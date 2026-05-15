@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IndTaxPay — File Taxes. Stay Compliant. Grow Confident.</title>
+    <meta
+      name="description"
+      content="IndTaxPay is India’s digital-first tax and compliance platform for ITR, GST, TDS, audits, and company registration — handled by expert CAs."
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body data-base="./">
+    <a class="skipLink" href="#main">Skip to content</a>
+
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+
+    <div class="loader" id="loader" aria-hidden="true">
+      <div class="chakra" aria-hidden="true"></div>
+    </div>
+
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="hero" aria-label="Hero">
+        <div class="hero__bg" aria-hidden="true"></div>
+        <svg class="hero__watermark" viewBox="0 0 200 200" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="78" stroke="#072D56" stroke-width="2" opacity="0.8" />
+          <circle cx="100" cy="100" r="14" stroke="#072D56" stroke-width="2" opacity="0.8" />
+          <g opacity="0.8" stroke="#072D56" stroke-width="2">
+            <line x1="100" y1="28" x2="100" y2="86" />
+            <line x1="100" y1="114" x2="100" y2="172" />
+            <line x1="28" y1="100" x2="86" y2="100" />
+            <line x1="114" y1="100" x2="172" y2="100" />
+            <line x1="49" y1="49" x2="90" y2="90" />
+            <line x1="110" y1="110" x2="151" y2="151" />
+            <line x1="151" y1="49" x2="110" y2="90" />
+            <line x1="90" y1="110" x2="49" y2="151" />
+          </g>
+        </svg>
+
+        <div class="container hero__grid">
+          <div>
+            <div class="kicker">India — SMBs • Freelancers • Startups • CAs</div>
+            <h1 class="hero__words" style="margin-top: 10px;">
+              <span class="w1">File</span> <span class="w2">Taxes</span>. <span class="w1">Stay</span>
+              <span class="w3">Compliant</span>. <span class="w1">Grow</span> <span class="w4">Confident</span>.
+            </h1>
+            <p class="hero__sub">
+              India's most trusted platform for ITR filing, GST, TDS, payroll, audits, and company registration — handled
+              by expert CAs.
+            </p>
+
+            <div class="hero__cta" role="group" aria-label="Primary actions">
+              <a class="btn btn-lg btn-primary" href="#services">Start Filing Now</a>
+              <button class="btn btn-lg btn-outline" type="button" data-open-chat>Talk to a CA Expert</button>
+            </div>
+
+            <div class="hero__trust" aria-label="Trust badges">
+              <span class="pill">🔒 SSL Secured</span>
+              <span class="pill">✓ GSTN Approved</span>
+              <span class="pill">⭐ 4.9/5 Rating</span>
+              <span class="pill">👥 500+ Clients</span>
+            </div>
+
+            <div class="ticker" aria-label="Live stats ticker">
+              <div class="tickerItem">
+                <div class="tickerItem__value mono" data-count-up="2847">0</div>
+                <div class="tickerItem__label">ITRs Filed Today ↑</div>
+              </div>
+              <div class="tickerItem">
+                <div class="tickerItem__value mono" data-count-up="98.2" data-decimals="1" data-suffix="%">0</div>
+                <div class="tickerItem__label">Accuracy Rate</div>
+              </div>
+              <div class="tickerItem">
+                <div class="tickerItem__value mono" data-count-up="12400" data-suffix="+">0</div>
+                <div class="tickerItem__label">Satisfied Clients</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="heroArt floaty" aria-label="Isometric illustration">
+            <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tax dashboard illustration">
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#D6E6F8" />
+                  <stop offset="1" stop-color="#FDEBD0" />
+                </linearGradient>
+                <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#0D4A8A" stop-opacity="0.14" />
+                  <stop offset="1" stop-color="#4B9C3A" stop-opacity="0.10" />
+                </linearGradient>
+              </defs>
+              <rect x="40" y="70" width="380" height="250" rx="22" fill="url(#g1)" stroke="#E2E6EA" />
+              <rect x="70" y="100" width="320" height="190" rx="18" fill="#FFFFFF" opacity="0.9" stroke="#E2E6EA" />
+              <rect x="92" y="124" width="150" height="18" rx="9" fill="#F2F4F7" />
+              <rect x="92" y="154" width="220" height="12" rx="6" fill="#F2F4F7" />
+              <rect x="92" y="178" width="260" height="12" rx="6" fill="#F2F4F7" />
+              <rect x="92" y="214" width="120" height="56" rx="16" fill="url(#g2)" stroke="#E2E6EA" />
+              <rect x="226" y="214" width="164" height="56" rx="16" fill="#FDEBD0" opacity="0.8" stroke="#E2E6EA" />
+              <circle cx="422" cy="110" r="42" fill="#F78A0E" opacity="0.18" />
+              <circle cx="448" cy="138" r="30" fill="#4B9C3A" opacity="0.16" />
+              <g>
+                <circle cx="442" cy="228" r="46" fill="#0D4A8A" opacity="0.10" />
+                <circle cx="442" cy="228" r="18" fill="#FFFFFF" opacity="0.92" />
+                <path d="M438 228h8" stroke="#0D4A8A" stroke-width="2" />
+                <path d="M442 224v8" stroke="#0D4A8A" stroke-width="2" />
+              </g>
+              <g transform="translate(88 304)">
+                <rect x="0" y="0" width="344" height="30" rx="15" fill="#FFFFFF" opacity="0.65" stroke="#E2E6EA" />
+                <circle cx="22" cy="15" r="10" fill="#F78A0E" opacity="0.7" />
+                <rect x="42" y="10" width="120" height="10" rx="5" fill="#F2F4F7" />
+                <rect x="176" y="10" width="140" height="10" rx="5" fill="#F2F4F7" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <section class="section section--tight" aria-label="Live stats panel">
+        <div class="container">
+          <div class="statsPanel">
+            <div class="statsPanel__inner">
+              <div class="statsGrid">
+                <div class="statCard">
+                  <div class="statCard__label">ITRs Filed Today</div>
+                  <div class="statCard__value"><span class="mono" data-count-up="2847">0</span></div>
+                  <div class="trend"><span class="up">+12%</span><span>today</span></div>
+                </div>
+                <div class="statCard">
+                  <div class="statCard__label">GST Registrations</div>
+                  <div class="statCard__value"><span class="mono" data-count-up="1204">0</span></div>
+                  <div class="trend"><span class="up">+8%</span><span>this month</span></div>
+                </div>
+                <div class="statCard">
+                  <div class="statCard__label">Client Satisfaction</div>
+                  <div class="statCard__value"><span class="mono" data-count-up="98.2" data-decimals="1" data-suffix="%">0</span></div>
+                  <div class="trend"><span class="live">↑</span><span>verified</span></div>
+                </div>
+                <div class="statCard">
+                  <div class="statCard__label">Expert CAs Online</div>
+                  <div class="statCard__value"><span class="mono" data-count-up="24">0</span></div>
+                  <div class="trend"><span class="live">Live</span><span>now</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services" aria-label="Services">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">One platform</div>
+            <h2 style="margin-top: 10px;">Everything You Need. One Platform.</h2>
+            <p style="margin-top: 10px;">
+              From filing your first ITR to managing enterprise compliance — IndTaxPay has you covered.
+            </p>
+          </div>
+
+          <div class="serviceGrid grid grid-3" style="margin-top: 22px;">
+            <a class="serviceCard" href="services/income-tax.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #FDEBD0; color: #F78A0E;">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M7 3h7l3 3v15H7V3z" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M14 3v4h4" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M9 12h6" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M9 15h6" stroke="currentColor" stroke-width="1.6" />
+                  </svg>
+                </span>
+                <span class="badge badge--saffron">Most Popular</span>
+              </div>
+              <div class="serviceCard__title">Income Tax Return (ITR)</div>
+              <div class="serviceCard__desc">Hassle-free ITR filing for individuals and freelancers with expert CA review.</div>
+              <div class="arrowLink">File ITR Now <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="serviceCard" href="services/gst.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #E6F5E2; color: #4B9C3A;">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M7 7h10v14H7V7z" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M9 3h6v4H9V3z" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M9 11h6" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M9 15h6" stroke="currentColor" stroke-width="1.6" />
+                  </svg>
+                </span>
+              </div>
+              <div class="serviceCard__title">GST Registration & Filing</div>
+              <div class="serviceCard__desc">Complete GST lifecycle — registration, returns, and reconciliation.</div>
+              <div class="arrowLink">Get GST Compliant <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="serviceCard" href="services/tds-tcs.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #D6E6F8; color: #0D4A8A;">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 3v18" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M7 7h10" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M8 17c1 1 2.4 1.6 4 1.6 2.2 0 4-.9 4-2.6 0-3.2-8-1.2-8-4.6 0-1.6 1.7-2.6 4-2.6 1.6 0 3 .5 4 1.6" stroke="currentColor" stroke-width="1.6" />
+                  </svg>
+                </span>
+              </div>
+              <div class="serviceCard__title">TDS & Payroll</div>
+              <div class="serviceCard__desc">Automated TDS computation, payroll processing, and returns filing.</div>
+              <div class="arrowLink">Manage TDS <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="serviceCard" href="services/company-registration.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #E6F5E2; color: #4B9C3A;">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M4 20V8l8-4 8 4v12H4z" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M9 20v-6h6v6" stroke="currentColor" stroke-width="1.6" />
+                  </svg>
+                </span>
+                <span class="badge badge--green">New</span>
+              </div>
+              <div class="serviceCard__title">Company Registration</div>
+              <div class="serviceCard__desc">Register your Pvt Ltd, LLP, or OPC — we handle MCA filings end-to-end.</div>
+              <div class="arrowLink">Register Company <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="serviceCard" href="services/statutory-audit.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #D6E6F8; color: #0D4A8A;">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 3l8 4v6c0 5-3.4 8.7-8 9-4.6-.3-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M8.5 12.5l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" />
+                  </svg>
+                </span>
+              </div>
+              <div class="serviceCard__title">Statutory Audit</div>
+              <div class="serviceCard__desc">3CD preparation, audit-ready reporting, and expert review.</div>
+              <div class="arrowLink">Request Audit <span aria-hidden="true">→</span></div>
+            </a>
+
+            <a class="serviceCard" href="services/accounting.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #FDEBD0; color: #F78A0E;">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M7 4h12v16H7V4z" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M5 6h2v12H5V6z" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M10 9h6" stroke="currentColor" stroke-width="1.6" />
+                    <path d="M10 13h6" stroke="currentColor" stroke-width="1.6" />
+                  </svg>
+                </span>
+              </div>
+              <div class="serviceCard__title">Accounting & Bookkeeping</div>
+              <div class="serviceCard__desc">Monthly bookkeeping, P&amp;L statements, and MIS reports.</div>
+              <div class="arrowLink">Start Bookkeeping <span aria-hidden="true">→</span></div>
+            </a>
+          </div>
+
+          <div class="center" style="margin-top: 14px;">
+            <div class="muted">Not sure which service you need?</div>
+            <button class="btn btn-ghost" type="button" data-open-chat>Talk to Our Experts →</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <section class="section" id="calculator" aria-label="Interactive calculators">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">Quick estimates</div>
+            <h2 style="margin-top: 10px;">Know Your Tax Before Filing</h2>
+            <p style="margin-top: 10px;">Quick estimates in seconds. No sign-up needed.</p>
+          </div>
+
+          <div class="calcShell" style="margin-top: 18px;" data-tabs data-default="income">
+            <div class="calcShell__inner">
+              <div class="calcNav" role="tablist" aria-label="Calculator tabs">
+                <button class="calcNav__btn" role="tab" data-tab="income" aria-selected="true" type="button">
+                  Income Tax <span class="mono">→</span>
+                </button>
+                <button class="calcNav__btn" role="tab" data-tab="gst" aria-selected="false" type="button">
+                  GST Liability <span class="mono">→</span>
+                </button>
+                <button class="calcNav__btn" role="tab" data-tab="tds" aria-selected="false" type="button">
+                  TDS Calculator <span class="mono">→</span>
+                </button>
+                <div class="muted" style="margin-top: 12px; font-size: 0.92rem;">
+                  Demo calculators for UX. Use expert review for final filing.
+                </div>
+              </div>
+
+              <div class="calcBody">
+                <div class="tabPanel is-active" role="tabpanel" data-panel="income">
+                  <div data-income-tax>
+                    <div class="grid grid-2" style="align-items: start;">
+                      <div class="stack">
+                        <div class="field">
+                          <div class="label">Annual Income (₹)</div>
+                          <div class="rangeRow">
+                            <input
+                              class="range"
+                              data-it-income-range
+                              type="range"
+                              min="0"
+                              max="5000000"
+                              step="10000"
+                              value="900000"
+                              aria-label="Annual income slider"
+                            />
+                            <input
+                              class="input"
+                              data-it-income-number
+                              type="number"
+                              min="0"
+                              max="5000000"
+                              step="10000"
+                              value="900000"
+                              aria-label="Annual income"
+                            />
+                          </div>
+                          <div class="help">Try moving the slider — numbers update instantly.</div>
+                        </div>
+
+                        <div class="field">
+                          <div class="label">Tax Regime</div>
+                          <div class="row wrap">
+                            <button class="btn btn-outline" type="button" data-it-regime="old" aria-pressed="false">Old Regime</button>
+                            <button class="btn btn-outline" type="button" data-it-regime="new" aria-pressed="true">New Regime</button>
+                          </div>
+                        </div>
+
+                        <div class="field">
+                          <div class="label">Age Group</div>
+                          <div class="row wrap">
+                            <label class="pill"><input type="radio" name="age_group" value="below60" checked /> Below 60</label>
+                            <label class="pill"><input type="radio" name="age_group" value="senior" /> 60–80 (Senior)</label>
+                            <label class="pill"><input type="radio" name="age_group" value="super" /> 80+ (Super Senior)</label>
+                          </div>
+                        </div>
+
+                        <div class="field" data-it-deductions-wrap>
+                          <div class="label">Total Deductions</div>
+                          <input class="input" data-it-deductions type="number" placeholder="e.g. 150000" value="150000" />
+                          <div class="help">Visible only for old regime (80C, 80D etc.).</div>
+                        </div>
+                      </div>
+
+                      <div class="stack">
+                        <div class="resultGrid">
+                          <div style="position: relative;">
+                            <div class="donut" data-it-donut>
+                              <div class="donutCenter" data-it-donut-center></div>
+                            </div>
+                            <div class="center" style="margin-top: 12px;">
+                              <div class="kicker">Take-home (est.)</div>
+                              <div class="mono" style="font-weight: 800; font-size: 1.25rem;" data-it-net>₹0</div>
+                            </div>
+                          </div>
+
+                          <div class="stack">
+                            <div class="breakdown" data-gated-content>
+                              <div class="breakdownRow"><span class="breakdownKey">Gross Income</span><span class="breakdownVal" data-it-gross>₹0</span></div>
+                              <div class="breakdownRow"><span class="breakdownKey">Standard Deduction</span><span class="breakdownVal" data-it-std>₹0</span></div>
+                              <div class="breakdownRow"><span class="breakdownKey">Deductions</span><span class="breakdownVal" data-it-deduct>₹0</span></div>
+                              <div class="breakdownRow"><span class="breakdownKey">Taxable Income</span><span class="breakdownVal" data-it-taxable>₹0</span></div>
+                              <div class="breakdownRow"><span class="breakdownKey">Tax Liability</span><span class="breakdownVal" data-it-tax>₹0</span></div>
+                              <div class="breakdownRow"><span class="breakdownKey">Cess (4%)</span><span class="breakdownVal" data-it-cess>₹0</span></div>
+                              <div class="breakdownRow"><span class="breakdownKey"><strong>Total</strong></span><span class="breakdownVal" data-it-total>₹0</span></div>
+                            </div>
+                            <div data-it-gate></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tabPanel" role="tabpanel" data-panel="gst">
+                  <div data-gst>
+                    <div class="grid grid-2" style="align-items: start;">
+                      <div class="stack">
+                        <div class="field">
+                          <div class="label">Base Amount (₹)</div>
+                          <input class="input" data-gst-amount type="number" value="10000" />
+                        </div>
+                        <div class="field">
+                          <div class="label">GST Rate</div>
+                          <select class="select" data-gst-rate>
+                            <option>5%</option>
+                            <option>12%</option>
+                            <option selected>18%</option>
+                            <option>28%</option>
+                          </select>
+                        </div>
+                        <div class="field">
+                          <div class="label">Calculate</div>
+                          <div class="row wrap">
+                            <button class="btn btn-outline" type="button" data-gst-dir="add" aria-pressed="true">Add GST</button>
+                            <button class="btn btn-outline" type="button" data-gst-dir="remove" aria-pressed="false">Remove GST</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="stack">
+                        <div class="card cardPad">
+                          <h3>Result</h3>
+                          <div class="breakdown" style="margin-top: 12px;">
+                            <div class="breakdownRow"><span class="breakdownKey">CGST</span><span class="breakdownVal" data-gst-cgst>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey">SGST</span><span class="breakdownVal" data-gst-sgst>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey">Total GST</span><span class="breakdownVal" data-gst-total>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey" data-gst-dirlabel>Final Amount</span><span class="breakdownVal" data-gst-final>₹0</span></div>
+                          </div>
+                          <div class="muted" style="margin-top: 10px; font-size: 0.92rem;">Updates on keystroke with debounce.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tabPanel" role="tabpanel" data-panel="tds">
+                  <div data-tds>
+                    <div class="grid grid-2" style="align-items: start;">
+                      <div class="stack">
+                        <div class="field">
+                          <div class="label">Payment Type</div>
+                          <select class="select" data-tds-type>
+                            <option value="salary">Salary (192)</option>
+                            <option value="professional" selected>Professional Fees (194J)</option>
+                            <option value="rent">Rent (194I)</option>
+                            <option value="commission">Commission (194H)</option>
+                            <option value="contractor">Contractor (194C)</option>
+                          </select>
+                        </div>
+                        <div class="field">
+                          <div class="label">Payment Amount (₹)</div>
+                          <input class="input" data-tds-amount type="number" value="50000" />
+                        </div>
+                        <div class="field">
+                          <div class="label">PAN Available?</div>
+                          <div class="row wrap">
+                            <button class="btn btn-outline" type="button" data-tds-pan="yes" aria-pressed="true">Yes</button>
+                            <button class="btn btn-outline" type="button" data-tds-pan="no" aria-pressed="false">No</button>
+                          </div>
+                          <div class="badge badge--saffron" data-tds-warn style="display: none;">PAN unavailable — higher rate may apply.</div>
+                        </div>
+                      </div>
+
+                      <div class="stack">
+                        <div class="card cardPad">
+                          <h3>Result</h3>
+                          <div class="breakdown" style="margin-top: 12px;">
+                            <div class="breakdownRow"><span class="breakdownKey">TDS Rate</span><span class="breakdownVal" data-tds-rate>—</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey">TDS Amount</span><span class="breakdownVal" data-tds-tds>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey">Net Payment</span><span class="breakdownVal" data-tds-net>₹0</span></div>
+                          </div>
+                          <div class="muted" style="margin-top: 10px; font-size: 0.92rem;">Rates are simplified for demo UX.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <section class="section" aria-label="How it works">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">4 steps</div>
+            <h2 style="margin-top: 10px;">Filing Made Simple. Really.</h2>
+            <p style="margin-top: 10px;">4 steps. Zero confusion. Complete peace of mind.</p>
+          </div>
+
+          <div class="steps" style="margin-top: 22px;">
+            <div class="stepCard">
+              <div class="stepCard__title">Fill Your Details</div>
+              <p class="stepCard__desc">Answer a few simple questions about your income, business, or compliance need.</p>
+              <div class="stepCard__sub"><span class="tag">Takes 3–5 minutes</span></div>
+              <div class="stepCard__num">01</div>
+            </div>
+            <div class="stepCard">
+              <div class="stepCard__title">Upload Documents</div>
+              <p class="stepCard__desc">Securely upload required paperwork via our encrypted portal.</p>
+              <div class="stepCard__sub"><span class="tag">256-bit encryption</span></div>
+              <div class="stepCard__num">02</div>
+            </div>
+            <div class="stepCard">
+              <div class="stepCard__title">Expert CA Review</div>
+              <p class="stepCard__desc">CAs review, verify, and prepare your filing. Preview before submission.</p>
+              <div class="stepCard__sub"><span class="tag">Avg turnaround: 24 hrs</span></div>
+              <div class="stepCard__num">03</div>
+            </div>
+            <div class="stepCard">
+              <div class="stepCard__title">Done — Acknowledgment</div>
+              <p class="stepCard__desc">Get official acknowledgment and confirmation certificate instantly.</p>
+              <div class="stepCard__sub"><span class="tag">Delivered to email</span></div>
+              <div class="stepCard__num">04</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <section class="section" aria-label="Persona journeys">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">For everyone</div>
+            <h2 style="margin-top: 10px;">Built for Everyone Who Deals with Taxes in India</h2>
+          </div>
+
+          <div class="personaShell" style="margin-top: 18px;" data-tabs data-default="individual">
+            <div class="personaTabs" role="tablist" aria-label="Personas">
+              <button class="personaTab" role="tab" data-tab="individual" aria-selected="true" type="button">👤 Individual</button>
+              <button class="personaTab" role="tab" data-tab="freelancer" aria-selected="false" type="button">💻 Freelancer</button>
+              <button class="personaTab" role="tab" data-tab="business" aria-selected="false" type="button">🏪 Business</button>
+              <button class="personaTab" role="tab" data-tab="ca" aria-selected="false" type="button">💼 CA</button>
+              <button class="personaTab" role="tab" data-tab="startup" aria-selected="false" type="button">🚀 Startup</button>
+            </div>
+
+            <div class="personaBody">
+              <div class="tabPanel is-active" role="tabpanel" data-panel="individual">
+                <h3>File your ITR in under 10 minutes</h3>
+                <div class="stepper" style="margin-top: 14px;">
+                  <div class="stepperItem">ITR page</div>
+                  <div class="stepperItem">Calculator</div>
+                  <div class="stepperItem">Income details</div>
+                  <div class="stepperItem">Upload Form 16</div>
+                  <div class="stepperItem">CA review</div>
+                  <div class="stepperItem">Download ITR-V</div>
+                </div>
+                <div class="card cardPad" style="margin-top: 14px;">
+                  <div class="kicker">Mini preview</div>
+                  <div class="row" style="justify-content: space-between; margin-top: 8px;">
+                    <div>
+                      <div style="font-family: var(--font-display); font-weight: 800;">Your Estimated Refund</div>
+                      <div class="muted">(demo preview)</div>
+                    </div>
+                    <div class="mono" style="font-weight: 800; font-size: 1.35rem; color: var(--color-green);" data-count-up="14200" data-prefix="₹">₹0</div>
+                  </div>
+                </div>
+                <div class="row wrap" style="margin-top: 12px;">
+                  <a class="btn btn-primary" href="services/income-tax.html">Start Your ITR Filing →</a>
+                  <button class="btn btn-outline" type="button" data-open-chat>Ask a CA</button>
+                </div>
+              </div>
+
+              <div class="tabPanel" role="tabpanel" data-panel="freelancer">
+                <h3>Manage 44ADA presumptive tax with ease</h3>
+                <div class="stepper" style="margin-top: 14px;">
+                  <div class="stepperItem">Select freelancer ITR</div>
+                  <div class="stepperItem">Input income</div>
+                  <div class="stepperItem">50% deduction</div>
+                  <div class="stepperItem">TDS credits</div>
+                  <div class="stepperItem">File 44ADA</div>
+                  <div class="stepperItem">Acknowledgment</div>
+                </div>
+                <div class="card cardPad" style="margin-top: 14px;">
+                  <div class="kicker">Savings highlight</div>
+                  <div style="font-family: var(--font-display); font-weight: 800; margin-top: 8px;">You save ~₹32,000 with presumptive scheme</div>
+                  <div class="muted">(Illustrative example for UX.)</div>
+                </div>
+                <div class="row wrap" style="margin-top: 12px;">
+                  <a class="btn btn-primary" href="services/income-tax.html">File as Freelancer →</a>
+                  <button class="btn btn-outline" type="button" data-open-chat>Talk to CA</button>
+                </div>
+              </div>
+
+              <div class="tabPanel" role="tabpanel" data-panel="business">
+                <h3>GST + TDS + Accounting — all in one</h3>
+                <div class="stepper" style="margin-top: 14px;">
+                  <div class="stepperItem">Bundle</div>
+                  <div class="stepperItem">Upload invoices</div>
+                  <div class="stepperItem">Reconcile 2B</div>
+                  <div class="stepperItem">CA prepares</div>
+                  <div class="stepperItem">File returns</div>
+                  <div class="stepperItem">Compliance report</div>
+                </div>
+                <div class="card cardPad" style="margin-top: 14px;">
+                  <div class="kicker">Estimator</div>
+                  <div class="row wrap" style="margin-top: 10px;">
+                    <a class="btn btn-primary" href="#pricing">Build Your Compliance Pack →</a>
+                    <button class="btn btn-outline" type="button" data-open-chat>Get a quote</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tabPanel" role="tabpanel" data-panel="ca">
+                <h3>Audit, manage clients, generate reports — automated</h3>
+                <div class="stepper" style="margin-top: 14px;">
+                  <div class="stepperItem">Create CA account</div>
+                  <div class="stepperItem">Add clients</div>
+                  <div class="stepperItem">Bulk upload</div>
+                  <div class="stepperItem">Run audit</div>
+                  <div class="stepperItem">Switch reports</div>
+                  <div class="stepperItem">Export PDF</div>
+                </div>
+
+                <div class="card cardPad" style="margin-top: 14px;" data-tabs data-default="audit">
+                  <div class="kicker">Toggle demo</div>
+                  <div class="tabs" role="tablist" aria-label="CA preview">
+                    <button class="tabBtn" role="tab" data-tab="audit" aria-selected="true" type="button">Audit Report</button>
+                    <button class="tabBtn" role="tab" data-tab="tax" aria-selected="false" type="button">Tax Report</button>
+                    <button class="tabBtn" role="tab" data-tab="finance" aria-selected="false" type="button">Financial Summary</button>
+                  </div>
+                  <div class="tabPanel is-active" role="tabpanel" data-panel="audit">
+                    <div class="badge badge--navy">3CD • auto-checks • variance flags</div>
+                  </div>
+                  <div class="tabPanel" role="tabpanel" data-panel="tax">
+                    <div class="badge badge--saffron">Schedule-wise summaries • deductions map</div>
+                  </div>
+                  <div class="tabPanel" role="tabpanel" data-panel="finance">
+                    <div class="badge badge--green">P&amp;L • Balance Sheet • MIS export</div>
+                  </div>
+                </div>
+
+                <div class="row wrap" style="margin-top: 12px;">
+                  <button class="btn btn-primary" type="button" data-open-chat>Request CA Demo →</button>
+                  <a class="btn btn-outline" href="services/statutory-audit.html">View Audit Page</a>
+                </div>
+              </div>
+
+              <div class="tabPanel" role="tabpanel" data-panel="startup">
+                <h3>Company registration to annual compliance — sorted</h3>
+                <div class="stepper" style="margin-top: 14px;">
+                  <div class="stepperItem">Choose entity</div>
+                  <div class="stepperItem">Name approval</div>
+                  <div class="stepperItem">MoA/AoA</div>
+                  <div class="stepperItem">DIN/DSC</div>
+                  <div class="stepperItem">COI received</div>
+                  <div class="stepperItem">ROC scheduled</div>
+                </div>
+                <div class="card cardPad" style="margin-top: 14px;">
+                  <div class="kicker">Compliance calendar</div>
+                  <div class="row wrap" style="margin-top: 10px;">
+                    <button class="btn btn-primary" type="button" data-open-lead>Get deadline alerts →</button>
+                    <a class="btn btn-outline" href="services/company-registration.html">Register your company</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <section class="section" id="calendar" aria-label="Compliance calendar">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">Due dates</div>
+            <h2 style="margin-top: 10px;">Never Miss a Deadline Again</h2>
+            <p style="margin-top: 10px;">Stay ahead of every ITR, GST, TDS, and ROC due date — personalised for your profile.</p>
+          </div>
+
+          <div class="row wrap" style="justify-content: center; margin-top: 14px;">
+            <button class="tabBtn" type="button" data-cal-chip="ALL" aria-pressed="true">All Dates</button>
+            <button class="tabBtn" type="button" data-cal-chip="ITR" aria-pressed="false">Income Tax</button>
+            <button class="tabBtn" type="button" data-cal-chip="GST" aria-pressed="false">GST</button>
+            <button class="tabBtn" type="button" data-cal-chip="TDS" aria-pressed="false">TDS</button>
+          </div>
+
+          <div class="calendar" style="margin-top: 14px;" data-calendar>
+            <div class="calendar__top">
+              <div style="font-family: var(--font-display); font-weight: 800;" data-cal-month>—</div>
+              <button class="btn btn-sm btn-primary" type="button" data-open-lead>Get Personalized Deadline Alerts →</button>
+            </div>
+            <div class="calendarGrid">
+              <div class="calHead">Sun</div>
+              <div class="calHead">Mon</div>
+              <div class="calHead">Tue</div>
+              <div class="calHead">Wed</div>
+              <div class="calHead">Thu</div>
+              <div class="calHead">Fri</div>
+              <div class="calHead">Sat</div>
+            </div>
+            <div class="calendarGrid" data-cal-grid></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <section class="section" aria-label="Document checklist">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">Ready-to-upload</div>
+            <h2 style="margin-top: 10px;">What Documents Do You Need?</h2>
+            <p style="margin-top: 10px;">Click any service to instantly see the required documents.</p>
+          </div>
+
+          <div class="accordion" data-accordion="single">
+            <div class="accItem">
+              <button class="accBtn" type="button" aria-expanded="false">
+                <span class="title">ITR — Salaried Individual</span>
+                <span aria-hidden="true">▾</span>
+              </button>
+              <div class="accPanel">
+                <div class="accPanel__inner">
+                  <ol>
+                    <li>PAN Card</li>
+                    <li>Aadhaar Card</li>
+                    <li>Form 16 from employer</li>
+                    <li>Bank account details</li>
+                    <li>Investment proofs (80C, 80D)</li>
+                  </ol>
+                  <div class="row wrap" style="margin-top: 10px;">
+                    <span class="badge badge--green">Completed in 24 hours</span>
+                    <a class="btn btn-sm btn-primary" href="services/income-tax.html">Start Now →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accItem">
+              <button class="accBtn" type="button" aria-expanded="false">
+                <span class="title">GST Registration</span>
+                <span aria-hidden="true">▾</span>
+              </button>
+              <div class="accPanel">
+                <div class="accPanel__inner">
+                  <ol>
+                    <li>PAN of business / proprietor</li>
+                    <li>Aadhaar of proprietor/directors</li>
+                    <li>Business address proof</li>
+                    <li>Bank statement (last 3 months)</li>
+                    <li>Cancelled cheque / passbook</li>
+                  </ol>
+                  <div class="row wrap" style="margin-top: 10px;">
+                    <span class="badge badge--green">ARN in 3–5 working days</span>
+                    <a class="btn btn-sm btn-primary" href="services/gst.html">Start Now →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accItem">
+              <button class="accBtn" type="button" aria-expanded="false">
+                <span class="title">Private Limited Company</span>
+                <span aria-hidden="true">▾</span>
+              </button>
+              <div class="accPanel">
+                <div class="accPanel__inner">
+                  <ol>
+                    <li>PAN &amp; Aadhaar of all directors</li>
+                    <li>Passport-size photos</li>
+                    <li>Proof of registered office address</li>
+                    <li>Utility bill (electricity/water)</li>
+                    <li>No-objection certificate from owner</li>
+                  </ol>
+                  <div class="row wrap" style="margin-top: 10px;">
+                    <span class="badge badge--green">COI in 7–10 working days</span>
+                    <a class="btn btn-sm btn-primary" href="services/company-registration.html">Start Now →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <section class="section" id="pricing" aria-label="Pricing configurator">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">Transparent pricing</div>
+            <h2 style="margin-top: 10px;">Build Your Compliance Pack</h2>
+            <p style="margin-top: 10px;">Select what you need. See transparent pricing. No hidden charges.</p>
+          </div>
+
+          <div class="pricingGrid" style="margin-top: 18px;" data-pricing>
+            <div class="card cardPad">
+              <h3>Select Services</h3>
+              <div class="stack" style="margin-top: 12px;">
+                <label class="pill"><input type="checkbox" data-price-item data-id="itr_basic" data-label="ITR Filing (Salaried)" data-price="999" /> ITR Filing (Salaried) <span class="mono">₹999</span></label>
+                <label class="pill"><input type="checkbox" data-price-item data-id="itr_business" data-label="ITR Filing (Business/44AD)" data-price="2499" /> ITR Filing (Business/44AD) <span class="mono">₹2,499</span></label>
+                <label class="pill"><input type="checkbox" data-price-item data-id="gst_registration" data-label="GST Registration" data-price="1499" /> GST Registration <span class="mono">₹1,499</span></label>
+                <label class="pill"><input type="checkbox" data-price-item data-id="gstr_monthly" data-label="GSTR-1 + 3B (Monthly)" data-price="799" /> GSTR-1 + 3B (Monthly) <span class="mono">₹799</span></label>
+                <label class="pill"><input type="checkbox" data-price-item data-id="tds_return" data-label="TDS Return (per quarter)" data-price="999" /> TDS Return (per quarter) <span class="mono">₹999</span></label>
+                <label class="pill"><input type="checkbox" data-price-item data-id="payroll" data-label="Payroll (up to 10 employees)" data-price="1999" /> Payroll (up to 10 employees) <span class="mono">₹1,999</span></label>
+                <label class="pill"><input type="checkbox" data-price-item data-id="accounting" data-label="Monthly Bookkeeping" data-price="2999" /> Monthly Bookkeeping <span class="mono">₹2,999</span></label>
+                <label class="pill"><input type="checkbox" data-price-item data-id="company_reg" data-label="Private Limited Registration" data-price="7999" /> Pvt Ltd Registration <span class="mono">₹7,999</span></label>
+              </div>
+              <div class="muted" style="margin-top: 12px; font-size: 0.92rem;">Bundle deal: select 3+ services to auto-apply 15% OFF.</div>
+            </div>
+
+            <div class="priceSummary">
+              <div class="row" style="justify-content: space-between; align-items: baseline;">
+                <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.2rem;">Order Summary</div>
+                <div class="discount" data-price-discount style="display: none;">Bundle Deal — 15% OFF</div>
+              </div>
+              <div style="margin-top: 12px;" data-price-summary></div>
+              <div class="line" style="margin-top: 12px;">
+                <span>Total</span>
+                <span class="total" data-price-total>₹0</span>
+              </div>
+              <div class="row wrap" style="margin-top: 12px;">
+                <button class="btn btn-primary" type="button" data-open-chat>Get Custom Quote →</button>
+                <button class="btn btn-outline" type="button" data-open-lead>Proceed to Checkout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section trustSection" aria-label="Trust">
+        <div class="container">
+          <div class="center">
+            <div class="kicker" style="color: rgba(255,255,255,0.84);">Trusted</div>
+            <h2 style="margin-top: 10px;">Trusted by Thousands Across India</h2>
+          </div>
+
+          <div class="carousel" data-carousel style="margin-top: 18px;">
+            <div class="tCard">
+              <div class="stars">★★★★★</div>
+              <p style="margin-top: 10px;">Filed my ITR in less than 20 minutes. The CA callback feature is outstanding.</p>
+              <div class="muted" style="margin-top: 10px;">Rajesh Kumar • Mumbai • ITR Filing</div>
+            </div>
+            <div class="tCard">
+              <div class="stars">★★★★★</div>
+              <p style="margin-top: 10px;">Got my GSTIN in 3 days! The document checklist made it so easy.</p>
+              <div class="muted" style="margin-top: 10px;">Priya Nair • Bengaluru • GST</div>
+            </div>
+            <div class="tCard">
+              <div class="stars">★★★★★</div>
+              <p style="margin-top: 10px;">Incorporated my startup seamlessly. The compliance calendar keeps me on top.</p>
+              <div class="muted" style="margin-top: 10px;">Ankit Shah • Ahmedabad • Company Registration</div>
+            </div>
+            <div class="tCard">
+              <div class="stars">★★★★★</div>
+              <p style="margin-top: 10px;">Automated audit reports are a game-changer. Cut prep time by 70%.</p>
+              <div class="muted" style="margin-top: 10px;">Sunita Menon • Chennai • Audit</div>
+            </div>
+          </div>
+
+          <div class="grid grid-4" style="margin-top: 18px;">
+            <div class="tCard" style="min-width: unset; max-width: unset;">
+              <div class="mono" style="font-weight: 800; font-size: 1.5rem;" data-count-up="12400" data-suffix="+">0</div>
+              <div class="muted">Clients Served</div>
+            </div>
+            <div class="tCard" style="min-width: unset; max-width: unset;">
+              <div class="mono" style="font-weight: 800; font-size: 1.5rem;" data-count-up="98.2" data-decimals="1" data-suffix="%">0</div>
+              <div class="muted">Accuracy Rate</div>
+            </div>
+            <div class="tCard" style="min-width: unset; max-width: unset;">
+              <div class="mono" style="font-weight: 800; font-size: 1.5rem;" data-count-up="24" data-suffix=" hrs">0</div>
+              <div class="muted">Avg Turnaround</div>
+            </div>
+            <div class="tCard" style="min-width: unset; max-width: unset;">
+              <div class="mono" style="font-weight: 800; font-size: 1.5rem;" data-count-up="50" data-suffix="+">0</div>
+              <div class="muted">Expert CAs</div>
+            </div>
+          </div>
+
+          <div class="trustBadges" aria-label="Trust badges">
+            <span class="trustBadge">✓ GSTN Approved Partner</span>
+            <span class="trustBadge">✓ ISO 27001 Certified</span>
+            <span class="trustBadge">✓ 256-bit SSL Encryption</span>
+            <span class="trustBadge">✓ Income Tax Dept. Registered</span>
+            <span class="trustBadge">✓ MCA Approved</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="FAQ">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">FAQ</div>
+            <h2 style="margin-top: 10px;">Got Questions? We've Got Answers.</h2>
+          </div>
+
+          <div class="faqGrid">
+            <div class="card cardPad" data-tabs data-default="income">
+              <div class="tabs" role="tablist" aria-label="FAQ categories">
+                <button class="tabBtn" role="tab" data-tab="income" aria-selected="true" type="button">Income Tax</button>
+                <button class="tabBtn" role="tab" data-tab="gst" aria-selected="false" type="button">GST</button>
+                <button class="tabBtn" role="tab" data-tab="company" aria-selected="false" type="button">Company</button>
+                <button class="tabBtn" role="tab" data-tab="tds" aria-selected="false" type="button">TDS &amp; Payroll</button>
+              </div>
+
+              <div class="tabPanel is-active" role="tabpanel" data-panel="income">
+                <div class="accordion" data-accordion="single">
+                  <div class="accItem">
+                    <button class="accBtn" type="button" aria-expanded="false"><span class="title">What is the last date to file ITR?</span><span>▾</span></button>
+                    <div class="accPanel"><div class="accPanel__inner">Due dates vary by profile. IndTaxPay helps you track deadlines with reminders.</div></div>
+                  </div>
+                  <div class="accItem">
+                    <button class="accBtn" type="button" aria-expanded="false"><span class="title">Can I switch between old and new regimes?</span><span>▾</span></button>
+                    <div class="accPanel"><div class="accPanel__inner">Yes — compare outcomes using our calculator to see which regime is more beneficial for you.</div></div>
+                  </div>
+                  <div class="accItem">
+                    <button class="accBtn" type="button" aria-expanded="false"><span class="title">Do you offer refund if filing fails?</span><span>▾</span></button>
+                    <div class="accPanel"><div class="accPanel__inner">This demo UI includes the policy placeholder. Confirm final policy details with your CA.</div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tabPanel" role="tabpanel" data-panel="gst">
+                <div class="accordion" data-accordion="single">
+                  <div class="accItem">
+                    <button class="accBtn" type="button" aria-expanded="false"><span class="title">How long does GST registration take?</span><span>▾</span></button>
+                    <div class="accPanel"><div class="accPanel__inner">Typically a few working days after document verification (varies by case).</div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tabPanel" role="tabpanel" data-panel="company">
+                <div class="accordion" data-accordion="single">
+                  <div class="accItem">
+                    <button class="accBtn" type="button" aria-expanded="false"><span class="title">Which entity should I choose?</span><span>▾</span></button>
+                    <div class="accPanel"><div class="accPanel__inner">Tell us your goals (fundraising, compliance needs) and we’ll guide you to Pvt Ltd/LLP/OPC.</div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tabPanel" role="tabpanel" data-panel="tds">
+                <div class="accordion" data-accordion="single">
+                  <div class="accItem">
+                    <button class="accBtn" type="button" aria-expanded="false"><span class="title">What happens if PAN is unavailable?</span><span>▾</span></button>
+                    <div class="accPanel"><div class="accPanel__inner">Higher rates may apply in many cases. Use the TDS calculator tab to simulate.</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card cardPad stickyCard">
+              <div class="kicker">Need help?</div>
+              <div style="font-family: var(--font-display); font-weight: 800; margin-top: 10px;">Ask a CA Expert</div>
+              <p style="margin-top: 10px;">Get help choosing the right service and preparing documents.</p>
+              <div class="row wrap" style="margin-top: 12px;">
+                <button class="btn btn-primary" type="button" data-open-chat>Ask a Question →</button>
+                <a class="btn btn-outline" href="contact/index.html">Contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Blog preview">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">Knowledge hub</div>
+            <h2 style="margin-top: 10px;">Tax Knowledge Hub</h2>
+            <p style="margin-top: 10px;">Plain-language guides from our expert CAs.</p>
+          </div>
+
+          <div class="grid grid-3" style="margin-top: 18px;">
+            <a class="serviceCard" href="blog/index.html">
+              <div class="badge badge--saffron">Featured</div>
+              <div class="serviceCard__title" style="margin-top: 10px;">New vs Old Tax Regime 2024-25: Which Saves You More?</div>
+              <div class="serviceCard__desc">Income Tax • 5 min read</div>
+              <div class="arrowLink">Read article →</div>
+            </a>
+            <a class="serviceCard" href="blog/index.html">
+              <div class="badge badge--green">GST</div>
+              <div class="serviceCard__title" style="margin-top: 10px;">GST Amnesty Scheme 2024: Are You Eligible?</div>
+              <div class="serviceCard__desc">GST • 4 min read</div>
+              <div class="arrowLink">Read article →</div>
+            </a>
+            <a class="serviceCard" href="blog/index.html">
+              <div class="badge badge--navy">TDS</div>
+              <div class="serviceCard__title" style="margin-top: 10px;">How to Generate Form 16 if Your Employer Didn't?</div>
+              <div class="serviceCard__desc">TDS • 3 min read</div>
+              <div class="arrowLink">Read article →</div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <div class="popover" data-popover role="dialog" aria-label="Due date details"></div>
+
+    <script defer src="assets/js/site.js"></script>
+  </body>
+</html>

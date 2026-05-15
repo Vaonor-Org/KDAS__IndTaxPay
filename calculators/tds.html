@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TDS Calculator — IndTaxPay</title>
+    <meta name="description" content="Estimate TDS rate, TDS amount, and net payment for common categories." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body data-base="../" data-active-nav="calculators">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="section section--tight" aria-label="TDS calculator header">
+        <div class="container">
+          <div class="card cardPad">
+            <div class="kicker">Calculator</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">TDS Calculator</h1>
+            <p style="margin-top: 10px;">Estimate TDS and net payment quickly (simplified rates for demo UX).</p>
+            <div class="row wrap" style="margin-top: 12px;">
+              <button class="btn btn-primary" type="button" data-open-chat>Talk to a CA →</button>
+              <a class="btn btn-outline" href="../services/tds-tcs.html">TDS Service</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="TDS calculator">
+        <div class="container">
+          <div class="calcShell">
+            <div class="calcShell__inner">
+              <div class="calcBody" style="grid-column: 1 / -1;">
+                <div data-tds>
+                  <div class="grid grid-2" style="align-items: start;">
+                    <div class="stack">
+                      <div class="field">
+                        <div class="label">Payment Type</div>
+                        <select class="select" data-tds-type>
+                          <option value="salary">Salary (192)</option>
+                          <option value="professional" selected>Professional Fees (194J)</option>
+                          <option value="rent">Rent (194I)</option>
+                          <option value="commission">Commission (194H)</option>
+                          <option value="contractor">Contractor (194C)</option>
+                        </select>
+                      </div>
+                      <div class="field">
+                        <div class="label">Payment Amount (₹)</div>
+                        <input class="input" data-tds-amount type="number" value="50000" />
+                      </div>
+                      <div class="field">
+                        <div class="label">PAN Available?</div>
+                        <div class="row wrap">
+                          <button class="btn btn-outline" type="button" data-tds-pan="yes" aria-pressed="true">Yes</button>
+                          <button class="btn btn-outline" type="button" data-tds-pan="no" aria-pressed="false">No</button>
+                        </div>
+                        <div class="badge badge--saffron" data-tds-warn style="display: none;">PAN unavailable — higher rate may apply.</div>
+                      </div>
+                    </div>
+
+                    <div class="stack">
+                      <div class="card cardPad">
+                        <h2 style="margin:0;">Result</h2>
+                        <div class="breakdown" style="margin-top: 12px;">
+                          <div class="breakdownRow"><span class="breakdownKey">TDS Rate</span><span class="breakdownVal" data-tds-rate>—</span></div>
+                          <div class="breakdownRow"><span class="breakdownKey">TDS Amount</span><span class="breakdownVal" data-tds-tds>₹0</span></div>
+                          <div class="breakdownRow"><span class="breakdownKey">Net Payment</span><span class="breakdownVal" data-tds-net>₹0</span></div>
+                        </div>
+                        <div class="muted" style="margin-top: 10px; font-size: 0.92rem;">Demo UX only — rates may vary by scenario.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="../assets/js/site.js"></script>
+  </body>
+</html>

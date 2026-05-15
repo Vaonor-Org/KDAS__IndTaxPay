@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calculators — IndTaxPay</title>
+    <meta name="description" content="Try IndTaxPay calculators: Income Tax, GST, and TDS. Quick estimates for better planning." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body data-base="../" data-active-nav="calculators">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="section section--tight" aria-label="Calculators header">
+        <div class="container">
+          <div class="card cardPad">
+            <div class="kicker">Calculators</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Quick estimates in seconds</h1>
+            <p style="margin-top: 10px;">Use calculators to plan — then talk to a CA for final filing.</p>
+            <div class="row wrap" style="margin-top: 12px;">
+              <button class="btn btn-primary" type="button" data-open-chat>Ask a CA →</button>
+              <button class="btn btn-outline" type="button" data-open-lead>Unlock detailed reports</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Calculator cards">
+        <div class="container">
+          <div class="grid grid-3">
+            <a class="serviceCard" href="income-tax.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #FDEBD0; color: #F78A0E;" aria-hidden="true">₹</span>
+                <span class="badge badge--saffron">Popular</span>
+              </div>
+              <div class="serviceCard__title">Income Tax Calculator</div>
+              <div class="serviceCard__desc">Estimate tax liability based on income, regime, and deductions.</div>
+              <div class="arrowLink">Open →</div>
+            </a>
+
+            <a class="serviceCard" href="gst.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #E6F5E2; color: #4B9C3A;" aria-hidden="true">GST</span>
+              </div>
+              <div class="serviceCard__title">GST Calculator</div>
+              <div class="serviceCard__desc">Add or remove GST and see CGST/SGST breakdown.</div>
+              <div class="arrowLink">Open →</div>
+            </a>
+
+            <a class="serviceCard" href="tds.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #D6E6F8; color: #0D4A8A;" aria-hidden="true">TDS</span>
+              </div>
+              <div class="serviceCard__title">TDS Calculator</div>
+              <div class="serviceCard__desc">Estimate TDS rate and net payment for common categories.</div>
+              <div class="arrowLink">Open →</div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="../assets/js/site.js"></script>
+  </body>
+</html>

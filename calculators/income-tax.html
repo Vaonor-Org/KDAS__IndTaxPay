@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Income Tax Calculator — IndTaxPay</title>
+    <meta name="description" content="Estimate your income tax using IndTaxPay’s interactive calculator. Compare regimes and see a breakdown (gated)." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body data-base="../" data-active-nav="calculators">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="section section--tight" aria-label="Income tax calculator header">
+        <div class="container">
+          <div class="card cardPad">
+            <div class="kicker">Calculator</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Income Tax Calculator</h1>
+            <p style="margin-top: 10px;">Estimate tax and take-home instantly. Unlock full breakdown with email.</p>
+            <div class="row wrap" style="margin-top: 12px;">
+              <button class="btn btn-primary" type="button" data-open-lead>Unlock Breakdown →</button>
+              <button class="btn btn-outline" type="button" data-open-chat>Talk to a CA</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Income tax calculator">
+        <div class="container">
+          <div class="calcShell">
+            <div class="calcShell__inner">
+              <div class="calcBody" style="grid-column: 1 / -1;">
+                <div data-income-tax>
+                  <div class="grid grid-2" style="align-items: start;">
+                    <div class="stack">
+                      <div class="field">
+                        <div class="label">Annual Income (₹)</div>
+                        <div class="rangeRow">
+                          <input class="range" data-it-income-range type="range" min="0" max="5000000" step="10000" value="900000" aria-label="Annual income slider" />
+                          <input class="input" data-it-income-number type="number" min="0" max="5000000" step="10000" value="900000" aria-label="Annual income" />
+                        </div>
+                        <div class="help">Adjust income to see tax changes instantly.</div>
+                      </div>
+
+                      <div class="field">
+                        <div class="label">Tax Regime</div>
+                        <div class="row wrap">
+                          <button class="btn btn-outline" type="button" data-it-regime="old" aria-pressed="false">Old Regime</button>
+                          <button class="btn btn-outline" type="button" data-it-regime="new" aria-pressed="true">New Regime</button>
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <div class="label">Age Group</div>
+                        <div class="row wrap">
+                          <label class="pill"><input type="radio" name="age_group" value="below60" checked /> Below 60</label>
+                          <label class="pill"><input type="radio" name="age_group" value="senior" /> 60–80</label>
+                          <label class="pill"><input type="radio" name="age_group" value="super" /> 80+</label>
+                        </div>
+                      </div>
+
+                      <div class="field" data-it-deductions-wrap>
+                        <div class="label">Total Deductions</div>
+                        <input class="input" data-it-deductions type="number" placeholder="e.g. 150000" value="150000" />
+                        <div class="help">Visible only for old regime (80C, 80D etc.).</div>
+                      </div>
+                    </div>
+
+                    <div class="stack">
+                      <div class="resultGrid">
+                        <div style="position: relative;">
+                          <div class="donut" data-it-donut>
+                            <div class="donutCenter" data-it-donut-center></div>
+                          </div>
+                          <div class="center" style="margin-top: 12px;">
+                            <div class="kicker">Take-home (est.)</div>
+                            <div class="mono" style="font-weight: 800; font-size: 1.25rem;" data-it-net>₹0</div>
+                          </div>
+                        </div>
+
+                        <div class="stack">
+                          <div class="breakdown" data-gated-content>
+                            <div class="breakdownRow"><span class="breakdownKey">Gross Income</span><span class="breakdownVal" data-it-gross>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey">Standard Deduction</span><span class="breakdownVal" data-it-std>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey">Deductions</span><span class="breakdownVal" data-it-deduct>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey">Taxable Income</span><span class="breakdownVal" data-it-taxable>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey">Tax Liability</span><span class="breakdownVal" data-it-tax>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey">Cess (4%)</span><span class="breakdownVal" data-it-cess>₹0</span></div>
+                            <div class="breakdownRow"><span class="breakdownKey"><strong>Total</strong></span><span class="breakdownVal" data-it-total>₹0</span></div>
+                          </div>
+                          <div data-it-gate></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="../assets/js/site.js"></script>
+  </body>
+</html>

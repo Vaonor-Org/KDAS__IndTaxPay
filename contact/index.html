@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact — IndTaxPay</title>
+    <meta name="description" content="Contact IndTaxPay. Ask questions, request a callback, or get help choosing a service." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body data-base="../" data-active-nav="contact">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="section section--tight" aria-label="Contact header">
+        <div class="container">
+          <div class="card cardPad">
+            <div class="kicker">Contact</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Talk to a CA Expert</h1>
+            <p style="margin-top: 10px;">Tell us what you need — we’ll guide you to the right service.</p>
+            <div class="row wrap" style="margin-top: 12px;">
+              <button class="btn btn-primary" type="button" data-open-chat>Chat now →</button>
+              <a class="btn btn-outline" href="https://wa.me/91XXXXXXXXXX?text=Hi%20IndTaxPay%2C%20I%20need%20help%20with%20tax%20and%20compliance" target="_blank" rel="noreferrer">WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Contact form">
+        <div class="container">
+          <div class="grid grid-2" style="align-items: start;">
+            <div class="card cardPad">
+              <h2 style="margin:0;">Send a message</h2>
+              <form data-contact style="margin-top: 12px;" class="stack">
+                <div class="field">
+                  <div class="label">Name</div>
+                  <input class="input" name="name" autocomplete="name" placeholder="Your name" required />
+                </div>
+                <div class="field">
+                  <div class="label">Email</div>
+                  <input class="input" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+                </div>
+                <div class="field">
+                  <div class="label">Message</div>
+                  <textarea class="input" name="message" rows="5" placeholder="Tell us what you need..." required></textarea>
+                </div>
+                <div class="row wrap">
+                  <button class="btn btn-primary" type="submit">Send →</button>
+                  <button class="btn btn-outline" type="button" data-open-lead>Get deadline alerts</button>
+                </div>
+              </form>
+              <div class="muted" style="margin-top: 10px; font-size: 0.92rem;">Demo UX — messages aren’t sent.</div>
+            </div>
+
+            <div class="card cardPad">
+              <h2 style="margin:0;">Help shortcuts</h2>
+              <div class="stack" style="margin-top: 12px;">
+                <a class="btn btn-outline" href="../services/income-tax.html">ITR filing</a>
+                <a class="btn btn-outline" href="../services/gst.html">GST</a>
+                <a class="btn btn-outline" href="../services/company-registration.html">Company registration</a>
+                <a class="btn btn-outline" href="../services/tds-tcs.html">TDS & payroll</a>
+              </div>
+              <div class="tricolourDivider" aria-hidden="true" style="margin: 18px 0;"></div>
+              <div class="kicker">Email</div>
+              <div class="mono" style="font-weight: 800;">support@indtaxpay.in</div>
+              <div class="kicker" style="margin-top: 12px;">Hours</div>
+              <div class="muted">Mon–Sat • 10:00 AM – 7:00 PM (IST)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <section class="section" id="legal" aria-label="Legal">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">Legal</div>
+            <h2 style="margin-top: 10px;">Privacy • Terms • Disclaimer</h2>
+            <p style="margin-top: 10px;">Demo UX — replace this text with your final legal documents.</p>
+          </div>
+
+          <div class="accordion" data-accordion="single" style="margin-top: 14px;">
+            <div class="accItem">
+              <button class="accBtn" type="button" aria-expanded="false"><span class="title">Privacy Policy (demo)</span><span>▾</span></button>
+              <div class="accPanel"><div class="accPanel__inner">
+                This demo website stores small UI preferences in your browser (e.g., theme and demo reminders). No messages from the contact form are actually sent.
+              </div></div>
+            </div>
+            <div class="accItem">
+              <button class="accBtn" type="button" aria-expanded="false"><span class="title">Terms (demo)</span><span>▾</span></button>
+              <div class="accPanel"><div class="accPanel__inner">
+                Calculator outputs and timelines shown here are illustrative for UX only. Final filings should be validated by a qualified CA.
+              </div></div>
+            </div>
+            <div class="accItem">
+              <button class="accBtn" type="button" aria-expanded="false"><span class="title">Disclaimer (demo)</span><span>▾</span></button>
+              <div class="accPanel"><div class="accPanel__inner">
+                IndTaxPay demo UI does not constitute legal or tax advice. Always confirm current rules and due dates from official sources or your advisor.
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="../assets/js/site.js"></script>
+  </body>
+</html>

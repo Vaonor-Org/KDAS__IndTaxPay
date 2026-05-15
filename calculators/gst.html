@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GST Calculator — IndTaxPay</title>
+    <meta name="description" content="Calculate GST by adding or removing GST and see CGST/SGST breakdown instantly." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body data-base="../" data-active-nav="calculators">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="section section--tight" aria-label="GST calculator header">
+        <div class="container">
+          <div class="card cardPad">
+            <div class="kicker">Calculator</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">GST Calculator</h1>
+            <p style="margin-top: 10px;">Add GST or remove GST from an amount — with instant breakdown.</p>
+            <div class="row wrap" style="margin-top: 12px;">
+              <button class="btn btn-primary" type="button" data-open-chat>Talk to a CA →</button>
+              <a class="btn btn-outline" href="../services/gst.html">GST Service</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="GST calculator">
+        <div class="container">
+          <div class="calcShell">
+            <div class="calcShell__inner">
+              <div class="calcBody" style="grid-column: 1 / -1;">
+                <div data-gst>
+                  <div class="grid grid-2" style="align-items: start;">
+                    <div class="stack">
+                      <div class="field">
+                        <div class="label">Base Amount (₹)</div>
+                        <input class="input" data-gst-amount type="number" value="10000" />
+                      </div>
+                      <div class="field">
+                        <div class="label">GST Rate</div>
+                        <select class="select" data-gst-rate>
+                          <option>5%</option>
+                          <option>12%</option>
+                          <option selected>18%</option>
+                          <option>28%</option>
+                        </select>
+                      </div>
+                      <div class="field">
+                        <div class="label">Calculate</div>
+                        <div class="row wrap">
+                          <button class="btn btn-outline" type="button" data-gst-dir="add" aria-pressed="true">Add GST</button>
+                          <button class="btn btn-outline" type="button" data-gst-dir="remove" aria-pressed="false">Remove GST</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="stack">
+                      <div class="card cardPad">
+                        <h2 style="margin:0;">Result</h2>
+                        <div class="breakdown" style="margin-top: 12px;">
+                          <div class="breakdownRow"><span class="breakdownKey">CGST</span><span class="breakdownVal" data-gst-cgst>₹0</span></div>
+                          <div class="breakdownRow"><span class="breakdownKey">SGST</span><span class="breakdownVal" data-gst-sgst>₹0</span></div>
+                          <div class="breakdownRow"><span class="breakdownKey">Total GST</span><span class="breakdownVal" data-gst-total>₹0</span></div>
+                          <div class="breakdownRow"><span class="breakdownKey" data-gst-dirlabel>Final Amount</span><span class="breakdownVal" data-gst-final>₹0</span></div>
+                        </div>
+                        <div class="muted" style="margin-top: 10px; font-size: 0.92rem;">Demo UX — validate exact filing rules with your CA.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="../assets/js/site.js"></script>
+  </body>
+</html>

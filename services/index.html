@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Services — IndTaxPay</title>
+    <meta name="description" content="Explore IndTaxPay services: ITR, GST, TDS, company registration, audits, accounting." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body data-base="../" data-active-nav="services">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="section section--tight" aria-label="Services header">
+        <div class="container">
+          <div class="card cardPad">
+            <div class="kicker">Services</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Everything You Need. One Platform.</h1>
+            <p style="margin-top: 10px;">Choose a service and get a clear checklist, timeline, and CA support.</p>
+            <div class="row wrap" style="margin-top: 12px;">
+              <button class="btn btn-primary" type="button" data-open-chat>Talk to a CA Expert →</button>
+              <a class="btn btn-outline" href="../pricing/index.html">View Pricing</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Services grid">
+        <div class="container">
+          <div class="serviceGrid grid grid-3">
+            <a class="serviceCard" href="income-tax.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #FDEBD0; color: #F78A0E;" aria-hidden="true">₹</span>
+                <span class="badge badge--saffron">Most Popular</span>
+              </div>
+              <div class="serviceCard__title">Income Tax Return (ITR)</div>
+              <div class="serviceCard__desc">Individuals, freelancers, and HUFs — CA-reviewed filing.</div>
+              <div class="arrowLink">Open →</div>
+            </a>
+            <a class="serviceCard" href="gst.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #E6F5E2; color: #4B9C3A;" aria-hidden="true">GST</span>
+              </div>
+              <div class="serviceCard__title">GST Registration & Filing</div>
+              <div class="serviceCard__desc">Registration, returns, reconciliation, and tracking.</div>
+              <div class="arrowLink">Open →</div>
+            </a>
+            <a class="serviceCard" href="tds-tcs.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #D6E6F8; color: #0D4A8A;" aria-hidden="true">TDS</span>
+              </div>
+              <div class="serviceCard__title">TDS & Payroll</div>
+              <div class="serviceCard__desc">Computation, payroll processing, Form 16, returns.</div>
+              <div class="arrowLink">Open →</div>
+            </a>
+            <a class="serviceCard" href="company-registration.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #E6F5E2; color: #4B9C3A;" aria-hidden="true">Co</span>
+                <span class="badge badge--green">New</span>
+              </div>
+              <div class="serviceCard__title">Company Registration</div>
+              <div class="serviceCard__desc">Pvt Ltd / LLP / OPC — end-to-end MCA filings.</div>
+              <div class="arrowLink">Open →</div>
+            </a>
+            <a class="serviceCard" href="statutory-audit.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #D6E6F8; color: #0D4A8A;" aria-hidden="true">🛡</span>
+              </div>
+              <div class="serviceCard__title">Statutory Audit</div>
+              <div class="serviceCard__desc">Audit-ready reports with modern workflows.</div>
+              <div class="arrowLink">Open →</div>
+            </a>
+            <a class="serviceCard" href="accounting.html">
+              <div class="serviceCard__top">
+                <span class="serviceIcon" style="background: #FDEBD0; color: #F78A0E;" aria-hidden="true">📚</span>
+              </div>
+              <div class="serviceCard__title">Accounting & Bookkeeping</div>
+              <div class="serviceCard__desc">Monthly books, MIS, and reporting — fully managed.</div>
+              <div class="arrowLink">Open →</div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <section class="section" aria-label="Document checklist">
+        <div class="container">
+          <div class="center">
+            <div class="kicker">Quick checklists</div>
+            <h2 style="margin-top: 10px;">What documents are needed?</h2>
+            <p style="margin-top: 10px;">Open an item to see a ready-to-upload list.</p>
+          </div>
+
+          <div class="accordion" data-accordion="single">
+            <div class="accItem">
+              <button class="accBtn" type="button" aria-expanded="false"><span class="title">ITR — Salaried Individual</span><span>▾</span></button>
+              <div class="accPanel"><div class="accPanel__inner">
+                <ol>
+                  <li>PAN + Aadhaar</li>
+                  <li>Form 16</li>
+                  <li>Bank details</li>
+                  <li>Investment proofs (80C/80D)</li>
+                </ol>
+                <a class="btn btn-sm btn-primary" href="income-tax.html">Start ITR →</a>
+              </div></div>
+            </div>
+            <div class="accItem">
+              <button class="accBtn" type="button" aria-expanded="false"><span class="title">GST Registration</span><span>▾</span></button>
+              <div class="accPanel"><div class="accPanel__inner">
+                <ol>
+                  <li>Business PAN</li>
+                  <li>Address proof</li>
+                  <li>Bank statement (3 months)</li>
+                  <li>Cancelled cheque</li>
+                </ol>
+                <a class="btn btn-sm btn-primary" href="gst.html">Start GST →</a>
+              </div></div>
+            </div>
+            <div class="accItem">
+              <button class="accBtn" type="button" aria-expanded="false"><span class="title">Private Limited Company</span><span>▾</span></button>
+              <div class="accPanel"><div class="accPanel__inner">
+                <ol>
+                  <li>Director PAN & Aadhaar</li>
+                  <li>Registered office proof</li>
+                  <li>Utility bill</li>
+                  <li>NOC from owner</li>
+                </ol>
+                <a class="btn btn-sm btn-primary" href="company-registration.html">Start Registration →</a>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="../assets/js/site.js"></script>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard — IndTaxPay</title>
+    <meta name="description" content="IndTaxPay dashboard demo: compliance score, filing tracker, and document vault." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body data-base="../">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="section section--tight" aria-label="Dashboard header">
+        <div class="container">
+          <div class="card cardPad">
+            <div class="kicker">Client portal</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Your Compliance Dashboard</h1>
+            <p style="margin-top: 10px;">Track filings, upload documents, and monitor your compliance score (demo UI).</p>
+            <div class="row wrap" style="margin-top: 12px;">
+              <button class="btn btn-primary" type="button" data-open-chat>Chat with CA →</button>
+              <button class="btn btn-outline" type="button" data-open-lead>Enable reminders</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Dashboard layout">
+        <div class="container">
+          <div class="dashLayout">
+            <aside class="dashSidebar card cardPad" aria-label="Dashboard sidebar">
+              <div class="kicker">Signed in as</div>
+              <div style="font-family: var(--font-display); font-weight: 800; margin-top: 6px;">Demo User</div>
+              <div class="muted" style="margin-top: 4px;">demo@indtaxpay.in</div>
+              <div class="tricolourDivider" aria-hidden="true" style="margin: 16px 0;"></div>
+              <nav class="dashNav" aria-label="Dashboard navigation">
+                <a class="dashLink is-active" href="#overview">Overview</a>
+                <a class="dashLink" href="#filings">Filing tracker</a>
+                <a class="dashLink" href="#vault">Document vault</a>
+                <a class="dashLink" href="#score">Compliance score</a>
+              </nav>
+              <div class="row wrap" style="margin-top: 14px;">
+                <a class="btn btn-sm btn-outline" href="../services/index.html">Services</a>
+                <a class="btn btn-sm btn-outline" href="../pricing/index.html">Pricing</a>
+              </div>
+            </aside>
+
+            <div class="dashMain" id="overview">
+              <div class="grid grid-3">
+                <div class="card cardPad">
+                  <div class="kicker">Next deadline</div>
+                  <div style="font-family: var(--font-display); font-weight: 800; margin-top: 10px;">GSTR-1</div>
+                  <div class="muted" style="margin-top: 6px;">Due in 6 days • 11 Aug</div>
+                  <button class="btn btn-sm btn-primary" type="button" style="margin-top: 12px;" data-open-lead>Set reminder →</button>
+                </div>
+                <div class="card cardPad">
+                  <div class="kicker">Open tasks</div>
+                  <div class="mono" style="font-weight: 800; font-size: 1.4rem; margin-top: 10px;" data-count-up="3">0</div>
+                  <div class="muted">Docs pending / validations</div>
+                </div>
+                <div class="card cardPad" id="score">
+                  <div class="kicker">Compliance score</div>
+                  <div class="row" style="justify-content: space-between; align-items: center; margin-top: 10px;">
+                    <div>
+                      <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.4rem;"><span class="mono" data-count-up="87">0</span>/100</div>
+                      <div class="muted">Good standing</div>
+                    </div>
+                    <svg width="96" height="96" viewBox="0 0 100 100" role="img" aria-label="Compliance score gauge">
+                      <circle cx="50" cy="50" r="36" fill="none" stroke="rgba(226,230,234,1)" stroke-width="10" />
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="36"
+                        fill="none"
+                        stroke="rgba(75,156,58,1)"
+                        stroke-width="10"
+                        stroke-linecap="round"
+                        stroke-dasharray="196.8 29.4"
+                        transform="rotate(-90 50 50)"
+                      />
+                    </svg>
+                  </div>
+                  <div class="muted" style="margin-top: 10px; font-size: 0.92rem;">Improve score by completing pending tasks.</div>
+                </div>
+              </div>
+
+              <div class="grid grid-2" style="margin-top: 14px; align-items: start;">
+                <div class="card cardPad" id="filings">
+                  <div class="row" style="justify-content: space-between; align-items: baseline;">
+                    <h2 style="margin:0;">Filing tracker</h2>
+                    <span class="badge badge--saffron">In Review</span>
+                  </div>
+                  <div class="muted" style="margin-top: 8px;">ITR AY 2024-25 • Individual</div>
+
+                  <div class="stepper" style="margin-top: 14px;">
+                    <div class="stepperItem">Docs received</div>
+                    <div class="stepperItem is-active">In review</div>
+                    <div class="stepperItem">Prepared</div>
+                    <div class="stepperItem">Submitted</div>
+                    <div class="stepperItem">E-verified</div>
+                    <div class="stepperItem">Acknowledged</div>
+                  </div>
+
+                  <div class="row wrap" style="margin-top: 14px;">
+                    <button class="btn btn-primary" type="button" data-open-chat>Ask about status →</button>
+                    <a class="btn btn-outline" href="../services/income-tax.html">ITR service</a>
+                  </div>
+                </div>
+
+                <div class="card cardPad" id="vault" data-docvault>
+                  <div class="row" style="justify-content: space-between; align-items: baseline;">
+                    <h2 style="margin:0;">Document vault</h2>
+                    <span class="badge badge--navy">Encrypted</span>
+                  </div>
+                  <div class="muted" style="margin-top: 8px;">Drag & drop documents for review (demo upload with progress).</div>
+
+                  <div class="dropzone" data-dropzone role="button" tabindex="0" aria-label="Upload documents" style="margin-top: 12px;">
+                    <div class="kicker">Drag & drop</div>
+                    <div style="font-family: var(--font-display); font-weight: 800; margin-top: 6px;">Upload PDF / PNG / JPG</div>
+                    <div class="muted" style="margin-top: 6px;">Click to choose files</div>
+                  </div>
+                  <input data-file-input type="file" multiple accept=".pdf,image/png,image/jpeg" style="display:none" />
+
+                  <div class="stack" data-file-list style="margin-top: 12px; gap: 12px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="../assets/js/site.js"></script>
+  </body>
+</html>

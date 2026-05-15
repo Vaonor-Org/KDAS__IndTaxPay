@@ -1,0 +1,945 @@
+{
+  "project": {
+    "name": "IndTaxPay",
+    "tagline": "India's Most Trusted Digital Tax & Compliance Platform",
+    "type": "Full-Stack HTML/CSS/JS/CSS frameworks Website",
+    "target_market": "India — SMBs, Freelancers, Chartered Accountants, Startups",
+    "brand_essence": "Professional, Digital-First, Culturally Resonant, Trustworthy"
+  },
+  "brand_identity": {
+    "philosophy": "Blend the heritage of India with the precision of modern fintech. Every design decision should feel like it belongs in 2025 India — ambitious, digitally confident, and culturally proud.",
+    "palette": {
+      "primary": {
+        "saffron": "#F78A0E",
+        "saffron_light": "#FDEBD0",
+        "saffron_dark": "#C96B00"
+      },
+      "secondary": {
+        "indian_green": "#4B9C3A",
+        "green_light": "#E6F5E2",
+        "green_dark": "#2E6B24"
+      },
+      "accent": {
+        "navy": "#0D4A8A",
+        "navy_light": "#D6E6F8",
+        "navy_deep": "#072D56"
+      },
+      "neutral": {
+        "white": "#FFFFFF",
+        "off_white": "#FAF8F5",
+        "light_grey": "#F2F4F7",
+        "border_grey": "#E2E6EA",
+        "text_primary": "#1A1A2E",
+        "text_secondary": "#4A5568",
+        "text_muted": "#A0ADB9"
+      },
+      "special": {
+        "gold_shimmer": "#D4A017",
+        "chakra_blue": "#1A5276",
+        "error": "#E53E3E",
+        "success": "#38A169",
+        "warning": "#DD6B20"
+      }
+    },
+    "css_variables": {
+      "comment": "Paste into :root {}",
+      "variables": "--color-saffron: #F78A0E; --color-saffron-light: #FDEBD0; --color-green: #4B9C3A; --color-green-light: #E6F5E2; --color-navy: #0D4A8A; --color-navy-deep: #072D56; --color-off-white: #FAF8F5; --color-text-primary: #1A1A2E; --color-text-secondary: #4A5568; --color-gold: #D4A017; --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 32px; --shadow-card: 0 4px 24px rgba(13,74,138,0.10); --shadow-hover: 0 8px 40px rgba(247,138,14,0.18); --transition-base: all 0.3s cubic-bezier(0.4,0,0.2,1);"
+    },
+    "typography": {
+      "display_font": "Sora (Google Fonts) — for all headings and hero text",
+      "body_font": "DM Sans — for body text, labels, descriptions",
+      "mono_font": "JetBrains Mono — for numbers, stats, code snippets",
+      "import_url": "@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');",
+      "scale": {
+        "h1": "clamp(2.8rem, 6vw, 5rem) / font-weight: 800",
+        "h2": "clamp(2rem, 4vw, 3.2rem) / font-weight: 700",
+        "h3": "clamp(1.4rem, 2.5vw, 2rem) / font-weight: 600",
+        "body_lg": "1.125rem / line-height: 1.75",
+        "body": "1rem / line-height: 1.65",
+        "caption": "0.875rem / line-height: 1.5",
+        "label": "0.75rem / letter-spacing: 0.08em / uppercase"
+      }
+    },
+    "logo_treatment": {
+      "description": "Wordmark 'IndTaxPay' in Sora ExtraBold. 'Ind' in navy, 'Tax' in saffron, 'Pay' in green. Optional: small Ashoka Chakra icon (24px) preceding or nested in the 'O' of IndTaxPay mark.",
+      "dark_variant": "All white text version for dark/navy backgrounds",
+      "favicon": "Orange Ashoka Chakra on white background"
+    },
+    "iconography": {
+     
+      "style": "Outlined, 1.5px stroke, rounded caps, 24px base size",
+      "custom_illustrations": "Isometric 3D-style SVG illustrations for key sections (hero, empty states, success screens) using the tricolour palette"
+    },
+    "motion_principles": {
+      "philosophy": "Purposeful, never flashy. Every animation should guide, not distract.",
+      "page_load": "Staggered fade-up reveals with 80ms delay between elements",
+      "hover_cards": "translateY(-4px) + shadow elevation increase",
+      "numbers": "Count-up animation on scroll into viewport (using IntersectionObserver)",
+      "page_transitions": "Slide fade with opacity 0→1 + translateY 20px→0",
+      "success_states": "Lottie or CSS keyframe confetti burst in tricolour",
+      "loading": "Ashoka Chakra spinning loader in saffron",
+      "form_validation": "Gentle shake on error, green check-pulse on success"
+    }
+  },
+  "site_architecture": {
+    "public_pages": [
+      "/",
+      "/services",
+      "/services/income-tax",
+      "/services/gst",
+      "/services/tds-payroll",
+      "/services/company-registration",
+      "/services/statutory-audit",
+      "/services/accounting",
+      "/calculators",
+      "/calculators/income-tax",
+      "/calculators/gst",
+      "/calculators/tds",
+      "/how-it-works",
+      "/about",
+      "/blog",
+      "/contact",
+      "/pricing"
+    ],
+    "authenticated_pages": [
+      "/dashboard",
+      "/dashboard/filings",
+      "/dashboard/documents",
+      "/dashboard/status",
+      "/dashboard/profile",
+      "/file/itr",
+      "/file/gst",
+      "/file/tds"
+    ]
+  },
+  "sections": {
+    "global_navbar": {
+      "design": "Sticky frosted-glass navbar. Transparent on hero, transitions to white/blur on scroll. Height 64px desktop, 56px mobile.",
+      "left": "IndTaxPay logo (SVG)",
+      "center": "Navigation links: Services (mega-menu dropdown), Calculators, How It Works, Blog, About",
+      "right": "Login (ghost button) + Get Started (filled saffron button with arrow icon)",
+      "mega_menu": {
+        "trigger": "Services hover/click",
+        "layout": "3-column grid. Column 1: Tax Services. Column 2: Business Services. Column 3: Featured Service card with illustration and CTA",
+        "animation": "Slide down + fade in, 250ms"
+      },
+      "mobile": "Hamburger → full-screen overlay menu with staggered link animations. Bottom CTA bar pinned.",
+      "copilot_prompt": "Generate a Navbar component with framer-motion scroll-aware opacity, shadcn NavigationMenu for mega-menu with 3-column layout, and sticky positioning with backdrop-blur."
+    },
+    "hero_section": {
+      "layout": "Split layout — Left: text content (60%), Right: animated 3D isometric illustration (40%). On mobile: stacked, illustration above fold.",
+      "background": "Subtle diagonal mesh gradient: off-white (#FAF8F5) to light-navy (#D6E6F8). Faint Ashoka Chakra watermark at 4% opacity in the top-right corner.",
+      "headline": "File Taxes. Stay Compliant. Grow Confident.",
+      "subheadline": "India's most trusted platform for ITR filing, GST, TDS, payroll, audits, and company registration — handled by expert CAs.",
+      "headline_treatment": "Each word animates in with staggered fade-up. 'Taxes', 'Compliant', 'Confident' each appear in saffron, green, navy respectively.",
+      "cta_buttons": [
+        {
+          "label": "Start Filing Now",
+          "style": "Large filled — saffron background, white text, rounded-xl, pulse glow on load",
+          "action": "Scroll to services or /file/itr"
+        },
+        {
+          "label": "Talk to a CA Expert",
+          "style": "Large outlined — navy border, navy text, hover fills navy",
+          "action": "Opens floating chat/contact modal"
+        }
+      ],
+      "trust_bar": "Below CTAs: small row of trust pills — '🔒 SSL Secured', '✓ GSTN Approved', '⭐ 4.9/5 Rating', '👥 500+ Clients'",
+      "illustration": "Isometric SVG scene: a laptop screen showing a tax dashboard, floating Indian Rupee coins (₹), a CA badge, a checkmark shield. Subtle floating animation (translateY 0→-8px, infinite ease-in-out, 3s).",
+      "live_stats_ticker": "Animated counter row below hero — '2,847 ITRs Filed Today ↑', '98.2% Accuracy Rate', '12,400+ Satisfied Clients'. Numbers count up on page load.",
+      "copilot_prompt": "Build a Hero section with framer-motion staggered text animation, a split grid layout, animated SVG illustration with floating keyframes, live counter with IntersectionObserver, and a trust badge strip."
+    },
+    "live_stats_dashboard": {
+      "concept": "A frosted-glass dark-navy panel (like a live dashboard widget) embedded just below the hero.",
+      "items": [
+        {
+          "label": "ITRs Filed Today",
+          "value": "2,847",
+          "trend": "+12%",
+          "icon": "FileCheck"
+        },
+        {
+          "label": "GST Registrations",
+          "value": "1,204",
+          "trend": "+8%",
+          "icon": "Building"
+        },
+        {
+          "label": "Client Satisfaction",
+          "value": "98.2%",
+          "trend": "↑",
+          "icon": "Star"
+        },
+        {
+          "label": "Expert CAs Online",
+          "value": "24",
+          "trend": "Live",
+          "icon": "UserCheck"
+        }
+      ],
+      "design": "4-column grid on dark navy (#0D4A8A) card. Numbers in Sora ExtraBold with count-up animation. Trend badges in green/saffron. Subtle scanline texture overlay for tech feel.",
+      "copilot_prompt": "Create a StatsBar component with animated number counters using requestAnimationFrame, dark glassmorphism card, and live badge indicators."
+    },
+    "services_grid": {
+      "heading": "Everything You Need. One Platform.",
+      "subheading": "From filing your first ITR to managing enterprise compliance — IndTaxPay has you covered.",
+      "layout": "3-column grid (desktop), 2-column (tablet), 1-column (mobile). Cards with hover elevation.",
+      "card_design": "White card, rounded-2xl, 1px border (#E2E6EA). On hover: border turns saffron, translateY(-4px), shadow deepens. Icon in coloured circle (saffron/green/navy alternating). Bold title, 2-line description, arrow CTA.",
+      "services": [
+        {
+          "id": "itr",
+          "icon": "FileText",
+          "icon_bg": "saffron_light",
+          "icon_color": "saffron",
+          "title": "Income Tax Return (ITR)",
+          "description": "Hassle-free ITR filing for individuals, freelancers, and HUFs with expert CA review.",
+          "badge": "Most Popular",
+          "badge_color": "saffron",
+          "cta": "File ITR Now"
+        },
+        {
+          "id": "gst",
+          "icon": "Receipt",
+          "icon_bg": "green_light",
+          "icon_color": "green",
+          "title": "GST Registration & Filing",
+          "description": "Complete GST lifecycle — registration, monthly/quarterly returns, and reconciliation.",
+          "badge": null,
+          "cta": "Get GST Compliant"
+        },
+        {
+          "id": "tds",
+          "icon": "DollarSign",
+          "icon_bg": "navy_light",
+          "icon_color": "navy",
+          "title": "TDS & Payroll",
+          "description": "Automated TDS computation, payroll processing, Form 16 generation, and 24Q/26Q filing.",
+          "badge": null,
+          "cta": "Manage TDS"
+        },
+        {
+          "id": "company",
+          "icon": "Building2",
+          "icon_bg": "green_light",
+          "icon_color": "green",
+          "title": "Company Registration",
+          "description": "Register your Private Limited, LLP, or OPC in days. We handle MCA filings end-to-end.",
+          "badge": "New",
+          "badge_color": "green",
+          "cta": "Register Company"
+        },
+        {
+          "id": "audit",
+          "icon": "Shield",
+          "icon_bg": "navy_light",
+          "icon_color": "navy",
+          "title": "Statutory Audit",
+          "description": "100% transaction audit, 3CD preparation, and automated financial report generation.",
+          "badge": null,
+          "cta": "Request Audit"
+        },
+        {
+          "id": "accounting",
+          "icon": "BookOpen",
+          "icon_bg": "saffron_light",
+          "icon_color": "saffron",
+          "title": "Accounting & Bookkeeping",
+          "description": "Monthly bookkeeping, P&L statements, and MIS reports — fully managed by our team.",
+          "badge": null,
+          "cta": "Start Bookkeeping"
+        }
+      ],
+      "bottom_cta": {
+        "text": "Not sure which service you need?",
+        "button": "Talk to Our Experts →",
+        "style": "Centred ghost/text link below grid"
+      },
+      "copilot_prompt": "Build a ServiceCard accepting props (icon: LucideIcon, iconBg, iconColor, title, description, badge, badgeColor, cta, href). Apply framer-motion whileHover lift. Export a ServicesGrid that renders cards in a responsive 3/2/1 column TailwindCSS grid."
+    },
+    "interactive_calculator": {
+      "heading": "Know Your Tax Before Filing",
+      "subheading": "Quick estimates in seconds. No sign-up needed.",
+      "design": "Tabbed interface — 3 tabs: 'Income Tax', 'GST Liability', 'TDS Calculator'. Off-white card with left sidebar tabs on desktop, horizontal tabs on mobile.",
+      "income_tax_calculator": {
+        "fields": [
+          {
+            "id": "annual_income",
+            "label": "Annual Income (₹)",
+            "type": "range+number",
+            "min": 0,
+            "max": 5000000,
+            "step": 10000
+          },
+          {
+            "id": "regime",
+            "label": "Tax Regime",
+            "type": "toggle",
+            "options": [
+              "Old Regime",
+              "New Regime"
+            ]
+          },
+          {
+            "id": "age_group",
+            "label": "Age Group",
+            "type": "radio",
+            "options": [
+              "Below 60",
+              "60–80 (Senior)",
+              "80+ (Super Senior)"
+            ]
+          },
+          {
+            "id": "deductions",
+            "label": "Total Deductions (80C, 80D etc.)",
+            "type": "number",
+            "placeholder": "e.g. 150000",
+            "visible_if": "regime === 'Old Regime'"
+          }
+        ],
+        "output": {
+          "layout": "Animated donut chart (Recharts PieChart) showing Tax vs Take-Home split. Below: breakdown table (Gross Income, Standard Deduction, Taxable Income, Tax Liability, Cess, Net Payable). All numbers animate on change.",
+          "lead_capture": "Email field + 'Get Detailed Report' CTA that triggers email capture before showing full breakdown"
+        }
+      },
+      "gst_calculator": {
+        "fields": [
+          {
+            "id": "amount",
+            "label": "Base Amount (₹)",
+            "type": "number"
+          },
+          {
+            "id": "gst_rate",
+            "label": "GST Rate",
+            "type": "select",
+            "options": [
+              "5%",
+              "12%",
+              "18%",
+              "28%"
+            ]
+          },
+          {
+            "id": "direction",
+            "label": "Calculate",
+            "type": "toggle",
+            "options": [
+              "Add GST",
+              "Remove GST"
+            ]
+          }
+        ],
+        "output": "Instant inline result card: CGST, SGST, Total GST, Final Amount. Updates on keystroke with debounce."
+      },
+      "tds_calculator": {
+        "fields": [
+          {
+            "id": "payment_type",
+            "label": "Payment Type",
+            "type": "select",
+            "options": [
+              "Salary (192)",
+              "Professional Fees (194J)",
+              "Rent (194I)",
+              "Commission (194H)",
+              "Contractor (194C)"
+            ]
+          },
+          {
+            "id": "amount",
+            "label": "Payment Amount (₹)",
+            "type": "number"
+          },
+          {
+            "id": "pan_available",
+            "label": "PAN Available?",
+            "type": "toggle",
+            "options": [
+              "Yes",
+              "No"
+            ]
+          }
+        ],
+        "output": "TDS rate, TDS amount, Net payment. Warning banner if PAN unavailable (higher rate applies)."
+      },
+      "copilot_prompt": "Build a TabbedCalculator. Tab 1: IncomeTaxCalculator using Recharts PieChart with animated transitions, range slider + number input sync, conditional deductions field. Tab 2: GSTCalculator with real-time keystroke compute. Tab 3: TDSCalculator with dynamic rate lookup table. All tabs share a styled card shell with tab navigation."
+    },
+    "how_it_works": {
+      "heading": "Filing Made Simple. Really.",
+      "subheading": "4 steps. Zero confusion. Complete peace of mind.",
+      "design": "Horizontal step-flow on desktop (connected by animated dashed line in saffron), vertical accordion on mobile. Each step card: large step number in Sora 800 at 4rem in light grey behind, icon centred, title, description.",
+      "steps": [
+        {
+          "number": "01",
+          "icon": "ClipboardList",
+          "icon_color": "saffron",
+          "title": "Fill Your Details",
+          "description": "Answer a few simple questions about your income, business, or compliance need. No jargon, no confusion.",
+          "sub_detail": "Takes 3–5 minutes"
+        },
+        {
+          "number": "02",
+          "icon": "Upload",
+          "icon_color": "green",
+          "title": "Upload Documents",
+          "description": "Securely upload your Form 16, bank statements, invoices, or any required paperwork via our encrypted portal.",
+          "sub_detail": "Bank-grade 256-bit encryption"
+        },
+        {
+          "number": "03",
+          "icon": "UserCheck",
+          "icon_color": "navy",
+          "title": "Expert CA Review",
+          "description": "Our Chartered Accountants review, verify, and prepare your filing. You'll get a preview before anything is submitted.",
+          "sub_detail": "Average turnaround: 24 hours"
+        },
+        {
+          "number": "04",
+          "icon": "CheckCircle",
+          "icon_color": "green",
+          "title": "Done — Get Your Acknowledgment",
+          "description": "Your filing is submitted. You receive the official acknowledgment number and confirmation certificate instantly.",
+          "sub_detail": "ITR-V / GST ARN delivered to email"
+        }
+      ],
+      "animation": "Steps animate in sequence on scroll, each with a 200ms stagger. The dashed connector line draws progressively using SVG stroke-dasharray animation.",
+      "copilot_prompt": "Create a HowItWorks section with a 4-step horizontal timeline. Use framer-motion staggerChildren for step card reveals. SVG animated connector line between steps using stroke-dashoffset animation triggered by IntersectionObserver."
+    },
+    "user_persona_journey_tabs": {
+      "concept": "Interactive tabbed section — user selects their profile and sees a tailored journey preview.",
+      "heading": "Built for Everyone Who Deals with Taxes in India",
+      "tabs": [
+        {
+          "id": "individual",
+          "label": "Individual / Salaried",
+          "icon": "User",
+          "color": "saffron",
+          "headline": "File your ITR in under 10 minutes",
+          "journey_steps": [
+            "Land on ITR page",
+            "Use tax calculator",
+            "Enter income details",
+            "Upload Form 16",
+            "CA review & e-file",
+            "Download ITR-V"
+          ],
+          "interactive_element": "Animated mini-dashboard preview showing 'Your Estimated Refund: ₹14,200' with green checkmark",
+          "cta": "Start Your ITR Filing"
+        },
+        {
+          "id": "freelancer",
+          "label": "Freelancer / Consultant",
+          "icon": "Laptop",
+          "color": "navy",
+          "headline": "Manage 44ADA presumptive tax with ease",
+          "journey_steps": [
+            "Select Freelancer ITR",
+            "Input professional income",
+            "Claim 50% deduction automatically",
+            "Expert verifies TDS credits",
+            "File 44ADA return",
+            "Get acknowledgment"
+          ],
+          "interactive_element": "Savings highlight: 'You save ₹32,000 with presumptive scheme vs regular filing'",
+          "cta": "File as Freelancer"
+        },
+        {
+          "id": "business",
+          "label": "Small Business Owner",
+          "icon": "Store",
+          "color": "green",
+          "headline": "GST + TDS + Accounting — all in one",
+          "journey_steps": [
+            "Select GST & Business Bundle",
+            "Upload invoices / tally data",
+            "Auto-reconcile GSTR-2B",
+            "CA prepares returns",
+            "File GSTR-3B & 1",
+            "Download compliance report"
+          ],
+          "interactive_element": "Service bundle cost estimator: dynamically selects services and shows bundled pricing",
+          "cta": "Build Your Compliance Pack"
+        },
+        {
+          "id": "ca",
+          "label": "Chartered Accountant",
+          "icon": "Briefcase",
+          "color": "navy",
+          "headline": "Audit, manage clients, generate reports — automated",
+          "journey_steps": [
+            "Create CA account",
+            "Add client entities",
+            "Bulk upload books",
+            "Run automated 3CD audit",
+            "Switch between financial reports",
+            "Export audit-ready PDF"
+          ],
+          "interactive_element": "Toggle demo: 'Switch between Audit Report / Tax Report / Financial Summary' — live preview panel",
+          "cta": "Request CA Demo"
+        },
+        {
+          "id": "startup",
+          "label": "Startup / Entrepreneur",
+          "icon": "Rocket",
+          "color": "saffron",
+          "headline": "Company registration to annual compliance — sorted",
+          "journey_steps": [
+            "Choose entity type (Pvt Ltd / LLP)",
+            "Book name approval",
+            "Draft MoA / AoA",
+            "DIN & DSC setup",
+            "COI received",
+            "Annual ROC compliance scheduled"
+          ],
+          "interactive_element": "Compliance calendar widget showing upcoming due dates with status toggles",
+          "cta": "Register Your Company"
+        }
+      ],
+      "copilot_prompt": "Build a PersonaJourneyTabs component. Tabs in a pill-style horizontal scroller. Active tab shows: animated headline, a 6-step mini progress-flow (stepper), a highlighted interactive element, and a CTA button. Use framer-motion AnimatePresence for tab transition."
+    },
+    "interactive_compliance_calendar": {
+      "concept": "A NEW creative feature — a live compliance due-date calendar widget on the homepage.",
+      "heading": "Never Miss a Deadline Again",
+      "subheading": "Stay ahead of every ITR, GST, TDS, and ROC due date — personalised for your profile.",
+      "design": "Mini calendar (month view, read-only). Dates with due deadlines highlighted in colour-coded dots (saffron = ITR, green = GST, navy = TDS/ROC). Clicking a date opens a tooltip/popover with event details and a 'Set Reminder' button.",
+      "filter_chips": [
+        "All Dates",
+        "Income Tax",
+        "GST",
+        "TDS",
+        "ROC/Company"
+      ],
+      "sample_events": [
+        {
+          "date": "Jul 31",
+          "type": "ITR",
+          "color": "saffron",
+          "label": "Last date for ITR filing (non-audit)"
+        },
+        {
+          "date": "Aug 11",
+          "type": "GST",
+          "color": "green",
+          "label": "GSTR-1 due for monthly filers"
+        },
+        {
+          "date": "Sep 30",
+          "type": "ITR",
+          "color": "saffron",
+          "label": "ITR due for businesses requiring audit"
+        },
+        {
+          "date": "Oct 15",
+          "type": "TDS",
+          "color": "navy",
+          "label": "TDS Q2 return filing deadline"
+        }
+      ],
+      "lead_capture": "'Get Personalized Deadline Alerts' → email signup → sends monthly compliance calendar PDF",
+      "copilot_prompt": "Build a ComplianceCalendar using a custom calendar grid (no library dependencies). Colour-coded dot indicators per deadline type. Popover on date click. Filter chip row to show/hide categories. 'Set Reminder' button triggers email lead capture modal."
+    },
+    "document_checklist_accordion": {
+      "heading": "What Documents Do You Need?",
+      "subheading": "Click any service to instantly see the required documents.",
+      "design": "Accordion list. Each item: service icon + name + arrow. Expanded state reveals: numbered doc list, estimated time, and a direct 'Start Now' button.",
+      "services": [
+        {
+          "id": "itr_salaried",
+          "label": "ITR — Salaried Individual",
+          "docs": [
+            "PAN Card",
+            "Aadhaar Card",
+            "Form 16 from employer",
+            "Bank account details",
+            "Investment proofs (80C, 80D)"
+          ],
+          "time_estimate": "Completed in 24 hours"
+        },
+        {
+          "id": "gst_registration",
+          "label": "GST Registration",
+          "docs": [
+            "PAN of business / proprietor",
+            "Aadhaar of proprietor/directors",
+            "Business address proof",
+            "Bank statement (last 3 months)",
+            "Cancelled cheque or passbook"
+          ],
+          "time_estimate": "ARN in 3–5 working days"
+        },
+        {
+          "id": "company_registration",
+          "label": "Private Limited Company",
+          "docs": [
+            "PAN & Aadhaar of all directors",
+            "Passport-size photos",
+            "Proof of registered office address",
+            "Utility bill (electricity/water)",
+            "No-objection certificate from owner"
+          ],
+          "time_estimate": "COI in 7–10 working days"
+        }
+      ],
+      "copilot_prompt": "Build an Accordion component with framer-motion AnimateHeight for smooth open/close. Each item: icon, title, expand arrow (rotates 180° when open). Expanded: animated list of docs (stagger-in), time badge, and CTA button."
+    },
+    "pricing_configurator": {
+      "concept": "NEW — Interactive pricing builder. Users select services they need and see a dynamic total.",
+      "heading": "Build Your Compliance Pack",
+      "subheading": "Select what you need. See transparent pricing. No hidden charges.",
+      "design": "Left panel: service toggles with individual prices. Right panel: live order summary card that updates in real time with animation.",
+      "services_menu": [
+        {
+          "id": "itr_basic",
+          "label": "ITR Filing (Salaried)",
+          "price": 999,
+          "category": "Tax"
+        },
+        {
+          "id": "itr_business",
+          "label": "ITR Filing (Business/44AD)",
+          "price": 2499,
+          "category": "Tax"
+        },
+        {
+          "id": "gst_registration",
+          "label": "GST Registration",
+          "price": 1499,
+          "category": "GST"
+        },
+        {
+          "id": "gstr_monthly",
+          "label": "GSTR-1 + 3B (Monthly, per month)",
+          "price": 799,
+          "category": "GST"
+        },
+        {
+          "id": "tds_return",
+          "label": "TDS Return Filing (per quarter)",
+          "price": 999,
+          "category": "TDS"
+        },
+        {
+          "id": "payroll",
+          "label": "Payroll Processing (up to 10 employees)",
+          "price": 1999,
+          "category": "Payroll"
+        },
+        {
+          "id": "accounting",
+          "label": "Monthly Bookkeeping",
+          "price": 2999,
+          "category": "Accounting"
+        },
+        {
+          "id": "company_reg",
+          "label": "Private Limited Registration",
+          "price": 7999,
+          "category": "Company"
+        }
+      ],
+      "bundle_discount": "If 3+ services selected: show 'Bundle Deal — 15% OFF applied' badge with celebration animation",
+      "summary_card": "Dark navy card on right. Itemised list. Animated running total. 'Get Custom Quote' or 'Proceed to Checkout' CTA.",
+      "copilot_prompt": "Build a PricingConfigurator. Left: CheckboxList of services grouped by category. Right: sticky OrderSummary card that animates total using spring animation (framer-motion). Auto-apply discount badge when 3+ items selected. Mobile: summary collapses to bottom sticky bar."
+    },
+    "trust_section": {
+      "heading": "Trusted by Thousands Across India",
+      "design": "Dark navy background section. Three sub-blocks: Testimonials carousel, Stat counters, Partner/Certificate logos.",
+      "testimonials": {
+        "layout": "Auto-scrolling horizontal carousel (pause on hover). Card: quote text, star rating (★★★★★), avatar initial circle, name, city, service used.",
+        "cards": [
+          {
+            "name": "Rajesh Kumar",
+            "city": "Mumbai",
+            "service": "ITR Filing",
+            "rating": 5,
+            "quote": "Filed my ITR in less than 20 minutes. The CA callback feature is outstanding. Highly recommend IndTaxPay!"
+          },
+          {
+            "name": "Priya Nair",
+            "city": "Bengaluru",
+            "service": "GST Registration",
+            "rating": 5,
+            "quote": "Got my GSTIN in 3 days! The document checklist made it so easy to know exactly what to upload."
+          },
+          {
+            "name": "Ankit Shah",
+            "city": "Ahmedabad",
+            "service": "Company Registration",
+            "rating": 5,
+            "quote": "Incorporated my startup seamlessly. The compliance calendar keeps me on top of all deadlines now."
+          },
+          {
+            "name": "Sunita Menon",
+            "city": "Chennai",
+            "service": "Statutory Audit",
+            "rating": 5,
+            "quote": "The automated audit report is a game-changer for our CA firm. We've cut report prep time by 70%."
+          }
+        ],
+        "copilot_prompt": "Build a TestimonialsCarousel with CSS scroll-snap and auto-play using setInterval (pause on mouseEnter). Cards with glassmorphism style on dark navy background."
+      },
+      "stat_counters": [
+        {
+          "value": "12,400+",
+          "label": "Clients Served",
+          "icon": "Users"
+        },
+        {
+          "value": "98.2%",
+          "label": "Accuracy Rate",
+          "icon": "Target"
+        },
+        {
+          "value": "24 hrs",
+          "label": "Average Turnaround",
+          "icon": "Clock"
+        },
+        {
+          "value": "50+",
+          "label": "Expert CAs",
+          "icon": "Award"
+        }
+      ],
+      "trust_badges": {
+        "items": [
+          "GSTN Approved Partner",
+          "ISO 27001 Certified",
+          "256-bit SSL Encryption",
+          "Income Tax Dept. Registered",
+          "MCA Approved"
+        ],
+        "design": "White pill badges with green checkmark prefix, displayed in wrapping flex row"
+      },
+      "partner_logos": "Grayscale logos of partner banks / corporations (displayed at 60% opacity, hover to full colour)"
+    },
+    "live_chat_widget": {
+      "concept": "Sticky bottom-right chat bubble. Opens a slide-up panel.",
+      "design": "Floating circular button — saffron gradient with chat icon. Pulse ring animation to draw attention. On click: slide-up card with options: 'Chat with CA Expert', 'WhatsApp us', 'Schedule a Call', 'FAQ'.",
+      "ai_chatbot_integration": "Rule-based + AI fallback. Greets user: 'Hi! I'm TaxBot 🙏 How can I help you today?' Suggested quick replies: 'How do I file ITR?', 'What's my GST due date?', 'I need to register a company'.",
+      "copilot_prompt": "Build a FloatingChat component. Trigger button with CSS pulse animation. AnimatePresence for slide-up panel. Chat interface with message bubbles, quick-reply chips, and WhatsApp deep-link button."
+    },
+    "faq_section": {
+      "heading": "Got Questions? We've Got Answers.",
+      "design": "Two-column layout: left column = FAQ list (accordion), right column = sticky contact card with CA photo, rating, and 'Ask a Question' CTA.",
+      "categories": [
+        "Income Tax",
+        "GST",
+        "Company Registration",
+        "TDS & Payroll"
+      ],
+      "filter_tabs": "Pill tabs to filter questions by category",
+      "questions": [
+        {
+          "q": "What is the last date to file ITR?",
+          "a": "For individuals (non-audit cases), the due date is typically July 31. Businesses requiring audit have a September 30 deadline. IndTaxPay sends automated reminders.",
+          "category": "Income Tax"
+        },
+        {
+          "q": "Can I switch between old and new tax regimes?",
+          "a": "Yes. From FY 2023-24, the new regime is the default. You can opt for the old regime if it's more beneficial. Our calculator shows you which regime saves more.",
+          "category": "Income Tax"
+        },
+        {
+          "q": "How long does GST registration take?",
+          "a": "GST registration typically takes 3–7 working days after document verification. With IndTaxPay, we track your ARN status in real time.",
+          "category": "GST"
+        },
+        {
+          "q": "Do you offer refund if filing fails?",
+          "a": "Yes — if we're unable to file your return due to our error, you receive a full refund. Our 98.2% success rate speaks for itself.",
+          "category": "Income Tax"
+        }
+      ],
+      "copilot_prompt": "Build a FilteredFAQ component. Category pill tabs filter the accordion list. Framer-motion AnimatePresence for smooth filter transitions. Each accordion uses AnimateHeight for smooth open/close."
+    },
+    "blog_preview": {
+      "heading": "Tax Knowledge Hub",
+      "subheading": "Plain-language guides from our expert CAs.",
+      "design": "3-card horizontal row. Card: category pill, title, 1-line excerpt, author avatar + name, read time, date. Featured card (larger, first position) with full-width illustration.",
+      "sample_posts": [
+        {
+          "title": "New vs Old Tax Regime 2024-25: Which Saves You More?",
+          "category": "Income Tax",
+          "read_time": "5 min",
+          "featured": true
+        },
+        {
+          "title": "GST Amnesty Scheme 2024: Are You Eligible?",
+          "category": "GST",
+          "read_time": "4 min",
+          "featured": false
+        },
+        {
+          "title": "How to Generate Form 16 if Your Employer Didn't?",
+          "category": "TDS",
+          "read_time": "3 min",
+          "featured": false
+        }
+      ],
+      "copilot_prompt": "Build BlogPreview with a 1+2 asymmetric grid. Featured card spans full height on left. Two smaller cards stacked on right. Hover: title underline animation with saffron colour slide-in."
+    },
+    "footer": {
+      "design": "Dark navy background. 4-column layout. Logo + tagline + social icons on left. Service links, Resource links, Company links in columns 2–4. Bottom bar: copyright + legal links + payment badges.",
+      "newsletter_widget": "Inline email signup in footer: 'Get monthly compliance reminders' — input + subscribe button in saffron.",
+      "social_links": [
+        "LinkedIn",
+        "Twitter/X",
+        "YouTube",
+        "Instagram",
+        "WhatsApp Business"
+      ],
+      "payment_badges": "Razorpay / PhonePe / UPI / Netbanking icons",
+      "legal": [
+        "Privacy Policy",
+        "Terms of Service",
+        "Refund Policy",
+        "Disclaimer"
+      ],
+      "bottom_tagline": "Made with 🧡 in India | A CA-powered compliance platform",
+      "copilot_prompt": "Build a Footer component with a 4-column responsive grid (2-col tablet, 1-col mobile). Newsletter inline form. Social icons with hover fill animation. Payment logos strip. Sticky scroll-to-top button."
+    }
+  },
+  "dashboard_portal": {
+    "description": "Post-login authenticated area for users to track their filings and documents.",
+    "design_theme": "Light sidebar (white) + content area (off-white). Navy sidebar accent. Full-width on desktop, hamburger drawer on mobile.",
+    "sidebar_nav": [
+      "Overview",
+      "My Filings",
+      "Documents",
+      "Track Status",
+      "Compliance Calendar",
+      "Profile",
+      "Help"
+    ],
+    "overview_widgets": [
+      {
+        "type": "stat_card",
+        "label": "Active Filings",
+        "value": "3",
+        "icon": "FileText",
+        "color": "saffron"
+      },
+      {
+        "type": "stat_card",
+        "label": "Completed",
+        "value": "12",
+        "icon": "CheckCircle",
+        "color": "green"
+      },
+      {
+        "type": "stat_card",
+        "label": "Pending Action",
+        "value": "1",
+        "icon": "AlertCircle",
+        "color": "error"
+      },
+      {
+        "type": "stat_card",
+        "label": "Deadline",
+        "value": "Jul 31",
+        "icon": "Calendar",
+        "color": "navy"
+      }
+    ],
+    "filing_status_tracker": {
+      "design": "Stepper component per filing. 5 stages: Submitted → Under Review → CA Processing → Filed → Acknowledged. Current stage highlighted in saffron with animated pulse. Completed stages in green with checkmark.",
+      "copilot_prompt": "Build a FilingStatusTracker component. Each filing has a progress stepper. Active step: saffron animated pulse ring. Completed: green checkmark icon. Timestamp shown below each step."
+    },
+    "document_vault": {
+      "design": "Grid of document cards. Each card: file icon (coloured by type), filename, upload date, status badge (Verified / Pending), download button.",
+      "features": [
+        "Drag & drop upload",
+        "File type validation",
+        "Progress bar on upload",
+        "Auto-category tagging (Form 16, Aadhaar, etc.)"
+      ],
+      "copilot_prompt": "Build DocumentVault -dropzone drag-drop upload zone. Uploaded files shown as animated card grid. File type icons via Lucide. Status badge (green verified, yellow pending)."
+    }
+  },
+  "advanced_creative_enhancements": {
+    "ashoka_chakra_loader": {
+      "description": "Custom page loader — the Ashoka Chakra's 24 spokes draw in progressively using SVG stroke animation, in navy blue. Fades out on page ready.",
+      "copilot_prompt": "Create an AshokaChagraLoader SVG component. Use stroke-dasharray and stroke-dashoffset CSS animation to progressively reveal 24 spokes. Fade out with opacity transition on isLoaded=true."
+    },
+    "tricolour_dividers": {
+      "description": "Section dividers between major sections use a thin 3px horizontal line in the tricolour: left third saffron, middle third white/grey, right third green. Or a wave SVG divider in the same palette.",
+      "copilot_prompt": "Create a TricolourDivider SVG component with a subtle wave path. Fill: gradient left-to-right saffron → off-white → green. Height: 40px. Used between hero and stats, stats and services."
+    },
+    "cursor_custom": {
+      "description": "On desktop, a custom cursor: small circle that expands to a ring on hover over interactive elements. Cursor in saffron colour.",
+      "copilot_prompt": "Implement a custom cursor using a fixed-position div tracked by mousemove event. Default: 10px saffron dot. On hover over buttons/links: expand to 32px ring with framer-motion spring transition."
+    },
+    "dark_mode": {
+      "description": "Full dark mode support. Dark theme: deep navy (#0D1B2E) background, saffron accents, soft white text, cards in #152237.",
+      "implementation": "CSS variable swap on [data-theme='dark']",
+      "copilot_prompt": "Add dark mode to the design system using themes. Define dark-mode CSS variables. All components use CSS variables from :root and [data-theme='dark']. Toggle button in navbar."
+    },
+    "scroll_progress_bar": {
+      "description": "Thin 3px saffron line at the very top of the page that fills from 0% to 100% as user scrolls.",
+      "copilot_prompt": "Create a ScrollProgressBar component fixed at top of page. Use framer-motion useScroll + scaleX transform on a full-width saffron bar."
+    },
+    "gamification_widget": {
+      "concept": "NEW — A compliance score widget for logged-in users. 'Your Compliance Score: 87/100'. Circle gauge in saffron/green gradient. Improvements listed below as actionable checklist items.",
+      "copilot_prompt": "Build a ComplianceScoreWidget. Circular SVG progress gauge (stroke-dasharray animation). Score number counts up on mount. Checklist of pending actions with checkboxes."
+    },
+    "before_after_comparison": {
+      "concept": "For the Statutory Audit page — a drag-handle comparison slider: Left = 'Manual Process' (cluttered spreadsheet screenshot), Right = 'IndTaxPay Automated' (clean dashboard screenshot). Drag the handle to reveal.",
+      "copilot_prompt": "Build a BeforeAfterSlider component with a draggable divider. Left image: manual audit illustration. Right image: automated dashboard illustration. Drag handle with saffron accent."
+    },
+    "floating_deadline_banner": {
+      "concept": "A dismissible sticky banner just below the navbar: '⏰ ITR Filing Deadline: 47 days left — File Now →'. Countdown timer in real time.",
+      "design": "Saffron background banner. Clock icon + countdown (DD:HH:MM:SS). CTA link. Close (×) button. Reappears after 7 days if dismissed (localStorage).",
+      "copilot_prompt": "Build a DeadlineBanner component with real-time countdown using setInterval. Saffron background. Dismiss stores timestamp in localStorage with 7-day re-show logic."
+    },
+    "whatsapp_integration": {
+      "concept": "WhatsApp CTA on every service page and in the chat widget.",
+      "link_format": "https://wa.me/91XXXXXXXXXX?text=Hi%20IndTaxPay%2C%20I%20need%20help%20with%20[service]",
+      "design": "Green WhatsApp button with icon, 'Chat with CA on WhatsApp' label"
+    },
+    "testimonials_video": {
+      "concept": "NEW — Video testimonials section. 3 short video thumbnails (15–30 sec clips from real clients). Click to play in a lightbox modal. Builds extreme trust.",
+      "copilot_prompt": "Build a VideoTestimonialsGrid. 3 cards with blurred thumbnail, play button overlay. Click opens a VideoLightbox modal with overlay backdrop and close button."
+    }
+  },
+  "accessibility_checklist": [
+    "All images have descriptive alt attributes",
+    "Focus-visible ring styles on all interactive elements",
+    "Keyboard navigation for accordions, tabs, modals",
+    "ARIA roles: role='tablist', role='dialog', aria-expanded, aria-label",
+    "Colour contrast ratio: minimum 4.5:1 for body text, 3:1 for large text",
+    "Skip-to-content link for screen reader users",
+    "Motion: prefers-reduced-motion media query disables all animations"
+  ],
+  "performance_targets": {
+    "lighthouse_performance": ">90",
+    "lighthouse_accessibility": ">95",
+    "lcp": "<2.5s",
+    "fid": "<100ms",
+    "cls": "<0.1"
+   
+  },
+  "seo_strategy": {
+    "target_keywords": [
+      "ITR filing online India",
+      "GST registration online",
+      "income tax consultant India",
+      "TDS return filing",
+      "company registration India",
+      "statutory audit services",
+      "CA online India",
+      "IndTaxPay"
+    ],
+    "structured_data": [
+      "Organization",
+      "FAQPage",
+      "BreadcrumbList",
+      "Service"
+    ],
+    "meta_strategy": "Unique title + description per service page. Open Graph images for social sharing."
+  },
+  "master_copilot_prompt": {
+    "description": "The top-level prompt to give GitHub Copilot or any AI coding assistant to scaffold the full project.",
+    "prompt": "Build a production-grade website called 'IndTaxPay' — India's digital tax and compliance platform. Use TailwindCSS, shadcn/ui, Framer Motion, Recharts, Form + Zod, and Zustand. Design system: Sora (headings), DM Sans (body), JetBrains Mono (numbers). Palette: saffron #F78A0E, indian-green #4B9C3A, navy #0D4A8A, off-white #FAF8F5, text #1A1A2E — defined as CSS variables. Build the following pages and components: (1) Sticky frosted-glass Navbar with mega-menu, (2) Hero section with split layout, animated isometric SVG illustration, staggered headline animation, live stat counters, trust bar, (3) Services grid with ServiceCard components and hover animations, (4) Tabbed Tax Calculator (Income Tax with donut chart, GST, TDS) with real-time compute, (5) How-It-Works section with animated 4-step SVG connector flow, (6) Persona Journey Tabs (Individual / Freelancer / Business / CA / Startup) with per-persona interactive preview, (7) Compliance Calendar widget with colour-coded deadline dots and popover, (8) Interactive Pricing Configurator with live total and bundle discount logic, (9) Trust section (testimonials carousel, stat counters, trust badges) on dark navy background, (10) Sticky floating chat widget with slide-up panel and AI chatbot placeholder, (11) FAQ section with category filter tabs and accordion, (12) Footer with newsletter signup. Also build an authenticated Dashboard with sidebar navigation, filing status stepper, document vault with drag-drop upload. Add: custom Ashoka Chakra SVG loader, tricolour wave section dividers, scroll progress bar, dark mode with, custom cursor on desktop, deadline countdown banner, and full WCAG 2.1 AA accessibility. All components must be mobile-first responsive. Follow the brand identity and typography scale exactly as specified."
+  }
+}

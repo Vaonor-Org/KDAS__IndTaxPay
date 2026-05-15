@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog — IndTaxPay</title>
+    <meta name="description" content="Tax knowledge hub: plain-language guides from expert CAs." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body data-base="../" data-active-nav="blog">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="section section--tight" aria-label="Blog header">
+        <div class="container">
+          <div class="card cardPad">
+            <div class="kicker">Blog</div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Tax Knowledge Hub</h1>
+            <p style="margin-top: 10px;">Plain-language guides from our expert CAs (demo content).</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Posts">
+        <div class="container">
+          <div class="grid grid-3">
+            <article class="serviceCard">
+              <div class="badge badge--saffron">Income Tax</div>
+              <h2 class="serviceCard__title" style="margin-top: 10px;">New vs Old Tax Regime 2024-25</h2>
+              <p class="serviceCard__desc">A simple comparison and when each regime makes sense.</p>
+              <button class="btn btn-sm btn-outline" type="button" data-open-chat>Ask a CA about this →</button>
+            </article>
+            <article class="serviceCard">
+              <div class="badge badge--green">GST</div>
+              <h2 class="serviceCard__title" style="margin-top: 10px;">GST Reconciliation: Avoid 2B Mismatch</h2>
+              <p class="serviceCard__desc">How to reduce ITC issues with simple monthly habits.</p>
+              <button class="btn btn-sm btn-outline" type="button" data-open-chat>Ask a CA about this →</button>
+            </article>
+            <article class="serviceCard">
+              <div class="badge badge--navy">TDS</div>
+              <h2 class="serviceCard__title" style="margin-top: 10px;">TDS Basics for Small Businesses</h2>
+              <p class="serviceCard__desc">Common sections and how to avoid interest/penalties.</p>
+              <button class="btn btn-sm btn-outline" type="button" data-open-chat>Ask a CA about this →</button>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="../assets/js/site.js"></script>
+  </body>
+</html>
