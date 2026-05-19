@@ -57,15 +57,15 @@
                 <circle cx="12" cy="12" r="9" stroke="currentColor" opacity="0.35"/>
                 <circle cx="12" cy="12" r="2.2" stroke="currentColor"/>
                 ${Array.from({ length: 12 })
-                  .map((_, i) => {
-                    const a = (i * Math.PI) / 6;
-                    const x1 = 12 + Math.cos(a) * 3.4;
-                    const y1 = 12 + Math.sin(a) * 3.4;
-                    const x2 = 12 + Math.cos(a) * 8.9;
-                    const y2 = 12 + Math.sin(a) * 8.9;
-                    return `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" stroke="currentColor" opacity="0.45"/>`;
-                  })
-                  .join("")}
+        .map((_, i) => {
+          const a = (i * Math.PI) / 6;
+          const x1 = 12 + Math.cos(a) * 3.4;
+          const y1 = 12 + Math.sin(a) * 3.4;
+          const x2 = 12 + Math.cos(a) * 8.9;
+          const y2 = 12 + Math.sin(a) * 8.9;
+          return `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" stroke="currentColor" opacity="0.45"/>`;
+        })
+        .join("")}
               </svg>
             </span>
             <span class="brand__text" aria-label="IndTaxPay">
@@ -74,11 +74,9 @@
           </a>
 
           <nav class="navLinks" aria-label="Primary">
+            <a class="navLink" href="${base}index.html" data-nav="home">Home</a>
             <button class="navLink" type="button" data-mega-btn="services" data-nav="services" aria-expanded="false" aria-controls="mega-services">
               Services ▾
-            </button>
-            <button class="navLink" type="button" data-mega-btn="calculators" data-nav="calculators" aria-expanded="false" aria-controls="mega-calculators">
-              Calculators ▾
             </button>
             <a class="navLink" href="${base}how-it-works/index.html" data-nav="how">How It Works</a>
             <a class="navLink" href="${base}blog/index.html" data-nav="blog">Blog</a>
@@ -89,7 +87,6 @@
             <button class="iconBtn" type="button" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
               <span aria-hidden="true">◐</span>
             </button>
-            <a class="btn btn-sm btn-ghost" href="${base}dashboard/index.html">Login</a>
             <a class="btn btn-sm btn-primary" href="${base}pricing/index.html">Get Started <span aria-hidden="true">→</span></a>
             <button class="iconBtn hamburger" type="button" data-mobile-open aria-label="Open menu">
               <span aria-hidden="true">☰</span>
@@ -171,15 +168,13 @@
             <button class="iconBtn" type="button" data-mobile-close aria-label="Close menu">✕</button>
           </div>
           <div class="mobileMenu__links" aria-label="Mobile navigation">
+            <a class="navLink" href="${base}index.html" data-nav="home">Home</a>
             <a class="navLink" href="${base}services/index.html">Services</a>
-            <a class="navLink" href="${base}calculators/index.html">Calculators</a>
             <a class="navLink" href="${base}how-it-works/index.html">How It Works</a>
             <a class="navLink" href="${base}blog/index.html">Blog</a>
             <a class="navLink" href="${base}about/index.html">About</a>
-            <a class="navLink" href="${base}contact/index.html">Contact</a>
           </div>
           <div class="mobileMenu__cta">
-            <a class="btn btn-ghost" href="${base}dashboard/index.html">Login</a>
             <a class="btn btn-primary" href="${base}pricing/index.html">Get Started →</a>
           </div>
         </div>
@@ -1018,11 +1013,11 @@
       if (summary) {
         summary.innerHTML = selected.length
           ? selected
-              .map(
-                (s) =>
-                  `<div class="line"><span>${s.label}</span><span class="mono">${fmtINR(s.price)}</span></div>`
-              )
-              .join('')
+            .map(
+              (s) =>
+                `<div class="line"><span>${s.label}</span><span class="mono">${fmtINR(s.price)}</span></div>`
+            )
+            .join('')
           : `<div class="muted">Select services to build your pack.</div>`;
       }
       if (discountEl) discountEl.style.display = selected.length >= 3 ? 'block' : 'none';
@@ -1166,17 +1161,17 @@
           <div class="stack" style="gap:10px;">
             <div style="font-family: var(--font-display); font-weight:800;">Due dates</div>
             ${filtered
-              .map(
-                (ev) =>
-                  `<div class="row" style="justify-content: space-between;">
+            .map(
+              (ev) =>
+                `<div class="row" style="justify-content: space-between;">
                     <div>
                       <div style="font-weight:800;">${ev.type}</div>
                       <div class="muted" style="font-size:0.92rem;">${ev.label}</div>
                     </div>
                     <span class="badge badge--${ev.color === 'itr' ? 'saffron' : ev.color === 'gst' ? 'green' : 'navy'}">${ev.date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' })}</span>
                   </div>`
-              )
-              .join('')}
+            )
+            .join('')}
             <div class="row wrap">
               <button class="btn btn-primary" type="button" data-open-lead>Set Reminder</button>
               <button class="btn btn-ghost" type="button" data-pop-close>Close</button>
@@ -1409,11 +1404,77 @@
     window.setTimeout(() => document.documentElement.classList.add('page-ready'), 30);
   }
 
+  function createLoaderEl() {
+    const el = document.createElement('div');
+    el.id = 'loader';
+    el.className = 'loader';
+    el.setAttribute('aria-hidden', 'true');
+    const spokes = Array.from({length: 24}, (_, i) =>
+      `<line x1="50" y1="42" x2="50" y2="12" transform="rotate(${i * 15} 50 50)"/>`
+    ).join('');
+    el.innerHTML = `
+      <div class="loaderInner">
+        <div class="loaderRing"></div>
+        <svg class="chakra-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#0D4A8A" stroke-width="3"/>
+          <circle cx="50" cy="50" r="8" fill="none" stroke="#0D4A8A" stroke-width="2.5"/>
+          <circle cx="50" cy="50" r="3" fill="#0D4A8A"/>
+          <g stroke="#0D4A8A" stroke-width="1.5" stroke-linecap="round">${spokes}</g>
+        </svg>
+      </div>
+      <div class="loaderBrand"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></div>
+    `;
+    return el;
+  }
+
+  function initPageTransitionLoader() {
+    // Show loader on page load (all pages)
+    const existing = $('#loader');
+    if (existing) {
+      window.setTimeout(() => existing.classList.add('is-hidden'), 400);
+      window.setTimeout(() => existing.remove(), 1000);
+    } else {
+      const el = createLoaderEl();
+      document.body.insertBefore(el, document.body.firstChild);
+      window.setTimeout(() => el.classList.add('is-hidden'), 400);
+      window.setTimeout(() => el.remove(), 1000);
+    }
+
+    // Show loader when navigating to any internal page
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      const anchor = t.closest('a[href]');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href') || '';
+      // skip: external, hash-only, mailto, tel, JS links
+      if (
+        !href ||
+        href.startsWith('#') ||
+        href.startsWith('http') ||
+        href.startsWith('mailto') ||
+        href.startsWith('tel') ||
+        href.startsWith('javascript') ||
+        anchor.target === '_blank'
+      ) return;
+
+      e.preventDefault();
+      const dest = href;
+
+      // inject loader
+      const loader = createLoaderEl();
+      document.body.insertBefore(loader, document.body.firstChild);
+
+      // navigate after a short delay so animation is visible
+      window.setTimeout(() => { window.location.href = dest; }, 450);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     injectLayout();
 
     initTheme();
-    initLoader();
+    initPageTransitionLoader();
     initScrollProgress();
     initNavbar();
     initMobileMenu();

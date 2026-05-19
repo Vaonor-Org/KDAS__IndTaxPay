@@ -16,7 +16,45 @@
     <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
 
     <div class="loader" id="loader" aria-hidden="true">
-      <div class="chakra" aria-hidden="true"></div>
+      <div class="loaderInner">
+        <div class="loaderRing"></div>
+        <svg class="chakra-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Outer ring -->
+          <circle cx="50" cy="50" r="46" fill="none" stroke="#0D4A8A" stroke-width="3"/>
+          <!-- Inner ring -->
+          <circle cx="50" cy="50" r="8" fill="none" stroke="#0D4A8A" stroke-width="2.5"/>
+          <!-- Hub dot -->
+          <circle cx="50" cy="50" r="3" fill="#0D4A8A"/>
+          <!-- 24 spokes -->
+          <g stroke="#0D4A8A" stroke-width="1.5" stroke-linecap="round">
+            <line x1="50" y1="42" x2="50" y2="12"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(15 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(30 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(45 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(60 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(75 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(90 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(105 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(120 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(135 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(150 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(165 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(180 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(195 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(210 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(225 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(240 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(255 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(270 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(285 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(300 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(315 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(330 50 50)"/>
+            <line x1="50" y1="42" x2="50" y2="12" transform="rotate(345 50 50)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="loaderBrand"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></div>
     </div>
 
     <div class="cursorDot" aria-hidden="true"></div>
@@ -28,20 +66,6 @@
     <main id="main" class="pageFadeIn">
       <section class="hero" aria-label="Hero">
         <div class="hero__bg" aria-hidden="true"></div>
-        <svg class="hero__watermark" viewBox="0 0 200 200" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="78" stroke="#072D56" stroke-width="2" opacity="0.8" />
-          <circle cx="100" cy="100" r="14" stroke="#072D56" stroke-width="2" opacity="0.8" />
-          <g opacity="0.8" stroke="#072D56" stroke-width="2">
-            <line x1="100" y1="28" x2="100" y2="86" />
-            <line x1="100" y1="114" x2="100" y2="172" />
-            <line x1="28" y1="100" x2="86" y2="100" />
-            <line x1="114" y1="100" x2="172" y2="100" />
-            <line x1="49" y1="49" x2="90" y2="90" />
-            <line x1="110" y1="110" x2="151" y2="151" />
-            <line x1="151" y1="49" x2="110" y2="90" />
-            <line x1="90" y1="110" x2="49" y2="151" />
-          </g>
-        </svg>
 
         <div class="container hero__grid">
           <div>
@@ -59,64 +83,51 @@
               <a class="btn btn-lg btn-primary" href="#services">Start Filing Now</a>
               <button class="btn btn-lg btn-outline" type="button" data-open-chat>Talk to a CA Expert</button>
             </div>
-
-            <div class="hero__trust" aria-label="Trust badges">
-              <span class="pill">🔒 SSL Secured</span>
-              <span class="pill">✓ GSTN Approved</span>
-              <span class="pill">⭐ 4.9/5 Rating</span>
-              <span class="pill">👥 500+ Clients</span>
-            </div>
-
-            <div class="ticker" aria-label="Live stats ticker">
-              <div class="tickerItem">
-                <div class="tickerItem__value mono" data-count-up="2847">0</div>
-                <div class="tickerItem__label">ITRs Filed Today ↑</div>
-              </div>
-              <div class="tickerItem">
-                <div class="tickerItem__value mono" data-count-up="98.2" data-decimals="1" data-suffix="%">0</div>
-                <div class="tickerItem__label">Accuracy Rate</div>
-              </div>
-              <div class="tickerItem">
-                <div class="tickerItem__value mono" data-count-up="12400" data-suffix="+">0</div>
-                <div class="tickerItem__label">Satisfied Clients</div>
-              </div>
-            </div>
           </div>
 
           <div class="heroArt floaty" aria-label="Isometric illustration">
-            <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tax dashboard illustration">
-              <defs>
-                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#D6E6F8" />
-                  <stop offset="1" stop-color="#FDEBD0" />
-                </linearGradient>
-                <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#0D4A8A" stop-opacity="0.14" />
-                  <stop offset="1" stop-color="#4B9C3A" stop-opacity="0.10" />
-                </linearGradient>
-              </defs>
-              <rect x="40" y="70" width="380" height="250" rx="22" fill="url(#g1)" stroke="#E2E6EA" />
-              <rect x="70" y="100" width="320" height="190" rx="18" fill="#FFFFFF" opacity="0.9" stroke="#E2E6EA" />
-              <rect x="92" y="124" width="150" height="18" rx="9" fill="#F2F4F7" />
-              <rect x="92" y="154" width="220" height="12" rx="6" fill="#F2F4F7" />
-              <rect x="92" y="178" width="260" height="12" rx="6" fill="#F2F4F7" />
-              <rect x="92" y="214" width="120" height="56" rx="16" fill="url(#g2)" stroke="#E2E6EA" />
-              <rect x="226" y="214" width="164" height="56" rx="16" fill="#FDEBD0" opacity="0.8" stroke="#E2E6EA" />
-              <circle cx="422" cy="110" r="42" fill="#F78A0E" opacity="0.18" />
-              <circle cx="448" cy="138" r="30" fill="#4B9C3A" opacity="0.16" />
-              <g>
-                <circle cx="442" cy="228" r="46" fill="#0D4A8A" opacity="0.10" />
-                <circle cx="442" cy="228" r="18" fill="#FFFFFF" opacity="0.92" />
-                <path d="M438 228h8" stroke="#0D4A8A" stroke-width="2" />
-                <path d="M442 224v8" stroke="#0D4A8A" stroke-width="2" />
-              </g>
-              <g transform="translate(88 304)">
-                <rect x="0" y="0" width="344" height="30" rx="15" fill="#FFFFFF" opacity="0.65" stroke="#E2E6EA" />
-                <circle cx="22" cy="15" r="10" fill="#F78A0E" opacity="0.7" />
-                <rect x="42" y="10" width="120" height="10" rx="5" fill="#F2F4F7" />
-                <rect x="176" y="10" width="140" height="10" rx="5" fill="#F2F4F7" />
-              </g>
-            </svg>
+            <div class="dashCardTop">
+              <div class="macDots">
+                <span class="macDot red"></span>
+                <span class="macDot yellow"></span>
+                <span class="macDot green"></span>
+              </div>
+              <div class="dashCardTitle">Compliance Dashboard</div>
+            </div>
+            <div class="dashCardBody">
+              <div class="dashRow">
+                <div class="dashIcon" style="background: rgba(75, 156, 58, 0.15); color: #4B9C3A;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div class="dashText">
+                  <div class="dashName">GST Filing</div>
+                  <div class="dashStatus status-green">Approved & Verified</div>
+                </div>
+                <div class="dashArrow">›</div>
+              </div>
+
+              <div class="dashRow">
+                <div class="dashIcon" style="background: rgba(13, 74, 138, 0.15); color: #5BC0DE;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <div class="dashText">
+                  <div class="dashName">MSME Registration</div>
+                  <div class="dashStatus status-blue">Certificate Generated</div>
+                </div>
+                <div class="dashArrow">›</div>
+              </div>
+
+              <div class="dashRow">
+                <div class="dashIcon" style="background: rgba(247, 138, 14, 0.15); color: #F78A0E;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div class="dashText">
+                  <div class="dashName">Trademark</div>
+                  <div class="dashStatus status-orange">Protection Active</div>
+                </div>
+                <div class="dashArrow">›</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -360,19 +371,6 @@
                               <div class="mono" style="font-weight: 800; font-size: 1.25rem;" data-it-net>₹0</div>
                             </div>
                           </div>
-
-                          <div class="stack">
-                            <div class="breakdown" data-gated-content>
-                              <div class="breakdownRow"><span class="breakdownKey">Gross Income</span><span class="breakdownVal" data-it-gross>₹0</span></div>
-                              <div class="breakdownRow"><span class="breakdownKey">Standard Deduction</span><span class="breakdownVal" data-it-std>₹0</span></div>
-                              <div class="breakdownRow"><span class="breakdownKey">Deductions</span><span class="breakdownVal" data-it-deduct>₹0</span></div>
-                              <div class="breakdownRow"><span class="breakdownKey">Taxable Income</span><span class="breakdownVal" data-it-taxable>₹0</span></div>
-                              <div class="breakdownRow"><span class="breakdownKey">Tax Liability</span><span class="breakdownVal" data-it-tax>₹0</span></div>
-                              <div class="breakdownRow"><span class="breakdownKey">Cess (4%)</span><span class="breakdownVal" data-it-cess>₹0</span></div>
-                              <div class="breakdownRow"><span class="breakdownKey"><strong>Total</strong></span><span class="breakdownVal" data-it-total>₹0</span></div>
-                            </div>
-                            <div data-it-gate></div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -474,35 +472,30 @@
       <section class="section" aria-label="How it works">
         <div class="container">
           <div class="center">
-            <div class="kicker">4 steps</div>
-            <h2 style="margin-top: 10px;">Filing Made Simple. Really.</h2>
-            <p style="margin-top: 10px;">4 steps. Zero confusion. Complete peace of mind.</p>
+            <div class="kicker">—— OUR PROCESS ——</div>
+            <h2 style="margin-top: 10px;">Filing Made Frictionless</h2>
           </div>
 
-          <div class="steps" style="margin-top: 22px;">
-            <div class="stepCard">
-              <div class="stepCard__title">Fill Your Details</div>
-              <p class="stepCard__desc">Answer a few simple questions about your income, business, or compliance need.</p>
-              <div class="stepCard__sub"><span class="tag">Takes 3–5 minutes</span></div>
-              <div class="stepCard__num">01</div>
+          <div class="processLine">
+            <div class="processStep">
+              <div class="processIcon"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
+              <div class="processTitle">1. Gather Docs</div>
+              <div class="processDesc">Securely upload your requirements to our encrypted portal.</div>
             </div>
-            <div class="stepCard">
-              <div class="stepCard__title">Upload Documents</div>
-              <p class="stepCard__desc">Securely upload required paperwork via our encrypted portal.</p>
-              <div class="stepCard__sub"><span class="tag">256-bit encryption</span></div>
-              <div class="stepCard__num">02</div>
+            <div class="processStep">
+              <div class="processIcon"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg></div>
+              <div class="processTitle">2. Verification</div>
+              <div class="processDesc">Our experts review everything for 100% accuracy.</div>
             </div>
-            <div class="stepCard">
-              <div class="stepCard__title">Expert CA Review</div>
-              <p class="stepCard__desc">CAs review, verify, and prepare your filing. Preview before submission.</p>
-              <div class="stepCard__sub"><span class="tag">Avg turnaround: 24 hrs</span></div>
-              <div class="stepCard__num">03</div>
+            <div class="processStep">
+              <div class="processIcon"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></div>
+              <div class="processTitle">3. Filing</div>
+              <div class="processDesc">Immediate submission to respective government portals.</div>
             </div>
-            <div class="stepCard">
-              <div class="stepCard__title">Done — Acknowledgment</div>
-              <p class="stepCard__desc">Get official acknowledgment and confirmation certificate instantly.</p>
-              <div class="stepCard__sub"><span class="tag">Delivered to email</span></div>
-              <div class="stepCard__num">04</div>
+            <div class="processStep">
+              <div class="processIcon active"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <div class="processTitle">4. Approval</div>
+              <div class="processDesc">Receive your official certificates and compliance proofs.</div>
             </div>
           </div>
         </div>
@@ -767,50 +760,6 @@
         </div>
       </section>
 
-      <div class="tricolourDivider" aria-hidden="true"></div>
-
-      <section class="section" id="pricing" aria-label="Pricing configurator">
-        <div class="container">
-          <div class="center">
-            <div class="kicker">Transparent pricing</div>
-            <h2 style="margin-top: 10px;">Build Your Compliance Pack</h2>
-            <p style="margin-top: 10px;">Select what you need. See transparent pricing. No hidden charges.</p>
-          </div>
-
-          <div class="pricingGrid" style="margin-top: 18px;" data-pricing>
-            <div class="card cardPad">
-              <h3>Select Services</h3>
-              <div class="stack" style="margin-top: 12px;">
-                <label class="pill"><input type="checkbox" data-price-item data-id="itr_basic" data-label="ITR Filing (Salaried)" data-price="999" /> ITR Filing (Salaried) <span class="mono">₹999</span></label>
-                <label class="pill"><input type="checkbox" data-price-item data-id="itr_business" data-label="ITR Filing (Business/44AD)" data-price="2499" /> ITR Filing (Business/44AD) <span class="mono">₹2,499</span></label>
-                <label class="pill"><input type="checkbox" data-price-item data-id="gst_registration" data-label="GST Registration" data-price="1499" /> GST Registration <span class="mono">₹1,499</span></label>
-                <label class="pill"><input type="checkbox" data-price-item data-id="gstr_monthly" data-label="GSTR-1 + 3B (Monthly)" data-price="799" /> GSTR-1 + 3B (Monthly) <span class="mono">₹799</span></label>
-                <label class="pill"><input type="checkbox" data-price-item data-id="tds_return" data-label="TDS Return (per quarter)" data-price="999" /> TDS Return (per quarter) <span class="mono">₹999</span></label>
-                <label class="pill"><input type="checkbox" data-price-item data-id="payroll" data-label="Payroll (up to 10 employees)" data-price="1999" /> Payroll (up to 10 employees) <span class="mono">₹1,999</span></label>
-                <label class="pill"><input type="checkbox" data-price-item data-id="accounting" data-label="Monthly Bookkeeping" data-price="2999" /> Monthly Bookkeeping <span class="mono">₹2,999</span></label>
-                <label class="pill"><input type="checkbox" data-price-item data-id="company_reg" data-label="Private Limited Registration" data-price="7999" /> Pvt Ltd Registration <span class="mono">₹7,999</span></label>
-              </div>
-              <div class="muted" style="margin-top: 12px; font-size: 0.92rem;">Bundle deal: select 3+ services to auto-apply 15% OFF.</div>
-            </div>
-
-            <div class="priceSummary">
-              <div class="row" style="justify-content: space-between; align-items: baseline;">
-                <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.2rem;">Order Summary</div>
-                <div class="discount" data-price-discount style="display: none;">Bundle Deal — 15% OFF</div>
-              </div>
-              <div style="margin-top: 12px;" data-price-summary></div>
-              <div class="line" style="margin-top: 12px;">
-                <span>Total</span>
-                <span class="total" data-price-total>₹0</span>
-              </div>
-              <div class="row wrap" style="margin-top: 12px;">
-                <button class="btn btn-primary" type="button" data-open-chat>Get Custom Quote →</button>
-                <button class="btn btn-outline" type="button" data-open-lead>Proceed to Checkout</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section class="section trustSection" aria-label="Trust">
         <div class="container">
@@ -840,33 +789,6 @@
               <p style="margin-top: 10px;">Automated audit reports are a game-changer. Cut prep time by 70%.</p>
               <div class="muted" style="margin-top: 10px;">Sunita Menon • Chennai • Audit</div>
             </div>
-          </div>
-
-          <div class="grid grid-4" style="margin-top: 18px;">
-            <div class="tCard" style="min-width: unset; max-width: unset;">
-              <div class="mono" style="font-weight: 800; font-size: 1.5rem;" data-count-up="12400" data-suffix="+">0</div>
-              <div class="muted">Clients Served</div>
-            </div>
-            <div class="tCard" style="min-width: unset; max-width: unset;">
-              <div class="mono" style="font-weight: 800; font-size: 1.5rem;" data-count-up="98.2" data-decimals="1" data-suffix="%">0</div>
-              <div class="muted">Accuracy Rate</div>
-            </div>
-            <div class="tCard" style="min-width: unset; max-width: unset;">
-              <div class="mono" style="font-weight: 800; font-size: 1.5rem;" data-count-up="24" data-suffix=" hrs">0</div>
-              <div class="muted">Avg Turnaround</div>
-            </div>
-            <div class="tCard" style="min-width: unset; max-width: unset;">
-              <div class="mono" style="font-weight: 800; font-size: 1.5rem;" data-count-up="50" data-suffix="+">0</div>
-              <div class="muted">Expert CAs</div>
-            </div>
-          </div>
-
-          <div class="trustBadges" aria-label="Trust badges">
-            <span class="trustBadge">✓ GSTN Approved Partner</span>
-            <span class="trustBadge">✓ ISO 27001 Certified</span>
-            <span class="trustBadge">✓ 256-bit SSL Encryption</span>
-            <span class="trustBadge">✓ Income Tax Dept. Registered</span>
-            <span class="trustBadge">✓ MCA Approved</span>
           </div>
         </div>
       </section>
