@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | IndTaxPay</title>
+  <meta name="description" content="IndTaxPay Admin Dashboard — manage tickets, track status and review applications.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" type="image/png" href="../assets/wheel.png">
+</head>
+<body>
+  <!-- Loading State -->
+  <div class="dash-loading" id="dashLoading">
+    <div style="text-align:center;">
+      <div class="spinner"></div>
+      <p>Loading dashboard...</p>
+    </div>
+  </div>
+
+  <!-- Dashboard (hidden until auth) -->
+  <div class="dash-page" id="dashPage" style="display:none;">
+    <header class="dash-header">
+      <div style="display:flex; align-items:center;">
+        <a href="dashboard.html" class="dash-header-brand">IndTaxPay</a>
+        <span class="admin-badge">ADMIN</span>
+      </div>
+      <div class="dash-header-right">
+        <span class="dash-header-email" id="userEmail"></span>
+        <button class="dash-signout" id="signOutBtn">Sign Out</button>
+      </div>
+    </header>
+
+    <div class="dash-error" id="dashError" style="display:none;">
+      <strong>Firestore Error:</strong>
+      <span id="dashErrorMsg"></span>
+      <p style="font-size:0.8rem; color:#6b7280; margin-top:8px;">Make sure Firestore is enabled in your Firebase Console and security rules are deployed.</p>
+    </div>
+
+    <!-- Metric Cards -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-icon total"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></div>
+        <div><div class="metric-value" id="metricTotal">0</div><div class="metric-label">Total Tickets</div></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon progress"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 13 9 20 9"/><path d="M13 2L20 9V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></div>
+        <div><div class="metric-value" id="metricInProgress">0</div><div class="metric-label">In Progress</div></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon completed"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div><div class="metric-value" id="metricCompleted">0</div><div class="metric-label">Completed</div></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon urgent">🔴</div>
+        <div><div class="metric-value" id="metricUrgent">0</div><div class="metric-label">Urgent</div></div>
+      </div>
+    </div>
+
+    <!-- Tabs: Board / Urgent / Callbacks / History / Archive -->
+    <div class="dash-tabs">
+      <button class="dash-tab-btn active" data-tab="board"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Ticket Board</button>
+      <button class="dash-tab-btn" data-tab="urgent">🔴 Urgent</button>
+      <button class="dash-tab-btn" data-tab="callbacks">📞 Callbacks <span class="urgent-count" id="callbackCountTab" style="background:#ef4444; color:#fff; padding:1px 6px; border-radius:10px; font-size:0.7rem; margin-left:4px; display:none;">0</span></button>
+      <button class="dash-tab-btn" data-tab="history"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> History</button>
+      <button class="dash-tab-btn" data-tab="archive"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg> Archive</button>
+    </div>
+
+    <!-- Tab: Board -->
+    <div class="dash-tab-panel active" id="tab-board">
+      <div class="dash-toolbar">
+        <div>
+          <h1>Ticket Board</h1>
+          <p class="count" id="ticketCount">0 tickets</p>
+        </div>
+        <div class="toolbar-controls">
+          <input type="text" class="dash-search" id="searchInput" placeholder="Search tickets...">
+          <select class="dash-select" id="filterService">
+            <option value="">All Services</option>
+            <option value="GST">GST</option>
+            <option value="Income Tax">Income Tax</option>
+            <option value="Company">Company Registration</option>
+            <option value="PAN">PAN</option>
+            <option value="MSME">MSME</option>
+            <option value="TDS">TDS / TCS</option>
+            <option value="EPF">EPF / ESI</option>
+            <option value="Accounting">Accounting</option>
+          </select>
+          <select class="dash-select" id="sortOrder">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="priority">Priority (Urgent → Low)</option>
+            <option value="service">Service A-Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="kanban-grid" id="kanbanGrid"></div>
+    </div>
+
+    <!-- Tab: History -->
+    <div class="dash-tab-panel" id="tab-history">
+      <div class="history-panel">
+        <div class="history-card">
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:6px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Activity History</h3>
+          <div id="historyContent"><p class="history-empty">Loading history...</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Urgent -->
+    <div class="dash-tab-panel" id="tab-urgent">
+      <div class="urgent-panel">
+        <div class="urgent-card">
+          <h3>🔴 Urgent Tickets <span class="urgent-count" id="urgentCount"></span></h3>
+          <div id="urgentContent"><p class="urgent-empty">Loading...</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Archive -->
+    <div class="dash-tab-panel" id="tab-archive">
+      <div class="archive-panel">
+        <div class="archive-card">
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:6px;"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>Archived Tickets <span class="archive-count" id="archiveCount"></span></h3>
+          <div id="archiveContent"><p class="archive-empty">Loading...</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Callbacks -->
+    <div class="dash-tab-panel" id="tab-callbacks">
+      <div class="archive-panel">
+        <div class="archive-card">
+          <h3>📞 Callback Requests <span class="archive-count" id="callbacksTabCount"></span></h3>
+          <div id="callbacksContent"><p class="archive-empty">Loading...</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="../backend/firebase-init.js"></script>
+  <script src="../backend/firestore-helpers.js"></script>
+
+  <script>
+  (function() {
+    var BOARD_STATUSES = [
+      { value: 'New', label: 'New' },
+      { value: 'Documents Pending', label: 'Verifying Document' },
+      { value: 'Filed', label: 'Filed' },
+      { value: 'In Progress', label: 'In Progress' },
+      { value: 'Completed', label: 'Complete' },
+      { value: 'Rejected', label: 'Rejected' }
+    ];
+
+    var STATUS_COLORS = {
+      'New': '#3b82f6',
+      'Documents Pending': '#f59e0b',
+      'In Progress': '#8b5cf6',
+      'Filed': '#06b6d4',
+      'Completed': '#22c55e',
+      'Rejected': '#ef4444'
+    };
+
+    var PRIORITY_COLORS = {
+      'Urgent': '#ef4444',
+      'High': '#f59e0b',
+      'Normal': '#3b82f6',
+      'Low': '#6b7280'
+    };
+
+    var dashLoading = document.getElementById('dashLoading');
+    var dashPage = document.getElementById('dashPage');
+    var searchInput = document.getElementById('searchInput');
+    var filterService = document.getElementById('filterService');
+    var sortOrder = document.getElementById('sortOrder');
+    var kanbanGrid = document.getElementById('kanbanGrid');
+    var ticketCountEl = document.getElementById('ticketCount');
+    var dashError = document.getElementById('dashError');
+    var dashErrorMsg = document.getElementById('dashErrorMsg');
+
+    var allTickets = [];
+    var allCallbacks = [];
+    var draggedId = null;
+    var dragOverCol = null;
+    var currentUserEmail = '';
+    var ADMIN_TIMEOUT_MS = 24 * 60 * 60 * 1000;
+    var adminSessionTimer = null;
+    var adminSessionInterval = null;
+    var adminSessionBound = false;
+
+    function clearAdminSessionTimers() {
+      if (adminSessionTimer) {
+        clearTimeout(adminSessionTimer);
+        adminSessionTimer = null;
+      }
+      if (adminSessionInterval) {
+        clearInterval(adminSessionInterval);
+        adminSessionInterval = null;
+      }
+    }
+
+    function markAdminActivity() {
+      sessionStorage.setItem('adminLastActivityAt', String(Date.now()));
+    }
+
+    function logoutForInactivity() {
+      clearAdminSessionTimers();
+      sessionStorage.setItem('adminSessionExpired', '1');
+      sessionStorage.removeItem('adminLastActivityAt');
+      auth.signOut().finally(function() {
+        window.location.href = 'login.html?reason=session-expired';
+      });
+    }
+
+    function resetAdminSessionTimer() {
+      clearAdminSessionTimers();
+      markAdminActivity();
+      adminSessionTimer = setTimeout(logoutForInactivity, ADMIN_TIMEOUT_MS);
+      adminSessionInterval = setInterval(function() {
+        var lastActivityAt = parseInt(sessionStorage.getItem('adminLastActivityAt') || '0', 10);
+        if (lastActivityAt && Date.now() - lastActivityAt >= ADMIN_TIMEOUT_MS) {
+          logoutForInactivity();
+        }
+      }, 30000);
+    }
+
+    function bindAdminSessionTracking() {
+      if (adminSessionBound) {
+        resetAdminSessionTimer();
+        return;
+      }
+      adminSessionBound = true;
+      ['click', 'keydown', 'mousemove', 'scroll', 'touchstart'].forEach(function(eventName) {
+        document.addEventListener(eventName, resetAdminSessionTimer, { passive: true });
+      });
+      window.addEventListener('focus', resetAdminSessionTimer);
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) resetAdminSessionTimer();
+      });
+      resetAdminSessionTimer();
+    }
+
+    /* ── Toast System ── */
+    function showToast(message, type) {
+      type = type || 'success';
+      var icons = { success: '✓', error: '✕' };
+      var container = document.getElementById('toastContainer');
+      var toast = document.createElement('div');
+      toast.className = 'toast ' + type;
+      toast.textContent = (icons[type] || '') + ' ' + message;
+      container.appendChild(toast);
+      setTimeout(function() {
+        toast.classList.add('fade-out');
+        setTimeout(function() { toast.remove(); }, 250);
+      }, 3000);
+    }
+
+    /* ── Tab Switching ── */
+    document.querySelectorAll('.dash-tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.dash-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.querySelectorAll('.dash-tab-panel').forEach(function(p) { p.classList.remove('active'); });
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        if (btn.dataset.tab === 'history') { loadAllHistory(); }
+        if (btn.dataset.tab === 'archive') { loadArchivedTickets(); }
+        if (btn.dataset.tab === 'urgent') { renderUrgentTab(); }
+        if (btn.dataset.tab === 'callbacks') { renderCallbacksTab(); }
+      });
+    });
+
+    /* ── Auth Guard ── */
+    auth.onAuthStateChanged(function(user) {
+      dashLoading.style.display = 'none';
+      if (!user) {
+        clearAdminSessionTimers();
+        window.location.href = 'login.html';
+        return;
+      }
+      dashPage.style.display = '';
+      currentUserEmail = user.email;
+      document.getElementById('userEmail').textContent = user.email;
+      bindAdminSessionTracking();
+      startSubscription();
+    });
+
+    document.getElementById('signOutBtn').addEventListener('click', function() {
+      clearAdminSessionTimers();
+      sessionStorage.removeItem('adminSessionExpired');
+      sessionStorage.removeItem('adminLastActivityAt');
+      auth.signOut().then(function() {
+        window.location.href = 'login.html';
+      });
+    });
+
+    /* ── Realtime subscription ── */
+    function startSubscription() {
+      try {
+        subscribeToTickets(function(tickets) {
+          allTickets = tickets;
+          updateMetrics();
+          renderBoard();
+        }, function(err) {
+          dashErrorMsg.textContent = err.message || 'Failed to load tickets.';
+          dashError.style.display = '';
+        });
+
+        subscribeToCallbacks(function(callbacks) {
+          allCallbacks = callbacks;
+          updateCallbackMetrics();
+          if (document.getElementById('tab-callbacks').classList.contains('active')) {
+            renderCallbacksTab();
+          }
+        });
+      } catch (err) {
+        dashErrorMsg.textContent = err.message || String(err);
+        dashError.style.display = '';
+      }
+    }
+
+    /* ── Update Metrics ── */
+    function updateMetrics() {
+      document.getElementById('metricTotal').textContent = allTickets.length;
+      document.getElementById('metricInProgress').textContent = allTickets.filter(function(t) { return t.status === 'In Progress'; }).length;
+      document.getElementById('metricCompleted').textContent = allTickets.filter(function(t) { return t.status === 'Completed'; }).length;
+      document.getElementById('metricUrgent').textContent = allTickets.filter(function(t) { return t.priority === 'Urgent'; }).length;
+    }
+
+    /* ── Filter, Sort, Search ── */
+    searchInput.addEventListener('input', renderBoard);
+    filterService.addEventListener('change', renderBoard);
+    sortOrder.addEventListener('change', renderBoard);
+
+    function getFilteredSortedTickets() {
+      var query = searchInput.value.toLowerCase();
+      var serviceFilter = filterService.value;
+      var sort = sortOrder.value;
+
+      var filtered = allTickets.filter(function(t) {
+        if (query) {
+          var match = (t.ticketNumber || '').toLowerCase().includes(query) ||
+                      (t.name || '').toLowerCase().includes(query) ||
+                      (t.email || '').toLowerCase().includes(query) ||
+                      (t.serviceType || '').toLowerCase().includes(query);
+          if (!match) return false;
+        }
+        if (serviceFilter) {
+          if (!(t.serviceType || '').toLowerCase().includes(serviceFilter.toLowerCase())) return false;
+        }
+        return true;
+      });
+
+      filtered.sort(function(a, b) {
+        switch (sort) {
+          case 'oldest':
+            return ((a.createdAt && a.createdAt.seconds) || 0) - ((b.createdAt && b.createdAt.seconds) || 0);
+          case 'priority':
+            return prioritySortValue(a.priority) - prioritySortValue(b.priority);
+          case 'service':
+            return (a.serviceType || '').localeCompare(b.serviceType || '');
+          default:
+            return ((b.createdAt && b.createdAt.seconds) || 0) - ((a.createdAt && a.createdAt.seconds) || 0);
+        }
+      });
+
+      return filtered;
+    }
+
+    function prioritySortValue(p) {
+      var order = { 'Urgent': 0, 'High': 1, 'Normal': 2, 'Low': 3 };
+      return order[p] !== undefined ? order[p] : 4;
+    }
+
+    /* ── Priority Badge ── */
+    function priorityBadgeHtml(priority) {
+      var p = priority || 'Normal';
+      var color = PRIORITY_COLORS[p] || '#3b82f6';
+      return '<span class="priority-badge" style="color:' + color + '; background:' + color + '18;">' + p + '</span>';
+    }
+
+    /* ── Render Kanban Board ── */
+    function renderBoard() {
+      var tickets = getFilteredSortedTickets();
+      var html = '';
+
+      BOARD_STATUSES.forEach(function(boardStatus) {
+        var status = boardStatus.value;
+        var color = STATUS_COLORS[status] || '#6b7280';
+        var statusTickets = tickets.filter(function(t) { return t.status === status; });
+
+        html += '<div class="kanban-col" data-status="' + status + '" ondragover="event.preventDefault()" ondragleave="this.classList.remove(\'drag-over\')">';
+        html += '<div class="kanban-col-header">';
+        html += '<div style="display:flex; align-items:center;"><span class="kanban-col-dot" style="background:' + color + ';"></span><span class="kanban-col-name">' + boardStatus.label + '</span></div>';
+        html += '<span class="kanban-col-count">' + statusTickets.length + '</span>';
+        html += '</div>';
+        html += '<div class="kanban-cards">';
+
+        if (statusTickets.length === 0) {
+          html += '<div class="kanban-empty">No tickets</div>';
+        } else {
+          statusTickets.forEach(function(ticket) {
+            html += '<a class="ticket-card" href="ticket.html?id=' + ticket.id + '" draggable="true" data-ticket-id="' + ticket.id + '" style="border-left-color:' + color + ';">';
+            html += '<div class="ticket-card-top"><span class="ticket-card-id">' + (ticket.ticketNumber || '') + '</span>' + priorityBadgeHtml(ticket.priority) + '</div>';
+            html += '<p class="ticket-card-name">' + (ticket.name || '') + '</p>';
+            html += '<p class="ticket-card-service">' + (ticket.serviceType || '') + '</p>';
+            html += '<p class="ticket-card-date">' + formatFirestoreDate(ticket.lastUpdated) + '</p>';
+            html += '<div class="ticket-card-actions">';
+            html += '<button class="ticket-urgent-btn' + (ticket.priority === 'Urgent' ? ' is-urgent' : '') + '" type="button" data-ticket-id="' + ticket.id + '" title="' + (ticket.priority === 'Urgent' ? 'Remove Urgent' : 'Mark Urgent') + '" style="' + (ticket.priority === 'Urgent' ? '' : 'opacity:0.4;') + '">🔴</button>';
+            html += '<button class="ticket-delete" type="button" data-ticket-id="' + ticket.id + '" title="Archive">Archive</button>';
+            html += '</div>';
+            html += '</a>';
+          });
+        }
+
+        html += '</div></div>';
+      });
+
+      kanbanGrid.innerHTML = html;
+      ticketCountEl.textContent = tickets.length + ' total ticket' + (tickets.length !== 1 ? 's' : '');
+
+      bindDragEvents();
+      bindDeleteEvents();
+      bindUrgentEvents();
+    }
+
+    /* ── Drag & Drop ── */
+    function bindDragEvents() {
+      kanbanGrid.querySelectorAll('.ticket-card').forEach(function(card) {
+        card.addEventListener('dragstart', function(e) {
+          draggedId = card.dataset.ticketId;
+          card.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+        });
+        card.addEventListener('dragend', function() {
+          card.classList.remove('dragging');
+          draggedId = null;
+          kanbanGrid.querySelectorAll('.kanban-col').forEach(function(col) {
+            col.classList.remove('drag-over');
+          });
+        });
+      });
+
+      kanbanGrid.querySelectorAll('.kanban-col').forEach(function(col) {
+        col.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          col.classList.add('drag-over');
+        });
+        col.addEventListener('dragleave', function() {
+          col.classList.remove('drag-over');
+        });
+        col.addEventListener('drop', async function(e) {
+          e.preventDefault();
+          col.classList.remove('drag-over');
+          if (!draggedId) return;
+
+          var newStatus = col.dataset.status;
+          var ticket = allTickets.find(function(t) { return t.id === draggedId; });
+          if (ticket && ticket.status !== newStatus) {
+            try {
+              await updateTicketStatus(draggedId, newStatus, currentUserEmail);
+              showToast('Status → ' + newStatus);
+            } catch (err) {
+              console.error('Failed to update status:', err);
+              showToast('Failed to update status', 'error');
+            }
+          }
+          draggedId = null;
+        });
+      });
+    }
+
+    /* ── Soft Delete (Archive) ── */
+    function bindDeleteEvents() {
+      kanbanGrid.querySelectorAll('.ticket-delete').forEach(function(btn) {
+        btn.addEventListener('click', async function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var ticketId = btn.dataset.ticketId;
+          if (!ticketId) return;
+          var ok = confirm('Archive this ticket? It will be hidden from the board but data is preserved.');
+          if (!ok) return;
+          try {
+            await softDeleteTicket(ticketId, currentUserEmail);
+            showToast('Ticket archived');
+          } catch (err) {
+            console.error('Archive failed:', err);
+            showToast('Archive failed', 'error');
+          }
+        });
+      });
+    }
+
+    /* ── Mark Urgent (toggle) ── */
+    function bindUrgentEvents() {
+      kanbanGrid.querySelectorAll('.ticket-urgent-btn').forEach(function(btn) {
+        btn.addEventListener('click', async function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var ticketId = btn.dataset.ticketId;
+          if (!ticketId) return;
+          var ticket = allTickets.find(function(t) { return t.id === ticketId; });
+          if (!ticket) return;
+
+          var isUrgent = ticket.priority === 'Urgent';
+          var newPriority = isUrgent ? 'Normal' : 'Urgent';
+
+          btn.disabled = true;
+          try {
+            await updateTicketPriority(ticketId, newPriority, currentUserEmail);
+            showToast(isUrgent ? 'Removed urgent' : 'Marked as URGENT');
+          } catch (err) {
+            console.error('Priority update failed:', err);
+            showToast('Failed to update priority', 'error');
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      });
+    }
+
+    /* ══════════════════════════════════════
+       URGENT TAB
+       ══════════════════════════════════════ */
+    function renderUrgentTab() {
+      var container = document.getElementById('urgentContent');
+      var countEl = document.getElementById('urgentCount');
+
+      var urgentTickets = allTickets.filter(function(t) { return t.priority === 'Urgent'; });
+      countEl.textContent = '(' + urgentTickets.length + ')';
+
+      if (urgentTickets.length === 0) {
+        container.innerHTML = '<p class="urgent-empty">No urgent tickets right now. Click the 🔴 button on any ticket card to mark it as urgent.</p>';
+        return;
+      }
+
+      var html = '';
+      urgentTickets.forEach(function(ticket) {
+        html += '<div class="urgent-item">';
+        html += '<div class="urgent-info">';
+        html += '<span class="urgent-dot"></span>';
+        html += '<div>';
+        html += '<div style="display:flex; align-items:center; gap:8px;">';
+        html += '<span class="urgent-ticket-id">' + (ticket.ticketNumber || ticket.id) + '</span>';
+        html += '<span style="font-size:0.72rem; padding:2px 6px; border-radius:4px; background:rgba(59,130,246,0.1); color:#2563eb; font-weight:700;">' + (ticket.status || '') + '</span>';
+        html += '</div>';
+        html += '<p class="urgent-name">' + (ticket.name || '') + '</p>';
+        html += '<p class="urgent-detail">' + (ticket.serviceType || '') + ' • ' + formatFirestoreDate(ticket.lastUpdated) + '</p>';
+        html += '</div></div>';
+        html += '<div class="urgent-actions">';
+        html += '<a class="urgent-view-btn" href="ticket.html?id=' + ticket.id + '">View Ticket</a>';
+        html += '<button class="urgent-downgrade-btn" data-ticket-id="' + ticket.id + '">↓ Set Normal</button>';
+        html += '</div>';
+        html += '</div>';
+      });
+
+      container.innerHTML = html;
+
+      container.querySelectorAll('.urgent-downgrade-btn').forEach(function(btn) {
+        btn.addEventListener('click', async function() {
+          var tid = btn.dataset.ticketId;
+          btn.disabled = true; btn.textContent = 'Updating...';
+          try {
+            await updateTicketPriority(tid, 'Normal', currentUserEmail);
+            showToast('Priority set to Normal');
+            renderUrgentTab();
+          } catch (e) {
+            console.error('Downgrade failed:', e);
+            showToast('Failed to update', 'error');
+            btn.disabled = false; btn.textContent = '↓ Set Normal';
+          }
+        });
+      });
+    }
+
+    /* ══════════════════════════════════════
+       HISTORY TAB
+       ══════════════════════════════════════ */
+    var historyLoaded = false;
+
+    async function loadAllHistory() {
+      if (historyLoaded) return;
+      historyLoaded = true;
+      var container = document.getElementById('historyContent');
+      container.innerHTML = '<p class="history-empty">Loading history...</p>';
+
+      try {
+        var allLogs = [];
+        var ticketMap = {};
+        allTickets.forEach(function(t) { ticketMap[t.id] = t; });
+
+        var promises = allTickets.map(function(t) {
+          return getAuditLogs(t.id).then(function(logs) {
+            logs.forEach(function(log) {
+              log._ticketId = t.id;
+              log._ticketNumber = t.ticketNumber || t.id;
+              allLogs.push(log);
+            });
+          }).catch(function() {});
+        });
+
+        await Promise.all(promises);
+
+        allLogs.sort(function(a, b) {
+          var aT = (a.timestamp && a.timestamp.seconds) || 0;
+          var bT = (b.timestamp && b.timestamp.seconds) || 0;
+          return bT - aT;
+        });
+
+        if (allLogs.length === 0) {
+          container.innerHTML = '<p class="history-empty">No activity recorded yet. Actions like status changes, priority updates, and file downloads will appear here.</p>';
+          return;
+        }
+
+        var html = '<table class="history-table">';
+        html += '<thead><tr><th>Timestamp</th><th>Ticket</th><th>Action</th><th>Details</th><th>By</th></tr></thead>';
+        html += '<tbody>';
+
+        var limit = Math.min(allLogs.length, 100);
+        for (var i = 0; i < limit; i++) {
+          var log = allLogs[i];
+          var typeClass = (log.type || '').replace(/\s/g, '_');
+          var detail = '';
+          if (log.previousValue && log.newValue) {
+            detail = log.previousValue + ' → ' + log.newValue;
+          } else if (log.newValue) {
+            detail = log.newValue;
+          }
+
+          html += '<tr>';
+          html += '<td style="white-space:nowrap;">' + formatFirestoreDate(log.timestamp) + '</td>';
+          html += '<td><a class="history-ticket-link" href="ticket.html?id=' + log._ticketId + '">' + log._ticketNumber + '</a></td>';
+          html += '<td><span class="history-type-badge ' + typeClass + '">' + formatAuditType(log.type) + '</span></td>';
+          html += '<td>' + (detail || '—') + '</td>';
+          html += '<td>' + (log.changedBy || 'system') + '</td>';
+          html += '</tr>';
+        }
+
+        html += '</tbody></table>';
+
+        if (allLogs.length > 100) {
+          html += '<p style="text-align:center; color:#9ca3af; font-size:0.82rem; margin-top:12px;">Showing latest 100 entries</p>';
+        }
+
+        container.innerHTML = html;
+      } catch (err) {
+        console.error('Failed to load history:', err);
+        container.innerHTML = '<p class="history-empty">Failed to load history. Check console.</p>';
+      }
+    }
+
+    /* ══════════════════════════════════════
+       ARCHIVE TAB
+       ══════════════════════════════════════ */
+    async function loadArchivedTickets() {
+      var container = document.getElementById('archiveContent');
+      var countEl = document.getElementById('archiveCount');
+      container.innerHTML = '<p class="archive-empty">Loading archived tickets...</p>';
+
+      try {
+        var archived = await getArchivedTickets();
+        countEl.textContent = '(' + archived.length + ')';
+
+        if (archived.length === 0) {
+          container.innerHTML = '<p class="archive-empty">No archived tickets. Tickets you archive from the board will appear here.</p>';
+          return;
+        }
+
+        var html = '';
+        archived.forEach(function(ticket) {
+          html += '<div class="archive-item">';
+          html += '<div class="archive-info">';
+          html += '<span class="archive-dot"></span>';
+          html += '<div>';
+          html += '<div style="display:flex; align-items:center; gap:8px;">';
+          html += '<span class="archive-ticket-id">' + (ticket.ticketNumber || ticket.id) + '</span>';
+          html += '<span style="font-size:0.72rem; color:#9ca3af;">(' + (ticket.status || '') + ')</span>';
+          html += '</div>';
+          html += '<p class="archive-name">' + (ticket.name || '') + '</p>';
+          html += '<p class="archive-detail">' + (ticket.serviceType || '') + ' • Archived ' + formatFirestoreDate(ticket.lastUpdated) + '</p>';
+          html += '</div></div>';
+          html += '<div class="archive-actions">';
+          html += '<button class="archive-restore-btn" data-ticket-id="' + ticket.id + '">↩ Restore</button>';
+          html += '<button class="archive-delete-btn" data-ticket-id="' + ticket.id + '">🗑 Delete Forever</button>';
+          html += '</div>';
+          html += '</div>';
+        });
+
+        container.innerHTML = html;
+
+        container.querySelectorAll('.archive-restore-btn').forEach(function(btn) {
+          btn.addEventListener('click', async function() {
+            var tid = btn.dataset.ticketId;
+            btn.disabled = true; btn.textContent = 'Restoring...';
+            try {
+              await unarchiveTicket(tid, currentUserEmail);
+              showToast('Ticket restored to board');
+              loadArchivedTickets();
+            } catch (e) {
+              console.error('Restore failed:', e);
+              showToast('Restore failed', 'error');
+              btn.disabled = false; btn.textContent = '↩ Restore';
+            }
+          });
+        });
+
+        container.querySelectorAll('.archive-delete-btn').forEach(function(btn) {
+          btn.addEventListener('click', async function() {
+            var tid = btn.dataset.ticketId;
+            var ok = confirm('Permanently delete this ticket and all its files? This CANNOT be undone.');
+            if (!ok) return;
+            btn.disabled = true; btn.textContent = 'Deleting...';
+            try {
+              await deleteTicketAndFiles(tid);
+              showToast('Ticket permanently deleted');
+              loadArchivedTickets();
+            } catch (e) {
+              console.error('Delete failed:', e);
+              showToast('Delete failed', 'error');
+              btn.disabled = false; btn.textContent = '🗑 Delete Forever';
+            }
+          });
+        });
+
+      } catch (err) {
+        console.error('Failed to load archived tickets:', err);
+        container.innerHTML = '<p class="archive-empty">Failed to load archived tickets. Check console.</p>';
+      }
+    }
+
+    /* ══════════════════════════════════════
+       CALLBACKS TAB
+       ══════════════════════════════════════ */
+    function updateCallbackMetrics() {
+      var newCount = allCallbacks.filter(function(c) { return c.status !== 'Called'; }).length;
+      var tabCountEl = document.getElementById('callbackCountTab');
+      if (tabCountEl) {
+        if (newCount > 0) {
+          tabCountEl.textContent = newCount;
+          tabCountEl.style.display = 'inline-block';
+        } else {
+          tabCountEl.style.display = 'none';
+        }
+      }
+    }
+
+    function renderCallbacksTab() {
+      var container = document.getElementById('callbacksContent');
+      var countEl = document.getElementById('callbacksTabCount');
+      if (countEl) countEl.textContent = '(' + allCallbacks.length + ')';
+
+      if (allCallbacks.length === 0) {
+        container.innerHTML = '<p class="archive-empty">No callback requests.</p>';
+        return;
+      }
+
+      var html = '';
+      allCallbacks.forEach(function(cb) {
+        html += '<div class="archive-item">';
+        html += '<div class="archive-info">';
+        html += '<span class="archive-dot" style="' + (cb.status === 'Called' ? 'background:var(--color-green);' : 'background:#f59e0b;') + '"></span>';
+        html += '<div>';
+        html += '<div style="display:flex; align-items:center; gap:8px;">';
+        html += '<span class="archive-ticket-id">' + (cb.name || 'Unknown') + '</span>';
+        html += '<span style="font-size:0.72rem; color:' + (cb.status === 'Called' ? 'var(--color-green-dark)' : '#d97706') + '; font-weight:700;">(' + (cb.status || 'New') + ')</span>';
+        html += '</div>';
+        html += '<p class="archive-name">📞 ' + (cb.phone || '') + '  | 📧 ' + (cb.email || '') + '</p>';
+        html += '<p class="archive-detail">' + (cb.service || '') + ' • ' + formatFirestoreDate(cb.createdAt) + '</p>';
+        if (cb.message) html += '<p style="font-size:0.8rem; margin-top:4px; max-width:600px; color:var(--text-secondary);">&quot;' + cb.message + '&quot;</p>';
+        html += '</div></div>';
+        html += '<div class="archive-actions">';
+        if (cb.status !== 'Called') {
+          html += '<button class="cb-mark-called-btn" data-cb-id="' + cb.id + '">✓ Mark Called</button>';
+        }
+        html += '<button class="cb-delete-btn archive-delete-btn" data-cb-id="' + cb.id + '"> 🗑 </button>';
+        html += '</div>';
+        html += '</div>';
+      });
+
+      container.innerHTML = html;
+
+      container.querySelectorAll('.cb-mark-called-btn').forEach(function(btn) {
+        btn.addEventListener('click', async function() {
+          var id = btn.dataset.cbId;
+          btn.disabled = true; btn.textContent = 'Updating...';
+          try {
+            await updateCallbackStatus(id, 'Called');
+            showToast('Callback marked as Called');
+          } catch (e) {
+            console.error(e);
+            showToast('Failed to update', 'error');
+            btn.disabled = false; btn.textContent = '✓ Mark Called';
+          }
+        });
+      });
+
+      container.querySelectorAll('.cb-delete-btn').forEach(function(btn) {
+        btn.addEventListener('click', async function() {
+          var id = btn.dataset.cbId;
+          var ok = confirm('Permanently delete this callback request?');
+          if (!ok) return;
+          btn.disabled = true; btn.textContent = 'Deleting...';
+          try {
+            await deleteCallback(id);
+            showToast('Callback deleted');
+          } catch (e) {
+            console.error(e);
+            showToast('Delete failed', 'error');
+            btn.disabled = false; btn.textContent = '🗑 Delete';
+          }
+        });
+      });
+    }
+
+  })();
+  </script>
+</body>
+</html>

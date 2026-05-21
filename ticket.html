@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Detail | IndTaxPay Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/png" href="assets/wheel.png">
+</head>
+<body>
+  <!-- Loading -->
+  <div class="ticket-loading" id="ticketLoading">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+
+  <!-- Ticket Page -->
+  <div class="ticket-page" id="ticketPage" style="display:none;">
+    <header class="ticket-header">
+      <div style="display:flex; align-items:center;">
+        <a href="Admin/dashboard.html">IndTaxPay</a>
+        <span class="ticket-admin-badge">ADMIN</span>
+      </div>
+      <div class="ticket-header-right">
+        <span class="ticket-header-email" id="userEmail"></span>
+        <button class="ticket-signout" id="signOutBtn">Sign Out</button>
+      </div>
+    </header>
+
+    <div class="ticket-content" id="ticketContent"></div>
+  </div>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+  <script src="backend/firebase-init.js"></script>
+  <script src="backend/firestore-helpers.js"></script>
+
+  <script>
+  (function() {
+    var ticketLoading = document.getElementById('ticketLoading');
+    var ticketPage = document.getElementById('ticketPage');
+    var ticketContent = document.getElementById('ticketContent');
+
+    var params = new URLSearchParams(window.location.search);
+    var ticketId = params.get('id');
+
+    /* ── Auth Guard ── */
+    auth.onAuthStateChanged(function(user) {
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+      document.getElementById('userEmail').textContent = user.email;
+      loadTicket();
+    });
+
+    document.getElementById('signOutBtn').addEventListener('click', function() {
+      auth.signOut().then(function() { window.location.href = 'login.html'; });
+    });
+
+    /* ── Load Ticket Data ── */
+    async function loadTicket() {
+      if (!ticketId) {
+        showNotFound();
+        return;
+      }
+
+      try {
+        var ticket = await getTicket(ticketId);
+        var docs = await getTicketDocuments(ticketId);
+
+        ticketLoading.style.display = 'none';
+        ticketPage.style.display = '';
+
+        if (!ticket) {
+          showNotFound();
+          return;
+        }
+
+        renderTicket(ticket, docs);
+      } catch (err) {
+        console.error(err);
+        ticketLoading.style.display = 'none';
+        ticketPage.style.display = '';
+        showNotFound();
+      }
+    }
+
+    function showNotFound() {
+      ticketLoading.style.display = 'none';
+      ticketPage.style.display = '';
+      ticketContent.innerHTML = '<div style="padding:48px; text-align:center;"><h2 style="color:#E53E3E;">Ticket Not Found</h2><a href="Admin/dashboard.html" style="color:#F78A0E; margin-top:16px; display:inline-block;">← Back to Board</a></div>';
+    }
+
+    function renderTicket(ticket, docs) {
+      var badgeColor, badgeBg;
+      if (ticket.status === 'Completed') {
+        badgeBg = 'rgba(75, 156, 58, 0.14)';
+        badgeColor = '#2E6B24';
+      } else if (ticket.status === 'Rejected') {
+        badgeBg = 'rgba(229, 62, 62, 0.10)';
+        badgeColor = '#E53E3E';
+      } else {
+        badgeBg = 'rgba(247, 138, 14, 0.12)';
+        badgeColor = '#C96B00';
+      }
+
+      var progressBg = ticket.status === 'Rejected'
+        ? 'linear-gradient(90deg, #E53E3E, #C96B00)'
+        : 'linear-gradient(90deg, #0D4A8A, #F78A0E)';
+
+      var statusLabelsHtml = '';
+      STATUSES.forEach(function(s) {
+        if (s === 'Rejected') return;
+        var cls = s === ticket.status ? ' active-label' : '';
+        statusLabelsHtml += '<span class="' + cls + '">' + s + '</span>';
+      });
+
+      // Status options
+      var statusOptions = '';
+      STATUSES.forEach(function(s) {
+        var sel = s === ticket.status ? ' selected' : '';
+        statusOptions += '<option value="' + s + '"' + sel + '>' + s + '</option>';
+      });
+
+      // Documents HTML
+      var docsHtml = '';
+      if (docs.length === 0) {
+        docsHtml = '<p class="doc-empty">No documents uploaded yet.</p>';
+      } else {
+        docs.forEach(function(d) {
+          docsHtml += '<div class="doc-item">';
+          docsHtml += '<div style="display:flex; align-items:center;">';
+          docsHtml += '<span class="doc-icon">📄</span>';
+          docsHtml += '<div><p class="doc-name">' + d.fileName + '</p>';
+          docsHtml += '<p class="doc-meta">' + (d.type || 'Other') + ' • ' + formatFileSize(d.size) + ' • ' + formatFirestoreDate(d.uploadedAt) + '</p></div>';
+          docsHtml += '</div>';
+          docsHtml += '<button class="doc-download" data-doc-id="' + d.id + '">Download</button>';
+          docsHtml += '</div>';
+        });
+      }
+
+      var zipBtnHtml = docs.length > 0
+        ? '<div class="doc-item"><div style="display:flex; align-items:center;"><span class="doc-icon">🗂️</span><div><p class="doc-name">' + ticket.ticketNumber + '.zip</p><p class="doc-meta">All documents + data.txt</p></div></div><button class="doc-download" id="downloadZipBtn">Download Zip</button></div>'
+        : '';
+
+      ticketContent.innerHTML = ''
+        + '<div class="breadcrumb"><a href="Admin/dashboard.html">← Board</a><span class="sep">/</span><span class="current">' + ticket.ticketNumber + '</span></div>'
+
+        // Header
+        + '<div class="ticket-section header-section">'
+        + '<div><h1>' + ticket.ticketNumber + '</h1><p class="service-label">' + ticket.serviceType + '</p></div>'
+        + '<span class="header-badge" style="background:' + badgeBg + '; color:' + badgeColor + ';">' + ticket.status + '</span>'
+        + '</div>'
+
+        // Progress
+        + '<div class="ticket-section">'
+        + '<div class="status-progress"><div class="status-progress-fill" style="width:' + statusPercent(ticket.status) + '%; background:' + progressBg + ';"></div></div>'
+        + '<div class="status-labels">' + statusLabelsHtml + '</div>'
+        + '</div>'
+
+        // Two column: Client Info + Admin Controls
+        + '<div class="two-col">'
+
+        // Client Info
+        + '<div class="ticket-section"><h3>Client Information</h3>'
+        + '<div class="info-row"><p class="info-label">Name</p><p class="info-value">' + ticket.name + '</p></div>'
+        + '<div class="info-row"><p class="info-label">Phone</p><p class="info-value">' + ticket.phone + '</p></div>'
+        + '<div class="info-row"><p class="info-label">Email</p><p class="info-value">' + ticket.email + '</p></div>'
+        + '<div class="info-row"><p class="info-label">Created</p><p class="info-value">' + formatFirestoreDate(ticket.createdAt) + '</p></div>'
+        + '<div class="info-row"><p class="info-label">Last Updated</p><p class="info-value">' + formatFirestoreDate(ticket.lastUpdated) + '</p></div>'
+        + '</div>'
+
+        // Admin Controls
+        + '<div class="ticket-section"><h3>Update Ticket</h3>'
+        + '<div class="edit-field"><label>Status</label><select id="editStatus">' + statusOptions + '</select></div>'
+        + '<div class="edit-field"><label>Internal Notes</label><textarea id="editNotes" rows="4" placeholder="Add internal notes here">' + (ticket.notes || '') + '</textarea></div>'
+        + '<div style="display:flex; align-items:center;"><button class="save-btn" id="saveBtn">Save Changes</button><span class="save-msg" id="saveMsg"></span></div>'
+        + '</div>'
+
+        + '</div>'
+
+        // Files
+        + '<div class="ticket-section"><h3>Files</h3>' + (zipBtnHtml || '<p class="doc-empty">No documents to download.</p>') + '</div>'
+
+        // Documents
+        + '<div class="ticket-section"><h3>Uploaded Documents (' + docs.length + ')</h3>' + docsHtml + '</div>';
+
+      // Bind save button
+      document.getElementById('saveBtn').addEventListener('click', async function() {
+        var btn = document.getElementById('saveBtn');
+        var msg = document.getElementById('saveMsg');
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+        msg.textContent = '';
+
+        try {
+          await updateTicketFields(ticketId, {
+            status: document.getElementById('editStatus').value,
+            notes: document.getElementById('editNotes').value
+          });
+          msg.textContent = 'Saved successfully';
+          msg.className = 'save-msg success';
+          // Reload to refresh
+          var t = await getTicket(ticketId);
+          var d = await getTicketDocuments(ticketId);
+          renderTicket(t, d);
+          setTimeout(function() { msg.textContent = ''; }, 3000);
+        } catch (err) {
+          console.error(err);
+          msg.textContent = 'Save failed';
+          msg.className = 'save-msg error';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Save Changes';
+        }
+      });
+
+      // Bind download buttons
+      ticketContent.querySelectorAll('.doc-download[data-doc-id]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var docId = btn.dataset.docId;
+          var doc = docs.find(function(d) { return d.id === docId; });
+          if (doc && doc.base64) {
+            downloadBase64File(doc.base64, doc.fileName);
+          } else {
+            alert('File data not available.');
+          }
+        });
+      });
+
+      // Bind zip download
+      var zipBtn = document.getElementById('downloadZipBtn');
+      if (zipBtn) {
+        zipBtn.addEventListener('click', async function() {
+          zipBtn.textContent = 'Generating...';
+          zipBtn.disabled = true;
+          try {
+            var zipBlob = await buildTicketZip(ticket, docs);
+            var url = URL.createObjectURL(zipBlob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = ticket.ticketNumber + '.zip';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          } catch (err) {
+            console.error('Zip error:', err);
+            alert('Failed to generate zip.');
+          } finally {
+            zipBtn.textContent = 'Download Zip';
+            zipBtn.disabled = false;
+          }
+        });
+      }
+    }
+  })();
+  </script>
+</body>
+</html>

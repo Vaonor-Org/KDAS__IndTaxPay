@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Track your IndTaxPay application status securely online.">
+  <meta name="theme-color" content="#0D4A8A">
+  <title>Track Application | IndTaxPay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/apply-track.css">
+  <link rel="icon" type="image/png" href="assets/wheel.png">
+</head>
+<body data-base="./">
+
+  <div id="navbarSlot"></div>
+
+  <div class="track-page">
+    <main class="track-main">
+      <div class="track-title">
+        <span class="kicker">Secure Status Tracking</span>
+        <h1>Track your filing in real time</h1>
+        <p>Enter your ticket ID and registered phone number to view the latest progress from IndTaxPay.</p>
+      </div>
+
+      <form class="track-form" id="trackForm" novalidate>
+        <div class="track-field-group">
+          <div class="track-field">
+            <label for="tid">Ticket ID</label>
+            <input id="tid" type="text" required placeholder="e.g. ITP-20240521-001" autocomplete="off">
+          </div>
+          <div class="track-field">
+            <label for="tphone">Registered Phone Number</label>
+            <input id="tphone" type="tel" required placeholder="e.g. 9876543210" autocomplete="tel" inputmode="numeric">
+          </div>
+        </div>
+        <button type="submit" class="track-btn" id="trackBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Track Application
+        </button>
+      </form>
+
+      <!-- Not Found -->
+      <div id="notFound" class="track-result not-found" style="display:none;" role="alert">
+        <div class="kicker" style="margin-bottom:10px;">Search Result</div>
+        <h3>No matching ticket found</h3>
+        <p>Please check your ticket ID and registered phone number. Both fields must exactly match our records.</p>
+      </div>
+
+      <!-- Found -->
+      <div id="ticketResult" class="track-result found" style="display:none;" role="region" aria-label="Ticket status">
+        <div class="result-header">
+          <div>
+            <p class="result-ticket-label">Ticket</p>
+            <p class="result-ticket-number" id="resTicketNumber"></p>
+          </div>
+          <span class="result-status-badge" id="resStatusBadge"></span>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="track-status-progress">
+          <div class="track-status-progress-fill" id="resProgressFill"></div>
+        </div>
+        <div class="track-status-labels" id="resStatusLabels"></div>
+
+        <!-- Details -->
+        <div id="resDetails"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="footerSlot"></div>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="backend/firebase-init.js"></script>
+  <script src="backend/firestore-helpers.js"></script>
+
+  <script>
+  (function() {
+    var STATUSES = ['New', 'Documents Pending', 'In Progress', 'Filed', 'Completed'];
+
+    var form      = document.getElementById('trackForm');
+    var trackBtn  = document.getElementById('trackBtn');
+    var notFound  = document.getElementById('notFound');
+    var ticketResult = document.getElementById('ticketResult');
+    var tidInput  = document.getElementById('tid');
+    var phoneInput = document.getElementById('tphone');
+
+    /* ── Pre-fill from URL ── */
+    var params = new URLSearchParams(window.location.search);
+    var preId  = params.get('id');
+    if (preId) tidInput.value = preId;
+
+    /* ── Button colour: saffron → green when both fields filled ── */
+    function updateBtnColor() {
+      var filled = tidInput.value.trim().length > 0 && phoneInput.value.trim().length >= 10;
+      trackBtn.classList.toggle('track-btn--ready', filled);
+    }
+    tidInput.addEventListener('input', updateBtnColor);
+    phoneInput.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9+\s\-()\u002B]/g, '');
+      updateBtnColor();
+    });
+    updateBtnColor();
+
+    /* ── Form submit ── */
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      notFound.style.display = 'none';
+      ticketResult.style.display = 'none';
+      trackBtn.disabled = true;
+      trackBtn.innerHTML = '<span style="opacity:.7">Searching...</span>';
+
+      try {
+        var ticketId = tidInput.value.trim();
+        var phone    = phoneInput.value.trim();
+        var ticket   = await trackTicket(ticketId, phone);
+
+        if (!ticket) {
+          notFound.style.display = '';
+        } else {
+          renderResult(ticket);
+          ticketResult.style.display = '';
+        }
+      } catch (err) {
+        console.error(err);
+        notFound.style.display = '';
+      } finally {
+        trackBtn.disabled = false;
+        trackBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Track Application';
+      }
+    });
+
+    function statusPercent(status) {
+      var map = { 'New': 5, 'Documents Pending': 25, 'In Progress': 55, 'Filed': 80, 'Completed': 100, 'Rejected': 100 };
+      return map[status] || 0;
+    }
+
+    function renderResult(ticket) {
+      document.getElementById('resTicketNumber').textContent = ticket.ticketNumber;
+
+      var badge = document.getElementById('resStatusBadge');
+      badge.textContent = ticket.status;
+      if (ticket.status === 'Completed') {
+        badge.style.cssText = 'background:rgba(75,156,58,0.14); color:var(--color-green-dark);';
+      } else if (ticket.status === 'Rejected') {
+        badge.style.cssText = 'background:rgba(229,62,62,0.10); color:#E53E3E;';
+      } else {
+        badge.style.cssText = 'background:rgba(247,138,14,0.12); color:var(--color-saffron-dark);';
+      }
+
+      var fill = document.getElementById('resProgressFill');
+      fill.style.width = statusPercent(ticket.status) + '%';
+      fill.style.background = ticket.status === 'Rejected'
+        ? 'linear-gradient(90deg,#E53E3E,#C96B00)'
+        : 'linear-gradient(90deg,var(--color-navy),var(--color-saffron))';
+
+      var labelsDiv = document.getElementById('resStatusLabels');
+      var html = '';
+      STATUSES.forEach(function(s) {
+        var cls = s === ticket.status ? ' active-label' : '';
+        html += '<span class="' + cls + '">' + s + '</span>';
+      });
+      labelsDiv.innerHTML = html;
+
+      var details = [
+        ['Service',      ticket.serviceType],
+        ['Submitted',    formatFirestoreDate(ticket.createdAt)],
+        ['Last Updated', formatFirestoreDate(ticket.lastUpdated)]
+      ];
+      var dHtml = '';
+      details.forEach(function(row) {
+        dHtml += '<div class="detail-row"><span class="detail-label">' + row[0] + '</span><span class="detail-value">' + (row[1] || '—') + '</span></div>';
+      });
+      document.getElementById('resDetails').innerHTML = dHtml;
+    }
+  })();
+  </script>
+
+  <script defer src="assets/js/site.js"></script>
+</body>
+</html>

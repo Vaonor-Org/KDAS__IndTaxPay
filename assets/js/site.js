@@ -81,13 +81,14 @@
             <a class="navLink" href="${base}how-it-works/index.html" data-nav="how">How It Works</a>
             <a class="navLink" href="${base}blog/index.html" data-nav="blog">Blog</a>
             <a class="navLink" href="${base}about/index.html" data-nav="about">About</a>
+            <a class="navLink" href="${base}track.html" data-nav="track">Track</a>
           </nav>
 
           <div class="navActions">
             <button class="iconBtn" type="button" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
               <span aria-hidden="true">◐</span>
             </button>
-            <a class="btn btn-sm btn-primary" href="${base}pricing/index.html">Get Started <span aria-hidden="true">→</span></a>
+            <a class="btn btn-sm btn-primary" href="${base}apply.html">Book Now <span aria-hidden="true">→</span></a>
             <button class="iconBtn hamburger" type="button" data-mobile-open aria-label="Open menu">
               <span aria-hidden="true">☰</span>
             </button>
@@ -173,9 +174,10 @@
             <a class="navLink" href="${base}how-it-works/index.html">How It Works</a>
             <a class="navLink" href="${base}blog/index.html">Blog</a>
             <a class="navLink" href="${base}about/index.html">About</a>
+            <a class="navLink" href="${base}track.html" data-nav="track">Track Application</a>
           </div>
           <div class="mobileMenu__cta">
-            <a class="btn btn-primary" href="${base}pricing/index.html">Get Started →</a>
+            <a class="btn btn-primary" href="${base}apply.html">Book Now →</a>
           </div>
         </div>
       </div>
