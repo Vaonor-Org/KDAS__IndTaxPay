@@ -723,50 +723,6 @@ html[data-theme="dark"] .featuredCard {
   border-top: 1px solid var(--border);
 }
 
-/* Deadline banner */
-.deadlineBanner {
-  position: sticky;
-  top: var(--nav-h);
-  z-index: 70;
-  background: var(--color-saffron);
-  color: var(--color-white);
-}
-
-.deadlineBanner__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0;
-}
-
-.deadlineBanner__left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.deadlineBanner__timer {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.deadlineBanner__close {
-  width: 38px;
-  height: 38px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--color-white);
-  cursor: pointer;
-  transition: var(--transition-base);
-}
-
-.deadlineBanner__close:hover {
-  background: rgba(255, 255, 255, 0.22);
-}
-
 /* Hero */
 .hero {
   position: relative;
@@ -2687,9 +2643,6 @@ html[data-theme="dark"] .dropzone {
     grid-template-columns: 1fr;
   }
 
-  .deadlineBanner {
-    top: var(--nav-h-mobile);
-  }
 }
 
 /* Hero Compliance Dashboard */

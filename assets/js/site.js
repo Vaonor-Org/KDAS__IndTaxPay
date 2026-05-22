@@ -1480,7 +1480,6 @@
     initScrollProgress();
     initNavbar();
     initMobileMenu();
-    initDeadlineBanner();
     initModalSystem();
     initChat();
     initCountUps();
