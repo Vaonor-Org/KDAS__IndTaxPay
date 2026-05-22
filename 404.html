@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 - Page Not Found | IndTaxPay</title>
+    <meta
+      name="description"
+      content="The page you were looking for could not be found. Explore IndTaxPay services, return to the homepage, or track your application."
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body data-base="./">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+    <div id="navbarSlot"></div>
+    <div id="deadlineSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+      <section class="error404" aria-labelledby="error404Title">
+        <div class="error404__bg" aria-hidden="true"></div>
+
+        <div class="container">
+          <div class="error404__copy">
+            <div class="error404__code">404</div>
+            <h1 id="error404Title" class="error404__title">This page isn't available.</h1>
+            <p class="error404__text">
+              The link may be outdated, the page may have moved, or the URL might be incorrect. You can head back home,
+              start a filing request, or continue tracking an existing application.
+            </p>
+
+            <div class="error404__actions" role="group" aria-label="Recovery actions">
+              <a class="btn btn-lg btn-primary" href="index.html">Go to homepage</a>
+              <a class="btn btn-lg btn-outline" href="apply.html">Book a service</a>
+              <a class="btn btn-lg btn-ghost" href="track.html">Track application</a>
+            </div>
+
+            <div class="error404__meta">
+              <span class="pill">Expert CA support</span>
+              <span class="pill">Fast response workflows</span>
+              <span class="pill">Secure compliance journey</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="assets/js/site.js"></script>
+  </body>
+</html>
