@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apply for PAN, Income Tax, MSME, GST, TDS/TCS, EPF/ESI, Company ROC, and Accounting services with IndTaxPay.">
+  <meta name="theme-color" content="#0D4A8A">
+  <title>Apply Now | IndTaxPay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/apply-track.css">
+  <link rel="icon" type="image/png" href="assets/wheel.png">
+</head>
+<body data-base="./">
+
+  <div id="navbarSlot"></div>
+
+  <main class="apply-main">
+
+    <!-- FORM SECTION -->
+    <section class="apply-form-section">
+      <div class="apply-form-container">
+        <div class="apply-form-header">
+          <span class="kicker">Book a Service</span>
+          <h1>Fill this Application Form to get started</h1>
+          <p>Tell us what you need — we'll keep it tight and relevant.</p>
+        </div>
+
+        <!-- SUCCESS SCREEN -->
+        <div id="successScreen" class="apply-success" style="display:none;">
+          <div class="apply-success-icon">✅</div>
+          <h2>Application Submitted!</h2>
+          <p>Your application has been created successfully.</p>
+          <div class="apply-success-ticket-box">
+            <p class="apply-success-label">Your IndTaxPay Ticket ID</p>
+            <p id="successTicketId" class="apply-success-ticket"></p>
+          </div>
+          <p id="successEmailStatus" class="apply-success-note">Save this ID to track your application status.</p>
+          <div class="apply-success-actions">
+            <a href="track.html" class="apply-btn apply-btn--outline">Track Application</a>
+            <a href="index.html" class="apply-btn">Back to Home</a>
+          </div>
+        </div>
+
+        <!-- ERROR MESSAGE -->
+        <div id="formError" class="apply-form-error" style="display:none;"></div>
+
+        <form class="apply-form" id="applicationForm" novalidate>
+
+          <!-- Step 1: Service Category -->
+          <div class="form-group">
+            <label class="form-label">Service Category</label>
+            <div class="service-pill-row" id="serviceCategories">
+              <button type="button" data-category="pan">PAN &amp; Identity</button>
+              <button type="button" data-category="itr">Income Tax</button>
+              <button type="button" data-category="gst">GST</button>
+              <button type="button" data-category="msme">MSME / Startup</button>
+              <button type="button" data-category="tds">TDS / TCS</button>
+              <button type="button" data-category="epf">EPF / ESI</button>
+              <button type="button" data-category="company">Company / ROC</button>
+              <button type="button" data-category="accounting">Accounting &amp; Compliance</button>
+            </div>
+          </div>
+
+          <!-- Step 1b: Service -->
+          <div class="form-group">
+            <label class="form-label" for="service">Service</label>
+            <select id="service" name="service" required disabled class="form-select">
+              <option value="">Select a category first</option>
+            </select>
+            <p class="form-hint" id="selectedServiceLabel" aria-live="polite"></p>
+          </div>
+
+          <!-- Step 2: Personal Info -->
+          <div class="form-group">
+            <p class="form-section-title">Personal Information</p>
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label" for="fullName">Full Name <span class="form-req">*</span></label>
+                <input type="text" id="fullName" name="fullName" required placeholder="Your full legal name" class="form-input" autocomplete="name">
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="email">Email <span class="form-req">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="you@example.com" class="form-input" autocomplete="email">
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="phone">Phone Number <span class="form-req">*</span></label>
+                <input type="tel" id="phone" name="phone" required placeholder="10-digit mobile number" class="form-input" inputmode="numeric" autocomplete="tel">
+              </div>
+            </div>
+          </div>
+
+          <!-- Adaptive: PAN -->
+          <div class="form-group adaptive-field" data-service-type="pan" style="display:none;">
+            <p class="form-section-title">PAN Details</p>
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label" for="panFather">Father's Name</label>
+                <input type="text" id="panFather" name="panFather" placeholder="As on official documents" class="form-input">
+                <p class="form-hint">Required for PAN verification.</p>
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="panDob">Date of Birth</label>
+                <input type="date" id="panDob" name="panDob" class="form-input">
+                <p class="form-hint">Must match ITD records.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Adaptive: ITR -->
+          <div class="form-group adaptive-field" data-service-type="itr" style="display:none;">
+            <p class="form-section-title">ITR Details</p>
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label" for="itrType">Return Type</label>
+                <select id="itrType" name="itrType" class="form-select">
+                  <option value="">Select return type</option>
+                  <option value="ITR-1">ITR-1</option>
+                  <option value="ITR-2">ITR-2</option>
+                  <option value="ITR-3">ITR-3</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="itrYear">Assessment Year</label>
+                <input type="text" id="itrYear" name="itrYear" placeholder="e.g., 2024-25" class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- Adaptive: GST -->
+          <div class="form-group adaptive-field" data-service-type="gst" style="display:none;">
+            <p class="form-section-title">GST Details</p>
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label" for="gstState">State</label>
+                <input type="text" id="gstState" name="gstState" placeholder="e.g., Tamil Nadu" class="form-input">
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="gstTurnover">Annual Turnover (₹)</label>
+                <input type="number" id="gstTurnover" name="gstTurnover" placeholder="e.g., 1500000" class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- Adaptive: MSME -->
+          <div class="form-group adaptive-field" data-service-type="msme" style="display:none;">
+            <p class="form-section-title">MSME Details</p>
+            <div class="form-field">
+              <label class="form-label" for="msmeBizType">Business Type</label>
+              <input type="text" id="msmeBizType" name="msmeBizType" placeholder="Manufacturing / Services" class="form-input">
+            </div>
+          </div>
+
+          <!-- Adaptive: Company -->
+          <div class="form-group adaptive-field" data-service-type="company" style="display:none;">
+            <p class="form-section-title">Company / ROC Details</p>
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label" for="entityType">Entity Type</label>
+                <select id="entityType" name="entityType" class="form-select">
+                  <option value="">Select entity type</option>
+                  <option value="Private Limited">Private Limited</option>
+                  <option value="LLP">LLP</option>
+                  <option value="OPC">OPC</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="directorCount">Directors / Partners</label>
+                <input type="number" id="directorCount" name="directorCount" min="1" placeholder="e.g., 2" class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- Adaptive: Accounting -->
+          <div class="form-group adaptive-field" data-service-type="accounting" style="display:none;">
+            <p class="form-section-title">Accounting Details</p>
+            <div class="form-field">
+              <label class="form-label" for="txnVolume">Monthly Transactions</label>
+              <input type="number" id="txnVolume" name="txnVolume" placeholder="e.g., 300" class="form-input">
+            </div>
+          </div>
+
+          <!-- Document Uploads -->
+          <div class="form-group" id="documentsSection" style="display:none;">
+            <p class="form-section-title">Required Documents</p>
+            <p class="form-hint" style="margin-bottom:14px;">Upload the documents listed below. Maximum 500 KB per file.</p>
+            <div id="documentFields"></div>
+          </div>
+
+          <!-- Agreement -->
+          <div class="form-group">
+            <label class="form-checkbox-label">
+              <input type="checkbox" name="agreement" id="agreement" required>
+              <span>I agree to the terms and conditions</span>
+            </label>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="apply-btn apply-submit-btn" id="submitBtn" disabled>
+            Submit for Expert Review
+          </button>
+          <p id="submitStatus" class="apply-submit-status" style="display:none;"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- PROCESS FLOW -->
+    <section class="apply-process-section">
+      <div class="apply-process-container">
+        <h2 class="apply-process-title">What Happens Next</h2>
+        <div class="process-flow">
+          <div class="process-step">
+            <div class="process-dot">1</div>
+            <h3 class="process-label">Submit</h3>
+            <p class="process-desc">Send your completed application</p>
+          </div>
+          <div class="process-line"></div>
+          <div class="process-step">
+            <div class="process-dot">2</div>
+            <h3 class="process-label">Review</h3>
+            <p class="process-desc">Our team verifies your information</p>
+          </div>
+          <div class="process-line"></div>
+          <div class="process-step">
+            <div class="process-dot">3</div>
+            <h3 class="process-label">Contact</h3>
+            <p class="process-desc">We reach out if clarification is needed</p>
+          </div>
+          <div class="process-line"></div>
+          <div class="process-step">
+            <div class="process-dot">4</div>
+            <h3 class="process-label">Processing</h3>
+            <p class="process-desc">We file with government authorities</p>
+          </div>
+          <div class="process-line"></div>
+          <div class="process-step">
+            <div class="process-dot">5</div>
+            <h3 class="process-label">Completion</h3>
+            <p class="process-desc">Receive your certificate within 5 days</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footerSlot"></div>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="backend/firebase-init.js"></script>
+  <script src="backend/firestore-helpers.js"></script>
+  <script src="backend/script.js"></script>
+  <script src="application-mail.js"></script>
+
+  <script>
+  (function() {
+    var SERVICE_DOCUMENTS = {
+      pan: [
+        { label: 'Aadhaar Card (Front & Back)', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Passport Size Photo', accept: '.jpg,.jpeg,.png', required: true },
+        { label: 'Signature Scan', accept: '.jpg,.jpeg,.png', required: true },
+        { label: 'Address Proof (if different from Aadhaar)', accept: '.pdf,.jpg,.jpeg,.png', required: false }
+      ],
+      itr: [
+        { label: 'PAN Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Aadhaar Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Form 16 / Salary Slips', accept: '.pdf,.doc,.docx,.xls,.xlsx', required: true },
+        { label: 'Bank Statements', accept: '.pdf,.xls,.xlsx', required: false },
+        { label: 'Investment Proofs (80C, 80D, etc.)', accept: '.pdf,.jpg,.jpeg,.png', required: false }
+      ],
+      gst: [
+        { label: 'PAN Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Aadhaar Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Business Address Proof', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Bank Statement / Cancelled Cheque', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Sales / Purchase Invoices', accept: '.pdf,.xls,.xlsx,.doc,.docx', required: false }
+      ],
+      msme: [
+        { label: 'Aadhaar Card of Proprietor / Partner', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'PAN Card of Business', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Business Address Proof', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'GST Certificate (if registered)', accept: '.pdf,.jpg,.jpeg,.png', required: false }
+      ],
+      tds: [
+        { label: 'TAN Allotment Letter', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'PAN Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Challan Payment Receipts', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Salary / Payment Details Sheet', accept: '.pdf,.xls,.xlsx,.doc,.docx', required: false }
+      ],
+      epf: [
+        { label: 'PAN Card of Company / Firm', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Aadhaar Card of Authorised Signatory', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Employee List with Salary Details', accept: '.pdf,.xls,.xlsx,.doc,.docx', required: true },
+        { label: 'Bank Statement / Cancelled Cheque', accept: '.pdf,.jpg,.jpeg,.png', required: true }
+      ],
+      company: [
+        { label: 'PAN Card of Directors', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Aadhaar Card of Directors', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Address Proof of Registered Office', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'MOA / AOA / LLP Agreement (if existing)', accept: '.pdf,.doc,.docx', required: false },
+        { label: 'Digital Signature Certificate', accept: '.pdf,.pfx', required: false }
+      ],
+      accounting: [
+        { label: 'Bank Statements', accept: '.pdf,.xls,.xlsx', required: true },
+        { label: 'Sales / Purchase Invoices', accept: '.pdf,.xls,.xlsx,.doc,.docx', required: true },
+        { label: 'Previous Year Financials (if any)', accept: '.pdf,.xls,.xlsx', required: false },
+        { label: 'GST Returns (if applicable)', accept: '.pdf,.xls,.xlsx', required: false }
+      ]
+    };
+
+    var form              = document.getElementById('applicationForm');
+    var submitBtn         = document.getElementById('submitBtn');
+    var agreementBox      = document.getElementById('agreement');
+    var serviceSelect     = document.getElementById('service');
+    var successScreen     = document.getElementById('successScreen');
+    var formError         = document.getElementById('formError');
+    var submitStatus      = document.getElementById('submitStatus');
+    var successEmailStatus = document.getElementById('successEmailStatus');
+    var documentsSection  = document.getElementById('documentsSection');
+    var documentFields    = document.getElementById('documentFields');
+    var categoryRow       = document.getElementById('serviceCategories');
+    var phoneField        = document.getElementById('phone');
+
+    /* ── Phone: digits only ── */
+    if (phoneField) {
+      phoneField.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9+\s\-()]/g, '');
+        var digits = this.value.replace(/\D/g, '');
+        if (digits.length > 10) {
+          var trimmed = '';
+          var count = 0;
+          for (var i = 0; i < this.value.length && count < 10; i++) {
+            if (/\d/.test(this.value[i])) count++;
+            trimmed += this.value[i];
+          }
+          this.value = trimmed;
+        }
+        updateSubmitColor();
+      });
+    }
+
+    /* ── Button colour: saffron → green when form looks complete ── */
+    function isFormFilled() {
+      var name  = (document.getElementById('fullName') || {}).value || '';
+      var email = (document.getElementById('email') || {}).value || '';
+      var phone = (phoneField || {}).value || '';
+      var svc   = serviceSelect ? serviceSelect.value : '';
+      var agreed = agreementBox ? agreementBox.checked : false;
+      return name.trim().length > 1
+          && email.includes('@')
+          && phone.replace(/\D/g, '').length >= 10
+          && svc
+          && agreed;
+    }
+
+    function updateSubmitColor() {
+      submitBtn.classList.toggle('apply-btn--ready', isFormFilled());
+    }
+
+    /* Watch all inputs for color update */
+    form.addEventListener('input', updateSubmitColor);
+    if (agreementBox) agreementBox.addEventListener('change', updateSubmitColor);
+
+    /* ── Agreement / service → enable submit ── */
+    function updateSubmitState() {
+      var hasService = serviceSelect && serviceSelect.value;
+      var agreed     = agreementBox && agreementBox.checked;
+      submitBtn.disabled = !(hasService && agreed);
+      updateSubmitColor();
+    }
+    if (agreementBox)   agreementBox.addEventListener('change', updateSubmitState);
+    if (serviceSelect)  serviceSelect.addEventListener('change', updateSubmitState);
+
+    /* ── Document fields renderer ── */
+    function renderDocumentFields(category) {
+      var docs = SERVICE_DOCUMENTS[category];
+      if (!docs || docs.length === 0) {
+        documentsSection.style.display = 'none';
+        documentFields.innerHTML = '';
+        return;
+      }
+      documentsSection.style.display = '';
+      var html = '';
+      docs.forEach(function(docItem, idx) {
+        html += '<div class="form-field" style="margin-bottom:16px;">';
+        html += '<label class="form-label" for="doc_' + idx + '">' + docItem.label;
+        if (docItem.required) html += ' <span class="form-req">*</span>';
+        html += '</label>';
+        html += '<input type="file" id="doc_' + idx + '" name="doc_' + idx + '" accept="' + docItem.accept + '" data-doc-label="' + docItem.label + '" class="form-input-file"';
+        if (docItem.required) html += ' required';
+        html += '>';
+        html += '<p class="form-hint">Max file size: 500 KB.</p>';
+        html += '</div>';
+      });
+      documentFields.innerHTML = html;
+    }
+
+    if (categoryRow) {
+      categoryRow.addEventListener('click', function(e) {
+        var btn = e.target.closest('button[data-category]');
+        if (!btn) return;
+        renderDocumentFields(btn.dataset.category);
+      });
+    }
+
+    /* ── Helpers ── */
+    function getFormDataFields() {
+      var data = {};
+      var fd = new FormData(form);
+      fd.forEach(function(value, key) {
+        if (value instanceof File) return;
+        if (key === 'agreement') return;
+        data[key] = String(value).trim();
+      });
+      return data;
+    }
+
+    /* ── Submit ── */
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      formError.style.display = 'none';
+      submitBtn.disabled = true;
+      submitStatus.style.display = 'block';
+      submitStatus.textContent = 'Creating your ticket...';
+
+      try {
+        var serviceOption  = serviceSelect.options[serviceSelect.selectedIndex];
+        var categoryBtn    = categoryRow.querySelector('button.active');
+        var categoryLabel  = categoryBtn ? categoryBtn.textContent.trim() : '';
+        var serviceLabel   = serviceOption ? serviceOption.text : '';
+        var fullServiceType = categoryLabel ? categoryLabel + ' → ' + serviceLabel : serviceLabel;
+
+        var dataFields = getFormDataFields();
+        dataFields.serviceCategory = categoryLabel;
+        dataFields.serviceName = serviceLabel;
+
+        var result = await createTicket({
+          name:        document.getElementById('fullName').value.trim(),
+          phone:       document.getElementById('phone').value.trim(),
+          email:       document.getElementById('email').value.trim(),
+          serviceType: fullServiceType,
+          dataFields:  dataFields
+        });
+
+        /* Upload documents */
+        var files = [];
+        documentFields.querySelectorAll('input[type="file"]').forEach(function(input) {
+          if (input.files && input.files.length > 0) {
+            files.push({ file: input.files[0], type: input.dataset.docLabel || 'Other' });
+          }
+        });
+        if (files.length > 0) {
+          submitStatus.textContent = 'Uploading documents (' + files.length + ' files)...';
+          await uploadDocuments(result.ticketId, files);
+        }
+
+        /* Acknowledgement email */
+        submitStatus.textContent = 'Sending acknowledgement email...';
+        var emailSent = false;
+        try {
+          await sendApplicationAcknowledgementEmail({
+            name:         document.getElementById('fullName').value.trim(),
+            email:        document.getElementById('email').value.trim(),
+            serviceType:  fullServiceType,
+            ticketNumber: result.ticketNumber
+          }, { websiteUrl: window.location.origin });
+          emailSent = true;
+        } catch (emailErr) {
+          console.warn('Email send failed:', emailErr);
+        }
+
+        document.getElementById('successTicketId').textContent = result.ticketNumber;
+        successEmailStatus.textContent = emailSent
+          ? 'A confirmation email has been sent. Keep this ID safe and use it on the tracking page.'
+          : 'Keep this ID safe and use it on the tracking page. Email is not configured yet.';
+
+        form.style.display = 'none';
+        successScreen.style.display = '';
+
+      } catch (err) {
+        console.error('Submit error:', err);
+        formError.textContent = 'Something went wrong: ' + (err.message || err);
+        formError.style.display = '';
+        submitBtn.disabled = false;
+      } finally {
+        submitStatus.style.display = 'none';
+      }
+    });
+  })();
+  </script>
+
+  <script defer src="assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | IndTaxPay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" type="image/png" href="../assets/wheel.png">
+</head>
+<body class="login-page-body">
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-icon">🔐</div>
+      <h1>Admin Login</h1>
+      <p class="subtitle">Secure access for the IndTaxPay operations dashboard.</p>
+
+      <div class="login-error" id="loginError"></div>
+
+      <form id="loginForm">
+        <div class="login-field">
+          <input id="login-email" type="email" required autofocus placeholder=" ">
+          <label for="login-email">Email</label>
+        </div>
+        <div class="login-field">
+          <input id="login-pass" type="password" required placeholder=" ">
+          <label for="login-pass">Password</label>
+        </div>
+        <div class="show-password-row">
+          <input id="show-pass" type="checkbox">
+          <label for="show-pass">Show Password</label>
+        </div>
+        <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
+      </form>
+
+      <p class="login-back"><a href="../index.html">← Back to website</a></p>
+    </div>
+  </div>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+  <script src="../backend/firebase-init.js"></script>
+
+  <script>
+  (function() {
+    var form = document.getElementById('loginForm');
+    var loginBtn = document.getElementById('loginBtn');
+    var errorDiv = document.getElementById('loginError');
+    var passwordInput = document.getElementById('login-pass');
+    var showPassCheckbox = document.getElementById('show-pass');
+    var params = new URLSearchParams(window.location.search);
+
+    if (passwordInput && showPassCheckbox) {
+      showPassCheckbox.addEventListener('change', function() {
+        passwordInput.type = this.checked ? 'text' : 'password';
+      });
+    }
+
+    function showLoginError(message) {
+      errorDiv.textContent = message;
+      errorDiv.style.display = '';
+    }
+
+    if (params.get('reason') === 'session-expired' || sessionStorage.getItem('adminSessionExpired') === '1') {
+      showLoginError('Your admin session expired after 24 hours of inactivity. Please sign in again.');
+      sessionStorage.removeItem('adminSessionExpired');
+    }
+
+    // If already logged in, redirect
+    auth.onAuthStateChanged(function(user) {
+      if (user) window.location.href = 'dashboard.html';
+    });
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      errorDiv.style.display = 'none';
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Signing in...';
+
+      var email = document.getElementById('login-email').value;
+      var password = document.getElementById('login-pass').value;
+
+      try {
+        sessionStorage.removeItem('adminSessionExpired');
+        sessionStorage.removeItem('adminLastActivityAt');
+        await auth.signInWithEmailAndPassword(email, password);
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        showLoginError('Invalid email or password.');
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Sign In';
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

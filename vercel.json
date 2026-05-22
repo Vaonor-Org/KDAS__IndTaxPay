@@ -1,0 +1,150 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/login",
+      "permanent": false
+    },
+    {
+      "source": "/index",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/login",
+      "permanent": false
+    },
+    {
+      "source": "/index.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/login",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/login",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/ui/login"
+    },
+    {
+      "source": "/login.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/ui/login"
+    },
+    {
+      "source": "/dashboard",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/ui/dashboard"
+    },
+    {
+      "source": "/dashboard.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/ui/dashboard"
+    },
+    {
+      "source": "/ticket",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/ui/ticket"
+    },
+    {
+      "source": "/ticket.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/ui/ticket"
+    },
+    {
+      "source": "/style.css",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/ui/style.css"
+    },
+    {
+      "source": "/navbar.js",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/ui/navbar.js"
+    },
+    {
+      "source": "/application-mail.js",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/ui/application-mail.js"
+    },
+    {
+      "source": "/backend/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/backend/$1"
+    },
+    {
+      "source": "/Assests/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/Assests/$1"
+    }
+  ]
+}

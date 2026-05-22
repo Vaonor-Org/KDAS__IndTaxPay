@@ -1,0 +1,18 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /tickets/{ticketId}/{fileName} {
+      // Public can upload files to a ticket folder (max 10MB)
+      allow write: if request.resource.size < 10 * 1024 * 1024;
+
+      // Only authenticated admin can read/download
+      allow read: if request.auth != null;
+    }
+
+    // Block all other paths
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
