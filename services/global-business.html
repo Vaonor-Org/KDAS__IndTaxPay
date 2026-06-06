@@ -171,6 +171,11 @@
       box-shadow: inset 4px 0 0 var(--sp-saffron);
     }
   </style>
+  <!-- amCharts 4 Scripts -->
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+  <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 </head>
 <body data-base="../" data-active-nav="services" class="theme-global">
   <a class="skipLink" href="#main">Skip to content</a>
@@ -214,93 +219,26 @@
         <div class="dna-explorer sp-reveal sp-reveal--d2" id="globalExplorer">
           <!-- LEFT PANEL: Interactive Globe -->
           <div class="dna-left theme-global" id="globeLeft">
-            <div class="os-container" style="width: 500px; height: 100%; margin: 0 auto; position: relative;">
-              <!-- Static Outer Globe Glow & Sphere Background -->
-              <svg class="os-svg" viewBox="0 0 500 620" preserveAspectRatio="none">
-                <defs>
-                  <radialGradient id="globeGrad" cx="35%" cy="35%" r="60%">
-                    <stop offset="0%" stop-color="#0d1b32" />
-                    <stop offset="70%" stop-color="#040b17" />
-                    <stop offset="100%" stop-color="#01040a" />
-                  </radialGradient>
-                  <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.22" />
-                    <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
-                  </radialGradient>
-                </defs>
-                <circle cx="250" cy="310" r="170" fill="url(#glowGrad)" />
-                <circle cx="250" cy="310" r="150" fill="url(#globeGrad)" stroke="rgba(59, 130, 246, 0.2)" stroke-width="2" />
-              </svg>
-
-              <!-- Rotating / Tilting Inner Globe Grid and Pins -->
-              <div class="globe-inner-wrapper" id="globeInner" style="position: absolute; inset: 0;">
-                <svg class="os-svg" viewBox="0 0 500 620" preserveAspectRatio="none">
-                  <!-- Latitude and Longitude Grid Lines -->
-                  <g class="globe-grid">
-                    <!-- Latitude Lines -->
-                    <path d="M 100 310 L 400 310" fill="none" stroke="rgba(59, 130, 246, 0.1)" stroke-width="1.2" />
-                    <path d="M 106 260 Q 250 290 394 260" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
-                    <path d="M 106 360 Q 250 330 394 360" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
-                    <path d="M 125 210 Q 250 250 375 210" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
-                    <path d="M 125 410 Q 250 370 375 410" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
-                    <path d="M 160 160 Q 250 200 340 160" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
-                    <path d="M 160 460 Q 250 420 340 460" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
-                    
-                    <!-- Longitude Lines -->
-                    <ellipse cx="250" cy="310" rx="0" ry="150" fill="none" stroke="rgba(59, 130, 246, 0.1)" stroke-width="1.2" />
-                    <ellipse cx="250" cy="310" rx="40" ry="150" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
-                    <ellipse cx="250" cy="310" rx="80" ry="150" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
-                    <ellipse cx="250" cy="310" rx="120" ry="150" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
-                  </g>
-                  
-                  <!-- Connection Routes (Dash path and animated glowing dots) -->
-                  <path id="route-usa" class="globe-route" d="M 250 310 Q 170 230 130 220" fill="none" stroke="#ff9933" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" />
-                  <path id="route-uk" class="globe-route" d="M 250 310 Q 200 220 190 190" fill="none" stroke="#ff9933" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" />
-                  <path id="route-singapore" class="globe-route" d="M 250 310 Q 290 340 320 350" fill="none" stroke="#ff9933" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" />
-                  <path id="route-uae" class="globe-route" d="M 250 310 Q 220 280 210 270" fill="none" stroke="#ff9933" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" />
-                  
-                  <!-- Animated Dots -->
-                  <circle id="dot-usa" class="globe-dot" r="4.5" fill="#ff9933">
-                    <animateMotion dur="2.2s" repeatCount="indefinite" path="M 250 310 Q 170 230 130 220" />
-                  </circle>
-                  <circle id="dot-uk" class="globe-dot" r="4.5" fill="#ff9933">
-                    <animateMotion dur="2.0s" repeatCount="indefinite" path="M 250 310 Q 200 220 190 190" />
-                  </circle>
-                  <circle id="dot-singapore" class="globe-dot" r="4.5" fill="#ff9933">
-                    <animateMotion dur="1.8s" repeatCount="indefinite" path="M 250 310 Q 290 340 320 350" />
-                  </circle>
-                  <circle id="dot-uae" class="globe-dot" r="4.5" fill="#ff9933">
-                    <animateMotion dur="1.6s" repeatCount="indefinite" path="M 250 310 Q 220 280 210 270" />
-                  </circle>
-                </svg>
-                
-                <!-- Country Pins -->
-                <button type="button" class="globe-pin active" data-country="india" style="top: 310px; left: 250px;" aria-label="India Hub">
-                  <span class="pin-pulse"></span>
-                  <span class="pin-dot"></span>
-                  <span class="pin-label">INDIA</span>
-                </button>
-                <button type="button" class="globe-pin" data-country="usa" style="top: 220px; left: 130px;" aria-label="United States">
-                  <span class="pin-pulse"></span>
-                  <span class="pin-dot"></span>
-                  <span class="pin-label">USA</span>
-                </button>
-                <button type="button" class="globe-pin" data-country="uk" style="top: 190px; left: 190px;" aria-label="United Kingdom">
-                  <span class="pin-pulse"></span>
-                  <span class="pin-dot"></span>
-                  <span class="pin-label">UK</span>
-                </button>
-                <button type="button" class="globe-pin" data-country="singapore" style="top: 350px; left: 320px;" aria-label="Singapore">
-                  <span class="pin-pulse"></span>
-                  <span class="pin-dot"></span>
-                  <span class="pin-label">SINGAPORE</span>
-                </button>
-                <button type="button" class="globe-pin" data-country="uae" style="top: 270px; left: 210px;" aria-label="United Arab Emirates">
-                  <span class="pin-pulse"></span>
-                  <span class="pin-dot"></span>
-                  <span class="pin-label">UAE</span>
-                </button>
-              </div>
+            <div class="os-container" style="width: 100%; max-width: 500px; height: 100%; margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center;">
+              <!-- amCharts Globe Container (with static CSS glow background) -->
+              <div id="chartdiv" style="width: 100%; height: 100%; background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0) 65%);"></div>
+              
+              <!-- Resume Spin / Auto-Rotate Button -->
+              <button id="resume-spin-btn" type="button" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(13, 27, 50, 0.85); border: 1px solid rgba(59, 130, 246, 0.4); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 0.72rem; font-family: inherit; font-weight: 700; cursor: pointer; transition: all 0.3s ease; display: none; align-items: center; gap: 6px; z-index: 10; pointer-events: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.4); text-transform: uppercase; letter-spacing: 0.05em;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="animation: spinPulse 2s linear infinite;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                <span>Resume Rotation</span>
+              </button>
+              <style>
+                @keyframes spinPulse {
+                  from { transform: rotate(0deg); }
+                  to { transform: rotate(360deg); }
+                }
+                #resume-spin-btn:hover {
+                  background: rgba(59, 130, 246, 0.2);
+                  border-color: #3b82f6;
+                  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+                }
+              </style>
             </div>
           </div>
 
@@ -489,55 +427,340 @@
       }
     };
 
+    const countryToIso = {
+      india: "IN",
+      usa: "US",
+      uk: "GB",
+      singapore: "SG",
+      uae: "AE"
+    };
+
+    const isoToCountry = {
+      IN: "india",
+      US: "usa",
+      GB: "uk",
+      SG: "singapore",
+      AE: "uae"
+    };
+
+    const countryCoords = {
+      IN: { lat: 20.59, lon: 78.96 },
+      US: { lat: 37.09, lon: -95.71 },
+      GB: { lat: 55.37, lon: -3.43 },
+      SG: { lat: 1.35, lon: 103.82 },
+      AE: { lat: 23.42, lon: 53.84 }
+    };
+
     const globalExplorer = {
       activeCountry: 'india',
       activeSvc: 'fdi_filing',
-
+      isSpinning: true,
+      
       init() {
         this.container = document.getElementById('globalExplorer');
         if (!this.container) return;
 
-        this.globeInner = document.getElementById('globeInner');
         this.panel = document.getElementById('globePanel');
-        this.pins = this.container.querySelectorAll('.globe-pin');
         this.mobileBtns = this.container.querySelectorAll('.dna-mobile-btn');
         this.mobileScroll = this.container.querySelector('.dna-mobile-nav__scroll');
-        this.routes = this.container.querySelectorAll('.globe-route');
-        this.dots = this.container.querySelectorAll('.globe-dot');
+        this.resumeBtn = document.getElementById('resume-spin-btn');
 
-        // Pin click listeners (desktop)
-        this.pins.forEach(pin => {
-          pin.addEventListener('click', () => {
-            const country = pin.getAttribute('data-country');
-            this.selectCountry(country);
-          });
+        // amCharts 4 configuration
+        am4core.useTheme(am4themes_animated);
+        this.chart = am4core.create("chartdiv", am4maps.MapChart);
+        this.chart.geodata = am4geodata_worldLow;
+        this.chart.projection = new am4maps.projections.Orthographic();
+        this.chart.panBehavior = "none";
+        this.chart.deltaLatitude = -20;
+        this.chart.padding(20, 20, 20, 20);
+
+        // Lock zooming and translations to keep globe position fixed in center
+        this.chart.maxZoomLevel = 1;
+        this.chart.minZoomLevel = 1;
+        this.chart.mouseWheelBehavior = "none";
+        this.chart.seriesContainer.draggable = false;
+        this.chart.seriesContainer.events.disableType("doublehit");
+        this.chart.chartContainer.background.events.disableType("doublehit");
+
+        // Background / Ocean Fill (solid deep cosmic blue)
+        this.chart.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 1;
+        this.chart.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color("#0d1b32");
+        this.chart.backgroundSeries.mapPolygons.template.polygon.stroke = am4core.color("rgba(59, 130, 246, 0.35)");
+        this.chart.backgroundSeries.mapPolygons.template.polygon.strokeWidth = 2;
+        
+
+        this.chart.backgroundSeries.events.on("hit", () => {
+          if (!this.isSpinning) {
+            this.resumeSpinning();
+          }
         });
 
-        // Mobile buttons
+        // Stop auto-spin on drag to prevent twitching/conflicts
+        this.chart.seriesContainer.events.on("dragstart", () => {
+          this.isSpinning = false;
+          if (this.spinAnimation) {
+            this.spinAnimation.stop();
+          }
+          if (this.resumeBtn) {
+            this.resumeBtn.style.display = 'flex';
+          }
+        });
+
+        // Graticule / Grid Lines (subtle blue lines over ocean)
+        var graticuleSeries = this.chart.series.push(new am4maps.GraticuleSeries());
+        graticuleSeries.mapLines.template.line.stroke = am4core.color("rgba(59, 130, 246, 0.1)");
+        graticuleSeries.mapLines.template.line.strokeOpacity = 1;
+        graticuleSeries.fitExtent = false;
+
+        // Country Polygons Series
+        this.polygonSeries = this.chart.series.push(new am4maps.MapPolygonSeries());
+        this.polygonSeries.useGeodata = true;
+        this.polygonSeries.data = [
+          { id: "IN", target: true },
+          { id: "US", target: true },
+          { id: "GB", target: true },
+          { id: "SG", target: true },
+          { id: "AE", target: true }
+        ];
+
+        var polygonTemplate = this.polygonSeries.mapPolygons.template;
+        polygonTemplate.tooltipText = "{name}";
+        polygonTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+
+        // Color target and non-target countries
+        polygonTemplate.adapter.add("fill", function(fill, target) {
+          if (target.dataItem.dataContext && target.dataItem.dataContext.target) {
+            return am4core.color("#254c8c"); // steel blue for target countries
+          }
+          return am4core.color("#14223f"); // darker navy for non-target countries
+        });
+        polygonTemplate.adapter.add("stroke", function(stroke, target) {
+          if (target.dataItem.dataContext && target.dataItem.dataContext.target) {
+            return am4core.color("#ffffff"); // white outlines for target countries
+          }
+          return am4core.color("rgba(255, 255, 255, 0.08)");
+        });
+        polygonTemplate.adapter.add("strokeWidth", function(strokeWidth, target) {
+          if (target.dataItem.dataContext && target.dataItem.dataContext.target) {
+            return 1.2; // slightly thicker borders for target countries
+          }
+          return 0.5;
+        });
+
+        // Hover states
+        var hs = polygonTemplate.states.create("hover");
+        hs.properties.fill = am4core.color("rgba(59, 130, 246, 0.45)");
+        hs.properties.stroke = am4core.color("#3b82f6");
+
+        // Active (Selected) state with glowing drop shadow filter
+        var activeState = polygonTemplate.states.create("active");
+        activeState.properties.fill = am4core.color("rgba(255, 153, 51, 0.35)");
+        activeState.properties.stroke = am4core.color("#ff9933");
+        activeState.properties.strokeWidth = 2.2;
+
+
+        // Click handler for polygons
+        polygonTemplate.events.on("hit", (ev) => {
+          const dataCtx = ev.target.dataItem.dataContext;
+          if (dataCtx && dataCtx.target) {
+            const countryKey = isoToCountry[dataCtx.id];
+            if (countryKey) {
+              this.selectCountry(countryKey);
+            }
+          } else {
+            if (!this.isSpinning) {
+              this.resumeSpinning();
+            }
+          }
+        });
+
+        // Flight Paths Line Series
+        this.lineSeries = this.chart.series.push(new am4maps.MapLineSeries());
+        this.lineSeries.mapLines.template.strokeWidth = 2.2;
+        this.lineSeries.mapLines.template.stroke = am4core.color("#ff9933");
+        this.lineSeries.mapLines.template.line.strokeDasharray = "4,4";
+        this.lineSeries.mapLines.template.line.controlPointDistance = 0.25;
+
+        // Animated traveling dot along flight path
+        var bullet = this.lineSeries.mapLines.template.lineObjects.create();
+        bullet.nonScaling = true;
+        bullet.position = 0;
+        bullet.width = 10;
+        bullet.height = 10;
+
+        var circle = bullet.createChild(am4core.Circle);
+        circle.radius = 4.5;
+        circle.fill = am4core.color("#ff9933");
+        circle.strokeWidth = 0;
+
+
+        bullet.animate({
+          property: "position",
+          from: 0,
+          to: 1
+        }, 2200, am4core.ease.none).loop = true;
+
+        // Marker Pins (Image Series)
+        this.imageSeries = this.chart.series.push(new am4maps.MapImageSeries());
+        var imageTemplate = this.imageSeries.mapImages.template;
+        imageTemplate.propertyFields.longitude = "longitude";
+        imageTemplate.propertyFields.latitude = "latitude";
+        imageTemplate.nonScaling = true;
+
+        // Pulse (underneath center pin)
+        var pinPulse = imageTemplate.createChild(am4core.Circle);
+        pinPulse.radius = 6;
+        pinPulse.fill = am4core.color("#ff9933");
+        pinPulse.fillOpacity = 0.4;
+        pinPulse.strokeWidth = 0;
+        pinPulse.nonScaling = true;
+
+        var pulseAnim = pinPulse.animate([
+          { property: "scale", from: 1, to: 3.5 },
+          { property: "opacity", from: 0.8, to: 0 }
+        ], 2500, am4core.ease.none);
+        pulseAnim.loop = true;
+
+        // Center solid pin dot
+        var pinCircle = imageTemplate.createChild(am4core.Circle);
+        pinCircle.radius = 5;
+        pinCircle.fill = am4core.color("#3b82f6");
+        pinCircle.stroke = am4core.color("#ffffff");
+        pinCircle.strokeWidth = 2;
+        pinCircle.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+
+        var pinActive = pinCircle.states.create("active");
+        pinActive.properties.fill = am4core.color("#ff9933");
+
+        // Pin text label (bright white text with zero stroke to maximize visibility)
+        var pinLabel = imageTemplate.createChild(am4core.Label);
+        pinLabel.text = "{label}";
+        pinLabel.horizontalCenter = "middle";
+        pinLabel.verticalCenter = "top";
+        pinLabel.dy = 8;
+        pinLabel.fill = am4core.color("#ffffff");
+        pinLabel.fontSize = 10;
+        pinLabel.fontWeight = "bold";
+        pinLabel.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+
+        var labelActive = pinLabel.states.create("active");
+        labelActive.properties.fill = am4core.color("#ff9933");
+
+        // Bind active states
+        pinCircle.bind("isActive", imageTemplate);
+        pinLabel.bind("isActive", imageTemplate);
+
+        this.imageSeries.data = [
+          { id: "india", latitude: countryCoords.IN.lat, longitude: countryCoords.IN.lon, label: "INDIA" },
+          { id: "usa", latitude: countryCoords.US.lat, longitude: countryCoords.US.lon, label: "USA" },
+          { id: "uk", latitude: countryCoords.GB.lat, longitude: countryCoords.GB.lon, label: "UK" },
+          { id: "singapore", latitude: countryCoords.SG.lat, longitude: countryCoords.SG.lon, label: "SINGAPORE" },
+          { id: "uae", latitude: countryCoords.AE.lat, longitude: countryCoords.AE.lon, label: "UAE" }
+        ];
+
+        // Click handler for pin markers
+        imageTemplate.events.on("hit", (ev) => {
+          const cName = ev.target.dataItem.dataContext.id;
+          this.selectCountry(cName);
+        });
+
+        // Mobile buttons listeners
         this.mobileBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
             const country = btn.getAttribute('data-country');
             this.selectCountry(country);
             this.centerMobileButton(btn);
           });
         });
 
-        // Init
+        // Resume button listener
+        if (this.resumeBtn) {
+          this.resumeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.resumeSpinning();
+          });
+        }
+
+        // Start auto-rotation
+        this.startRotation();
+
+        // Initial Selection (sets details panel but keeps spinning)
         this.selectCountry(this.activeCountry, true);
+      },
+
+      startRotation() {
+        this.isSpinning = true;
+        if (this.resumeBtn) {
+          this.resumeBtn.style.display = 'none';
+        }
+        
+        // Reset tilt (latitude)
+        this.chart.animate({ property: "deltaLatitude", to: -20 }, 1000, am4core.ease.cubicOut);
+        
+        // Continuous linear spin on deltaLongitude
+        const currentLong = this.chart.deltaLongitude;
+        this.spinAnimation = this.chart.animate(
+          { property: "deltaLongitude", to: currentLong + 36000 },
+          1200000, // extremely smooth rotation
+          am4core.ease.linear
+        );
       },
 
       selectCountry(country, isInit = false) {
         if (this.activeCountry === country && !isInit) return;
         this.activeCountry = country;
 
-        // Set active class on desktop pins
-        this.pins.forEach(pin => {
-          if (pin.getAttribute('data-country') === country) {
-            pin.classList.add('active');
+        const targetIso = countryToIso[country];
+
+        if (!isInit) {
+          this.isSpinning = false;
+          
+          if (this.spinAnimation) {
+            this.spinAnimation.stop();
+          }
+
+          if (this.resumeBtn) {
+            this.resumeBtn.style.display = 'flex';
+          }
+
+          // Rotate globe to center country smoothly
+          const coord = countryCoords[targetIso];
+          if (coord) {
+            let currentLong = this.chart.deltaLongitude;
+            let targetLong = -coord.lon;
+
+            // Shortest path interpolation
+            let diff = (targetLong - currentLong) % 360;
+            if (diff > 180) diff -= 360;
+            if (diff < -180) diff += 360;
+
+            this.chart.animate([
+              { property: "deltaLongitude", to: currentLong + diff },
+              { property: "deltaLatitude", to: -coord.lat }
+            ], 1200, am4core.ease.cubicOut);
+          }
+        }
+
+        // Highlight country boundary (polygon) & marker pin
+        this.polygonSeries.mapPolygons.each((polygon) => {
+          if (polygon.dataItem.dataContext && polygon.dataItem.dataContext.id === targetIso) {
+            polygon.isActive = true;
           } else {
-            pin.classList.remove('active');
+            polygon.isActive = false;
           }
         });
+
+        this.imageSeries.mapImages.each((image) => {
+          if (image.dataItem.dataContext && image.dataItem.dataContext.id === country) {
+            image.isActive = true;
+          } else {
+            image.isActive = false;
+          }
+        });
+
+        // Draw flight connection path
+        this.updateFlightPath(targetIso);
 
         // Set active class on mobile tabs
         this.mobileBtns.forEach(btn => {
@@ -549,40 +772,37 @@
           }
         });
 
-        // Handle SVG flight paths & dot animations
-        this.routes.forEach(route => {
-          const routeId = route.getAttribute('id');
-          if (routeId === `route-${country}`) {
-            route.classList.add('active');
-          } else {
-            route.classList.remove('active');
-          }
-        });
-
-        this.dots.forEach(dot => {
-          const dotId = dot.getAttribute('id');
-          if (dotId === `dot-${country}`) {
-            dot.classList.add('active');
-          } else {
-            dot.classList.remove('active');
-          }
-        });
-
-        // Shift/rotate globe grid coordinates
-        if (this.globeInner) {
-          // Remove previous view classes
-          this.globeInner.className = "globe-inner-wrapper";
-          const viewClass = globalData[country].viewClass;
-          if (viewClass) {
-            this.globeInner.classList.add(viewClass);
-          }
-        }
-
         // Set first service of this country as active
         const servicesKeys = Object.keys(globalData[country].services);
         this.activeSvc = servicesKeys[0];
 
         this.updatePanel();
+      },
+
+      updateFlightPath(targetIso) {
+        if (targetIso === "IN" || !countryCoords[targetIso]) {
+          this.lineSeries.data = [];
+          return;
+        }
+        this.lineSeries.data = [{
+          multiGeoLine: [
+            [
+              { latitude: countryCoords.IN.lat, longitude: countryCoords.IN.lon },
+              { latitude: countryCoords[targetIso].lat, longitude: countryCoords[targetIso].lon }
+            ]
+          ]
+        }];
+      },
+
+      resumeSpinning() {
+        // Clear active selection visual highlights but keep state
+        this.polygonSeries.mapPolygons.each(p => p.isActive = false);
+        this.imageSeries.mapImages.each(img => img.isActive = false);
+        this.lineSeries.data = [];
+        
+        this.mobileBtns.forEach(btn => btn.classList.remove('active'));
+
+        this.startRotation();
       },
 
       centerMobileButton(btn) {
