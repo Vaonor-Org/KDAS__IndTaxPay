@@ -276,66 +276,167 @@ document.addEventListener('DOMContentLoaded', function() {
   const selectedServiceLabel = document.getElementById('selectedServiceLabel');
 
   const categoryServices = {
-    pan: [
-      { value: 'pan-individual', label: 'PAN Card - Individual' },
-      { value: 'pan-company', label: 'PAN Card - Company' },
-      { value: 'pan-firm', label: 'PAN Card - Firm' },
-      { value: 'pan-llp', label: 'PAN Card - LLP' },
-      { value: 'pan-trust', label: 'PAN Card - Trust' },
+    startup: [
+      { value: 'startup-proprietorship', label: 'Proprietorship' },
+      { value: 'startup-partnership', label: 'Partnership Firm' },
+      { value: 'startup-opc', label: 'One Person Company (OPC)' },
+      { value: 'startup-llp', label: 'Limited Liability Partnership (LLP)' },
+      { value: 'startup-pvt-ltd', label: 'Private Limited Company' },
+      { value: 'startup-pub-ltd', label: 'Public Limited Company' },
+      { value: 'startup-sec-8', label: 'Section 8 Company' },
+      { value: 'startup-producer-co', label: 'Producer Company' },
+      { value: 'startup-trust-reg', label: 'Trust Registration' },
+      { value: 'startup-indian-sub', label: 'Indian Subsidiary Company' }
     ],
-    itr: [
-      { value: 'it-individual', label: 'Income Tax Filing - Individual' },
-      { value: 'it-business', label: 'Income Tax Filing - Business' },
-      { value: 'it-company', label: 'Income Tax Filing - Company' },
-      { value: 'it-firm', label: 'Income Tax Filing - Firm' },
-      { value: 'it-llp', label: 'Income Tax Filing - LLP' },
-      { value: 'tds-return', label: 'TDS Return Filing' },
-      { value: 'tcs-return', label: 'TCS Return Filing' },
+    registrations: [
+      { value: 'registrations-pan-individual', label: 'PAN Card - Individual' },
+      { value: 'registrations-pan-company', label: 'PAN Card - Company' },
+      { value: 'registrations-pan-firm', label: 'PAN Card - Partnership Firm' },
+      { value: 'registrations-pan-llp', label: 'PAN Card - LLP' },
+      { value: 'registrations-pan-trust', label: 'PAN Card - Trust / AOP' },
+      { value: 'registrations-startup-india', label: 'Startup India Registration' },
+      { value: 'registrations-trade-license', label: 'Trade License' },
+      { value: 'registrations-fssai-reg', label: 'FSSAI Registration' },
+      { value: 'registrations-fssai-lic', label: 'FSSAI License' },
+      { value: 'registrations-halal-cert', label: 'Halal License & Certification' },
+      { value: 'registrations-icegate-reg', label: 'ICEGATE Registration' },
+      { value: 'registrations-iec', label: 'Import Export Code (IEC)' },
+      { value: 'registrations-lei', label: 'Legal Entity Identifier (LEI)' },
+      { value: 'registrations-iso-reg', label: 'ISO Registration' },
+      { value: 'registrations-pf-reg', label: 'PF Registration' },
+      { value: 'registrations-esi-reg', label: 'ESI Registration' },
+      { value: 'registrations-prof-tax-reg', label: 'Professional Tax Registration' },
+      { value: 'registrations-rcmc-reg', label: 'RCMC Registration' },
+      { value: 'registrations-tn-rera', label: 'TN RERA Registration' },
+      { value: 'registrations-12a-reg', label: '12A Registration' },
+      { value: 'registrations-80g-reg', label: '80G Registration' },
+      { value: 'registrations-12a-80g-reg', label: '12A & 80G Registration' },
+      { value: 'registrations-barcode-reg', label: 'Barcode Registration' },
+      { value: 'registrations-bis-reg', label: 'BIS Registration' },
+      { value: 'registrations-cert-incumbency', label: 'Certificate of Incumbency' },
+      { value: 'registrations-ngo-darpan', label: 'NGO Darpan Registration' },
+      { value: 'registrations-dsc', label: 'Digital Signature Certificate (DSC)' },
+      { value: 'registrations-shop-act', label: 'Shop Act Registration' },
+      { value: 'registrations-udyam-reg', label: 'Udyam Registration' },
+      { value: 'registrations-fire-license', label: 'Fire License' },
+      { value: 'registrations-food-testing', label: 'Food Testing' },
+      { value: 'registrations-water-testing', label: 'Water Testing' }
+    ],
+    trademark: [
+      { value: 'trademark-tm-reg', label: 'Trademark Registration' },
+      { value: 'trademark-tm-objection', label: 'Trademark Objection' },
+      { value: 'trademark-tm-certificate', label: 'Trademark Certificate' },
+      { value: 'trademark-tm-opposition', label: 'Trademark Opposition' },
+      { value: 'trademark-tm-hearing', label: 'Trademark Hearing' },
+      { value: 'trademark-tm-rectification', label: 'Trademark Rectification' },
+      { value: 'trademark-tm-renewal', label: 'Trademark Renewal' },
+      { value: 'trademark-tm-transfer', label: 'Trademark Transfer' },
+      { value: 'trademark-expedited-tm', label: 'Expedited Trademark Registration' },
+      { value: 'trademark-logo-design', label: 'Logo Designing' },
+      { value: 'trademark-design-reg', label: 'Design Registration' },
+      { value: 'trademark-design-objection', label: 'Design Objection' },
+      { value: 'trademark-copyright-reg', label: 'Copyright Registration' },
+      { value: 'trademark-copyright-objection', label: 'Copyright Objection' },
+      { value: 'trademark-patent-reg', label: 'Patent Registration' },
+      { value: 'trademark-tm-protection', label: 'Trademark Protection' }
     ],
     gst: [
-      { value: 'gst-reg', label: 'GST Registration' },
-      { value: 'gst-filing', label: 'GST Filing (General)' },
-      { value: 'gst-gstr1', label: 'GSTR-1' },
-      { value: 'gst-gstr3b', label: 'GSTR-3B' },
-      { value: 'gst-gstr9', label: 'GSTR-9 / 9C' },
-      { value: 'gst-amendment', label: 'GST Amendment' },
-      { value: 'gst-reconciliation', label: 'GST Reconciliation' },
-      { value: 'gst-cmp08', label: 'Composition CMP-08' },
-      { value: 'gst-gstr7', label: 'GST TDS (GSTR-7)' },
+      { value: 'gst-gst-registration', label: 'GST Registration' },
+      { value: 'gst-gst-return-filing', label: 'GST Return Filing' },
+      { value: 'gst-gst-lut', label: 'GST LUT Form' },
+      { value: 'gst-gst-notice', label: 'GST Notice Response' },
+      { value: 'gst-gst-annual', label: 'GST Annual Return (GSTR-9)' },
+      { value: 'gst-gst-foreign', label: 'GST Registration for Foreigners' },
+      { value: 'gst-gst-amend', label: 'GST Amendment' },
+      { value: 'gst-gst-revocation', label: 'GST Revocation' },
+      { value: 'gst-gst-final', label: 'GSTR-10 Final Return' },
+      { value: 'gst-gst-virtual', label: 'Virtual Office + GSTIN' }
     ],
-    msme: [
-      { value: 'msme-udyam', label: 'Udyam (MSME) Registration' },
-      { value: 'business', label: 'Startup / Business Registration' },
+    incomeTax: [
+      { value: 'incomeTax-it-efiling', label: 'Income Tax E-Filing' },
+      { value: 'incomeTax-it-biz-filing', label: 'Business Tax Filing' },
+      { value: 'incomeTax-it-firm-llp-itr', label: 'Partnership Firm / LLP ITR' },
+      { value: 'incomeTax-it-company-itr', label: 'Company ITR Filing' },
+      { value: 'incomeTax-it-trust-ngo', label: 'Trust / NGO Tax Filing' },
+      { value: 'incomeTax-it-15ca-cb', label: '15CA – 15CB Filing' },
+      { value: 'incomeTax-it-tan-reg', label: 'TAN Registration' },
+      { value: 'incomeTax-it-tds-filing', label: 'TDS Return Filing' },
+      { value: 'incomeTax-it-notice', label: 'Income Tax Notice Response' },
+      { value: 'incomeTax-it-u-return', label: 'Revised ITR Return (ITR-U)' }
     ],
-    tds: [
-      { value: 'tds-return', label: 'TDS Return Filing' },
-      { value: 'tcs-return', label: 'TCS Return Filing' },
+    compliance: [
+      { value: 'compliance-comp-annual', label: 'Company Annual Compliance' },
+      { value: 'compliance-comp-llp', label: 'LLP Compliance' },
+      { value: 'compliance-comp-opc', label: 'OPC Compliance' },
+      { value: 'compliance-comp-name-change', label: 'Company Name Change' },
+      { value: 'compliance-comp-office-change', label: 'Registered Office Change' },
+      { value: 'compliance-comp-din-ekyc', label: 'DIN eKYC Filing' },
+      { value: 'compliance-comp-din-reactivate', label: 'DIN Reactivation' },
+      { value: 'compliance-comp-director-change', label: 'Director Change' },
+      { value: 'compliance-comp-remove-director', label: 'Remove Director' },
+      { value: 'compliance-comp-adt1', label: 'ADT-1 Filing' },
+      { value: 'compliance-comp-dpt3', label: 'DPT-3 Filing' },
+      { value: 'compliance-comp-llp-f11', label: 'LLP Form 11 Filing' },
+      { value: 'compliance-comp-dormant', label: 'Dormant Status Filing' },
+      { value: 'compliance-comp-moa', label: 'MOA Amendment' },
+      { value: 'compliance-comp-aoa', label: 'AOA Amendment' },
+      { value: 'compliance-comp-cap-increase', label: 'Authorized Capital Increase' },
+      { value: 'compliance-comp-share-transfer', label: 'Share Transfer' },
+      { value: 'compliance-comp-demat', label: 'Demat of Shares' },
+      { value: 'compliance-comp-wind-llp', label: 'Winding Up – LLP' },
+      { value: 'compliance-comp-wind-co', label: 'Winding Up – Company' },
+      { value: 'compliance-comp-commencement', label: 'Commencement (INC-20A)' },
+      { value: 'compliance-comp-cfss', label: 'CFSS Scheme' }
     ],
-    epf: [
-      { value: 'epf-registration', label: 'EPF Registration' },
-      { value: 'epf-monthly', label: 'EPF Monthly Filing' },
-      { value: 'esi-registration', label: 'ESI Registration' },
-      { value: 'esi-monthly', label: 'ESI Monthly Filing' },
+    businessSupport: [
+      { value: 'businessSupport-biz-plan', label: 'Business Plan' },
+      { value: 'businessSupport-biz-payroll', label: 'HR & Payroll' },
+      { value: 'businessSupport-biz-bookkeeping', label: 'Bookkeeping' },
+      { value: 'businessSupport-biz-ca', label: 'CA Support' },
+      { value: 'businessSupport-biz-pf', label: 'PF Return Filing' },
+      { value: 'businessSupport-biz-esi', label: 'ESI Return Filing' },
+      { value: 'businessSupport-biz-pt', label: 'Professional Tax Return Filing' },
+      { value: 'businessSupport-biz-partnership', label: 'Partnership Compliance' },
+      { value: 'businessSupport-biz-proprietorship', label: 'Proprietorship Compliance' },
+      { value: 'businessSupport-biz-fssai-renewal', label: 'FSSAI Renewal' },
+      { value: 'businessSupport-biz-fssai-return', label: 'FSSAI Return Filing' }
     ],
-    company: [
-      { value: 'pvt-ltd-registration', label: 'Private Limited Company Registration' },
-      { value: 'llp-registration', label: 'LLP Registration' },
-      { value: 'roc-annual-filing', label: 'ROC Annual Filing' },
-      { value: 'mca-compliance-filing', label: 'MCA Compliance Filing' },
-      { value: 'director-kyc', label: 'Director KYC (DIR-3 KYC)' },
-      { value: 'company-amendments', label: 'Company Amendments' },
+    globalBusiness: [
+      { value: 'globalBusiness-global-uae', label: 'UAE Company Registration' },
+      { value: 'globalBusiness-global-usa', label: 'USA Company Registration' },
+      { value: 'globalBusiness-global-singapore', label: 'Singapore Company Registration' },
+      { value: 'globalBusiness-global-uk', label: 'UK Company Registration' },
+      { value: 'globalBusiness-global-usa-tm', label: 'USA Trademark Registration' },
+      { value: 'globalBusiness-global-fdi', label: 'FDI Filing' },
+      { value: 'globalBusiness-global-odi', label: 'ODI Filing' },
+      { value: 'globalBusiness-global-fla', label: 'FLA Return Filing' }
     ],
-    accounting: [
-      { value: 'accounting-services', label: 'Accounting Services' },
-      { value: 'bookkeeping-services', label: 'Bookkeeping Services' },
-      { value: 'bank-reconciliation', label: 'Bank Reconciliation' },
-      { value: 'compliance-management', label: 'Compliance Management' },
-      { value: 'financial-statements', label: 'Financial Statement Preparation' },
-    ],
+    audit: [
+      { value: 'audit-audit-assurance', label: 'Audit & Assurance Services' }
+    ]
   };
 
   function serviceTypeFromValue(val) {
     if (!val) return null;
+    const parts = val.split('-');
+    const category = parts[0];
+    
+    // Map to adaptive form sections in apply.html: pan, itr, gst, msme, company, accounting
+    if (category === 'startup') return 'company';
+    if (category === 'registrations') {
+      if (val.includes('pan')) return 'pan';
+      if (val.includes('udyam') || val.includes('startup-india')) return 'msme';
+      return 'company';
+    }
+    if (category === 'trademark') return 'company';
+    if (category === 'gst') return 'gst';
+    if (category === 'incomeTax') return 'itr';
+    if (category === 'compliance') return 'company';
+    if (category === 'businessSupport') return 'accounting';
+    if (category === 'globalBusiness') return 'company';
+    if (category === 'audit') return 'accounting';
+
+    // Support legacy values in case they are used or requested
     if (val.startsWith('pan-')) return 'pan';
     if (val.startsWith('it-') || val === 'tds-return' || val === 'tcs-return') return 'itr';
     if (val.startsWith('gst')) return 'gst';
@@ -346,6 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (val.includes('accounting') || val.includes('bookkeeping') ||
         val.includes('reconciliation') || val.includes('compliance') ||
         val.includes('financial')) return 'accounting';
+
     return null;
   }
 

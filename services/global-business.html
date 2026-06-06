@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Global Business & FEMA — 8 Services | IndTaxPay</title>
+  <meta name="description" content="UAE, USA, Singapore, UK company registration, FDI/ODI filing, FLA return, USA trademark — international business services by K.Das & Associates." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/services.css" />
+  <style>
+    /* Global Expansion Network custom styles */
+    .theme-global .dna-left {
+      background: radial-gradient(circle at center, rgba(10, 61, 145, 0.2) 0%, rgba(3, 10, 24, 0.95) 85%),
+                  linear-gradient(rgba(59, 130, 246, 0.02) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(59, 130, 246, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
+      border-color: rgba(59, 130, 246, 0.25);
+      position: relative;
+      height: 620px;
+      overflow: hidden;
+    }
+    html[data-theme="dark"] .theme-global .dna-left {
+      background: radial-gradient(circle at center, rgba(10, 61, 145, 0.25) 0%, rgba(2, 6, 18, 1) 85%),
+                  linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    .globe-inner-wrapper {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .globe-inner-wrapper.view-usa { transform: rotateX(15deg) rotateY(-22deg) scale(1.04); }
+    .globe-inner-wrapper.view-uk { transform: rotateX(18deg) rotateY(-12deg) scale(1.04); }
+    .globe-inner-wrapper.view-singapore { transform: rotateX(-12deg) rotateY(15deg) scale(1.04); }
+    .globe-inner-wrapper.view-uae { transform: rotateX(5deg) rotateY(-15deg) scale(1.04); }
+    .globe-inner-wrapper.view-india { transform: rotateX(0deg) rotateY(0deg) scale(1); }
+
+    .globe-grid {
+      transform-origin: 250px 310px;
+      animation: rotateGrid 85s linear infinite;
+    }
+    @keyframes rotateGrid {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Interactive Pins */
+    .globe-pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 5;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      outline: none;
+    }
+    .pin-dot {
+      width: 10px;
+      height: 10px;
+      background: #3b82f6;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+      transition: all 0.3s ease;
+    }
+    .globe-pin.active .pin-dot {
+      background: #ff9933;
+      box-shadow: 0 0 12px #ff9933;
+    }
+    .pin-pulse {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.4);
+      animation: pinGlow 2.5s ease-out infinite;
+      pointer-events: none;
+      transform: translate(0px, 0px);
+    }
+    .globe-pin.active .pin-pulse {
+      background: rgba(255, 153, 51, 0.4);
+    }
+    @keyframes pinGlow {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(3.5); opacity: 0; }
+    }
+    .pin-label {
+      margin-top: 6px;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.7);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      transition: all 0.3s ease;
+    }
+    .globe-pin.active .pin-label {
+      color: #ff9933;
+      font-size: 0.7rem;
+    }
+    .globe-pin:hover .pin-dot {
+      transform: scale(1.3);
+    }
+    
+    /* Connection paths */
+    .globe-route {
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    .globe-route.active {
+      stroke-dashoffset: 0;
+      filter: drop-shadow(0 0 6px var(--sp-saffron));
+    }
+    .globe-dot {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .globe-dot.active {
+      opacity: 1;
+    }
+
+    /* Right Side Panel Services buttons */
+    .global-services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .global-service-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid rgba(0,0,0,0.04);
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-text-primary, #333);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    html[data-theme="dark"] .global-service-btn {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.04);
+      color: #ddd;
+    }
+    .global-service-btn:hover, .global-service-btn.active {
+      background: rgba(59, 130, 246, 0.05);
+      border-color: rgba(59, 130, 246, 0.12);
+      color: #3b82f6;
+    }
+    html[data-theme="dark"] .global-service-btn:hover, html[data-theme="dark"] .global-service-btn.active {
+      background: rgba(59, 130, 246, 0.08);
+      border-color: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+    }
+    .global-service-btn.active {
+      box-shadow: inset 4px 0 0 var(--sp-saffron);
+    }
+  </style>
+</head>
+<body data-base="../" data-active-nav="services" class="theme-global">
+  <a class="skipLink" href="#main">Skip to content</a>
+  <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+  <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+  <div class="cursorDot" aria-hidden="true"></div>
+  <div class="cursorRing" aria-hidden="true"></div>
+  <div id="navbarSlot"></div>
+  <main id="main">
+
+    <section class="sp-hero sp-hero--dark" style="background-image: url('../assets/services_assets/gloabl_hero.png');" aria-label="Global Business hero">
+      <div class="sp-hero__bg"></div>
+      <div class="sp-hero__grid" aria-hidden="true"></div>
+      <div class="sp-hero__inner">
+        <div class="sp-hero__content">
+          <div class="sp-hero__kicker sp-reveal"><span class="sp-hero__dot"></span>Global Expansion · 07</div>
+          <h1 class="sp-hero__h1 sp-reveal sp-reveal--d1">Take your business<br><span class="sp-hl-s">beyond borders.</span></h1>
+          <p class="sp-hero__sub sp-reveal sp-reveal--d2">Register companies in UAE, USA, Singapore and UK. Manage FDI/ODI, FLA returns, and FEMA compliance. CA-guided international business setup for Indian and foreign companies.</p>
+          <div class="sp-hero__stats sp-reveal sp-reveal--d3">
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">4</span><span class="sp-hero__stat-lbl">Countries</span></div>
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">FEMA</span><span class="sp-hero__stat-lbl">Compliant</span></div>
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">CA</span><span class="sp-hero__stat-lbl">Guided</span></div>
+          </div>
+          <div class="sp-hero__cta sp-reveal sp-reveal--d4">
+            <a class="sp-btn-primary" href="../apply.html?service=usa_reg" id="global-apply-btn">Expand Globally →</a>
+            <button class="sp-btn-ghost" type="button" data-open-chat>Talk to Expert</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="sp-stripe" aria-hidden="true"></div>
+
+    <section class="sp-section" id="global-explorer-section" aria-label="Global Expansion Network">
+      <div class="sp-container">
+        <div class="sp-reveal">
+          <div class="sp-label">Interactive Explorer</div>
+          <h2 class="sp-h2">Global <span>Expansion Network</span></h2>
+          <p class="sp-body">Expand beyond borders smoothly. Select a country or FEMA compliance hub node on the globe to trace connection links and explore business setup specifications.</p>
+        </div>
+
+        <div class="dna-explorer sp-reveal sp-reveal--d2" id="globalExplorer">
+          <!-- LEFT PANEL: Interactive Globe -->
+          <div class="dna-left theme-global" id="globeLeft">
+            <div class="os-container" style="width: 500px; height: 100%; margin: 0 auto; position: relative;">
+              <!-- Static Outer Globe Glow & Sphere Background -->
+              <svg class="os-svg" viewBox="0 0 500 620" preserveAspectRatio="none">
+                <defs>
+                  <radialGradient id="globeGrad" cx="35%" cy="35%" r="60%">
+                    <stop offset="0%" stop-color="#0d1b32" />
+                    <stop offset="70%" stop-color="#040b17" />
+                    <stop offset="100%" stop-color="#01040a" />
+                  </radialGradient>
+                  <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.22" />
+                    <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+                  </radialGradient>
+                </defs>
+                <circle cx="250" cy="310" r="170" fill="url(#glowGrad)" />
+                <circle cx="250" cy="310" r="150" fill="url(#globeGrad)" stroke="rgba(59, 130, 246, 0.2)" stroke-width="2" />
+              </svg>
+
+              <!-- Rotating / Tilting Inner Globe Grid and Pins -->
+              <div class="globe-inner-wrapper" id="globeInner" style="position: absolute; inset: 0;">
+                <svg class="os-svg" viewBox="0 0 500 620" preserveAspectRatio="none">
+                  <!-- Latitude and Longitude Grid Lines -->
+                  <g class="globe-grid">
+                    <!-- Latitude Lines -->
+                    <path d="M 100 310 L 400 310" fill="none" stroke="rgba(59, 130, 246, 0.1)" stroke-width="1.2" />
+                    <path d="M 106 260 Q 250 290 394 260" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
+                    <path d="M 106 360 Q 250 330 394 360" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
+                    <path d="M 125 210 Q 250 250 375 210" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
+                    <path d="M 125 410 Q 250 370 375 410" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
+                    <path d="M 160 160 Q 250 200 340 160" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
+                    <path d="M 160 460 Q 250 420 340 460" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
+                    
+                    <!-- Longitude Lines -->
+                    <ellipse cx="250" cy="310" rx="0" ry="150" fill="none" stroke="rgba(59, 130, 246, 0.1)" stroke-width="1.2" />
+                    <ellipse cx="250" cy="310" rx="40" ry="150" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
+                    <ellipse cx="250" cy="310" rx="80" ry="150" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
+                    <ellipse cx="250" cy="310" rx="120" ry="150" fill="none" stroke="rgba(59, 130, 246, 0.08)" stroke-width="1" />
+                  </g>
+                  
+                  <!-- Connection Routes (Dash path and animated glowing dots) -->
+                  <path id="route-usa" class="globe-route" d="M 250 310 Q 170 230 130 220" fill="none" stroke="#ff9933" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" />
+                  <path id="route-uk" class="globe-route" d="M 250 310 Q 200 220 190 190" fill="none" stroke="#ff9933" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" />
+                  <path id="route-singapore" class="globe-route" d="M 250 310 Q 290 340 320 350" fill="none" stroke="#ff9933" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" />
+                  <path id="route-uae" class="globe-route" d="M 250 310 Q 220 280 210 270" fill="none" stroke="#ff9933" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" />
+                  
+                  <!-- Animated Dots -->
+                  <circle id="dot-usa" class="globe-dot" r="4.5" fill="#ff9933">
+                    <animateMotion dur="2.2s" repeatCount="indefinite" path="M 250 310 Q 170 230 130 220" />
+                  </circle>
+                  <circle id="dot-uk" class="globe-dot" r="4.5" fill="#ff9933">
+                    <animateMotion dur="2.0s" repeatCount="indefinite" path="M 250 310 Q 200 220 190 190" />
+                  </circle>
+                  <circle id="dot-singapore" class="globe-dot" r="4.5" fill="#ff9933">
+                    <animateMotion dur="1.8s" repeatCount="indefinite" path="M 250 310 Q 290 340 320 350" />
+                  </circle>
+                  <circle id="dot-uae" class="globe-dot" r="4.5" fill="#ff9933">
+                    <animateMotion dur="1.6s" repeatCount="indefinite" path="M 250 310 Q 220 280 210 270" />
+                  </circle>
+                </svg>
+                
+                <!-- Country Pins -->
+                <button type="button" class="globe-pin active" data-country="india" style="top: 310px; left: 250px;" aria-label="India Hub">
+                  <span class="pin-pulse"></span>
+                  <span class="pin-dot"></span>
+                  <span class="pin-label">INDIA</span>
+                </button>
+                <button type="button" class="globe-pin" data-country="usa" style="top: 220px; left: 130px;" aria-label="United States">
+                  <span class="pin-pulse"></span>
+                  <span class="pin-dot"></span>
+                  <span class="pin-label">USA</span>
+                </button>
+                <button type="button" class="globe-pin" data-country="uk" style="top: 190px; left: 190px;" aria-label="United Kingdom">
+                  <span class="pin-pulse"></span>
+                  <span class="pin-dot"></span>
+                  <span class="pin-label">UK</span>
+                </button>
+                <button type="button" class="globe-pin" data-country="singapore" style="top: 350px; left: 320px;" aria-label="Singapore">
+                  <span class="pin-pulse"></span>
+                  <span class="pin-dot"></span>
+                  <span class="pin-label">SINGAPORE</span>
+                </button>
+                <button type="button" class="globe-pin" data-country="uae" style="top: 270px; left: 210px;" aria-label="United Arab Emirates">
+                  <span class="pin-pulse"></span>
+                  <span class="pin-dot"></span>
+                  <span class="pin-label">UAE</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile categories swipe list -->
+          <div class="dna-mobile-nav">
+            <div class="dna-mobile-nav__scroll">
+              <button class="dna-mobile-btn active" data-country="india">India (FEMA)</button>
+              <button class="dna-mobile-btn" data-country="usa">United States</button>
+              <button class="dna-mobile-btn" data-country="uk">United Kingdom</button>
+              <button class="dna-mobile-btn" data-country="singapore">Singapore</button>
+              <button class="dna-mobile-btn" data-country="uae">United Arab Emirates</button>
+            </div>
+          </div>
+
+          <!-- RIGHT PANEL: Dynamic Details -->
+          <div class="dna-right" id="globePanel">
+            <!-- Content dynamically populated via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sp-stripe" aria-hidden="true"></div>
+
+    <section class="sp-section sp-section--alt" aria-label="Benefits">
+      <div class="sp-container">
+        <div class="sp-reveal"><div class="sp-label">Why Expert Guidance?</div><h2 class="sp-h2">Cross-border compliance<br><span>is non-negotiable</span></h2></div>
+        <div class="sp-benefits__grid">
+          <div class="sp-benefit sp-reveal sp-reveal--d1"><div class="sp-benefit__icon">⚖️</div><div class="sp-benefit__title">FEMA Compliance</div><div class="sp-benefit__desc">FEMA violations attract up to 3× the transaction value as penalty — expert CA guidance prevents costly mistakes.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d2"><div class="sp-benefit__icon">💰</div><div class="sp-benefit__title">Tax Efficiency</div><div class="sp-benefit__desc">Right jurisdiction and structure can significantly reduce global effective tax rate while staying fully compliant.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d3"><div class="sp-benefit__icon">🚀</div><div class="sp-benefit__title">Fast Market Entry</div><div class="sp-benefit__desc">We handle entity selection, registration, and initial compliance so you enter new markets quickly and correctly.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d4"><div class="sp-benefit__icon">🏦</div><div class="sp-benefit__title">FDI Reporting</div><div class="sp-benefit__desc">FC-GPR, FC-TRS, and FLA filings handled accurately and on time — keeping your company RBI-compliant.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d5"><div class="sp-benefit__icon">🛡️</div><div class="sp-benefit__title">Brand Protection</div><div class="sp-benefit__desc">Register your trademark in target markets before competitors — protecting your brand globally.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d1"><div class="sp-benefit__icon">🌍</div><div class="sp-benefit__title">Global Credibility</div><div class="sp-benefit__desc">A registered entity in the USA, UK, or Singapore signals global reach and builds trust with international clients.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section" aria-label="Process">
+      <div class="sp-container">
+        <div class="sp-reveal"><div class="sp-label">The Process</div><h2 class="sp-h2">Global business<br><span>setup workflow</span></h2></div>
+        <div class="sp-process__flow sp-reveal sp-reveal--d2">
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">💬</span></div><div class="sp-proc-step__label">Consultation</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">🗺️</span></div><div class="sp-proc-step__label">Structure Plan</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">📁</span></div><div class="sp-proc-step__label">Registration</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">🏦</span></div><div class="sp-proc-step__label">Banking &amp; Tax</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">✅</span></div><div class="sp-proc-step__label">Operational</div></div>
+        </div>
+        <div class="sp-learn-more sp-reveal sp-reveal--d3">
+          <p>See the complete global business setup workflow and estimated timelines for each country.</p>
+          <a class="sp-btn-primary" href="../how-it-works/index.html" id="global-learn-more">Learn More →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-cta" aria-label="Apply">
+      <div class="sp-cta__inner sp-reveal">
+        <div class="sp-cta__label">Go Global</div>
+        <h2 class="sp-cta__h">Ready to expand<br><span>across borders?</span></h2>
+        <p class="sp-cta__sub">Our CA team handles every regulatory, compliance, and tax requirement — so your international expansion is fast, legal, and efficient.</p>
+        <div class="sp-cta__btns">
+          <a class="sp-btn-primary" href="../apply.html?service=usa_reg" id="global-cta-btn">Apply Now →</a>
+          <button class="sp-btn-ghost" type="button" data-open-chat>Talk to a CA</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="footerSlot"></div>
+  <script defer src="../assets/js/site.js"></script>
+  <script>
+    (function(){
+      var io = new IntersectionObserver(function(e){
+        e.forEach(function(x){
+          if(x.isIntersecting){
+            x.target.classList.add('is-visible');
+            io.unobserve(x.target);
+          }
+        });
+      },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+      document.querySelectorAll('.sp-reveal').forEach(function(el){
+        io.observe(el);
+      });
+    })();
+  </script>
+  <script>
+    // Global Expansion Network Data
+    const globalData = {
+      india: {
+        name: "India (FEMA Inbound)",
+        desc: "Inbound foreign investments, compliance mandates for outstanding assets/liabilities, and outbound direct investment declarations under RBI/FEMA frameworks.",
+        viewClass: "view-india",
+        services: {
+          fdi_filing: {
+            name: "FDI Filing",
+            overview: "Foreign Direct Investment compliance — FC-GPR filing with RBI after receiving foreign investment, FC-TRS for secondary share transfers, and FIRMS portal reporting. Full FEMA 20(R) compliance.",
+            who: "Indian companies receiving foreign capital or NRI investment",
+            timeline: "30 Days from capital receipt",
+            docs: ["Foreign Inward Remittance Certificate (FIRC)", "KYC report from the remitter's foreign bank", "Board resolution for allotment of shares", "Valuation certificate by a practicing Chartered Accountant"],
+            benefits: ["Ensures 100% RBI & FEMA statutory compliance", "Avoids heavy compounding penalties on late reporting", "Facilitates seamless future repatriation of funds"]
+          },
+          odi_filing: {
+            name: "ODI Filing",
+            overview: "Overseas Direct Investment filings under FEMA for Indian entities investing in foreign companies or JV setups. Includes Form ODI submission, annual performance reports, and disinvestment reporting.",
+            who: "Indian companies establishing JV or Wholly Owned Subsidiaries abroad",
+            timeline: "30 Days from remittance",
+            docs: ["Statutory auditor certificate", "Board resolution authorizing overseas investment", "Details of overseas JV / WOS entity", "Net worth certificate of Indian investor entity"],
+            benefits: ["Enables lawful outbound capital investment", "Maintains clean record with RBI and ED", "Legitimizes overseas asset ownership structure"]
+          },
+          fla_filing: {
+            name: "FLA Return Filing",
+            overview: "Annual Foreign Liabilities and Assets return filing with RBI — mandatory for Indian companies with FDI or overseas investments (ODI). Due by July 15 every year on the RBI FLAIR portal.",
+            who: "Indian entities with outstanding FDI or ODI at financial year-end",
+            timeline: "Due by July 15 annually",
+            docs: ["Audited financial statements for the fiscal year", "Details of FDI / ODI investments", "Director declaration on foreign holdings"],
+            benefits: ["Meets annual RBI statutory reporting mandates", "Prevents regulatory notices & penalties on FLAIR", "Validates overseas asset/liability records"]
+          }
+        }
+      },
+      usa: {
+        name: "United States (USA)",
+        desc: "Fast-track US company formation and trademark protection to establish your brand, set up US payment gateways, and raise venture capital.",
+        viewClass: "view-usa",
+        services: {
+          usa_reg: {
+            name: "USA Company Registration",
+            overview: "Incorporate an LLC or C-Corp in Delaware or Wyoming — the most popular US business structures for international founders. Includes EIN (tax ID), registered agent, and bank setup guidance.",
+            who: "Founders raising US venture capital or targeting US market",
+            timeline: "5–10 Days",
+            docs: ["Proposed company names (3 choices)", "Passport copy of directors/shareholders", "Brief business activity description", "US registered agent address (provided by us)"],
+            benefits: ["Access to Stripe, US bank accounts, and US payment gateways", "Highly favored structure for global venture capital", "No US physical presence required to operate"]
+          },
+          usa_tm: {
+            name: "USA Trademark Registration",
+            overview: "File your trademark application with the USPTO (US Patent and Trademark Office) to protect your brand in the American market. Includes TEAS application, office action response, and tracking.",
+            who: "Brands selling on Amazon US or targeting US consumers",
+            timeline: "8–12 Months",
+            docs: ["Logo image or word mark text", "Proof of use in US commerce (specimen/website link)", "Date of first use of the brand in commerce", "Applicant entity / personal address details"],
+            benefits: ["Legal monopoly over your brand name/logo in the United States", "Enables Amazon Brand Registry for protection against listing hijacks", "Prevents competitors from using confusingly similar marks"]
+          }
+        }
+      },
+      uk: {
+        name: "United Kingdom (UK)",
+        desc: "Register a Private Limited Company (Ltd) with UK Companies House. The fastest and most cost-effective European business setup for global entrepreneurs.",
+        viewClass: "view-uk",
+        services: {
+          uk_reg: {
+            name: "UK Company Registration",
+            overview: "Register a Private Limited Company (Ltd) with Companies House in the United Kingdom. Includes memorandum, articles, director/shareholder setup, and registered address.",
+            who: "E-commerce sellers, consultants, and European exporters",
+            timeline: "1–2 Days",
+            docs: ["Proposed UK company name", "Passport details of directors", "Registered office address (provided by us)", "Details of shareholders & share allocation"],
+            benefits: ["Fastest international company incorporation process", "Low cost of registration and maintenance", "Direct access to UK and European payment portals"]
+          }
+        }
+      },
+      singapore: {
+        name: "Singapore (SG)",
+        desc: "Incorporate in Singapore, Asia's premier business-friendly financial hub. Offers excellent tax incentives, nominee director support, and world-class IP laws.",
+        viewClass: "view-singapore",
+        services: {
+          singapore_reg: {
+            name: "Singapore Company Registration",
+            overview: "Incorporate a Private Limited Company (Pte. Ltd.) in Singapore — Asia's most business-friendly jurisdiction. Includes ACRA registration, nominee director, and corporate secretary.",
+            who: "SaaS founders, tech startups, and global trading companies",
+            timeline: "3–5 Days",
+            docs: ["Passport copy of directors & shareholders", "Foreign address proof of directors", "Nominee director agreement (provided by us)", "Company constitution documents"],
+            benefits: ["Extremely low corporate tax rates with new setup exemptions", "Ease of raising VC capital in Southeast Asia", "Stellar intellectual property protection laws"]
+          }
+        }
+      },
+      uae: {
+        name: "United Arab Emirates (UAE)",
+        desc: "Set up Mainland, Free Zone, or Offshore companies in Dubai and the wider UAE. Maximize profits with 100% ownership and highly competitive corporate tax exemptions.",
+        viewClass: "view-uae",
+        services: {
+          uae_reg: {
+            name: "UAE Company Registration",
+            overview: "Incorporate a Mainland, Free Zone, or Offshore company in the UAE. We handle MoA drafting, trade name reservation, initial approval, and bank account assistance for 0% corporate tax.",
+            who: "Founders seeking Middle East hub / zero-tax setup",
+            timeline: "7–15 Days",
+            docs: ["Passport copy of all shareholders", "Specimen signatures of directors", "Proposed business activity details", "Proof of address of shareholders"],
+            benefits: ["0% personal income tax and highly competitive corporate tax", "100% foreign company ownership in Free Zones", "Strategic geographical position for global trade"]
+          }
+        }
+      }
+    };
+
+    const globalExplorer = {
+      activeCountry: 'india',
+      activeSvc: 'fdi_filing',
+
+      init() {
+        this.container = document.getElementById('globalExplorer');
+        if (!this.container) return;
+
+        this.globeInner = document.getElementById('globeInner');
+        this.panel = document.getElementById('globePanel');
+        this.pins = this.container.querySelectorAll('.globe-pin');
+        this.mobileBtns = this.container.querySelectorAll('.dna-mobile-btn');
+        this.mobileScroll = this.container.querySelector('.dna-mobile-nav__scroll');
+        this.routes = this.container.querySelectorAll('.globe-route');
+        this.dots = this.container.querySelectorAll('.globe-dot');
+
+        // Pin click listeners (desktop)
+        this.pins.forEach(pin => {
+          pin.addEventListener('click', () => {
+            const country = pin.getAttribute('data-country');
+            this.selectCountry(country);
+          });
+        });
+
+        // Mobile buttons
+        this.mobileBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const country = btn.getAttribute('data-country');
+            this.selectCountry(country);
+            this.centerMobileButton(btn);
+          });
+        });
+
+        // Init
+        this.selectCountry(this.activeCountry, true);
+      },
+
+      selectCountry(country, isInit = false) {
+        if (this.activeCountry === country && !isInit) return;
+        this.activeCountry = country;
+
+        // Set active class on desktop pins
+        this.pins.forEach(pin => {
+          if (pin.getAttribute('data-country') === country) {
+            pin.classList.add('active');
+          } else {
+            pin.classList.remove('active');
+          }
+        });
+
+        // Set active class on mobile tabs
+        this.mobileBtns.forEach(btn => {
+          if (btn.getAttribute('data-country') === country) {
+            btn.classList.add('active');
+            this.centerMobileButton(btn);
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        // Handle SVG flight paths & dot animations
+        this.routes.forEach(route => {
+          const routeId = route.getAttribute('id');
+          if (routeId === `route-${country}`) {
+            route.classList.add('active');
+          } else {
+            route.classList.remove('active');
+          }
+        });
+
+        this.dots.forEach(dot => {
+          const dotId = dot.getAttribute('id');
+          if (dotId === `dot-${country}`) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+
+        // Shift/rotate globe grid coordinates
+        if (this.globeInner) {
+          // Remove previous view classes
+          this.globeInner.className = "globe-inner-wrapper";
+          const viewClass = globalData[country].viewClass;
+          if (viewClass) {
+            this.globeInner.classList.add(viewClass);
+          }
+        }
+
+        // Set first service of this country as active
+        const servicesKeys = Object.keys(globalData[country].services);
+        this.activeSvc = servicesKeys[0];
+
+        this.updatePanel();
+      },
+
+      centerMobileButton(btn) {
+        if (!this.mobileScroll) return;
+        const scrollRect = this.mobileScroll.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+        const offsetLeft = btnRect.left - scrollRect.left - (scrollRect.width / 2) + (btnRect.width / 2);
+        this.mobileScroll.scrollBy({ left: offsetLeft, behavior: 'smooth' });
+      },
+
+      updatePanel() {
+        if (!this.panel) return;
+
+        // Morphing animation
+        const card = this.panel.querySelector('.dna-card');
+        if (card) {
+          card.classList.add('morphing');
+          setTimeout(() => this.renderPanelHtml(), 150);
+        } else {
+          this.renderPanelHtml();
+        }
+      },
+
+      renderPanelHtml() {
+        const countryData = globalData[this.activeCountry];
+        const activeSvcData = countryData.services[this.activeSvc];
+
+        // Services tabs
+        const servicesKeys = Object.keys(countryData.services);
+        let servicesListHtml = '';
+        if (servicesKeys.length > 1) {
+          servicesListHtml = `
+            <div class="dna-card__section-title" style="margin-top: 20px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3b82f6; margin-bottom: 12px;">Available Services</div>
+            <div class="global-services-list">
+              ${servicesKeys.map(key => {
+                const svc = countryData.services[key];
+                const activeClass = key === this.activeSvc ? 'active' : '';
+                return `<button type="button" class="global-service-btn ${activeClass}" data-svc-key="${key}">
+                  <span>${svc.name}</span>
+                  <span>→</span>
+                </button>`;
+              }).join('')}
+            </div>
+          `;
+        }
+
+        const docsHtml = activeSvcData.docs.map(doc => `<div class="dna-benefit-item" style="font-size:0.84rem; line-height: 1.4;"><strong>${doc}</strong></div>`).join('');
+        const benefitsHtml = activeSvcData.benefits.map(b => `<div class="dna-benefit-item">${b}</div>`).join('');
+
+        this.panel.innerHTML = `
+          <div class="dna-card morphing">
+            <div class="dna-card__header">
+              <span style="font-size:0.68rem; font-weight:800; color:#3b82f6; text-transform:uppercase; letter-spacing: 0.08em; display:block; margin-bottom:6px;">Region: ${countryData.name}</span>
+              <h3 class="dna-card__title">${activeSvcData.name}</h3>
+              <p class="dna-card__desc">${activeSvcData.overview}</p>
+            </div>
+            
+            <div class="dna-stats" style="margin-bottom: 20px;">
+              <div class="dna-stat">
+                <span class="dna-stat__label">Estimated SLA</span>
+                <span class="dna-stat__val" style="color:#3b82f6;">${activeSvcData.timeline}</span>
+              </div>
+              <div class="dna-stat">
+                <span class="dna-stat__label">Suitable For</span>
+                <span class="dna-stat__val">${activeSvcData.who.split(' or ')[0].split(' receiving ')[0].split(' establishing ')[0].split(' targeting ')[0].split(' selling ')[0]}</span>
+              </div>
+              <div class="dna-stat">
+                <span class="dna-stat__label">Execution</span>
+                <span class="dna-stat__val">CA Guided</span>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr; gap:20px; margin-bottom: 24px;">
+              <div>
+                <div class="dna-card__section-title" style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3b82f6; margin-bottom: 8px;">Documents Required</div>
+                <div class="dna-benefits-list" style="gap:6px; margin:0;">
+                  ${docsHtml}
+                </div>
+              </div>
+              <div>
+                <div class="dna-card__section-title" style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3b82f6; margin-bottom: 8px;">Key Benefits</div>
+                <div class="dna-benefits-list" style="gap:6px; margin:0;">
+                  ${benefitsHtml}
+                </div>
+              </div>
+            </div>
+
+            ${servicesListHtml}
+            
+            <div class="dna-card__cta" style="margin-top: 24px;">
+              <a class="sp-btn-primary" style="width: 100%; justify-content: center; background:#3b82f6; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);" href="../apply.html?service=${this.activeSvc}" id="global-apply-${this.activeSvc}">Apply for ${activeSvcData.name} →</a>
+            </div>
+          </div>
+        `;
+
+        // Bind clicks on service buttons
+        const btns = this.panel.querySelectorAll('.global-service-btn');
+        btns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            this.activeSvc = btn.getAttribute('data-svc-key');
+            this.updatePanel();
+          });
+        });
+
+        requestAnimationFrame(() => {
+          const card = this.panel.querySelector('.dna-card');
+          if (card) card.classList.remove('morphing');
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      globalExplorer.init();
+    });
+  </script>
+</body>
+</html>

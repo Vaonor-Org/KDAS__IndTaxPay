@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trademark, IP & Brand Protection — 17 Services | IndTaxPay</title>
+  <meta name="description" content="Trademark registration, objection, renewal, copyright, design, patent and full IP protection services — K.Das & Associates." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/services.css" />
+  <style>
+    /* Brand Shield Matrix unique styles */
+    .theme-trademark .dna-left {
+      background: radial-gradient(circle at center, rgba(255, 153, 51, 0.05) 0%, rgba(3, 10, 24, 0.02) 80%),
+                  radial-gradient(rgba(255, 153, 51, 0.05) 1px, transparent 1px);
+      background-size: 100% 100%, 20px 20px;
+    }
+    html[data-theme="dark"] .theme-trademark .dna-left {
+      background: radial-gradient(circle at center, rgba(255, 153, 51, 0.08) 0%, rgba(3, 10, 24, 0.2) 85%),
+                  radial-gradient(rgba(255, 153, 51, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 20px 20px;
+    }
+
+    /* Shield widget layout */
+    .shield-box {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 340px; height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .shield-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 153, 51, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .shield-ring:hover, .shield-ring.active {
+      border-color: var(--sp-saffron);
+      border-style: solid;
+      box-shadow: 0 0 24px rgba(255, 153, 51, 0.25);
+      transform: translate(-50%, -50%) rotate(0deg) scale(1.02);
+    }
+    .shield-ring--4 { width: 320px; height: 320px; z-index: 5; }
+    .shield-ring--3 { width: 240px; height: 240px; z-index: 6; }
+    .shield-ring--2 { width: 170px; height: 170px; z-index: 7; }
+    .shield-core {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e05300 0%, #9e1f00 100%);
+      border: 4px solid var(--panel, #fff);
+      box-shadow: 0 10px 30px rgba(224, 83, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 8;
+    }
+    .shield-core:hover, .shield-core.active {
+      transform: scale(1.08);
+      box-shadow: 0 15px 40px rgba(224, 83, 0, 0.6);
+    }
+    .shield-label-tag {
+      position: absolute;
+      top: -12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    
+    /* Services listing layout inside Shield panel */
+    .reg-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .reg-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid rgba(0,0,0,0.04);
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-text-primary, #333);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    html[data-theme="dark"] .reg-btn {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.04);
+      color: #ddd;
+    }
+    .reg-btn:hover, .reg-btn.active {
+      background: rgba(224, 83, 0, 0.06);
+      border-color: rgba(224, 83, 0, 0.15);
+      color: #e05300;
+    }
+    html[data-theme="dark"] .reg-btn:hover, html[data-theme="dark"] .reg-btn.active {
+      background: rgba(255, 153, 51, 0.10);
+      border-color: rgba(255, 153, 51, 0.2);
+      color: var(--sp-saffron);
+    }
+    .reg-btn.active {
+      box-shadow: inset 4px 0 0 var(--sp-saffron);
+    }
+    .reg-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--sp-saffron);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+      padding: 0;
+    }
+    .reg-back-btn:hover {
+      color: #ff6600;
+    }
+  </style>
+</head>
+<body data-base="../" data-active-nav="services" class="theme-trademark">
+  <a class="skipLink" href="#main">Skip to content</a>
+  <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+  <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+  <div class="cursorDot" aria-hidden="true"></div>
+  <div class="cursorRing" aria-hidden="true"></div>
+  <div id="navbarSlot"></div>
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="sp-hero sp-hero--saffron" style="background-image: url('../assets/services_assets/brand_hero.png');" aria-label="Brand Protection hero">
+      <div class="sp-hero__bg"></div>
+      <div class="sp-hero__grid" aria-hidden="true"></div>
+      <div class="sp-hero__inner">
+        <div class="sp-hero__content">
+          <div class="sp-hero__kicker sp-reveal"><span class="sp-hero__dot"></span>Brand Protection · 03</div>
+          <h1 class="sp-hero__h1 sp-reveal sp-reveal--d1">Your brand.<br><span class="sp-hl-s">Protected forever.</span></h1>
+          <p class="sp-hero__sub sp-reveal sp-reveal--d2">Register your trademark, copyright, design, and patent. Prevent competitors from copying your brand name, logo, invention, or creative work. Our expert team handles the complete filing and follow-up.</p>
+          <div class="sp-hero__stats sp-reveal sp-reveal--d3">
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">TM™</span><span class="sp-hero__stat-lbl">Use Immediately</span></div>
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">10yr</span><span class="sp-hero__stat-lbl">Protection</span></div>
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">17</span><span class="sp-hero__stat-lbl">IP Services</span></div>
+          </div>
+          <div class="sp-hero__cta sp-reveal sp-reveal--d4">
+            <a class="sp-btn-primary" href="../apply.html" id="tm-apply-btn">Protect My Brand →</a>
+            <button class="sp-btn-ghost" type="button" data-open-chat>Talk to Expert</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sp-stripe" aria-hidden="true"></div>
+
+    <!-- BRAND SHIELD MATRIX -->
+    <section class="sp-section sp-section--alt" id="shield-section" aria-label="Brand Shield Matrix">
+      <div class="sp-container">
+        <div class="sp-reveal">
+          <div class="sp-label">Security &amp; Intellectual Property</div>
+          <h2 class="sp-h2">Brand Shield <span>Matrix</span></h2>
+          <p class="sp-body">Protect your assets across multiple security tiers. Select a shield ring layer on the left to explore specific trademark, design, copyright, and patent filings.</p>
+        </div>
+
+        <div class="dna-explorer sp-reveal sp-reveal--d2" id="shieldExplorer">
+          <!-- LEFT PANEL: Shield Interactive Widget -->
+          <div class="dna-left" id="shieldNetwork">
+            <div class="shield-box">
+              <div class="shield-ring shield-ring--4" data-layer-id="layer4">
+                <span class="shield-label-tag">Tier 4: Enforcement &amp; Transfers</span>
+              </div>
+              <div class="shield-ring shield-ring--3" data-layer-id="layer3">
+                <span class="shield-label-tag">Tier 3: Extended IP Rights</span>
+              </div>
+              <div class="shield-ring shield-ring--2" data-layer-id="layer2">
+                <span class="shield-label-tag">Tier 2: Defensive Disputes</span>
+              </div>
+              <div class="shield-core" data-layer-id="layer1">
+                <span>Tier 1<br>Core ID</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile categories swipe list -->
+          <div class="dna-mobile-nav">
+            <div class="dna-mobile-nav__scroll">
+              <button class="dna-mobile-btn active" data-layer-id="layer1">Tier 1: Core ID</button>
+              <button class="dna-mobile-btn" data-layer-id="layer2">Tier 2: Defensive Disputes</button>
+              <button class="dna-mobile-btn" data-layer-id="layer3">Tier 3: Extended IP</button>
+              <button class="dna-mobile-btn" data-layer-id="layer4">Tier 4: Enforcement</button>
+            </div>
+          </div>
+
+          <!-- RIGHT PANEL: Dynamic Details -->
+          <div class="dna-right" id="shieldPanel">
+            <!-- Content dynamically populated via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sp-stripe" aria-hidden="true"></div>
+
+    <!-- BENEFITS -->
+    <section class="sp-section" aria-label="Benefits">
+      <div class="sp-container">
+        <div class="sp-reveal"><div class="sp-label">Why Protect Your Brand?</div><h2 class="sp-h2">What trademark registration<br><span>gives you</span></h2></div>
+        <div class="sp-benefits__grid">
+          <div class="sp-benefit sp-reveal sp-reveal--d1"><div class="sp-benefit__icon">™️</div><div class="sp-benefit__title">Use ™ Immediately</div><div class="sp-benefit__desc">You can use the ™ symbol the moment your application is filed — before registration is complete.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d2"><div class="sp-benefit__icon">🛡️</div><div class="sp-benefit__title">Legal Exclusivity</div><div class="sp-benefit__desc">Registered trademark gives you exclusive rights to use the mark — and the right to sue infringers.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d3"><div class="sp-benefit__icon">🌍</div><div class="sp-benefit__title">Export Protection</div><div class="sp-benefit__desc">Customs can block infringing imports once your trademark is registered — protecting your export markets.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d4"><div class="sp-benefit__icon">💰</div><div class="sp-benefit__title">Brand Asset Value</div><div class="sp-benefit__desc">A registered trademark is a tangible business asset that can be licensed, sold, or used as collateral.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d5"><div class="sp-benefit__icon">🔄</div><div class="sp-benefit__title">Indefinitely Renewable</div><div class="sp-benefit__desc">Trademark protection lasts 10 years and can be renewed indefinitely — your brand is protected forever.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d1"><div class="sp-benefit__icon">🚫</div><div class="sp-benefit__title">Stop Copycats</div><div class="sp-benefit__desc">Send legal cease-and-desist notices and initiate action against competitors copying your brand identity.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="sp-section sp-section--alt" aria-label="Process">
+      <div class="sp-container">
+        <div class="sp-reveal"><div class="sp-label">The Process</div><h2 class="sp-h2">Your trademark<br><span>journey</span></h2></div>
+        <div class="sp-process__flow sp-reveal sp-reveal--d2">
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">🔍</span></div><div class="sp-proc-step__label">Trademark Search</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">📝</span></div><div class="sp-proc-step__label">Application Filed</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">📋</span></div><div class="sp-proc-step__label">Examination</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">📢</span></div><div class="sp-proc-step__label">Publication</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">🏆</span></div><div class="sp-proc-step__label">Registration</div></div>
+        </div>
+        <div class="sp-learn-more sp-reveal sp-reveal--d3">
+          <p>See the complete step-by-step trademark registration workflow and typical timelines.</p>
+          <a class="sp-btn-primary" href="../how-it-works/index.html" id="tm-learn-more">Learn More →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="sp-cta" aria-label="Apply">
+      <div class="sp-cta__inner sp-reveal">
+        <div class="sp-cta__label">Protect Your IP</div>
+        <h2 class="sp-cta__h">Defend your hard work<br><span>today</span></h2>
+        <p class="sp-cta__sub">Get CA-guided IP filing support. Register trademarks, copyrights, patents, and designs.</p>
+        <div class="sp-cta__btns">
+          <a class="sp-btn-primary" href="../apply.html" id="tm-cta-btn">Protect My Brand →</a>
+          <button class="sp-btn-ghost" type="button" data-open-chat>Talk to an IP Attorney</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="footerSlot"></div>
+  <script defer src="../assets/js/site.js"></script>
+  <script>(function(){var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('is-visible');io.unobserve(x.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.sp-reveal').forEach(function(el){io.observe(el);});})();</script>
+  <script>
+    const shieldData = {
+      layer1: {
+        name: "Tier 1: Core Identity",
+        level: "Maximum Core Protection",
+        services: {
+          tm_reg: {
+            name: "Trademark Registration",
+            overview: "Register your brand name, logo, or slogan with the Indian Trademark Registry. Use ™ symbol immediately upon filing.",
+            who: "Startups, brands, manufacturers, service providers",
+            timeline: "1-2 Days (Filing), 12-18 Months (Registration)",
+            process: ["Trademark search", "Class classification", "Application filing on IP India portal", "Obtain TM receipt"],
+            benefits: ["Exclusive ownership rights", "Asset creation", "Use of ® symbol after registration"]
+          },
+          tm_cert: {
+            name: "Trademark Certificate",
+            overview: "Obtain the official certificate of registration from the Trademark Registry once the mark is approved and registered.",
+            who: "Trademark owners whose marks are registered",
+            timeline: "5-7 Days",
+            process: ["Check application status", "Verify entry in the trademark journal", "Generate and download e-certificate"],
+            benefits: ["Official legal proof of ownership", "Required for international trademark registrations", "Essential for brand infringement lawsuits"]
+          },
+          tm_renewal: {
+            name: "Trademark Renewal",
+            overview: "Renew your registered trademark every 10 years to maintain its validity and protect your brand indefinitely.",
+            who: "Owners of trademarks registered 9.5+ years ago",
+            timeline: "3-5 Days",
+            process: ["File Form TM-R", "Submit renewal fee", "Update trademark register records"],
+            benefits: ["Perpetual brand ownership", "Prevents competitor hijacking", "Avoids late fees and restoration hassles"]
+          },
+          tm_expedited: {
+            name: "Expedited Trademark Registration",
+            overview: "Fast-track your trademark application. Get examination report within 3 months compared to 12 months in standard route.",
+            who: "Launch-ready startups, time-sensitive ventures",
+            timeline: "3-6 Months",
+            process: ["File Form TM-M", "Submit expedited fee", "Immediate assignment to examiner"],
+            benefits: ["Speeds up registration timeline", "Quick resolution of objections", "Rapid brand security"]
+          }
+        }
+      },
+      layer2: {
+        name: "Tier 2: Defensive Disputes",
+        level: "Dispute & Objections Defense",
+        services: {
+          tm_objection: {
+            name: "Trademark Objection Reply",
+            overview: "Draft a comprehensive legal response to examination reports objecting to your trademark application under sections 9 or 11.",
+            who: "Applicants whose trademarks show status 'Objected'",
+            timeline: "3-5 Days",
+            process: ["Analyze objection report", "Collect user proofs (invoices/marketing)", "Draft legal submissions", "Submit reply online"],
+            benefits: ["Prevents application abandonment", "Convinces examiner of distinctiveness", "Unlocks publication in journal"]
+          },
+          tm_opposition: {
+            name: "Trademark Opposition",
+            overview: "File opposition against conflicting trademarks published in the Journal, or defend your mark against third-party oppositions.",
+            who: "Brand owners defending their brand territory from copycats",
+            timeline: "3-6 Months (Filing & Replies)",
+            process: ["Analyze conflicting published mark", "Draft Notice of Opposition (Form TM-O)", "Submit evidence of prior usage"],
+            benefits: ["Blocks copycat registrations", "Protects brand distinctiveness", "Prevents public confusion"]
+          },
+          tm_hearing: {
+            name: "Trademark Hearing",
+            overview: "Formal legal representation before the Trademark Registrar to argue your case in person for disputed objections or oppositions.",
+            who: "Applicants whose marks are set for a personal show-cause hearing",
+            timeline: "1 Day (Representation)",
+            process: ["Case law research", "Drafting written arguments", "Signatory authorization", "Attend virtual or physical hearing"],
+            benefits: ["Direct advocacy before registrar", "Final opportunity to resolve objections", "Protects application from refusal"]
+          },
+          tm_rectification: {
+            name: "Trademark Rectification",
+            overview: "Apply to edit errors, remove entries, or cancel registered trademarks that were registered invalidly or conflict with your rights.",
+            who: "Trademark owners wanting to correct certificates or remove bad-faith marks",
+            timeline: "3-6 Months",
+            process: ["Draft rectification petition", "Submit proof of error or prior right", "Sign and file TM-P application"],
+            benefits: ["Ensures registry record accuracy", "Removes blocking registered marks", "Maintains clean IP register"]
+          }
+        }
+      },
+      layer3: {
+        name: "Tier 3: Extended IP Rights",
+        level: "Invention, Design & Creative Protection",
+        services: {
+          copyright: {
+            name: "Copyright Registration",
+            overview: "Register ownership of original creative works like software, websites, books, videos, music, and corporate artworks.",
+            who: "Software startups, authors, artists, creators, designers",
+            timeline: "3-5 Days (Filing), 6-9 Months (Registration)",
+            process: ["Filing Form XIV", "Submit extracts of work (diary / source code)", "No-Objection Certificate from creators"],
+            benefits: ["Exclusive distribution rights", "Solid proof of creation date", "Protects code and creative assets from theft"]
+          },
+          copyright_objection: {
+            name: "Copyright Objection Reply",
+            overview: "Draft and submit legal replies to objections raised by the Copyright Office or third-party discrepancy letters.",
+            who: "Applicants whose copyright applications have discrepancy notices",
+            timeline: "5-7 Days",
+            process: ["Analyze discrepancy details", "Prepare custom clarifications", "Draft and submit legal response"],
+            benefits: ["Resumes copyright processing", "Clears minor discrepancies", "Avoids application rejection"]
+          },
+          patent: {
+            name: "Patent Registration",
+            overview: "Secure exclusive 20-year legal monopoly rights to manufacture and sell your unique technical invention or process.",
+            who: "Inventors, tech developers, hardware startups",
+            timeline: "15-30 Days (Filing), 3-5 Years (Grant)",
+            process: ["Prior art patent search", "Draft provisional/complete specifications", "Filing Form 1", "Request for examination"],
+            benefits: ["20-year absolute market monopoly", "High-value asset for investment & acquisition", "Can license out for royalties"]
+          },
+          design_reg: {
+            name: "Design Registration",
+            overview: "Protect the unique visual appearance, shape, configuration, or ornamentation of manufactured products.",
+            who: "Product manufacturers, consumer hardware designers, fashion houses",
+            timeline: "3-5 Days (Filing), 6-9 Months (Grant)",
+            process: ["Draft design representations (4-view photos)", "Determine class classification", "Filing Form 1 with Design Office"],
+            benefits: ["Prevents competitors copying product looks", "Creates design asset value", "Exclusive marketing aesthetics"]
+          },
+          design_objection: {
+            name: "Design Objection Reply",
+            overview: "Respond to examination reports issued by the Designs Registry objecting to novelty, class, or drawing representations.",
+            who: "Design applicants facing registry objections",
+            timeline: "5-7 Days",
+            process: ["Review examination objections", "Amend drawing representation sheets", "Submit written arguments"],
+            benefits: ["Clears objections for design grant", "Ensures correct drawing filings", "Avoids application abandonment"]
+          }
+        }
+      },
+      layer4: {
+        name: "Tier 4: Enforcement & Transfers",
+        level: "Asset Transfers & Brand Enforcement",
+        services: {
+          tm_transfer: {
+            name: "Trademark Transfer",
+            overview: "Legally transfer, sell, or assign your registered trademark rights to another individual or company.",
+            who: "Businesses undergoing mergers, acquisitions, or restructuring",
+            timeline: "10-15 Days (Filing), 6-9 Months (ROC Update)",
+            process: ["Draft Assignment Deed", "File Form TM-P with assignment details", "Submit proof of title transfer"],
+            benefits: ["Monetizes brand equity", "Smooth business transitions", "Legal updates in Registry record"]
+          },
+          tm_protection: {
+            name: "Trademark Protection & Monitoring",
+            overview: "Active legal monitoring of the trademark journal to spot and block competitors filing similar names or logos.",
+            who: "Established companies protecting active brand equity",
+            timeline: "Ongoing (Monthly alerts)",
+            process: ["Search weekly trademark journal", "Identify matching phonetic/visual filings", "Deliver monthly infringement report"],
+            benefits: ["Early copycat detection", "Allows filing oppositions before registration", "Maintains absolute brand distinctiveness"]
+          },
+          tm_notice: {
+            name: "Trademark Infringement Notice",
+            overview: "Draft and dispatch a formal legal Cease & Desist notice to any third party unauthorizedly using your trademark.",
+            who: "Trademark owners discovering active market copycats",
+            timeline: "2-3 Days",
+            process: ["Analyze infringing usage", "Draft Cease & Desist legal warning", "Dispatch via registered post and email"],
+            benefits: ["Resolves 90% of copycat issues out of court", "Establish legal precedent of enforcement", "Rapid brand protection"]
+          },
+          logo_design: {
+            name: "Logo Designing",
+            overview: "Get distinctive logos custom-designed by IP experts to pass registry examination and avoid trademark objections.",
+            who: "Startups launching new brands or rebranding",
+            timeline: "5-7 Days",
+            process: ["Brand brief consultation", "Drafting 3 distinctive concepts", "Trademark clearance check", "Final vector delivery"],
+            benefits: ["Inherent distinctiveness guarantees registry pass", "Professional brand identity", "Trademark search cleared logo"]
+          }
+        }
+      }
+    };
+
+    const shieldExplorer = {
+      activeLayer: 'layer1',
+
+      init() {
+        this.container = document.getElementById('shieldExplorer');
+        if (!this.container) return;
+
+        this.panel = document.getElementById('shieldPanel');
+        this.rings = this.container.querySelectorAll('.shield-ring, .shield-core');
+        this.mobileScroll = this.container.querySelector('.dna-mobile-nav__scroll');
+        this.mobileBtns = this.container.querySelectorAll('.dna-mobile-btn');
+
+        // Initialize display
+        this.selectLayer(this.activeLayer);
+
+        // Click listeners (desktop)
+        this.rings.forEach(ring => {
+          ring.addEventListener('click', () => {
+            const id = ring.getAttribute('data-layer-id');
+            this.selectLayer(id);
+          });
+        });
+
+        // Mobile swipe list click listeners
+        this.mobileBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-layer-id');
+            this.selectLayer(id);
+            this.centerMobileButton(btn);
+          });
+        });
+      },
+
+      selectLayer(id) {
+        this.activeLayer = id;
+
+        // Desktop active highlight
+        this.rings.forEach(ring => {
+          if (ring.getAttribute('data-layer-id') === id) {
+            ring.classList.add('active');
+            // Spin animation trigger on active ring
+            if (ring.classList.contains('shield-ring')) {
+              ring.style.transform = 'translate(-50%, -50%) rotate(45deg) scale(1.02)';
+              setTimeout(() => {
+                ring.style.transform = '';
+              }, 600);
+            }
+          } else {
+            ring.classList.remove('active');
+            if (ring.classList.contains('shield-ring')) {
+              ring.style.transform = '';
+            }
+          }
+        });
+
+        // Mobile active highlight
+        this.mobileBtns.forEach(btn => {
+          if (btn.getAttribute('data-layer-id') === id) {
+            btn.classList.add('active');
+            this.centerMobileButton(btn);
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        this.renderServicesList();
+      },
+
+      centerMobileButton(btn) {
+        if (!this.mobileScroll) return;
+        const scrollRect = this.mobileScroll.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+        const offsetLeft = btnRect.left - scrollRect.left - (scrollRect.width / 2) + (btnRect.width / 2);
+        this.mobileScroll.scrollBy({ left: offsetLeft, behavior: 'smooth' });
+      },
+
+      renderServicesList() {
+        const layer = shieldData[this.activeLayer];
+        if (!layer || !this.panel) return;
+
+        const serviceKeys = Object.keys(layer.services);
+        const listHtml = serviceKeys.map(key => {
+          const s = layer.services[key];
+          return `<button class="reg-btn" type="button" onclick="shieldExplorer.selectService('${key}')"><span>${s.name}</span> <span>→</span></button>`;
+        }).join('');
+
+        this.panel.innerHTML = `
+          <div class="dna-card">
+            <div class="dna-card__header">
+              <h3 class="dna-card__title">${layer.name}</h3>
+              <p class="dna-card__desc">Protection Level: <strong style="color: var(--sp-saffron);">${layer.level}</strong></p>
+              <p class="dna-card__desc" style="margin-top:6px;">Select an asset protection service to explore:</p>
+            </div>
+            <div class="reg-list">
+              ${listHtml}
+            </div>
+          </div>
+        `;
+      },
+
+      selectService(serviceKey) {
+        const layer = shieldData[this.activeLayer];
+        const s = layer.services[serviceKey];
+        if (!s || !this.panel) return;
+
+        const processHtml = s.process.map(p => `<div class="dna-benefit-item">${p}</div>`).join('');
+        const benefitsHtml = s.benefits.map(b => `<div class="dna-benefit-item">${b}</div>`).join('');
+
+        this.panel.innerHTML = `
+          <div class="dna-card morphing">
+            <button class="reg-back-btn" onclick="shieldExplorer.renderServicesList()">← Back to list</button>
+            <div class="dna-card__header">
+              <h3 class="dna-card__title">${s.name}</h3>
+              <p class="dna-card__desc">${s.overview}</p>
+            </div>
+
+            <div class="dna-card__section-title">Suitable For</div>
+            <div class="dna-chips">
+              <span class="dna-chip" style="background: rgba(255, 153, 51, 0.06); border-color: rgba(255, 153, 51, 0.1); color: var(--sp-saffron);">${s.who}</span>
+            </div>
+
+            <div class="dna-stats">
+              <div class="dna-stat" style="grid-column: span 3;">
+                <span class="dna-stat__label">Estimated Timeline</span>
+                <span class="dna-stat__val" style="color: var(--sp-saffron); font-size:1.1rem;">${s.timeline}</span>
+              </div>
+            </div>
+
+            <div class="dna-card__section-title">Filing Process</div>
+            <div class="dna-benefits-list" style="margin-bottom: 20px;">
+              ${processHtml}
+            </div>
+
+            <div class="dna-card__section-title">Protection Benefits</div>
+            <div class="dna-benefits-list" style="margin-bottom: 28px;">
+              ${benefitsHtml}
+            </div>
+
+            <div class="dna-card__cta">
+              <a class="sp-btn-primary" style="width: 100%; justify-content: center;" href="../apply.html?service=${serviceKey}" id="tm-apply-${serviceKey}">Apply for ${s.name} →</a>
+            </div>
+          </div>
+        `;
+
+        requestAnimationFrame(() => {
+          const card = this.panel.querySelector('.dna-card');
+          if (card) card.classList.remove('morphing');
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      shieldExplorer.init();
+    });
+  </script>
+</body>
+</html>

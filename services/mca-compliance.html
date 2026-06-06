@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MCA & Corporate Compliance — 24 Services | IndTaxPay</title>
+  <meta name="description" content="Company, LLP and OPC annual compliance, director changes, MOA/AOA amendments, share transfer, winding up and audit — K.Das & Associates." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/services.css" />
+  <style>
+    /* Corporate Control Center custom styles */
+    .theme-compliance .dna-left {
+      background: radial-gradient(circle at center, rgba(16, 185, 129, 0.08) 0%, #030a18 100%);
+      border-color: rgba(16, 185, 129, 0.2);
+      position: relative;
+      height: 620px;
+      overflow: hidden;
+    }
+    .control-center-panel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gauge-wrapper {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .gauge-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .gauge-track {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.04);
+      stroke-width: 10px;
+    }
+    .gauge-fill {
+      fill: none;
+      stroke: url(#gaugeGrad);
+      stroke-width: 10px;
+      stroke-linecap: round;
+      stroke-dasharray: 440;
+      stroke-dashoffset: 8.8; /* 98% compliant: 440 * 0.02 */
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .gauge-content {
+      position: absolute;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .gauge-percentage {
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #10b981;
+      line-height: 1;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+      transition: color 0.3s ease;
+    }
+    .gauge-label {
+      font-size: 0.64rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 4px;
+      font-weight: 700;
+    }
+    
+    .dept-node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: rgba(10, 22, 47, 0.75);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+      z-index: 4;
+      white-space: nowrap;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    
+    .dept-node:hover {
+      border-color: #10b981;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+      transform: translate(-50%, -50%) scale(1.03);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+    }
+    .dept-node.active {
+      background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+      border-color: #10b981;
+      color: #fff;
+      transform: translate(-50%, -50%) scale(1.06);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+    
+    .dept-connector-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .dept-connector-line {
+      fill: none;
+      stroke: rgba(16, 185, 129, 0.12);
+      stroke-width: 1.5px;
+      stroke-dasharray: 4 4;
+      transition: all 0.4s ease;
+    }
+    .dept-connector-line.active {
+      stroke: #10b981;
+      stroke-width: 2.5px;
+      stroke-dasharray: none;
+      filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.5));
+    }
+    
+    .compliance-services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .compliance-service-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid rgba(0,0,0,0.04);
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-text-primary, #333);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    html[data-theme="dark"] .compliance-service-btn {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.04);
+      color: #ddd;
+    }
+    .compliance-service-btn:hover, .compliance-service-btn.active {
+      background: rgba(16, 185, 129, 0.05);
+      border-color: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+    }
+    html[data-theme="dark"] .compliance-service-btn:hover, html[data-theme="dark"] .compliance-service-btn.active {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+    }
+    .compliance-service-btn.active {
+      box-shadow: inset 4px 0 0 var(--sp-saffron);
+    }
+  </style>
+</head>
+<body data-base="../" data-active-nav="services" class="theme-compliance">
+  <a class="skipLink" href="#main">Skip to content</a>
+  <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+  <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+  <div class="cursorDot" aria-hidden="true"></div>
+  <div class="cursorRing" aria-hidden="true"></div>
+  <div id="navbarSlot"></div>
+  <main id="main">
+
+    <section class="sp-hero sp-hero--violet" style="background-image: url('../assets/services_assets/cop_hero.png');" aria-label="Corporate Compliance hero">
+      <div class="sp-hero__bg"></div>
+      <div class="sp-hero__grid" aria-hidden="true"></div>
+      <div class="sp-hero__inner">
+        <div class="sp-hero__content">
+          <div class="sp-hero__kicker sp-reveal"><span class="sp-hero__dot"></span>Corporate Compliance · 05</div>
+          <h1 class="sp-hero__h1 sp-reveal sp-reveal--d1">Stay compliant.<br><span class="sp-hl-s">Avoid MCA penalties.</span></h1>
+          <p class="sp-hero__sub sp-reveal sp-reveal--d2">Complete MCA compliance calendar management — annual returns, director filings, capital changes, share transfers, and company restructuring. Never miss an ROC due date.</p>
+          <div class="sp-hero__stats sp-reveal sp-reveal--d3">
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">24</span><span class="sp-hero__stat-lbl">Services</span></div>
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">MCA</span><span class="sp-hero__stat-lbl">Compliant</span></div>
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">CA</span><span class="sp-hero__stat-lbl">Managed</span></div>
+          </div>
+          <div class="sp-hero__cta sp-reveal sp-reveal--d4">
+            <a class="sp-btn-primary" href="../apply.html" id="mca-apply-btn">Stay Compliant →</a>
+            <button class="sp-btn-ghost" type="button" data-open-chat>Talk to Expert</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="sp-stripe" aria-hidden="true"></div>
+
+    <section class="sp-section" id="mca-explorer-section" aria-label="Corporate Control Center">
+      <div class="sp-container">
+        <div class="sp-reveal">
+          <div class="sp-label">Interactive Cockpit</div>
+          <h2 class="sp-h2">Corporate <span>Control Center</span></h2>
+          <p class="sp-body">Monitor your company's regulatory health dial. Click any corporate department surrounding the cockpit score to inspect compliance checklists, fees, and filing requirements.</p>
+        </div>
+
+        <div class="dna-explorer sp-reveal sp-reveal--d2" id="complianceExplorer">
+          <!-- LEFT PANEL: Circular Cockpit Gauge Dashboard -->
+          <div class="dna-left theme-compliance" id="complianceLeft">
+            <div class="control-center-panel" style="width: 500px; height: 100%; margin: 0 auto; position: relative;">
+              <!-- Radial connector lines background -->
+              <svg class="dept-connector-svg" viewBox="0 0 500 620" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#10b981" />
+                    <stop offset="100%" stop-color="#3b82f6" />
+                  </linearGradient>
+                </defs>
+                <!-- Line nodes to center (x=250, y=310) -->
+                <line id="line-annual" class="dept-connector-line active" x1="250" y1="120" x2="250" y2="310" />
+                <line id="line-directors" class="dept-connector-line" x1="400" y1="215" x2="250" y2="310" />
+                <line id="line-changes" class="dept-connector-line" x1="400" y1="405" x2="250" y2="310" />
+                <line id="line-capital" class="dept-connector-line" x1="250" y1="500" x2="250" y2="310" />
+                <line id="line-filings" class="dept-connector-line" x1="100" y1="405" x2="250" y2="310" />
+                <line id="line-closure" class="dept-connector-line" x1="100" y1="215" x2="250" y2="310" />
+              </svg>
+
+              <!-- Central Health Score Gauge -->
+              <div class="gauge-wrapper" style="position: absolute; top: 310px; left: 250px; transform: translate(-50%, -50%);">
+                <svg class="gauge-svg" viewBox="0 0 160 160">
+                  <circle class="gauge-track" cx="80" cy="80" r="70" />
+                  <circle id="gaugeFill" class="gauge-fill" cx="80" cy="80" r="70" style="stroke-dashoffset: 8.8;" />
+                </svg>
+                <div class="gauge-content">
+                  <span id="gaugeValue" class="gauge-percentage">98%</span>
+                  <span id="gaugeStatus" class="gauge-label" style="color: #10b981;">Compliant</span>
+                </div>
+              </div>
+
+              <!-- Interactive Department Nodes -->
+              <button class="dept-node active" data-dept="annual" style="top: 120px; left: 250px;">Annual Compliance</button>
+              <button class="dept-node" data-dept="directors" style="top: 215px; left: 400px;">Director Services</button>
+              <button class="dept-node" data-dept="changes" style="top: 405px; left: 400px;">Corporate Changes</button>
+              <button class="dept-node" data-dept="capital" style="top: 500px; left: 250px;">Capital & Shares</button>
+              <button class="dept-node" data-dept="filings" style="top: 405px; left: 100px;">Statutory Filings</button>
+              <button class="dept-node" data-dept="closure" style="top: 215px; left: 100px;">Company Closure</button>
+            </div>
+          </div>
+
+          <!-- Mobile categories swipe list -->
+          <div class="dna-mobile-nav">
+            <div class="dna-mobile-nav__scroll">
+              <button class="dna-mobile-btn active" data-dept="annual">Annual Compliance</button>
+              <button class="dna-mobile-btn" data-dept="directors">Director Services</button>
+              <button class="dna-mobile-btn" data-dept="changes">Corporate Changes</button>
+              <button class="dna-mobile-btn" data-dept="capital">Capital & Shares</button>
+              <button class="dna-mobile-btn" data-dept="filings">Statutory Filings</button>
+              <button class="dna-mobile-btn" data-dept="closure">Company Closure</button>
+            </div>
+          </div>
+
+          <!-- RIGHT PANEL: Dynamic Details -->
+          <div class="dna-right" id="compliancePanel">
+            <!-- Content dynamically populated via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sp-stripe" aria-hidden="true"></div>
+
+    <section class="sp-section sp-section--alt" aria-label="Benefits">
+      <div class="sp-container">
+        <div class="sp-reveal"><div class="sp-label">Why Stay Compliant?</div><h2 class="sp-h2">The cost of<br><span>MCA defaults</span></h2></div>
+        <div class="sp-benefits__grid">
+          <div class="sp-benefit sp-reveal sp-reveal--d1"><div class="sp-benefit__icon">⚖️</div><div class="sp-benefit__title">Avoid Heavy Fines</div><div class="sp-benefit__desc">MCA late fees accumulate at ₹100/day per form. Months of defaults can result in lakhs in penalties.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d2"><div class="sp-benefit__icon">🚫</div><div class="sp-benefit__title">Prevent DIN Block</div><div class="sp-benefit__desc">Non-compliant directors are disqualified under Section 164(2) and their DIN is deactivated across all companies.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d3"><div class="sp-benefit__icon">🏦</div><div class="sp-benefit__title">Maintain Bank Access</div><div class="sp-benefit__desc">Banks require updated MCA filings for loan renewals, OD limits, and LC facilitation.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d4"><div class="sp-benefit__icon">📊</div><div class="sp-benefit__title">Investor Readiness</div><div class="sp-benefit__desc">VCs and strategic investors conduct due diligence — compliant companies close funding rounds faster.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d5"><div class="sp-benefit__icon">🛡️</div><div class="sp-benefit__title">Limited Liability Protection</div><div class="sp-benefit__desc">Non-compliance can pierce the corporate veil — making directors personally liable for company debts.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d1"><div class="sp-benefit__icon">🎯</div><div class="sp-benefit__title">Govt Tenders</div><div class="sp-benefit__desc">Government and PSU contracts require compliance certificates — non-compliant companies are disqualified at bidding stage.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section" aria-label="Process">
+      <div class="sp-container">
+        <div class="sp-reveal"><div class="sp-label">The Process</div><h2 class="sp-h2">How compliance<br><span>management works</span></h2></div>
+        <div class="sp-process__flow sp-reveal sp-reveal--d2">
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">🔍</span></div><div class="sp-proc-step__label">Compliance Audit</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">📋</span></div><div class="sp-proc-step__label">Calendar Setup</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">📁</span></div><div class="sp-proc-step__label">Form Preparation</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">🏛️</span></div><div class="sp-proc-step__label">MCA Filing</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">✅</span></div><div class="sp-proc-step__label">SRN Confirmation</div></div>
+        </div>
+        <div class="sp-learn-more sp-reveal sp-reveal--d3">
+          <p>Understand the complete MCA compliance workflow and what happens at each step.</p>
+          <a class="sp-btn-primary" href="../how-it-works/index.html" id="mca-learn-more">Learn More →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-cta" aria-label="Apply">
+      <div class="sp-cta__inner sp-reveal">
+        <div class="sp-cta__label">Stay Compliant</div>
+        <h2 class="sp-cta__h">Zero MCA defaults.<br><span>Zero penalties.</span></h2>
+        <p class="sp-cta__sub">Let our CA team manage your entire compliance calendar — filing every form accurately and before every due date.</p>
+        <div class="sp-cta__btns">
+          <a class="sp-btn-primary" href="../apply.html" id="mca-cta-btn">Apply Now →</a>
+          <button class="sp-btn-ghost" type="button" data-open-chat>Talk to a CA</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="footerSlot"></div>
+  <script defer src="../assets/js/site.js"></script>
+  <script>
+    (function(){
+      var io = new IntersectionObserver(function(e){
+        e.forEach(function(x){
+          if(x.isIntersecting){
+            x.target.classList.add('is-visible');
+            io.unobserve(x.target);
+          }
+        });
+      },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+      document.querySelectorAll('.sp-reveal').forEach(function(el){
+        io.observe(el);
+      });
+    })();
+  </script>
+  <script>
+    // Corporate Compliance Control Center Data
+    const compData = {
+      annual: {
+        name: "Annual Compliance",
+        score: 98,
+        status: "Compliant",
+        statusColor: "#10b981",
+        desc: "Mandatory annual ROC filings, board minutes, and ledger balances to maintain active status with the MCA.",
+        services: {
+          comp_annual_company: {
+            name: "Company Annual Compliance",
+            overview: "Complete annual compliance bundle for Private Limited Companies — AOC-4 (financial statements), MGT-7A (annual return), Board meeting minutes, and statutory register maintenance.",
+            who: "Private Limited Companies, OPCs",
+            timeline: "7–15 Days",
+            docs: ["Audited Financial Statements", "Director's Report", "Board meeting resolutions copy", "GST & tax filing records"],
+            benefits: ["Keeps active company status in MCA", "Avoids heavy ₹100/day default penalties", "Clear audit log for strategic investors"]
+          },
+          comp_annual_llp: {
+            name: "LLP Annual Compliance",
+            overview: "Mandatory LLP annual filings — Form 11 (annual return) and Form 8 (statement of accounts) — with designated partner review and MCA portal submission.",
+            who: "Limited Liability Partnerships (LLPs)",
+            timeline: "5–10 Days",
+            docs: ["LLP financial statements summary", "Partner remittance summaries", "LLP agreement details"],
+            benefits: ["Maintains active register with ROC", "Prevents partner liability extensions", "Avoids statutory blocking actions"]
+          },
+          comp_annual_opc: {
+            name: "OPC Annual Compliance",
+            overview: "Annual compliance filing for One Person Companies including financial statement submission, annual return, and board resolution with single-member structure requirements.",
+            who: "One Person Companies (OPC)",
+            timeline: "5–10 Days",
+            docs: ["Director identity details", "Bank statements", "P&L / Balance Sheet copy"],
+            benefits: ["Fulfills OPC specific compliance terms", "Ensures continuous legal entity separation", "Maintains corporate borrowing credibility"]
+          },
+          comp_annual_firm: {
+            name: "Partnership Compliance",
+            overview: "Annual income tax return, GST filings, TDS compliance, and statutory record maintenance for registered and unregistered partnership firms.",
+            who: "Partnership firms",
+            timeline: "3–5 Days",
+            docs: ["Partnership Deed", "Bank transaction summaries", "Sales & invoice log sheets"],
+            benefits: ["CA verification of partner accounts", "Avoids personal tax assessment conflicts", "Ensures compliance with commercial guidelines"]
+          },
+          comp_annual_proprietor: {
+            name: "Proprietorship Compliance",
+            overview: "Annual ITR filing, GST return management, and business compliance support for sole proprietorship businesses — simple, affordable, CA-managed.",
+            who: "Sole Proprietors, Freelancers",
+            timeline: "2–4 Days",
+            docs: ["Owner PAN & Aadhaar", "GST return summaries", "All business current accounts statements"],
+            benefits: ["Verifies business income for credit checks", "Ensures GST and income tax calculations match", "100% compliant solo business profile"]
+          }
+        }
+      },
+      directors: {
+        name: "Director Services",
+        score: 95,
+        status: "Safe",
+        statusColor: "#10b981",
+        desc: "Keep director identity profiles and credentials compliant to ensure signing authorities remain active.",
+        services: {
+          comp_director_change: {
+            name: "Director Change",
+            overview: "Appointment or resignation of directors through MCA. Includes DIR-12 filing, board resolution, consent letter (DIR-2), and updating the Register of Directors.",
+            who: "Companies appointing or retiring board members",
+            timeline: "3–5 Days",
+            docs: ["New director PAN & Aadhaar", "DIN details", "Consent letter (DIR-2)", "Board resolution copy"],
+            benefits: ["Legally adds/removes signing authority", "Updates MCA public board profile", "Prevents unauthorized corporate board filings"]
+          },
+          comp_director_remove: {
+            name: "Remove Director",
+            overview: "Formal director removal through board and shareholder resolution under Section 169, with DIR-12 filing and appropriate notice period compliance.",
+            who: "Companies removing non-cooperative board members",
+            timeline: "5–10 Days",
+            docs: ["Director removal notice copy", "Special resolution sheet", "DIR-12 form inputs"],
+            benefits: ["Safe, legal dispute resolution path", "Secures corporate property access rights", "Updates board roster instantly with ROC"]
+          },
+          comp_din_ekyc: {
+            name: "DIN eKYC Filing",
+            overview: "Annual Director Identification Number KYC (DIR-3 KYC / DIR-3 KYC-WEB) to keep DIN active. Mandatory for all DIN holders by September 30 each year.",
+            who: "All DIN holding directors in India",
+            timeline: "1–2 Days",
+            docs: ["Director PAN & Aadhaar", "Mobile number & Email for OTP verification", "Passport copy (for foreign nationals)"],
+            benefits: ["Keeps DIN in active status", "Avoids heavy ₹5,000 late fee penalty", "Enables board signings on all MCA documents"]
+          },
+          comp_din_reactivation: {
+            name: "DIN Reactivation",
+            overview: "Restore a deactivated DIN by filing overdue KYC. Deactivated DINs prevent directors from signing MCA forms — reactivate before any upcoming compliance deadline.",
+            who: "Directors with deactivated DINs due to overdue KYC",
+            timeline: "2–4 Days",
+            docs: ["Director credentials", "Identity proofs", "Form DIR-3 KYC submission details"],
+            benefits: ["Re-establishes board signature rights", "Allows filing pending company returns", "Deregisters director from active default lists"]
+          }
+        }
+      },
+      changes: {
+        name: "Corporate Changes",
+        score: 92,
+        status: "Good Status",
+        statusColor: "#3b82f6",
+        desc: "Amend company structures, official office addresses, and primary charter clauses legally.",
+        services: {
+          comp_name_change: {
+            name: "Company Name Change",
+            overview: "Official company name change through MCA — board resolution, shareholder approval (Special Resolution), INC-24 filing, and updating all related certificates and registrations.",
+            who: "Companies rebranding or switching names",
+            timeline: "7–15 Days",
+            docs: ["Proposed name preference", "Board resolution copy", "Special resolution details", "AOA/MOA revised draft"],
+            benefits: ["Protects new brand identity with ROC", "100% legal name change certificate issued", "AOA/MOA updated in corporate registry"]
+          },
+          comp_office_change: {
+            name: "Registered Office Change",
+            overview: "Change your company's registered address within the same city, RoC jurisdiction, or across states. Includes INC-22, INC-23 (if inter-state).",
+            who: "Companies shifting physical office premises",
+            timeline: "5–12 Days",
+            docs: ["New address proof (Electricity bill/NOC)", "Rent agreement copy", "Board approval resolution"],
+            benefits: ["Legal compliance for business address", "Official records updated on MCA portal", "Avoids non-existence flags from tax officers"]
+          },
+          comp_moa_amend: {
+            name: "MOA Amendment",
+            overview: "Amend the Memorandum of Association to add new business objectives, change registered state, or alter other main clauses.",
+            who: "Companies shifting business focus or objective clauses",
+            timeline: "5–10 Days",
+            docs: ["Revised object clause summary", "Special resolution document", "Form MGT-14 details"],
+            benefits: ["Enables legal operations in new sectors", "Updates charter capital objective checks", "ROC confirmation within days"]
+          },
+          comp_aoa_amend: {
+            name: "AOA Amendment",
+            overview: "Amend the Articles of Association to update internal governance rules — quorum, voting rights, director remuneration, or share transfer restrictions.",
+            who: "Companies changing internal voting structure or investment rules",
+            timeline: "5–10 Days",
+            docs: ["Revised Articles draft", "MGT-14 details", "Shareholder agreement summaries"],
+            benefits: ["Legal validity for joint venture covenants", "Protects founder veto/governance powers", "Official registry updated with RoC"]
+          }
+        }
+      },
+      capital: {
+        name: "Capital & Shares",
+        score: 90,
+        status: "Good Status",
+        statusColor: "#3b82f6",
+        desc: "Manage equity restructuring, authorized capital adjustments, and electronic dematerialization of shares.",
+        services: {
+          comp_capital_increase: {
+            name: "Authorized Capital Increase",
+            overview: "Increase your company's authorised share capital through shareholder approval and SH-7/MGT-14 filings with MCA. Required before issuing new shares.",
+            who: "Companies raising funds or issuing new shares",
+            timeline: "5–10 Days",
+            docs: ["Board resolution copy", "Ordinary resolution sheet", "Form SH-7 inputs", "Revised MOA capital clause"],
+            benefits: ["Enables accepting new equity investments", "Allows issuing fresh shares to co-founders", "Legally increases corporate asset limit"]
+          },
+          comp_share_transfer: {
+            name: "Share Transfer",
+            overview: "Transfer equity shares between shareholders through Share Transfer Deed, board approval, and updating share certificates and the Register of Members.",
+            who: "Companies transferring equity ownership between partners/investors",
+            timeline: "3–7 Days",
+            docs: ["Share Transfer Deed (SH-4)", "Share certificates copy", "PAN of transferor & transferee", "Stamp duty payment proof"],
+            benefits: ["Legally transfers company ownership", "Register of Members updated compliant with law", "New share certificates printed & issued"]
+          },
+          comp_demat_shares: {
+            name: "Demat of Shares",
+            overview: "Dematerialization of physical share certificates into electronic form through CDSL/NSDL. Mandatory for private limited companies under recent MCA amendments.",
+            who: "All private limited companies in India (Mandatory)",
+            timeline: "15–30 Days",
+            docs: ["Physical share certificates", "ISIN setup documents", "CDSL/NSDL corporate agreements"],
+            benefits: ["100% compliance with recent MCA guidelines", "Safe, tamper-proof electronic ownership records", "Smooth transaction logs for future funding rounds"]
+          }
+        }
+      },
+      filings: {
+        name: "Statutory Filings",
+        score: 88,
+        status: "Action Required",
+        statusColor: "#fbbf24",
+        desc: "File mandatory event-based and seasonal declarations to avoid suspension alerts.",
+        services: {
+          comp_adt1: {
+            name: "ADT-1 Filing",
+            overview: "Mandatory auditor appointment filing (Form ADT-1) with MCA within 15 days of appointment at the AGM. Covers statutory auditor changes.",
+            who: "Companies appointing or changing statutory auditors",
+            timeline: "2–4 Days",
+            docs: ["Auditor consent letter", "Auditor eligibility certificate copy", "Board resolution copy", "Form ADT-1 inputs"],
+            benefits: ["Fulfills mandatory statutory auditor record terms", "Avoids ROC system lock warnings", "Clean regulatory history log"]
+          },
+          comp_dpt3: {
+            name: "DPT-3 Filing",
+            overview: "Annual return of loans and deposits (Form DPT-3) disclosing outstanding loans received by the company. Mandatory for companies with any loans.",
+            who: "Companies with outstanding loans/deposits by June 30 each year",
+            timeline: "3–5 Days",
+            docs: ["Auditor certificate of outstanding loans", "Loan agreement summaries", "Form DPT-3 details"],
+            benefits: ["Mandatory disclosure compliance on corporate debts", "Avoids massive defaults action on company directors", "Updates ROC on credit status"]
+          },
+          comp_inc20a: {
+            name: "Commencement Certificate (INC-20A)",
+            overview: "Declaration of business commencement mandatory for companies incorporated after November 2019. Must be filed within 180 days of incorporation.",
+            who: "Newly incorporated companies in India",
+            timeline: "2–3 Days",
+            docs: ["Bank statement showing subscription capital payment", "Board resolution copy", "NOC (if regulator registered)"],
+            benefits: ["Legally permits starting business operations", "Prevents company cancellation risk", "Keeps directors safe from heavy early late fees"]
+          },
+          comp_cfss: {
+            name: "CFSS Scheme Support",
+            overview: "Companies Fresh Start Scheme filing support — helps companies with pending MCA defaults clear arrears by filing overdue forms with reduced additional fees during scheme windows.",
+            who: "Defaulting companies wishing to clear backlogs",
+            timeline: "5–12 Days",
+            docs: ["List of overdue filings", "Pending financial records", "Board clearance authorization"],
+            benefits: ["Clears years of MCA default backlog at massive discounts", "Restores active company status with ROC", "Grants immunity from director prosecutions"]
+          }
+        }
+      },
+      closure: {
+        name: "Company Closure",
+        score: 85,
+        status: "Action Required",
+        statusColor: "#fbbf24",
+        desc: "Formally strike off inactive corporate structures or place them in dormant state safely.",
+        services: {
+          comp_dormant_status: {
+            name: "Dormant Status Filing",
+            overview: "Apply to make your company dormant (inactive) under Section 455 to avoid full compliance requirements while keeping the company registered.",
+            who: "Companies with inactive operations holding assets/properties",
+            timeline: "7–15 Days",
+            docs: ["Consent of shareholders (Special Resolution)", "Financial position statements", "Dormant application forms"],
+            benefits: ["Reduces annual compliance upkeep cost by 90%", "Protects corporate name for future use", "Easy to reactivate when active operations start"]
+          },
+          comp_winding_llp: {
+            name: "Winding Up – LLP",
+            overview: "LLP closure through voluntary strike-off (Form 24 filing) after settling all liabilities, closing bank accounts, and filing all pending returns.",
+            who: "LLPs wishing to formally close down",
+            timeline: "3–6 Months",
+            docs: ["LLP agreement copy", "Indemnity bond & affidavit from partners", "Statement of assets & liabilities (Zero balance)"],
+            benefits: ["Formal closure certificate issued by MCA", "Terminates partner legal filing burdens", "Zero compliance penalty risks post-closure"]
+          },
+          comp_winding_company: {
+            name: "Winding Up – Company",
+            overview: "Company strike-off through the Fast Track Exit (FTE) scheme under Section 248. Includes closure of all pending filings, bank accounts, and GST.",
+            who: "Inactive companies with zero assets & liabilities",
+            timeline: "4–8 Months",
+            docs: ["Statement of accounts (verified by CA)", "Indemnity bond (Form STK-3)", "Affidavit (Form STK-4)", "Shareholder special resolution copy"],
+            benefits: ["Formally deregisters corporate entity from registry", "Stops all recurring statutory audit obligations", "Complete protection from default audits or penal actions"]
+          }
+        }
+      }
+    };
+
+    const compCockpit = {
+      activeDept: 'annual',
+      activeSvc: 'comp_annual_company',
+      
+      init() {
+        this.container = document.getElementById('complianceExplorer');
+        if (!this.container) return;
+
+        this.gaugeFill = document.getElementById('gaugeFill');
+        this.gaugeVal = document.getElementById('gaugeValue');
+        this.gaugeStatus = document.getElementById('gaugeStatus');
+        this.panel = document.getElementById('compliancePanel');
+        this.nodes = this.container.querySelectorAll('.dept-node');
+        this.mobileBtns = this.container.querySelectorAll('.dna-mobile-btn');
+        this.mobileScroll = this.container.querySelector('.dna-mobile-nav__scroll');
+        this.lines = this.container.querySelectorAll('.dept-connector-line');
+
+        // Node click listeners (desktop)
+        this.nodes.forEach(node => {
+          node.addEventListener('click', () => {
+            const dept = node.getAttribute('data-dept');
+            this.selectDept(dept);
+          });
+        });
+
+        // Mobile buttons
+        this.mobileBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const dept = btn.getAttribute('data-dept');
+            this.selectDept(dept);
+            this.centerMobileButton(btn);
+          });
+        });
+
+        // Init
+        this.selectDept(this.activeDept, true);
+      },
+
+      selectDept(dept, isInit = false) {
+        if (this.activeDept === dept && !isInit) return;
+        this.activeDept = dept;
+
+        // Set active class on desktop nodes
+        this.nodes.forEach(node => {
+          if (node.getAttribute('data-dept') === dept) {
+            node.classList.add('active');
+          } else {
+            node.classList.remove('active');
+          }
+        });
+
+        // Set active class on mobile tabs
+        this.mobileBtns.forEach(btn => {
+          if (btn.getAttribute('data-dept') === dept) {
+            btn.classList.add('active');
+            this.centerMobileButton(btn);
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        // Highlight connecting lines
+        this.lines.forEach(line => {
+          if (line.getAttribute('id') === `line-${dept}`) {
+            line.classList.add('active');
+          } else {
+            line.classList.remove('active');
+          }
+        });
+
+        // Animate circular gauge dial
+        const score = compData[dept].score;
+        const status = compData[dept].status;
+        const color = compData[dept].statusColor;
+        
+        const circumference = 440; // 2 * pi * 70
+        const offset = circumference * (1 - score / 100);
+
+        if (this.gaugeFill) {
+          this.gaugeFill.style.strokeDashoffset = offset;
+        }
+        if (this.gaugeVal) {
+          this.gaugeVal.textContent = `${score}%`;
+          this.gaugeVal.style.color = color;
+          this.gaugeVal.style.textShadow = `0 0 10px ${color}50`;
+        }
+        if (this.gaugeStatus) {
+          this.gaugeStatus.textContent = status;
+          this.gaugeStatus.style.color = color;
+        }
+
+        // Set first service of this department as active
+        const servicesKeys = Object.keys(compData[dept].services);
+        this.activeSvc = servicesKeys[0];
+
+        this.updatePanel();
+      },
+
+      centerMobileButton(btn) {
+        if (!this.mobileScroll) return;
+        const scrollRect = this.mobileScroll.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+        const offsetLeft = btnRect.left - scrollRect.left - (scrollRect.width / 2) + (btnRect.width / 2);
+        this.mobileScroll.scrollBy({ left: offsetLeft, behavior: 'smooth' });
+      },
+
+      updatePanel() {
+        if (!this.panel) return;
+
+        // Morphing animation
+        const card = this.panel.querySelector('.dna-card');
+        if (card) {
+          card.classList.add('morphing');
+          setTimeout(() => this.renderPanelHtml(), 150);
+        } else {
+          this.renderPanelHtml();
+        }
+      },
+
+      renderPanelHtml() {
+        const deptData = compData[this.activeDept];
+        const activeSvcData = deptData.services[this.activeSvc];
+        
+        // Services tabs
+        const servicesKeys = Object.keys(deptData.services);
+        let servicesListHtml = '';
+        if (servicesKeys.length > 1) {
+          servicesListHtml = `
+            <div class="compliance-card__section-title" style="margin-top: 20px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #10b981; margin-bottom: 12px;">Filings under this department</div>
+            <div class="compliance-services-list">
+              ${servicesKeys.map(key => {
+                const svc = deptData.services[key];
+                const activeClass = key === this.activeSvc ? 'active' : '';
+                return `<button class="compliance-service-btn ${activeClass}" data-svc-key="${key}">
+                  <span>${svc.name}</span>
+                  <span>→</span>
+                </button>`;
+              }).join('')}
+            </div>
+          `;
+        }
+
+        const docsHtml = activeSvcData.docs.map(doc => `<div class="dna-benefit-item" style="font-size:0.84rem; line-height: 1.4;"><strong>${doc}</strong></div>`).join('');
+        const benefitsHtml = activeSvcData.benefits.map(b => `<div class="dna-benefit-item">${b}</div>`).join('');
+
+        this.panel.innerHTML = `
+          <div class="dna-card morphing">
+            <div class="dna-card__header">
+              <span style="font-size:0.68rem; font-weight:800; color:#10b981; text-transform:uppercase; letter-spacing: 0.08em; display:block; margin-bottom:6px;">Department: ${deptData.name}</span>
+              <h3 class="dna-card__title">${activeSvcData.name}</h3>
+              <p class="dna-card__desc">${activeSvcData.overview}</p>
+            </div>
+            
+            <div class="dna-stats" style="margin-bottom: 20px;">
+              <div class="dna-stat">
+                <span class="dna-stat__label">ROC Duration</span>
+                <span class="dna-stat__val" style="color:#10b981;">${activeSvcData.timeline}</span>
+              </div>
+              <div class="dna-stat">
+                <span class="dna-stat__label">Applies To</span>
+                <span class="dna-stat__val">${activeSvcData.who.split(',')[0]}</span>
+              </div>
+              <div class="dna-stat">
+                <span class="dna-stat__label">MCA Portal</span>
+                <span class="dna-stat__val">ROC Link</span>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr; gap:20px; margin-bottom: 24px;">
+              <div>
+                <div class="dna-card__section-title" style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #10b981; margin-bottom: 8px;">Documents Required</div>
+                <div class="dna-benefits-list" style="gap:6px; margin:0;">
+                  ${docsHtml}
+                </div>
+              </div>
+              <div>
+                <div class="dna-card__section-title" style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #10b981; margin-bottom: 8px;">Why Professional Filing?</div>
+                <div class="dna-benefits-list" style="gap:6px; margin:0;">
+                  ${benefitsHtml}
+                </div>
+              </div>
+            </div>
+
+            ${servicesListHtml}
+            
+            <div class="dna-card__cta" style="margin-top: 24px;">
+              <a class="sp-btn-primary" style="width: 100%; justify-content: center; background:#10b981; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);" href="../apply.html?service=${this.activeSvc}" id="mca-apply-${this.activeSvc}">Apply for ${activeSvcData.name} →</a>
+            </div>
+          </div>
+        `;
+
+        // Bind clicks on service buttons
+        const btns = this.panel.querySelectorAll('.compliance-service-btn');
+        btns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            this.activeSvc = btn.getAttribute('data-svc-key');
+            this.updatePanel();
+          });
+        });
+
+        requestAnimationFrame(() => {
+          const card = this.panel.querySelector('.dna-card');
+          if (card) card.classList.remove('morphing');
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      compCockpit.init();
+    });
+  </script>
+</body>
+</html>

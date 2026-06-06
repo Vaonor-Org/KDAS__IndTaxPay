@@ -1,57 +1,864 @@
 <!doctype html>
 <html lang="en" data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Blog — IndTaxPay</title>
-    <meta name="description" content="Tax knowledge hub: plain-language guides from expert CAs." />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
-  </head>
-  <body data-base="../" data-active-nav="blog">
-    <a class="skipLink" href="#main">Skip to content</a>
-    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
-    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
-    <div class="cursorDot" aria-hidden="true"></div>
-    <div class="cursorRing" aria-hidden="true"></div>
-    <div id="navbarSlot"></div>
-    <main id="main" class="pageFadeIn">
-      <section class="section section--tight" aria-label="Blog header">
-        <div class="container">
-          <div class="card cardPad">
-            <div class="kicker">Blog</div>
-            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Tax Knowledge Hub</h1>
-            <p style="margin-top: 10px;">Plain-language guides from our expert CAs (demo content).</p>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CA Knowledge Hub & Tax Guides | IndTaxPay</title>
+  <meta name="description" content="Plain-language tax guides, GST compliance, ITR filing tutorials, and corporate registration resources curated by qualified Chartered Accountants." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <style>
+    /* Premium Blog Styling */
+    .blog-hero {
+      padding: 60px 0;
+      background: radial-gradient(circle at top right, rgba(13, 74, 138, 0.08) 0%, rgba(3, 10, 24, 0.01) 70%);
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+    }
+    html[data-theme="dark"] .blog-hero {
+      background: radial-gradient(circle at top right, rgba(13, 74, 138, 0.15) 0%, rgba(3, 10, 24, 0.3) 80%);
+      border-color: rgba(255,255,255,0.05);
+    }
+
+    .blog-header {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .blog-title {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--color-text-primary, #111) 30%, #4b5563 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: var(--font-display, 'Inter', sans-serif);
+    }
+    html[data-theme="dark"] .blog-title {
+      background: linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .blog-desc {
+      font-size: 1.12rem;
+      color: var(--color-text-secondary, #555);
+      margin-bottom: 32px;
+    }
+    html[data-theme="dark"] .blog-desc {
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Search & Filter Bar */
+    .blog-search-box {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+    .blog-search-input {
+      width: 100%;
+      padding: 16px 20px 16px 52px;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: var(--panel, #fff);
+      font-size: 0.96rem;
+      color: var(--color-text-primary, #333);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+    html[data-theme="dark"] .blog-search-input {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.06);
+      color: #fff;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+    .blog-search-input:focus {
+      outline: none;
+      border-color: var(--color-primary, #0D4A8A);
+      box-shadow: 0 4px 24px rgba(13, 74, 138, 0.12);
+    }
+    .blog-search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #9ca3af;
+      pointer-events: none;
+    }
+
+    /* Filter Tabs */
+    .blog-filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-tab {
+      padding: 8px 20px;
+      border-radius: 30px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: var(--panel, #fff);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-text-secondary, #555);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    html[data-theme="dark"] .filter-tab {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.7);
+    }
+    .filter-tab:hover {
+      background: rgba(0,0,0,0.02);
+      border-color: rgba(0,0,0,0.12);
+      color: var(--color-text-primary, #111);
+    }
+    html[data-theme="dark"] .filter-tab:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+    .filter-tab.active {
+      background: var(--color-primary, #0D4A8A);
+      border-color: var(--color-primary, #0D4A8A);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(13, 74, 138, 0.25);
+    }
+
+    /* Blog Card Design */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    .blog-card {
+      border-radius: 20px;
+      background: var(--panel, #fff);
+      border: 1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    html[data-theme="dark"] .blog-card {
+      background: rgba(255,255,255,0.01);
+      border-color: rgba(255,255,255,0.04);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+    .blog-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(13, 74, 138, 0.15);
+      box-shadow: 0 16px 36px rgba(13, 74, 138, 0.08);
+    }
+    html[data-theme="dark"] .blog-card:hover {
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    }
+    .blog-card__image-container {
+      width: 100%;
+      height: 140px;
+      position: relative;
+      background: #eee;
+      overflow: hidden;
+    }
+    .blog-card__img {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s ease;
+    }
+    .blog-card:hover .blog-card__img {
+      transform: scale(1.06);
+    }
+    .blog-card__content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .blog-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .blog-card__badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+    .blog-card__badge--it { background: rgba(255, 153, 51, 0.08); color: var(--sp-saffron, #FF9933); }
+    .blog-card__badge--gst { background: rgba(19, 136, 8, 0.08); color: var(--sp-green, #138808); }
+    .blog-card__badge--tds { background: rgba(13, 74, 138, 0.08); color: #0D4A8A; }
+    
+    .blog-card__date {
+      font-size: 0.76rem;
+      color: var(--color-text-muted, #888);
+    }
+    .blog-card__title {
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.35;
+      color: var(--color-text-primary, #111);
+      margin-bottom: 8px;
+    }
+    html[data-theme="dark"] .blog-card__title {
+      color: #fff;
+    }
+    .blog-card__desc {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary, #666);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    html[data-theme="dark"] .blog-card__desc {
+      color: rgba(255,255,255,0.55);
+    }
+    .blog-card__readmore {
+      font-size: 0.82rem;
+      font-weight: 750;
+      color: var(--color-primary, #0D4A8A);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    html[data-theme="dark"] .blog-card__readmore {
+      color: #4adf6a;
+    }
+
+    /* Article Drawer slide-out */
+    .article-drawer-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .article-drawer-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .article-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      width: 100%;
+      max-width: 680px;
+      height: 100%;
+      background: var(--panel, #fff);
+      z-index: 1000;
+      box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    html[data-theme="dark"] .article-drawer {
+      background: #0b111e;
+      box-shadow: -10px 0 50px rgba(0,0,0,0.4);
+    }
+    .article-drawer.active {
+      transform: translateX(0);
+    }
+    
+    /* Progress Indicator */
+    .drawer-progress-container {
+      width: 100%;
+      height: 4px;
+      background: rgba(0,0,0,0.05);
+      position: relative;
+    }
+    .drawer-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--color-primary, #0D4A8A);
+      transition: width 0.1s ease;
+    }
+    
+    .drawer-header {
+      padding: 24px 30px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    html[data-theme="dark"] .drawer-header {
+      border-color: rgba(255,255,255,0.06);
+    }
+    .drawer-header-title {
+      font-size: 0.94rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted, #777);
+    }
+    .drawer-close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: var(--body-bg, #f8fafc);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      line-height: 1;
+    }
+    html[data-theme="dark"] .drawer-close-btn {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .drawer-close-btn:hover {
+      background: rgba(0,0,0,0.05);
+      transform: rotate(90deg);
+    }
+    
+    .drawer-content {
+      padding: 40px 30px;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+    .drawer-article-body {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--color-text-secondary, #444);
+    }
+    html[data-theme="dark"] .drawer-article-body {
+      color: rgba(255,255,255,0.8);
+    }
+    .drawer-article-body h1 {
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: clamp(1.8rem, 4vw, 2.3rem);
+      font-weight: 850;
+      line-height: 1.2;
+      color: var(--color-text-primary, #111);
+      margin-bottom: 20px;
+    }
+    html[data-theme="dark"] .drawer-article-body h1 {
+      color: #fff;
+    }
+    .drawer-article-body h2 {
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--color-text-primary, #111);
+      margin: 32px 0 16px;
+    }
+    html[data-theme="dark"] .drawer-article-body h2 {
+      color: #fff;
+    }
+    .drawer-article-body p {
+      margin-bottom: 20px;
+    }
+    .drawer-article-body ul {
+      margin-bottom: 24px;
+      padding-left: 20px;
+    }
+    .drawer-article-body li {
+      margin-bottom: 8px;
+    }
+
+    .drawer-article-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 0.94rem;
+    }
+    .drawer-article-body th, .drawer-article-body td {
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    html[data-theme="dark"] .drawer-article-body th, html[data-theme="dark"] .drawer-article-body td {
+      border-color: rgba(255,255,255,0.06);
+    }
+    .drawer-article-body th {
+      background: rgba(0,0,0,0.02);
+      font-weight: 750;
+    }
+    html[data-theme="dark"] .drawer-article-body th {
+      background: rgba(255,255,255,0.02);
+    }
+    
+    .drawer-footer {
+      padding: 24px 30px;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      background: var(--body-bg, #f8fafc);
+    }
+    html[data-theme="dark"] .drawer-footer {
+      border-color: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.01);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--color-text-muted, #777);
+      grid-column: 1 / -1;
+      display: none;
+    }
+    .no-results-icon {
+      font-size: 2.5rem;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body data-base="../" data-active-nav="blog">
+  <a class="skipLink" href="#main">Skip to content</a>
+  <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+  <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+  <div class="cursorDot" aria-hidden="true"></div>
+  <div class="cursorRing" aria-hidden="true"></div>
+  
+  <div id="navbarSlot"></div>
+
+  <main id="main" class="pageFadeIn">
+    
+    <!-- Hero / Search Section -->
+    <section class="blog-hero" aria-label="Blog Header">
+      <div class="container">
+        <div class="blog-header">
+          <h1 class="blog-title">Tax Knowledge Hub</h1>
+          <p class="blog-desc">Plain-language guides, statutory checklists, and compliance tips curated by qualified CAs.</p>
+          
+          <div class="blog-search-box">
+            <span class="blog-search-icon">🔍</span>
+            <input type="text" class="blog-search-input" id="blogSearch" placeholder="Search guides, regulations, compliance...">
           </div>
         </div>
-      </section>
 
-      <section class="section" aria-label="Posts">
-        <div class="container">
-          <div class="grid grid-3">
-            <article class="serviceCard">
-              <div class="badge badge--saffron">Income Tax</div>
-              <h2 class="serviceCard__title" style="margin-top: 10px;">New vs Old Tax Regime 2024-25</h2>
-              <p class="serviceCard__desc">A simple comparison and when each regime makes sense.</p>
-              <button class="btn btn-sm btn-outline" type="button" data-open-chat>Ask a CA about this →</button>
-            </article>
-            <article class="serviceCard">
-              <div class="badge badge--green">GST</div>
-              <h2 class="serviceCard__title" style="margin-top: 10px;">GST Reconciliation: Avoid 2B Mismatch</h2>
-              <p class="serviceCard__desc">How to reduce ITC issues with simple monthly habits.</p>
-              <button class="btn btn-sm btn-outline" type="button" data-open-chat>Ask a CA about this →</button>
-            </article>
-            <article class="serviceCard">
-              <div class="badge badge--navy">TDS</div>
-              <h2 class="serviceCard__title" style="margin-top: 10px;">TDS Basics for Small Businesses</h2>
-              <p class="serviceCard__desc">Common sections and how to avoid interest/penalties.</p>
-              <button class="btn btn-sm btn-outline" type="button" data-open-chat>Ask a CA about this →</button>
-            </article>
-          </div>
+        <div class="blog-filters">
+          <button class="filter-tab active" data-filter="all">All Articles</button>
+          <button class="filter-tab" data-filter="incomeTax">Income Tax</button>
+          <button class="filter-tab" data-filter="gst">GST &amp; Indirect Tax</button>
+          <button class="filter-tab" data-filter="tds">TDS / TCS</button>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <div id="footerSlot"></div>
-    <script defer src="../assets/js/site.js"></script>
-  </body>
+    <!-- Grid / Cards Section -->
+    <section class="section" aria-label="Blog posts grid">
+      <div class="container">
+        <div class="blog-grid" id="blogGrid">
+          
+          <!-- Card 1 -->
+          <article class="blog-card" data-category="incomeTax" onclick="blogHub.openDrawer('new-vs-old-regime')">
+            <div class="blog-card__image-container">
+              <div class="blog-card__img" style="background-image: linear-gradient(135deg, #ff9933 0%, #d47a13 100%);"></div>
+            </div>
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span class="blog-card__badge blog-card__badge--it">Income Tax</span>
+                <span class="blog-card__date">June 2, 2026</span>
+              </div>
+              <h2 class="blog-card__title">New vs Old Tax Regime 2024-25: A CA's Decision Guide</h2>
+              <p class="blog-card__desc">A detailed mathematical breakdown under the latest Finance Act. Understand slab differences and find your threshold limit to save maximum tax.</p>
+              <button class="blog-card__readmore" type="button">Read Guide <span>→</span></button>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="blog-card" data-category="gst" onclick="blogHub.openDrawer('gst-reconciliation-guide')">
+            <div class="blog-card__image-container">
+              <div class="blog-card__img" style="background-image: linear-gradient(135deg, #138808 0%, #0c5705 100%);"></div>
+            </div>
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span class="blog-card__badge blog-card__badge--gst">GST</span>
+                <span class="blog-card__date">May 28, 2026</span>
+              </div>
+              <h2 class="blog-card__title">GST Reconciliation: How to Protect Your Input Tax Credit (ITC)</h2>
+              <p class="blog-card__desc">Claiming excess ITC or mismatching GSTR-2B can trigger automatic department demand notices. Learn how monthly reconciliations safeguard cash flow.</p>
+              <button class="blog-card__readmore" type="button">Read Guide <span>→</span></button>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="blog-card" data-category="tds" onclick="blogHub.openDrawer('tds-basics-startups')">
+            <div class="blog-card__image-container">
+              <div class="blog-card__img" style="background-image: linear-gradient(135deg, #0d4a8a 0%, #062b54 100%);"></div>
+            </div>
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span class="blog-card__badge blog-card__badge--tds">TDS</span>
+                <span class="blog-card__date">May 15, 2026</span>
+              </div>
+              <h2 class="blog-card__title">TDS Decoded: Essential Tax Deduction Rules for Startups</h2>
+              <p class="blog-card__desc">Avoid the heavy ₹200/day daily penalty. Learn when you are legally required to deduct TDS on salaries, rents, and professional consulting contracts.</p>
+              <button class="blog-card__readmore" type="button">Read Guide <span>→</span></button>
+            </div>
+          </article>
+
+          <!-- No results indicator -->
+          <div class="no-results" id="noResults">
+            <div class="no-results-icon">📂</div>
+            <h3>No Articles Found</h3>
+            <p>Try refining your search terms or selecting a different filter category.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Slide-out Drawer Overlay -->
+  <div class="article-drawer-overlay" id="drawerOverlay" onclick="blogHub.closeDrawer()"></div>
+
+  <!-- Slide-out Article Drawer -->
+  <div class="article-drawer" id="articleDrawer">
+    <div class="drawer-progress-container">
+      <div class="drawer-progress-bar" id="drawerProgress"></div>
+    </div>
+    <div class="drawer-header">
+      <span class="drawer-header-title" id="drawerCategory">Income Tax Guide</span>
+      <button class="drawer-close-btn" onclick="blogHub.closeDrawer()" aria-label="Close article">✕</button>
+    </div>
+    <div class="drawer-content" id="drawerContent">
+      <div class="drawer-article-body" id="drawerArticleBody">
+        <!-- Content injected dynamically via JS -->
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <span style="font-size:0.84rem; font-weight:750; color:var(--color-text-secondary, #555);">Need help filing?</span>
+      <a class="btn btn-sm btn-primary" id="drawerCta" href="../apply.html">Consult a CA Now</a>
+    </div>
+  </div>
+
+  <div id="footerSlot"></div>
+
+  <script defer src="../assets/js/site.js"></script>
+  <script>
+    // CA Articles Database
+    const articleDatabase = {
+      'new-vs-old-regime': {
+        categoryLabel: "Income Tax Guide",
+        ctaHref: "../apply.html?service=incomeTax-it-efiling",
+        ctaText: "File ITR Now",
+        html: `
+          <h1>New vs Old Tax Regime 2024-25: A CA's Decision Guide</h1>
+          <p style="font-size:0.96rem; color:var(--color-text-muted, #777); margin-bottom: 24px;">Written by CA K. Das | Published June 2, 2026</p>
+          
+          <p>Under the latest changes announced in the Finance Act, the New Tax Regime has been established as the default tax regime in India. However, taxpayers still have the option to opt for the Old Tax Regime if it yields better tax savings. Choosing between the two is a pure mathematical decision based on the level of deductions you can claim.</p>
+          
+          <h2>1. Tax Slab Comparison (FY 2024-25)</h2>
+          <p>Here is how the tax brackets align for both regimes:</p>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Income Slab</th>
+                <th>Old Regime Rates</th>
+                <th>New Regime Rates</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Up to ₹3,00,000</td>
+                <td>Nil</td>
+                <td>Nil</td>
+              </tr>
+              <tr>
+                <td>₹3,00,001 to ₹6,00,000</td>
+                <td>5% (above ₹2.5L)</td>
+                <td>5%</td>
+              </tr>
+              <tr>
+                <td>₹6,00,001 to ₹7,00,000</td>
+                <td>20%</td>
+                <td>10%</td>
+              </tr>
+              <tr>
+                <td>₹7,00,001 to ₹9,00,000</td>
+                <td>20%</td>
+                <td>10%</td>
+              </tr>
+              <tr>
+                <td>₹9,00,001 to ₹10,00,000</td>
+                <td>20%</td>
+                <td>15%</td>
+              </tr>
+              <tr>
+                <td>₹10,00,001 to ₹12,00,000</td>
+                <td>30%</td>
+                <td>15%</td>
+              </tr>
+              <tr>
+                <td>₹12,00,001 to ₹15,00,000</td>
+                <td>30%</td>
+                <td>20%</td>
+              </tr>
+              <tr>
+                <td>Above ₹15,00,000</td>
+                <td>30%</td>
+                <td>30%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>2. Deductions Lost vs Retained</h2>
+          <p>The primary trade-off of the New Tax Regime is the sacrifice of popular tax-saving deductions in exchange for lower tax slab rates.</p>
+          
+          <p><strong>Deductions NOT available in the New Regime:</strong></p>
+          <ul>
+            <li>Section 80C (PPF, EPF, ELSS, Insurance premium, Home loan principal) - up to ₹1.5 Lakhs</li>
+            <li>Section 80D (Medical insurance premium) - up to ₹25,000 / ₹50,000</li>
+            <li>House Rent Allowance (HRA) & Leave Travel Allowance (LTA)</li>
+            <li>Section 24(b) (Home loan interest on self-occupied property) - up to ₹2 Lakhs</li>
+          </ul>
+
+          <p><strong>Deductions Retained in the New Regime:</strong></p>
+          <ul>
+            <li>Standard Deduction of ₹50,000 (increased to ₹75,000 for salaried employees under new provisions)</li>
+            <li>Section 80CCD(2) (Employer's contribution to NPS) - up to 10% of salary</li>
+          </ul>
+
+          <h2>3. The Threshold Rule of Thumb</h2>
+          <p>As a general CA directive, we use a <strong>Break-Even Deductions Threshold</strong> to advise clients:</p>
+          <ul>
+            <li>If your total deductions (under 80C, 80D, HRA, home loan interest, etc.) are **less than ₹3,75,000**, the **New Tax Regime** is mathematically superior.</li>
+            <li>If your eligible deductions **exceed ₹3,75,000**, the **Old Tax Regime** will yield higher tax savings.</li>
+          </ul>
+          <p>Since each individual's financial situation varies, we recommend consulting one of our CA compliance team members to calculate the precise optimal route and file your ITR accurately.</p>
+        `
+      },
+      'gst-reconciliation-guide': {
+        categoryLabel: "GST Compliance Guide",
+        ctaHref: "../apply.html?service=gst-gst-registration",
+        ctaText: "Register/File GST",
+        html: `
+          <h1>GST Reconciliation: How to Protect Your Input Tax Credit (ITC)</h1>
+          <p style="font-size:0.96rem; color:var(--color-text-muted, #777); margin-bottom: 24px;">Written by CA K. Das | Published May 28, 2026</p>
+          
+          <p>For businesses holding GST registrations, managing Input Tax Credit (ITC) is critical to maintaining a healthy cash flow. Input Tax Credit allows you to deduct the GST you paid on purchases from the GST you owe on sales. However, claiming unverified or mismatched ITC is one of the quickest ways to receive tax demand notices from the department.</p>
+
+          <h2>1. Understanding GSTR-2B vs GSTR-3B</h2>
+          <p>Under current GST guidelines, you are legally permitted to claim ITC only if it appears in your <strong>GSTR-2B</strong> statement. GSTR-2B is a static, auto-generated statement showing all the inward supplies uploaded by your suppliers in their respective GSTR-1 files.</p>
+          <p><strong>The Mismatch Mismatch:</strong> If you claim an ITC amount in your monthly GSTR-3B return that is higher than the ITC available in your GSTR-2B, the GST portal automatically marks this as a discrepancy. This triggers a system-generated notice in **Form GST ASMT-10** demanding explanation or payment of interest.</p>
+
+          <h2>2. Step-by-Step Monthly Reconciliation Routine</h2>
+          <p>To avoid compliance audits, your accounting team should implement this 3-step monthly habit before filing returns on the 20th of every month:</p>
+          
+          <ul>
+            <li><strong>Download GSTR-2B:</strong> Fetch the static GSTR-2B statement from the GST portal on the 14th of the month.</li>
+            <li><strong>Match with Purchase Register:</strong> Compare the GSTR-2B transactions line-by-line with your internal purchase ledgers. Match invoice numbers, taxable values, and GST amounts.</li>
+            <li><strong>Categorize Mismatches:</strong> Divide non-matching items into:
+              <ul>
+                <li>*Missing Invoices:* Purchases recorded by you, but supplier has not uploaded the invoice. (Do not claim ITC this month; follow up with vendor).</li>
+                <li>*Mismatch Errors:* Incorrect invoice values or GSTINs typed by supplier.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h2>3. Setting Vendor Compliance Rules</h2>
+          <p>Since your ITC relies on your vendors filing on time, we recommend establishing clear payment terms. Hold back the GST component of a vendor's invoice payment until the transaction reflects successfully in your GSTR-2B ledger. This builds immediate compliance discipline among suppliers and protects your cash flow.</p>
+        `
+      },
+      'tds-basics-startups': {
+        categoryLabel: "TDS / Salary Compliance",
+        ctaHref: "../apply.html?service=incomeTax-it-tds-filing",
+        ctaText: "File TDS Returns",
+        html: `
+          <h1>TDS Decoded: Essential Tax Deduction Rules for Startups</h1>
+          <p style="font-size:0.96rem; color:var(--color-text-muted, #777); margin-bottom: 24px;">Written by CA K. Das | Published May 15, 2026</p>
+          
+          <p>Tax Deducted at Source (TDS) is a government mechanism to collect tax at the point of origin of income. As a startup or growing business, you are not just a taxpayer; the law appoints you as a **tax collector**. You are legally obligated to deduct a specified percentage of tax before paying salaries, professional consultants, or commercial landlord rents.</p>
+
+          <h2>1. What is TAN and Who Needs It?</h2>
+          <p>To deduct TDS, your business must obtain a <strong>TAN (Tax Deduction and Collection Account Number)</strong>. Operating without a TAN, or failing to quote it in challans/returns, carries a mandatory ₹10,000 fine. Any business (except individuals under certain thresholds) making payments to contractors or professionals must hold a TAN.</p>
+
+          <h2>2. Common TDS Sections & Threshold Limits</h2>
+          <p>Startups must keep a close eye on these four key sections:</p>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Nature of Payment</th>
+                <th>Section</th>
+                <th>Threshold Limit</th>
+                <th>TDS Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Salaries</td>
+                <td>Sec 192</td>
+                <td>Basic Exemption Limit</td>
+                <td>Slab rates (average rate)</td>
+              </tr>
+              <tr>
+                <td>Contractors / Subcontractors</td>
+                <td>Sec 194C</td>
+                <td>₹30,000 (single) / ₹1,00,000 (annual)</td>
+                <td>1% (Individual/HUF), 2% (Corporate)</td>
+              </tr>
+              <tr>
+                <td>Professional / Technical Fees</td>
+                <td>Sec 194J</td>
+                <td>₹30,000 annually</td>
+                <td>2% (Technical services), 10% (Professional/Royalties)</td>
+              </tr>
+              <tr>
+                <td>Rent (Land / Building)</td>
+                <td>Sec 194I</td>
+                <td>₹2,40,000 annually</td>
+                <td>10% (Land/Building), 2% (Plant/Machinery)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>3. Crucial Compliance Deadlines</h2>
+          <p>TDS compliance consists of two distinct steps:</p>
+          <ul>
+            <li><strong>Monthly Payment:</strong> The TDS deducted in any month must be deposited with the government by the **7th of the following month** (using Challan ITNS 281).</li>
+            <li><strong>Quarterly Returns:</strong> You must file TDS returns (Form 24Q for salaries, Form 26Q for others) quarterly:
+              <ul>
+                <li>Q1 (April - June): Due by July 31</li>
+                <li>Q2 (July - Sept): Due by October 31</li>
+                <li>Q3 (Oct - Dec): Due by January 31</li>
+                <li>Q4 (Jan - March): Due by May 31</li>
+              </ul>
+            </li>
+          </ul>
+
+          <p><strong>Consequences of Defaults:</strong> Failing to file quarterly returns on time triggers an automatic late fee of **₹200 per day** under Section 234E, which cannot exceed the TDS amount. Furthermore, the expense on which TDS was not deducted will be disallowed from business expenses, raising your corporate tax liability by 30%!</p>
+        `
+      }
+    };
+
+    const blogHub = {
+      init() {
+        this.search = document.getElementById('blogSearch');
+        this.grid = document.getElementById('blogGrid');
+        this.cards = Array.from(this.grid.querySelectorAll('.blog-card'));
+        this.filters = document.querySelectorAll('.filter-tab');
+        this.noResults = document.getElementById('noResults');
+        this.drawer = document.getElementById('articleDrawer');
+        this.overlay = document.getElementById('drawerOverlay');
+        this.drawerContent = document.getElementById('drawerContent');
+        this.progressBar = document.getElementById('drawerProgress');
+
+        // Search events
+        if (this.search) {
+          this.search.addEventListener('input', () => this.filterArticles());
+        }
+
+        // Filter tab events
+        this.filters.forEach(tab => {
+          tab.addEventListener('click', () => {
+            this.filters.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            this.filterArticles();
+          });
+        });
+
+        // Track reading progress in drawer
+        if (this.drawerContent) {
+          this.drawerContent.addEventListener('scroll', () => this.updateProgressBar());
+        }
+      },
+
+      filterArticles() {
+        const query = this.search.value.toLowerCase().trim();
+        const activeTab = document.querySelector('.filter-tab.active');
+        const category = activeTab ? activeTab.getAttribute('data-filter') : 'all';
+
+        let visibleCount = 0;
+
+        this.cards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          const title = card.querySelector('.blog-card__title').textContent.toLowerCase();
+          const desc = card.querySelector('.blog-card__desc').textContent.toLowerCase();
+
+          const matchesSearch = title.includes(query) || desc.includes(query);
+          const matchesCategory = category === 'all' || cardCat === category;
+
+          if (matchesSearch && matchesCategory) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (visibleCount === 0) {
+          this.noResults.style.display = 'block';
+        } else {
+          this.noResults.style.display = 'none';
+        }
+      },
+
+      openDrawer(articleKey) {
+        const article = articleDatabase[articleKey];
+        if (!article) return;
+
+        // Populate article content
+        document.getElementById('drawerCategory').textContent = article.categoryLabel;
+        document.getElementById('drawerArticleBody').innerHTML = article.html;
+        
+        // Setup CTA
+        const ctaBtn = document.getElementById('drawerCta');
+        if (ctaBtn) {
+          ctaBtn.href = article.ctaHref;
+          ctaBtn.textContent = article.ctaText;
+        }
+
+        // Reset progress bar
+        this.progressBar.style.width = '0%';
+        this.drawerContent.scrollTop = 0;
+
+        // Display drawer
+        this.overlay.classList.add('active');
+        this.drawer.classList.add('active');
+        document.body.style.overflow = 'hidden'; // prevent background scrolling
+      },
+
+      closeDrawer() {
+        this.overlay.classList.remove('active');
+        this.drawer.classList.remove('active');
+        document.body.style.overflow = '';
+      },
+
+      updateProgressBar() {
+        const contentHeight = this.drawerContent.scrollHeight - this.drawerContent.clientHeight;
+        if (contentHeight <= 0) return;
+        const scrollPercent = (this.drawerContent.scrollTop / contentHeight) * 100;
+        this.progressBar.style.width = scrollPercent + '%';
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      blogHub.init();
+    });
+  </script>
+</body>
 </html>

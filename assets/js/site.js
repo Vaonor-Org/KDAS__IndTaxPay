@@ -78,7 +78,6 @@
             <button class="navLink" type="button" data-mega-btn="services" data-nav="services" aria-expanded="false" aria-controls="mega-services">
               Services ▾
             </button>
-            <a class="navLink" href="${base}how-it-works/index.html" data-nav="how">How It Works</a>
             <a class="navLink" href="${base}blog/index.html" data-nav="blog">Blog</a>
             <a class="navLink" href="${base}about/index.html" data-nav="about">About</a>
             <a class="navLink" href="${base}track.html" data-nav="track">Track</a>
@@ -95,37 +94,295 @@
           </div>
         </div>
 
-        <div class="mega" id="mega-services" data-mega="services" aria-label="Services menu">
-          <div class="mega__card">
-            <div class="mega__grid">
-              <div class="mega__col">
-                <div class="mega__title">Tax Services</div>
-                ${renderMegaItem(base, "Income Tax (ITR)", "ITR filing with expert CA review.", "services/income-tax.html", "saffron")}
-                ${renderMegaItem(base, "GST Registration & Filing", "Registration, returns, reconciliation.", "services/gst.html", "green")}
-                ${renderMegaItem(base, "TDS & Payroll", "TDS returns, payroll, Form 16.", "services/tds-tcs.html", "navy")}
-              </div>
-              <div class="mega__col">
-                <div class="mega__title">Business Services</div>
-                ${renderMegaItem(base, "Company Registration", "Pvt Ltd / LLP / OPC.", "services/company-registration.html", "green")}
-                ${renderMegaItem(base, "Statutory Audit", "3CD + audit-ready reports.", "services/statutory-audit.html", "navy")}
-                ${renderMegaItem(base, "Accounting & Bookkeeping", "Monthly books + MIS.", "services/accounting.html", "saffron")}
-              </div>
-              <div class="mega__col">
-                <div class="featuredCard">
-                  <div class="stack">
-                    <div class="badge badge--saffron">Featured</div>
-                    <div class="mega__title">Never miss a due date</div>
-                    <p class="muted">Try the compliance calendar and get reminder-ready checklists in minutes.</p>
-                  </div>
-                  <div class="row wrap">
-                    <a class="btn btn-sm btn-primary" href="${base}index.html#calendar">Open Calendar →</a>
-                    <a class="btn btn-sm btn-outline" href="${base}contact/index.html">Talk to Expert</a>
-                  </div>
+        <div class="svcPanel" id="mega-services" data-mega="services" aria-label="Services navigation panel">
+          <div class="svcPanel__inner">
+
+            <div class="svcPanel__left">
+              <p class="svcPanel__journey-lbl">Your Business Journey</p>
+              <nav class="svcCats" aria-label="Service categories">
+                <button class="svcCat is-active" type="button" data-svc-cat="startup">
+                  <span class="svcCat__num">01</span>
+                  <span class="svcCat__body">
+                    <span class="svcCat__name">Start Business</span>
+                    <span class="svcCat__hint">Company formation &amp; incorporation</span>
+                  </span>
+                  <span class="svcCat__arr" aria-hidden="true">›</span>
+                </button>
+                <button class="svcCat" type="button" data-svc-cat="registrations">
+                  <span class="svcCat__num">02</span>
+                  <span class="svcCat__body">
+                    <span class="svcCat__name">Legal Registrations</span>
+                    <span class="svcCat__hint">Licenses, MSME &amp; government approvals</span>
+                  </span>
+                  <span class="svcCat__arr" aria-hidden="true">›</span>
+                </button>
+                <button class="svcCat" type="button" data-svc-cat="trademark">
+                  <span class="svcCat__num">03</span>
+                  <span class="svcCat__body">
+                    <span class="svcCat__name">Brand Protection</span>
+                    <span class="svcCat__hint">Trademark &amp; IP registration</span>
+                  </span>
+                  <span class="svcCat__arr" aria-hidden="true">›</span>
+                </button>
+                <button class="svcCat" type="button" data-svc-cat="gst">
+                  <span class="svcCat__num">04</span>
+                  <span class="svcCat__body">
+                    <span class="svcCat__name">Tax &amp; GST</span>
+                    <span class="svcCat__hint">GST registration &amp; return filing</span>
+                  </span>
+                  <span class="svcCat__arr" aria-hidden="true">›</span>
+                </button>
+                <button class="svcCat" type="button" data-svc-cat="incomeTax">
+                  <span class="svcCat__num">05</span>
+                  <span class="svcCat__body">
+                    <span class="svcCat__name">Income Tax</span>
+                    <span class="svcCat__hint">ITR filing &amp; tax planning</span>
+                  </span>
+                  <span class="svcCat__arr" aria-hidden="true">›</span>
+                </button>
+                <button class="svcCat" type="button" data-svc-cat="compliance">
+                  <span class="svcCat__num">06</span>
+                  <span class="svcCat__body">
+                    <span class="svcCat__name">Corporate Compliance</span>
+                    <span class="svcCat__hint">MCA filings &amp; company secretary</span>
+                  </span>
+                  <span class="svcCat__arr" aria-hidden="true">›</span>
+                </button>
+                <button class="svcCat" type="button" data-svc-cat="businessSupport">
+                  <span class="svcCat__num">07</span>
+                  <span class="svcCat__body">
+                    <span class="svcCat__name">Business Operations</span>
+                    <span class="svcCat__hint">Accounting, payroll &amp; bookkeeping</span>
+                  </span>
+                  <span class="svcCat__arr" aria-hidden="true">›</span>
+                </button>
+                <button class="svcCat" type="button" data-svc-cat="globalBusiness">
+                  <span class="svcCat__num">08</span>
+                  <span class="svcCat__body">
+                    <span class="svcCat__name">Global Expansion</span>
+                    <span class="svcCat__hint">International business setup</span>
+                  </span>
+                  <span class="svcCat__arr" aria-hidden="true">›</span>
+                </button>
+                <button class="svcCat" type="button" data-svc-cat="audit">
+                  <span class="svcCat__num">09</span>
+                  <span class="svcCat__body">
+                    <span class="svcCat__name">Audit &amp; Assurance</span>
+                    <span class="svcCat__hint">Statutory, tax &amp; internal audit</span>
+                  </span>
+                  <span class="svcCat__arr" aria-hidden="true">›</span>
+                </button>
+              </nav>
+            </div>
+
+            <div class="svcPanel__divider" aria-hidden="true"></div>
+
+            <div class="svcPanel__right">
+
+              <!-- START BUSINESS -->
+              <div class="svcServices is-active" data-svc-services="startup">
+                <div class="svcServices__hd">
+                  <span class="svcServices__title">Start Business</span>
+                  <span class="svcServices__count">10 services</span>
+                </div>
+                <div class="svcItems">
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:0"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Proprietorship</span><span class="svcItem__desc">Best for individual business owners and freelancers.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:1"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Partnership Firm</span><span class="svcItem__desc">Ideal for businesses operated by two or more partners.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:2"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">One Person Company (OPC)</span><span class="svcItem__desc">Limited liability business structure for a single owner.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:3"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Limited Liability Partnership (LLP)</span><span class="svcItem__desc">Flexible business structure with legal protection for partners.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:4"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Private Limited Company</span><span class="svcItem__desc">Most popular startup structure for growth and fundraising.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:5"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Public Limited Company</span><span class="svcItem__desc">Suitable for large businesses seeking expansion.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:6"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Section 8 Company</span><span class="svcItem__desc">Non-profit company structure for social and charitable activities.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:7"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Producer Company</span><span class="svcItem__desc">Designed for agricultural producers and farmer groups.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:8"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trust Registration</span><span class="svcItem__desc">Legal structure for charitable and religious organizations.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/startup.html" style="--i:9"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Indian Subsidiary Company</span><span class="svcItem__desc">For foreign businesses establishing operations in India.</span></span><span class="svcItem__arr">→</span></a>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+
+              <!-- LEGAL REGISTRATIONS -->
+              <div class="svcServices" data-svc-services="registrations">
+                <div class="svcServices__hd">
+                  <span class="svcServices__title">Legal Registrations</span>
+                  <span class="svcServices__count">27 services</span>
+                </div>
+                <div class="svcItems">
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:0"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Startup India Registration</span><span class="svcItem__desc">Government-recognized startup benefits and incentives.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:1"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trade License</span><span class="svcItem__desc">Legal permission to conduct business operations.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:2"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">FSSAI Registration</span><span class="svcItem__desc">Basic registration for food businesses.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:3"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">FSSAI License</span><span class="svcItem__desc">Mandatory licensing for larger food enterprises.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:4"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Halal License &amp; Certification</span><span class="svcItem__desc">Certification for halal-compliant products and services.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:5"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">ICEGATE Registration</span><span class="svcItem__desc">Required for customs and international trade activities.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:6"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Import Export Code (IEC)</span><span class="svcItem__desc">Mandatory for import and export businesses.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:7"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Legal Entity Identifier (LEI)</span><span class="svcItem__desc">Unique global identification for financial transactions.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:8"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">ISO Registration</span><span class="svcItem__desc">International quality certification standards.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:9"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">PF Registration</span><span class="svcItem__desc">Employee Provident Fund registration.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:10"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">ESI Registration</span><span class="svcItem__desc">Employee State Insurance registration.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:11"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Professional Tax Registration</span><span class="svcItem__desc">State-level employer tax compliance.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:12"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">RCMC Registration</span><span class="svcItem__desc">Export promotion council membership certificate.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:13"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">TN RERA Registration</span><span class="svcItem__desc">Mandatory registration for real estate agents.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:14"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">12A Registration</span><span class="svcItem__desc">Income tax exemption for NGOs.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:15"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">80G Registration</span><span class="svcItem__desc">Tax benefits for donors.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:16"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">12A &amp; 80G Registration</span><span class="svcItem__desc">Combined NGO tax exemption and donor benefit registration.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:17"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Barcode Registration</span><span class="svcItem__desc">Product barcode allocation and registration.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:18"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">BIS Registration</span><span class="svcItem__desc">Bureau of Indian Standards certification.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:19"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Certificate of Incumbency</span><span class="svcItem__desc">Verification of company status and directors.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:20"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">NGO Darpan Registration</span><span class="svcItem__desc">Government NGO recognition portal registration.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:21"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Digital Signature Certificate (DSC)</span><span class="svcItem__desc">Required for online filings and compliance.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:22"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Shop Act Registration</span><span class="svcItem__desc">Mandatory registration for shops and establishments.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:23"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Udyam Registration</span><span class="svcItem__desc">MSME registration with government benefits.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:24"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Fire License</span><span class="svcItem__desc">Fire safety compliance approval.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:25"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Food Testing</span><span class="svcItem__desc">Laboratory food safety testing and certification.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:26"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Water Testing</span><span class="svcItem__desc">Certified water quality testing services.</span></span><span class="svcItem__arr">→</span></a>
+                </div>
+              </div>
+
+              <!-- BRAND PROTECTION -->
+              <div class="svcServices" data-svc-services="trademark">
+                <div class="svcServices__hd">
+                  <span class="svcServices__title">Brand Protection</span>
+                  <span class="svcServices__count">16 services</span>
+                </div>
+                <div class="svcItems">
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:0"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trademark Registration</span><span class="svcItem__desc">Protect your brand name and identity.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:1"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trademark Objection</span><span class="svcItem__desc">Professional response to trademark objections.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:2"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trademark Certificate</span><span class="svcItem__desc">Obtain trademark registration certificate.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:3"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trademark Opposition</span><span class="svcItem__desc">Support for opposition proceedings.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:4"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trademark Hearing</span><span class="svcItem__desc">Representation during trademark hearings.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:5"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trademark Rectification</span><span class="svcItem__desc">Correction of trademark records.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:6"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trademark Renewal</span><span class="svcItem__desc">Maintain trademark validity beyond 10 years.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:7"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trademark Transfer</span><span class="svcItem__desc">Transfer ownership of registered trademarks.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:8"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Expedited Trademark Registration</span><span class="svcItem__desc">Fast-track trademark application processing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:9"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Logo Designing</span><span class="svcItem__desc">Professional logo and brand identity creation.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:10"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Design Registration</span><span class="svcItem__desc">Protect product appearance and designs.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:11"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Design Objection</span><span class="svcItem__desc">Response to design registration objections.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:12"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Copyright Registration</span><span class="svcItem__desc">Protect creative works and content.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:13"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Copyright Objection</span><span class="svcItem__desc">Handle copyright-related objections.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:14"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Patent Registration</span><span class="svcItem__desc">Protect inventions and innovations.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/trademark.html" style="--i:15"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trademark Protection</span><span class="svcItem__desc">Ongoing brand protection and monitoring services.</span></span><span class="svcItem__arr">→</span></a>
+                </div>
+              </div>
+
+              <!-- TAX & GST -->
+              <div class="svcServices" data-svc-services="gst">
+                <div class="svcServices__hd">
+                  <span class="svcServices__title">Tax &amp; GST</span>
+                  <span class="svcServices__count">10 services</span>
+                </div>
+                <div class="svcItems">
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:0"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">GST Registration</span><span class="svcItem__desc">Obtain GST registration and GSTIN.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:1"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">GST Return Filing</span><span class="svcItem__desc">Monthly and annual GST return filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:2"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">GST LUT Form</span><span class="svcItem__desc">Letter of Undertaking filing for exporters.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:3"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">GST Notice</span><span class="svcItem__desc">Professional GST notice handling and reply.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:4"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">GST Annual Return (GSTR-9)</span><span class="svcItem__desc">Annual GST compliance filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:5"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">GST Registration for Foreigners</span><span class="svcItem__desc">GST registration for foreign entities.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:6"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">GST Amendment</span><span class="svcItem__desc">Update GST registration details.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:7"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">GST Revocation</span><span class="svcItem__desc">Restore cancelled GST registrations.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:8"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">GSTR-10 Final Return</span><span class="svcItem__desc">Final GST return on cancellation of registration.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/gst.html" style="--i:9"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">Virtual Office + GSTIN</span><span class="svcItem__desc">Business address with GST registration support.</span></span><span class="svcItem__arr">→</span></a>
+                </div>
+              </div>
+
+              <!-- INCOME TAX -->
+              <div class="svcServices" data-svc-services="incomeTax">
+                <div class="svcServices__hd">
+                  <span class="svcServices__title">Income Tax</span>
+                  <span class="svcServices__count">10 services</span>
+                </div>
+                <div class="svcItems">
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:0"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Income Tax E-Filing</span><span class="svcItem__desc">Individual income tax return filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:1"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Business Tax Filing</span><span class="svcItem__desc">Tax filing for business entities.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:2"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Partnership Firm / LLP ITR</span><span class="svcItem__desc">Income tax filing for firms and LLPs.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:3"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Company ITR Filing</span><span class="svcItem__desc">Corporate income tax return filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:4"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Trust / NGO Tax Filing</span><span class="svcItem__desc">Tax compliance for NGOs and trusts.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:5"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">15CA – 15CB Filing</span><span class="svcItem__desc">Foreign remittance compliance certification.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:6"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">TAN Registration</span><span class="svcItem__desc">Tax deduction account number registration.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:7"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">TDS Return Filing</span><span class="svcItem__desc">Quarterly TDS filing services.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:8"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Income Tax Notice</span><span class="svcItem__desc">Notice response and representation.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/income-tax.html" style="--i:9"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Revised ITR Return (ITR-U)</span><span class="svcItem__desc">Correction and updating of filed returns.</span></span><span class="svcItem__arr">→</span></a>
+                </div>
+              </div>
+
+              <!-- CORPORATE COMPLIANCE -->
+              <div class="svcServices" data-svc-services="compliance">
+                <div class="svcServices__hd">
+                  <span class="svcServices__title">Corporate Compliance</span>
+                  <span class="svcServices__count">22 services</span>
+                </div>
+                <div class="svcItems">
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:0"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Company Annual Compliance</span><span class="svcItem__desc">Complete annual compliance for private limited companies.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:1"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">LLP Compliance</span><span class="svcItem__desc">Mandatory LLP annual filings and returns.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:2"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">OPC Compliance</span><span class="svcItem__desc">Compliance support for One Person Companies.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:3"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Company Name Change</span><span class="svcItem__desc">Official company name change process.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:4"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Registered Office Change</span><span class="svcItem__desc">Change company registered address.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:5"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">DIN eKYC Filing</span><span class="svcItem__desc">Director identity verification filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:6"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">DIN Reactivation</span><span class="svcItem__desc">Restore deactivated Director Identification Number.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:7"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Director Change</span><span class="svcItem__desc">Appointment and resignation of directors.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:8"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Remove Director</span><span class="svcItem__desc">Director removal ROC filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:9"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">ADT-1 Filing</span><span class="svcItem__desc">Auditor appointment filing with ROC.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:10"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">DPT-3 Filing</span><span class="svcItem__desc">Loan and deposit disclosure filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:11"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">LLP Form 11 Filing</span><span class="svcItem__desc">Annual LLP return filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:12"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Dormant Status Filing</span><span class="svcItem__desc">Apply for dormant company status.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:13"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">MOA Amendment</span><span class="svcItem__desc">Modify company objectives and clauses.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:14"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">AOA Amendment</span><span class="svcItem__desc">Amend internal governance rules.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:15"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Authorized Capital Increase</span><span class="svcItem__desc">Increase company authorised share capital.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:16"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Share Transfer</span><span class="svcItem__desc">Transfer company ownership shares.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:17"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Demat of Shares</span><span class="svcItem__desc">Share dematerialization services.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:18"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Winding Up – LLP</span><span class="svcItem__desc">LLP closure and strike-off process.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:19"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Winding Up – Company</span><span class="svcItem__desc">Company strike-off and closure.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:20"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Commencement (INC-20A)</span><span class="svcItem__desc">Business commencement declaration filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/mca-compliance.html" style="--i:21"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">CFSS Scheme</span><span class="svcItem__desc">Compliance support under applicable MCA schemes.</span></span><span class="svcItem__arr">→</span></a>
+                </div>
+              </div>
+
+              <!-- BUSINESS OPERATIONS -->
+              <div class="svcServices" data-svc-services="businessSupport">
+                <div class="svcServices__hd">
+                  <span class="svcServices__title">Business Operations</span>
+                  <span class="svcServices__count">11 services</span>
+                </div>
+                <div class="svcItems">
+                  <a class="svcItem" href="${base}services/business-support.html" style="--i:0"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Business Plan</span><span class="svcItem__desc">Professional business plan preparation.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/business-support.html" style="--i:1"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">HR &amp; Payroll</span><span class="svcItem__desc">Payroll management and HR support.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/business-support.html" style="--i:2"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Bookkeeping</span><span class="svcItem__desc">Daily financial record maintenance.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/business-support.html" style="--i:3"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">CA Support</span><span class="svcItem__desc">Dedicated chartered accountant assistance.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/business-support.html" style="--i:4"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">PF Return Filing</span><span class="svcItem__desc">Employee provident fund return filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/business-support.html" style="--i:5"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">ESI Return Filing</span><span class="svcItem__desc">Employee insurance return filing.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/business-support.html" style="--i:6"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Professional Tax Return Filing</span><span class="svcItem__desc">State tax return compliance.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/business-support.html" style="--i:7"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Partnership Compliance</span><span class="svcItem__desc">Ongoing compliance for partnerships.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/business-support.html" style="--i:8"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Proprietorship Compliance</span><span class="svcItem__desc">Compliance support for proprietorship businesses.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:9"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">FSSAI Renewal</span><span class="svcItem__desc">Renew food licenses and registrations.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/registrations.html" style="--i:10"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">FSSAI Return Filing</span><span class="svcItem__desc">Mandatory FSSAI annual return compliance.</span></span><span class="svcItem__arr">→</span></a>
+                </div>
+              </div>
+
+              <!-- GLOBAL EXPANSION -->
+              <div class="svcServices" data-svc-services="globalBusiness">
+                <div class="svcServices__hd">
+                  <span class="svcServices__title">Global Expansion</span>
+                  <span class="svcServices__count">8 services</span>
+                </div>
+                <div class="svcItems">
+                  <a class="svcItem" href="${base}services/global-business.html" style="--i:0"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">UAE Company Registration</span><span class="svcItem__desc">Start and operate a company in the UAE.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/global-business.html" style="--i:1"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">USA Company Registration</span><span class="svcItem__desc">Business incorporation in the United States.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/global-business.html" style="--i:2"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">Singapore Company Registration</span><span class="svcItem__desc">Company formation in Singapore.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/global-business.html" style="--i:3"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">UK Company Registration</span><span class="svcItem__desc">Business incorporation in the United Kingdom.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/global-business.html" style="--i:4"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">USA Trademark Registration</span><span class="svcItem__desc">Trademark protection in the United States.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/global-business.html" style="--i:5"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">FDI Filing</span><span class="svcItem__desc">Foreign Direct Investment compliance and reporting.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/global-business.html" style="--i:6"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">ODI Filing</span><span class="svcItem__desc">Overseas Direct Investment filings and RBI compliance.</span></span><span class="svcItem__arr">→</span></a>
+                  <a class="svcItem" href="${base}services/global-business.html" style="--i:7"><span class="svcItem__dot" style="background:#138808"></span><span class="svcItem__body"><span class="svcItem__name">FLA Return Filing</span><span class="svcItem__desc">Foreign liabilities and assets annual reporting.</span></span><span class="svcItem__arr">→</span></a>
+                </div>
+              </div>
+
+              <!-- AUDIT & ASSURANCE -->
+              <div class="svcServices" data-svc-services="audit">
+                <div class="svcServices__hd">
+                  <span class="svcServices__title">Audit &amp; Assurance</span>
+                  <span class="svcServices__count">1 service</span>
+                </div>
+                <div class="svcItems">
+                  <a class="svcItem" href="${base}services/audit-assurance.html" style="--i:0"><span class="svcItem__dot"></span><span class="svcItem__body"><span class="svcItem__name">Audit &amp; Assurance</span><span class="svcItem__desc">Financial audits and assurance services.</span></span><span class="svcItem__arr">→</span></a>
+                </div>
+              </div>
 
         <div class="mega" id="mega-calculators" data-mega="calculators" aria-label="Calculators menu">
           <div class="mega__card">
@@ -241,9 +498,9 @@
               <div class="footerList">
                 <a href="${base}services/income-tax.html">Income Tax (ITR)</a>
                 <a href="${base}services/gst.html">GST</a>
-                <a href="${base}services/tds-tcs.html">TDS & Payroll</a>
-                <a href="${base}services/company-registration.html">Company Registration</a>
-                <a href="${base}services/statutory-audit.html">Statutory Audit</a>
+                <a href="${base}services/business-support.html">TDS &amp; Payroll</a>
+                <a href="${base}services/startup.html">Company Registration</a>
+                <a href="${base}services/audit-assurance.html">Statutory Audit</a>
               </div>
             </div>
 
@@ -334,6 +591,162 @@
       const link = $(`.navLink[data-nav="${active}"]`);
       if (link) link.setAttribute("aria-current", "page");
     }
+
+    // inject services panel CSS once
+    if (!document.getElementById('svcPanelStyles')) {
+      const style = document.createElement('style');
+      style.id = 'svcPanelStyles';
+      style.textContent = `
+        /* ── Services Journey Panel ─────────────────────── */
+        .svcPanel {
+          position: absolute;
+          top: 100%;
+          left: 0; right: 0;
+          z-index: 900;
+          background: #030d20;
+          border-top: 1px solid rgba(255,255,255,0.06);
+          box-shadow: 0 40px 80px rgba(0,0,0,0.60);
+          opacity: 0;
+          transform: translateY(-12px);
+          pointer-events: none;
+          transition: opacity 0.32s cubic-bezier(0.16,1,0.3,1),
+                      transform 0.32s cubic-bezier(0.16,1,0.3,1);
+        }
+        .svcPanel.is-open { opacity:1; transform:translateY(0); pointer-events:all; }
+        .svcPanel__inner {
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 0 40px;
+          display: grid;
+          grid-template-columns: 300px 1px 1fr;
+          height: 520px;
+        }
+        /* ── Left column ─── */
+        .svcPanel__left { padding: 28px 28px 28px 0; overflow-y: auto; }
+        .svcPanel__journey-lbl {
+          font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
+          font-weight: 700; color: rgba(255,153,51,0.65);
+          margin-bottom: 16px;
+          font-family: var(--font-display, Inter, sans-serif);
+        }
+        .svcPanel__divider { width:1px; background: rgba(255,255,255,0.06); margin: 20px 0; }
+        .svcCats { display:flex; flex-direction:column; gap:2px; }
+        .svcCat {
+          display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+          padding:11px 12px; border-radius:10px; background:transparent; border:none;
+          cursor:pointer; transition:all 0.24s ease;
+          color:rgba(255,255,255,0.48); position:relative;
+        }
+        .svcCat.is-active, .svcCat:hover { background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.95); }
+        .svcCat.is-active::before {
+          content:''; position:absolute; left:0; top:18%; bottom:18%;
+          width:3px; border-radius:2px; background:#FF9933;
+          animation: svcCatLine 0.26s cubic-bezier(0.16,1,0.3,1) both;
+        }
+        @keyframes svcCatLine { from{transform:scaleY(0)} to{transform:scaleY(1)} }
+        .svcCat__num {
+          font-size:0.66rem; font-weight:800; font-family:var(--font-mono,monospace);
+          color:rgba(255,153,51,0.40); min-width:18px; transition:color 0.2s;
+        }
+        .svcCat.is-active .svcCat__num { color:#FF9933; }
+        .svcCat__body { flex:1; display:flex; flex-direction:column; gap:1px; }
+        .svcCat__name { font-family:var(--font-display,Inter,sans-serif); font-weight:700; font-size:0.86rem; line-height:1.2; }
+        .svcCat__hint { font-size:0.71rem; color:rgba(255,255,255,0.35); line-height:1.3; }
+        .svcCat.is-active .svcCat__hint { color:rgba(255,255,255,0.52); }
+        .svcCat__arr { font-size:1rem; opacity:0; transform:translateX(-4px); transition:all 0.2s ease; color:#FF9933; }
+        .svcCat.is-active .svcCat__arr { opacity:1; transform:translateX(0); }
+        /* ── Right column ─── */
+        .svcPanel__right {
+          padding: 0;
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255,153,51,0.25) transparent;
+        }
+        .svcPanel__right::-webkit-scrollbar { width:4px; }
+        .svcPanel__right::-webkit-scrollbar-track { background:transparent; }
+        .svcPanel__right::-webkit-scrollbar-thumb { background:rgba(255,153,51,0.25); border-radius:4px; }
+        .svcServices { display:none; flex-direction:column; height:100%; }
+        .svcServices.is-active { display:flex; }
+        /* Header row */
+        .svcServices__hd {
+          display:flex; align-items:center; justify-content:space-between;
+          padding: 20px 28px 14px;
+          border-bottom: 1px solid rgba(255,255,255,0.05);
+          position:sticky; top:0; background:#030d20; z-index:2;
+          flex-shrink:0;
+        }
+        .svcServices__title {
+          font-family:var(--font-display,Inter,sans-serif); font-weight:800;
+          font-size:0.95rem; color:rgba(255,255,255,0.92); letter-spacing:-0.01em;
+        }
+        .svcServices__count {
+          font-size:0.68rem; font-weight:700; font-family:var(--font-mono,monospace);
+          color:rgba(255,153,51,0.70); letter-spacing:0.08em; text-transform:uppercase;
+          padding:3px 10px; border-radius:999px;
+          background:rgba(255,153,51,0.10); border:1px solid rgba(255,153,51,0.18);
+        }
+        /* Services grid */
+        .svcItems {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1px;
+          padding: 8px 12px 20px;
+          flex:1;
+        }
+        /* Individual service item */
+        .svcItem {
+          display:flex; align-items:flex-start; gap:10px;
+          padding: 11px 14px;
+          border-radius: 10px;
+          text-decoration: none;
+          color: inherit;
+          transition: background 0.2s ease;
+          opacity: 0;
+          animation: svcItemIn 0.30s cubic-bezier(0.16,1,0.3,1) both;
+          animation-delay: calc(var(--i, 0) * 0.028s);
+          position: relative;
+        }
+        @keyframes svcItemIn {
+          from { opacity:0; transform:translateY(8px); }
+          to   { opacity:1; transform:translateY(0); }
+        }
+        .svcItem:hover { background:rgba(255,255,255,0.05); }
+        .svcItem:hover .svcItem__arr { opacity:1; transform:translateX(0); }
+        .svcItem:hover .svcItem__name { color:#FF9933; }
+        .svcItem__dot {
+          width:6px; height:6px; border-radius:50%;
+          background:#FF9933; margin-top:7px;
+          flex-shrink:0; opacity:0.55;
+          transition: opacity 0.2s;
+        }
+        .svcItem:hover .svcItem__dot { opacity:1; }
+        .svcItem__body { flex:1; display:flex; flex-direction:column; gap:2px; min-width:0; }
+        .svcItem__name {
+          font-family:var(--font-display,Inter,sans-serif); font-weight:700;
+          font-size:0.84rem; color:rgba(255,255,255,0.88); line-height:1.25;
+          transition: color 0.2s;
+          white-space: nowrap; overflow:hidden; text-overflow:ellipsis;
+        }
+        .svcItem__desc {
+          font-size:0.74rem; color:rgba(255,255,255,0.38); line-height:1.4;
+          display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+        }
+        .svcItem__arr {
+          font-size:0.9rem; color:rgba(255,153,51,0.70);
+          opacity:0; transform:translateX(-4px);
+          transition:all 0.18s ease; margin-top:4px; flex-shrink:0;
+        }
+        /* Mobile */
+        @media (max-width: 900px) {
+          .svcPanel__inner { grid-template-columns:1fr; height:auto; }
+          .svcPanel__divider { display:none; }
+          .svcPanel__left { padding:20px 20px 0; overflow-y:visible; height:auto; }
+          .svcPanel__right { height:360px; }
+          .svcItems { grid-template-columns:1fr; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
   }
 
   function setTheme(theme) {
@@ -419,6 +832,45 @@
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeAllMega();
+    });
+
+    // Services journey panel — category hover interaction
+    initSvcPanel();
+  }
+
+  function initSvcPanel() {
+    const serviceRoutes = {
+      startup: "services/startup.html",
+      registrations: "services/registrations.html",
+      trademark: "services/trademark.html",
+      gst: "services/gst.html",
+      incomeTax: "services/income-tax.html",
+      compliance: "services/mca-compliance.html",
+      businessSupport: "services/business-support.html",
+      globalBusiness: "services/global-business.html",
+      audit: "services/audit-assurance.html"
+    };
+
+    document.addEventListener('mouseover', (e) => {
+      const cat = e.target instanceof Element ? e.target.closest('[data-svc-cat]') : null;
+      if (!cat) return;
+      const id = cat.getAttribute('data-svc-cat');
+      document.querySelectorAll('[data-svc-cat]').forEach(c => {
+        c.classList.toggle('is-active', c === cat);
+      });
+      document.querySelectorAll('[data-svc-services]').forEach(s => {
+        s.classList.toggle('is-active', s.getAttribute('data-svc-services') === id);
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      const cat = e.target instanceof Element ? e.target.closest('[data-svc-cat]') : null;
+      if (!cat) return;
+      const id = cat.getAttribute('data-svc-cat');
+      const route = serviceRoutes[id];
+      if (route) {
+        window.location.href = getBase() + route;
+      }
     });
   }
 

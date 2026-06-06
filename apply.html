@@ -18,192 +18,202 @@
 
   <main class="apply-main">
 
-    <!-- FORM SECTION -->
-    <section class="apply-form-section">
-      <div class="apply-form-container">
-        <div class="apply-form-header">
-          <span class="kicker">Book a Service</span>
-          <h1>Fill this Application Form to get started</h1>
-          <p>Tell us what you need — we'll keep it tight and relevant.</p>
+    <div class="apply-onboarding-wrapper">
+      <!-- FORM SECTION -->
+      <section class="apply-form-section">
+        <div class="apply-form-container">
+          <div class="apply-form-header">
+            <span class="kicker">Book a Service</span>
+            <h1>Fill this Application Form to get started</h1>
+            <p>Tell us what you need — we'll keep it tight and relevant.</p>
+          </div>
+
+          <!-- SUCCESS SCREEN -->
+          <div id="successScreen" class="apply-success" style="display:none;">
+            <div class="apply-success-icon">✅</div>
+            <h2>Application Submitted!</h2>
+            <p>Your application has been created successfully.</p>
+            <div class="apply-success-ticket-box">
+              <p class="apply-success-label">Your IndTaxPay Ticket ID</p>
+              <p id="successTicketId" class="apply-success-ticket"></p>
+            </div>
+            <p id="successEmailStatus" class="apply-success-note">Save this ID to track your application status.</p>
+            <div class="apply-success-actions">
+              <a href="track.html" class="apply-btn apply-btn--outline">Track Application</a>
+              <a href="index.html" class="apply-btn">Back to Home</a>
+            </div>
+          </div>
+
+          <!-- ERROR MESSAGE -->
+          <div id="formError" class="apply-form-error" style="display:none;"></div>
+
+          <form class="apply-form" id="applicationForm" novalidate>
+
+            <!-- Step 1: Service Category -->
+            <div class="form-group">
+              <label class="form-label">Service Category</label>
+              <div class="service-pill-row" id="serviceCategories">
+                <button type="button" data-category="startup">Start Business</button>
+                <button type="button" data-category="registrations">Legal Registrations</button>
+                <button type="button" data-category="trademark">Brand Protection</button>
+                <button type="button" data-category="gst">Tax &amp; GST</button>
+                <button type="button" data-category="incomeTax">Income Tax</button>
+                <button type="button" data-category="compliance">Corporate Compliance</button>
+                <button type="button" data-category="businessSupport">Business Operations</button>
+                <button type="button" data-category="globalBusiness">Global Expansion</button>
+                <button type="button" data-category="audit">Audit &amp; Assurance</button>
+              </div>
+            </div>
+
+            <!-- Step 1b: Service -->
+            <div class="form-group">
+              <label class="form-label" for="service">Service</label>
+              <select id="service" name="service" required disabled class="form-select">
+                <option value="">Select a category first</option>
+              </select>
+              <p class="form-hint" id="selectedServiceLabel" aria-live="polite"></p>
+            </div>
+
+            <!-- Step 2: Personal Info -->
+            <div class="form-group">
+              <p class="form-section-title">Personal Information</p>
+              <div class="form-row">
+                <div class="form-field">
+                  <label class="form-label" for="fullName">Full Name <span class="form-req">*</span></label>
+                  <input type="text" id="fullName" name="fullName" required placeholder="Your full legal name" class="form-input" autocomplete="name">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="email">Email <span class="form-req">*</span></label>
+                  <input type="email" id="email" name="email" required placeholder="you@example.com" class="form-input" autocomplete="email">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="phone">Phone Number <span class="form-req">*</span></label>
+                  <input type="tel" id="phone" name="phone" required placeholder="10-digit mobile number" class="form-input" inputmode="numeric" autocomplete="tel">
+                </div>
+              </div>
+            </div>
+
+            <!-- Adaptive: PAN -->
+            <div class="form-group adaptive-field" data-service-type="pan" style="display:none;">
+              <p class="form-section-title">PAN Details</p>
+              <div class="form-row">
+                <div class="form-field">
+                  <label class="form-label" for="panFather">Father's Name</label>
+                  <input type="text" id="panFather" name="panFather" placeholder="As on official documents" class="form-input">
+                  <p class="form-hint">Required for PAN verification.</p>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="panDob">Date of Birth</label>
+                  <input type="date" id="panDob" name="panDob" class="form-input">
+                  <p class="form-hint">Must match ITD records.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Adaptive: ITR -->
+            <div class="form-group adaptive-field" data-service-type="itr" style="display:none;">
+              <p class="form-section-title">ITR Details</p>
+              <div class="form-row">
+                <div class="form-field">
+                  <label class="form-label" for="itrType">Return Type</label>
+                  <select id="itrType" name="itrType" class="form-select">
+                    <option value="">Select return type</option>
+                    <option value="ITR-1">ITR-1</option>
+                    <option value="ITR-2">ITR-2</option>
+                    <option value="ITR-3">ITR-3</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="itrYear">Assessment Year</label>
+                  <input type="text" id="itrYear" name="itrYear" placeholder="e.g., 2024-25" class="form-input">
+                </div>
+              </div>
+            </div>
+
+            <!-- Adaptive: GST -->
+            <div class="form-group adaptive-field" data-service-type="gst" style="display:none;">
+              <p class="form-section-title">GST Details</p>
+              <div class="form-row">
+                <div class="form-field">
+                  <label class="form-label" for="gstState">State</label>
+                  <input type="text" id="gstState" name="gstState" placeholder="e.g., Tamil Nadu" class="form-input">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="gstTurnover">Annual Turnover (₹)</label>
+                  <input type="number" id="gstTurnover" name="gstTurnover" placeholder="e.g., 1500000" class="form-input">
+                </div>
+              </div>
+            </div>
+
+            <!-- Adaptive: MSME -->
+            <div class="form-group adaptive-field" data-service-type="msme" style="display:none;">
+              <p class="form-section-title">MSME Details</p>
+              <div class="form-field">
+                <label class="form-label" for="msmeBizType">Business Type</label>
+                <input type="text" id="msmeBizType" name="msmeBizType" placeholder="Manufacturing / Services" class="form-input">
+              </div>
+            </div>
+
+            <!-- Adaptive: Company -->
+            <div class="form-group adaptive-field" data-service-type="company" style="display:none;">
+              <p class="form-section-title">Company / ROC Details</p>
+              <div class="form-row">
+                <div class="form-field">
+                  <label class="form-label" for="entityType">Entity Type</label>
+                  <select id="entityType" name="entityType" class="form-select">
+                    <option value="">Select entity type</option>
+                    <option value="Private Limited">Private Limited</option>
+                    <option value="LLP">LLP</option>
+                    <option value="OPC">OPC</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="directorCount">Directors / Partners</label>
+                  <input type="number" id="directorCount" name="directorCount" min="1" placeholder="e.g., 2" class="form-input">
+                </div>
+              </div>
+            </div>
+
+            <!-- Adaptive: Accounting -->
+            <div class="form-group adaptive-field" data-service-type="accounting" style="display:none;">
+              <p class="form-section-title">Accounting Details</p>
+              <div class="form-field">
+                <label class="form-label" for="txnVolume">Monthly Transactions</label>
+                <input type="number" id="txnVolume" name="txnVolume" placeholder="e.g., 300" class="form-input">
+              </div>
+            </div>
+
+            <!-- Document Uploads -->
+            <div class="form-group" id="documentsSection" style="display:none;">
+              <p class="form-section-title">Required Documents</p>
+              <p class="form-hint" style="margin-bottom:14px;">Upload the documents listed below. Maximum 500 KB per file.</p>
+              <div id="documentFields"></div>
+            </div>
+
+            <!-- Agreement -->
+            <div class="form-group">
+              <label class="form-checkbox-label">
+                <input type="checkbox" name="agreement" id="agreement" required>
+                <span>I agree to the terms and conditions</span>
+              </label>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="apply-btn apply-submit-btn" id="submitBtn" disabled>
+              Submit for Expert Review
+            </button>
+            <p id="submitStatus" class="apply-submit-status" style="display:none;"></p>
+          </form>
         </div>
+      </section>
 
-        <!-- SUCCESS SCREEN -->
-        <div id="successScreen" class="apply-success" style="display:none;">
-          <div class="apply-success-icon">✅</div>
-          <h2>Application Submitted!</h2>
-          <p>Your application has been created successfully.</p>
-          <div class="apply-success-ticket-box">
-            <p class="apply-success-label">Your IndTaxPay Ticket ID</p>
-            <p id="successTicketId" class="apply-success-ticket"></p>
-          </div>
-          <p id="successEmailStatus" class="apply-success-note">Save this ID to track your application status.</p>
-          <div class="apply-success-actions">
-            <a href="track.html" class="apply-btn apply-btn--outline">Track Application</a>
-            <a href="index.html" class="apply-btn">Back to Home</a>
-          </div>
+      <!-- RIGHT PANEL: Dynamic Onboarding Info -->
+      <aside class="apply-info-section">
+        <div class="apply-info-card" id="serviceInfoPanel">
+          <!-- Dynamically populated via JS -->
         </div>
-
-        <!-- ERROR MESSAGE -->
-        <div id="formError" class="apply-form-error" style="display:none;"></div>
-
-        <form class="apply-form" id="applicationForm" novalidate>
-
-          <!-- Step 1: Service Category -->
-          <div class="form-group">
-            <label class="form-label">Service Category</label>
-            <div class="service-pill-row" id="serviceCategories">
-              <button type="button" data-category="pan">PAN &amp; Identity</button>
-              <button type="button" data-category="itr">Income Tax</button>
-              <button type="button" data-category="gst">GST</button>
-              <button type="button" data-category="msme">MSME / Startup</button>
-              <button type="button" data-category="tds">TDS / TCS</button>
-              <button type="button" data-category="epf">EPF / ESI</button>
-              <button type="button" data-category="company">Company / ROC</button>
-              <button type="button" data-category="accounting">Accounting &amp; Compliance</button>
-            </div>
-          </div>
-
-          <!-- Step 1b: Service -->
-          <div class="form-group">
-            <label class="form-label" for="service">Service</label>
-            <select id="service" name="service" required disabled class="form-select">
-              <option value="">Select a category first</option>
-            </select>
-            <p class="form-hint" id="selectedServiceLabel" aria-live="polite"></p>
-          </div>
-
-          <!-- Step 2: Personal Info -->
-          <div class="form-group">
-            <p class="form-section-title">Personal Information</p>
-            <div class="form-row">
-              <div class="form-field">
-                <label class="form-label" for="fullName">Full Name <span class="form-req">*</span></label>
-                <input type="text" id="fullName" name="fullName" required placeholder="Your full legal name" class="form-input" autocomplete="name">
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="email">Email <span class="form-req">*</span></label>
-                <input type="email" id="email" name="email" required placeholder="you@example.com" class="form-input" autocomplete="email">
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="phone">Phone Number <span class="form-req">*</span></label>
-                <input type="tel" id="phone" name="phone" required placeholder="10-digit mobile number" class="form-input" inputmode="numeric" autocomplete="tel">
-              </div>
-            </div>
-          </div>
-
-          <!-- Adaptive: PAN -->
-          <div class="form-group adaptive-field" data-service-type="pan" style="display:none;">
-            <p class="form-section-title">PAN Details</p>
-            <div class="form-row">
-              <div class="form-field">
-                <label class="form-label" for="panFather">Father's Name</label>
-                <input type="text" id="panFather" name="panFather" placeholder="As on official documents" class="form-input">
-                <p class="form-hint">Required for PAN verification.</p>
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="panDob">Date of Birth</label>
-                <input type="date" id="panDob" name="panDob" class="form-input">
-                <p class="form-hint">Must match ITD records.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Adaptive: ITR -->
-          <div class="form-group adaptive-field" data-service-type="itr" style="display:none;">
-            <p class="form-section-title">ITR Details</p>
-            <div class="form-row">
-              <div class="form-field">
-                <label class="form-label" for="itrType">Return Type</label>
-                <select id="itrType" name="itrType" class="form-select">
-                  <option value="">Select return type</option>
-                  <option value="ITR-1">ITR-1</option>
-                  <option value="ITR-2">ITR-2</option>
-                  <option value="ITR-3">ITR-3</option>
-                </select>
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="itrYear">Assessment Year</label>
-                <input type="text" id="itrYear" name="itrYear" placeholder="e.g., 2024-25" class="form-input">
-              </div>
-            </div>
-          </div>
-
-          <!-- Adaptive: GST -->
-          <div class="form-group adaptive-field" data-service-type="gst" style="display:none;">
-            <p class="form-section-title">GST Details</p>
-            <div class="form-row">
-              <div class="form-field">
-                <label class="form-label" for="gstState">State</label>
-                <input type="text" id="gstState" name="gstState" placeholder="e.g., Tamil Nadu" class="form-input">
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="gstTurnover">Annual Turnover (₹)</label>
-                <input type="number" id="gstTurnover" name="gstTurnover" placeholder="e.g., 1500000" class="form-input">
-              </div>
-            </div>
-          </div>
-
-          <!-- Adaptive: MSME -->
-          <div class="form-group adaptive-field" data-service-type="msme" style="display:none;">
-            <p class="form-section-title">MSME Details</p>
-            <div class="form-field">
-              <label class="form-label" for="msmeBizType">Business Type</label>
-              <input type="text" id="msmeBizType" name="msmeBizType" placeholder="Manufacturing / Services" class="form-input">
-            </div>
-          </div>
-
-          <!-- Adaptive: Company -->
-          <div class="form-group adaptive-field" data-service-type="company" style="display:none;">
-            <p class="form-section-title">Company / ROC Details</p>
-            <div class="form-row">
-              <div class="form-field">
-                <label class="form-label" for="entityType">Entity Type</label>
-                <select id="entityType" name="entityType" class="form-select">
-                  <option value="">Select entity type</option>
-                  <option value="Private Limited">Private Limited</option>
-                  <option value="LLP">LLP</option>
-                  <option value="OPC">OPC</option>
-                </select>
-              </div>
-              <div class="form-field">
-                <label class="form-label" for="directorCount">Directors / Partners</label>
-                <input type="number" id="directorCount" name="directorCount" min="1" placeholder="e.g., 2" class="form-input">
-              </div>
-            </div>
-          </div>
-
-          <!-- Adaptive: Accounting -->
-          <div class="form-group adaptive-field" data-service-type="accounting" style="display:none;">
-            <p class="form-section-title">Accounting Details</p>
-            <div class="form-field">
-              <label class="form-label" for="txnVolume">Monthly Transactions</label>
-              <input type="number" id="txnVolume" name="txnVolume" placeholder="e.g., 300" class="form-input">
-            </div>
-          </div>
-
-          <!-- Document Uploads -->
-          <div class="form-group" id="documentsSection" style="display:none;">
-            <p class="form-section-title">Required Documents</p>
-            <p class="form-hint" style="margin-bottom:14px;">Upload the documents listed below. Maximum 500 KB per file.</p>
-            <div id="documentFields"></div>
-          </div>
-
-          <!-- Agreement -->
-          <div class="form-group">
-            <label class="form-checkbox-label">
-              <input type="checkbox" name="agreement" id="agreement" required>
-              <span>I agree to the terms and conditions</span>
-            </label>
-          </div>
-
-          <!-- Submit -->
-          <button type="submit" class="apply-btn apply-submit-btn" id="submitBtn" disabled>
-            Submit for Expert Review
-          </button>
-          <p id="submitStatus" class="apply-submit-status" style="display:none;"></p>
-        </form>
-      </div>
-    </section>
+      </aside>
+    </div> <!-- End of .apply-onboarding-wrapper -->
 
     <!-- PROCESS FLOW -->
     <section class="apply-process-section">
@@ -212,32 +222,42 @@
         <div class="process-flow">
           <div class="process-step">
             <div class="process-dot">1</div>
-            <h3 class="process-label">Submit</h3>
-            <p class="process-desc">Send your completed application</p>
+            <div class="process-step-info">
+              <h3 class="process-label">Submit</h3>
+              <p class="process-desc">Send your completed application</p>
+            </div>
           </div>
           <div class="process-line"></div>
           <div class="process-step">
             <div class="process-dot">2</div>
-            <h3 class="process-label">Review</h3>
-            <p class="process-desc">Our team verifies your information</p>
+            <div class="process-step-info">
+              <h3 class="process-label">Review</h3>
+              <p class="process-desc">Our team verifies your information</p>
+            </div>
           </div>
           <div class="process-line"></div>
           <div class="process-step">
             <div class="process-dot">3</div>
-            <h3 class="process-label">Contact</h3>
-            <p class="process-desc">We reach out if clarification is needed</p>
+            <div class="process-step-info">
+              <h3 class="process-label">Contact</h3>
+              <p class="process-desc">We reach out if clarification is needed</p>
+            </div>
           </div>
           <div class="process-line"></div>
           <div class="process-step">
             <div class="process-dot">4</div>
-            <h3 class="process-label">Processing</h3>
-            <p class="process-desc">We file with government authorities</p>
+            <div class="process-step-info">
+              <h3 class="process-label">Processing</h3>
+              <p class="process-desc">We file with government authorities</p>
+            </div>
           </div>
           <div class="process-line"></div>
           <div class="process-step">
             <div class="process-dot">5</div>
-            <h3 class="process-label">Completion</h3>
-            <p class="process-desc">Receive your certificate within 5 days</p>
+            <div class="process-step-info">
+              <h3 class="process-label">Completion</h3>
+              <p class="process-desc">Receive your certificate within 5 days</p>
+            </div>
           </div>
         </div>
       </div>
@@ -258,57 +278,173 @@
   <script>
   (function() {
     var SERVICE_DOCUMENTS = {
-      pan: [
-        { label: 'Aadhaar Card (Front & Back)', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Passport Size Photo', accept: '.jpg,.jpeg,.png', required: true },
-        { label: 'Signature Scan', accept: '.jpg,.jpeg,.png', required: true },
-        { label: 'Address Proof (if different from Aadhaar)', accept: '.pdf,.jpg,.jpeg,.png', required: false }
+      startup: [
+        { label: 'PAN Card of Directors/Partners/Proprietor', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Aadhaar Card of Directors/Partners/Proprietor', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Business Address Proof (Utility Bill/Rent Deed)', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'NOC from Property Owner', accept: '.pdf,.jpg,.jpeg,.png', required: false }
       ],
-      itr: [
-        { label: 'PAN Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Aadhaar Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Form 16 / Salary Slips', accept: '.pdf,.doc,.docx,.xls,.xlsx', required: true },
-        { label: 'Bank Statements', accept: '.pdf,.xls,.xlsx', required: false },
-        { label: 'Investment Proofs (80C, 80D, etc.)', accept: '.pdf,.jpg,.jpeg,.png', required: false }
-      ],
-      gst: [
-        { label: 'PAN Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Aadhaar Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Business Address Proof', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Bank Statement / Cancelled Cheque', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Sales / Purchase Invoices', accept: '.pdf,.xls,.xlsx,.doc,.docx', required: false }
-      ],
-      msme: [
-        { label: 'Aadhaar Card of Proprietor / Partner', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'PAN Card of Business', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Business Address Proof', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'GST Certificate (if registered)', accept: '.pdf,.jpg,.jpeg,.png', required: false }
-      ],
-      tds: [
-        { label: 'TAN Allotment Letter', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'PAN Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Challan Payment Receipts', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Salary / Payment Details Sheet', accept: '.pdf,.xls,.xlsx,.doc,.docx', required: false }
-      ],
-      epf: [
-        { label: 'PAN Card of Company / Firm', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Aadhaar Card of Authorised Signatory', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Employee List with Salary Details', accept: '.pdf,.xls,.xlsx,.doc,.docx', required: true },
+      registrations: [
+        { label: 'PAN Card of Applicant / Entity', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Aadhaar Card of Authorized Person', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Address Proof of Business Place', accept: '.pdf,.jpg,.jpeg,.png', required: true },
         { label: 'Bank Statement / Cancelled Cheque', accept: '.pdf,.jpg,.jpeg,.png', required: true }
       ],
-      company: [
-        { label: 'PAN Card of Directors', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Aadhaar Card of Directors', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'Address Proof of Registered Office', accept: '.pdf,.jpg,.jpeg,.png', required: true },
-        { label: 'MOA / AOA / LLP Agreement (if existing)', accept: '.pdf,.doc,.docx', required: false },
-        { label: 'Digital Signature Certificate', accept: '.pdf,.pfx', required: false }
+      trademark: [
+        { label: 'Logo / Brand Mark Image', accept: '.jpg,.jpeg,.png', required: true },
+        { label: 'Authorization Letter (Form TM-48)', accept: '.pdf', required: true },
+        { label: 'Incorporation / MSME Certificate (for fee discount)', accept: '.pdf,.jpg,.jpeg,.png', required: false }
       ],
-      accounting: [
-        { label: 'Bank Statements', accept: '.pdf,.xls,.xlsx', required: true },
-        { label: 'Sales / Purchase Invoices', accept: '.pdf,.xls,.xlsx,.doc,.docx', required: true },
-        { label: 'Previous Year Financials (if any)', accept: '.pdf,.xls,.xlsx', required: false },
-        { label: 'GST Returns (if applicable)', accept: '.pdf,.xls,.xlsx', required: false }
+      gst: [
+        { label: 'PAN Card of Business / Owners', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Aadhaar Card of Authorized Signatory', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Business Address Proof', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Bank Statement / Cancelled Cheque', accept: '.pdf,.jpg,.jpeg,.png', required: true }
+      ],
+      incomeTax: [
+        { label: 'PAN & Aadhaar Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Form 16 / Salary Slips / 26AS', accept: '.pdf,.xls,.xlsx', required: true },
+        { label: 'Bank Statements (All active accounts)', accept: '.pdf,.xls,.xlsx', required: true },
+        { label: 'Investment & Deduction Proofs (if any)', accept: '.pdf,.jpg,.jpeg,.png', required: false }
+      ],
+      compliance: [
+        { label: 'Certificate of Incorporation', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Company PAN Card', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Financial Statements (Balance Sheet & P&L)', accept: '.pdf,.xls,.xlsx', required: true },
+        { label: 'Director KYC Documents', accept: '.pdf,.jpg,.jpeg,.png', required: true }
+      ],
+      businessSupport: [
+        { label: 'Bank Statements (Latest 6 Months)', accept: '.pdf,.xls,.xlsx', required: true },
+        { label: 'Sales & Purchase Invoices', accept: '.pdf,.xls,.xlsx', required: true },
+        { label: 'Employee Salary & Attendance Sheets', accept: '.pdf,.xls,.xlsx', required: false }
+      ],
+      globalBusiness: [
+        { label: 'Passport of Directors (Clear Copy)', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Utility Bill (Address Proof of Directors)', accept: '.pdf,.jpg,.jpeg,.png', required: true },
+        { label: 'Suggested Names List (3 options)', accept: '.pdf,.doc,.docx', required: true }
+      ],
+      audit: [
+        { label: 'Trial Balance & General Ledger', accept: '.pdf,.xls,.xlsx', required: true },
+        { label: 'Bank Reconciliation Statements', accept: '.pdf,.xls,.xlsx', required: true },
+        { label: 'Sales, Purchase & Expense Registers', accept: '.pdf,.xls,.xlsx', required: true },
+        { label: 'Previous Year Audited Financials', accept: '.pdf', required: false }
       ]
+    };
+
+    var SERVICE_DETAILS = {
+      // Key Startups
+      'startup-proprietorship': {
+        name: 'Proprietorship Registration',
+        sla: '2-3 Days',
+        summary: 'Sole proprietorship setup. Simplest business structure where the owner and business are a single legal entity.',
+        benefits: ['Minimal compliance requirements', 'Complete control over decision making', 'Easiest business type to set up and close']
+      },
+      'startup-partnership': {
+        name: 'Partnership Firm Registration',
+        sla: '5-7 Days',
+        summary: 'Register a partnership firm managed by two or more individuals under a signed Partnership Deed.',
+        benefits: ['Shared financial and operational responsibilities', 'Highly flexible operational terms', 'Simple and quick registration process']
+      },
+      'startup-opc': {
+        name: 'One Person Company (OPC)',
+        sla: '7-10 Days',
+        summary: 'Register a company with a single director and shareholder. Provides corporate limited liability with sole control.',
+        benefits: ['Complete limited liability protection', 'Continuous legal existence of the entity', 'Easier access to bank loans and credit']
+      },
+      'startup-llp': {
+        name: 'Limited Liability Partnership (LLP)',
+        sla: '8-12 Days',
+        summary: 'Combines the flexibility of standard partnerships with the limited liability benefits of corporate entities.',
+        benefits: ['No minimum capital contribution mandatory', 'Lower administrative compliance costs', 'No dividend distribution tax (DDT)']
+      },
+      'startup-pvt-ltd': {
+        name: 'Private Limited Company',
+        sla: '7-10 Days',
+        summary: 'Most popular structure for startup growth. Offers legal independence, share transferability, and raises external funding.',
+        benefits: ['Highly attractive to venture capitalists', 'Independent corporate legal identity', 'Enhanced credibility and prestige']
+      },
+
+      // Key Registrations
+      'registrations-pan-individual': {
+        name: 'PAN Card - Individual',
+        sla: '3-5 Days',
+        summary: 'Obtain an individual Permanent Account Number (PAN) for tax filing and banking.',
+        benefits: ['Essential for personal income tax filing', 'Allows opening personal bank accounts', 'Required for buying mutual funds/shares']
+      },
+      'registrations-startup-india': {
+        name: 'Startup India Recognition',
+        sla: '7-12 Days',
+        summary: 'DPIIT recognition under the Startup India scheme to claim tax exemptions and benefits.',
+        benefits: ['3-year income tax holiday eligibility', 'Access to government fund of funds', 'Self-certification compliance scheme']
+      },
+      'registrations-udyam-reg': {
+        name: 'Udyam MSME Registration',
+        sla: '1-2 Days',
+        summary: 'Register under Micro, Small, and Medium Enterprises scheme to receive extensive subsidies.',
+        benefits: ['Collateral-free business loans & lower interest rates', 'Strict 45-day payment protection rules', '50% discount on trademark fees']
+      },
+      'registrations-fssai-reg': {
+        name: 'FSSAI Registration (Basic)',
+        sla: '3-5 Days',
+        summary: 'Basic food safety registration for small food businesses, retailers, and home kitchens.',
+        benefits: ['Mandatory legal compliance for food handlers', 'Builds consumer trust in food safety', 'Allows listing on Swiggy/Zomato']
+      },
+
+      // Key Trademarks
+      'trademark-tm-reg': {
+        name: 'Trademark Registration',
+        sla: '3-5 Days (Filing)',
+        summary: 'Register your brand name, logo, or tagline with the IP India registry. Enables ™ and ® symbols.',
+        benefits: ['Creates exclusive nationwide ownership of brand mark', 'Protects against counterfeit and duplicate brands', 'Creates valuable intangible business asset']
+      },
+
+      // Key GST
+      'gst-gst-registration': {
+        name: 'GST Registration',
+        sla: '3-5 Days',
+        summary: 'New GSTIN registration for businesses with turnover exceeding limits or doing interstate sales.',
+        benefits: ['Collect GST and claim full Input Tax Credit (ITC)', 'Unlocks interstate and online e-commerce sales', 'Improves business B2B credibility']
+      },
+
+      // Key Income Tax
+      'incomeTax-it-efiling': {
+        name: 'Income Tax Return Filing',
+        sla: '2-3 Days',
+        summary: 'Income tax return e-filing for salaried, professionals, and freelancers (ITR-1 & ITR-2).',
+        benefits: ['Avoids IT department penalty notices', 'Crucial document proof for visa approvals', 'Serves as standard income proof for bank loans']
+      },
+
+      // Key Compliance
+      'compliance-comp-annual': {
+        name: 'Company Annual Compliance',
+        sla: '5-7 Days',
+        summary: 'File mandatory financial statement forms (AOC-4 & MGT-7) with Registrar of Companies (ROC).',
+        benefits: ['Protects company from heavy daily penalty fees', 'Ensures directors do not face disqualification', 'Keeps company in active standing on MCA']
+      },
+
+      // Key Business Operations
+      'businessSupport-biz-bookkeeping': {
+        name: 'Bookkeeping Services',
+        sla: 'Monthly Ongoing',
+        summary: 'Maintain daily records of sales, purchases, bank transactions, and ledger entries.',
+        benefits: ['Accurate tracking of business cash flow', 'Ensures books are always ready for tax season', 'Saves administrative overheads and time']
+      },
+
+      // Key Global Expansion
+      'globalBusiness-global-usa': {
+        name: 'USA Company Registration',
+        sla: '10-12 Days',
+        summary: 'Register an LLC or C-Corp in the US (Delaware/Wyoming). Includes EIN and bank opening support.',
+        benefits: ['Access to US payment gateways (Stripe/PayPal)', 'Establish global brand presence', 'Attract international venture capital']
+      },
+
+      // Key Audit
+      'audit-audit-assurance': {
+        name: 'Audit & Assurance Services',
+        sla: '5-7 Days',
+        summary: 'Independent examination of financial books to express audit opinion on balance sheets & profit statements.',
+        benefits: ['Required statutory compliance for corporate entities', 'Detects internal accounting discrepancies & frauds', 'Provides true financial picture to investors']
+      }
     };
 
     var form              = document.getElementById('applicationForm');
@@ -385,17 +521,191 @@
       documentsSection.style.display = '';
       var html = '';
       docs.forEach(function(docItem, idx) {
-        html += '<div class="form-field" style="margin-bottom:16px;">';
-        html += '<label class="form-label" for="doc_' + idx + '">' + docItem.label;
+        html += '<div class="form-field upload-field-group" style="margin-bottom:20px;">';
+        html += '  <label class="form-label" for="doc_' + idx + '">' + docItem.label;
         if (docItem.required) html += ' <span class="form-req">*</span>';
-        html += '</label>';
-        html += '<input type="file" id="doc_' + idx + '" name="doc_' + idx + '" accept="' + docItem.accept + '" data-doc-label="' + docItem.label + '" class="form-input-file"';
+        html += '  </label>';
+        html += '  <div class="upload-zone" id="upload_zone_' + idx + '">';
+        html += '    <div class="upload-zone-content" id="upload_content_' + idx + '">';
+        html += '      <span class="upload-icon">📤</span>';
+        html += '      <p class="upload-text">Drag &amp; drop or <span class="upload-link">browse</span></p>';
+        html += '      <p class="upload-hint">Accepted: ' + docItem.accept.toUpperCase().replace(/\./g, ' ') + ' (Max 500 KB)</p>';
+        html += '    </div>';
+        html += '    <input type="file" id="doc_' + idx + '" name="doc_' + idx + '" accept="' + docItem.accept + '" data-doc-label="' + docItem.label + '" class="form-input-file"';
         if (docItem.required) html += ' required';
-        html += '>';
-        html += '<p class="form-hint">Max file size: 500 KB.</p>';
+        html += '    >';
+        html += '    <div class="upload-file-info" id="upload_file_info_' + idx + '" style="display:none;">';
+        html += '      <span class="file-icon">📄</span>';
+        html += '      <span class="file-name" id="file_name_' + idx + '"></span>';
+        html += '      <span class="file-status-badge">Ready</span>';
+        html += '      <button type="button" class="file-remove-btn" data-input-id="doc_' + idx + '" data-zone-id="upload_zone_' + idx + '">✕</button>';
+        html += '    </div>';
+        html += '  </div>';
         html += '</div>';
       });
       documentFields.innerHTML = html;
+
+      // Add dynamic event listeners for modern drop zones
+      docs.forEach(function(docItem, idx) {
+        var fileInput = document.getElementById('doc_' + idx);
+        var uploadZone = document.getElementById('upload_zone_' + idx);
+        var removeBtn = uploadZone.querySelector('.file-remove-btn');
+
+        if (fileInput && uploadZone) {
+          // File Change
+          fileInput.addEventListener('change', function() {
+            handleFileSelect(fileInput, uploadZone, idx);
+          });
+
+          // Drag Events
+          ['dragenter', 'dragover'].forEach(function(evt) {
+            uploadZone.addEventListener(evt, function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              uploadZone.classList.add('dragover');
+            }, false);
+          });
+
+          ['dragleave', 'drop'].forEach(function(evt) {
+            uploadZone.addEventListener(evt, function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              uploadZone.classList.remove('dragover');
+            }, false);
+          });
+
+          uploadZone.addEventListener('drop', function(e) {
+            var dt = e.dataTransfer;
+            var files = dt.files;
+            if (files && files.length > 0) {
+              fileInput.files = files;
+              var event = new Event('change');
+              fileInput.dispatchEvent(event);
+            }
+          }, false);
+
+          // Remove file
+          removeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.value = '';
+            var infoDiv = document.getElementById('upload_file_info_' + idx);
+            var contentDiv = document.getElementById('upload_content_' + idx);
+            infoDiv.style.display = 'none';
+            contentDiv.style.display = '';
+            uploadZone.classList.remove('has-file');
+            updateSubmitColor();
+          });
+        }
+      });
+    }
+
+    function handleFileSelect(input, zone, idx) {
+      var infoDiv = document.getElementById('upload_file_info_' + idx);
+      var contentDiv = document.getElementById('upload_content_' + idx);
+      var nameSpan = document.getElementById('file_name_' + idx);
+
+      if (input.files && input.files.length > 0) {
+        var file = input.files[0];
+        nameSpan.textContent = file.name + ' (' + Math.round(file.size / 1024) + ' KB)';
+        contentDiv.style.display = 'none';
+        infoDiv.style.display = 'flex';
+        zone.classList.add('has-file');
+      } else {
+        infoDiv.style.display = 'none';
+        contentDiv.style.display = '';
+        zone.classList.remove('has-file');
+      }
+      updateSubmitColor();
+    }
+
+    function updateServiceInfoPanel() {
+      var serviceVal = serviceSelect ? serviceSelect.value : '';
+      var infoPanel = document.getElementById('serviceInfoPanel');
+      if (!infoPanel) return;
+
+      if (!serviceVal) {
+        infoPanel.innerHTML = `
+          <div class="info-panel-placeholder">
+            <div class="placeholder-icon">📋</div>
+            <h4>Service Details</h4>
+            <p>Select a service category and specific service to view timeline, requirements, and benefits.</p>
+          </div>
+        `;
+        return;
+      }
+
+      var details = SERVICE_DETAILS[serviceVal];
+      if (!details) {
+        // Dynamically generate details for any missing services to avoid undefined errors
+        var optionText = serviceSelect.options[serviceSelect.selectedIndex].text;
+        details = {
+          name: optionText,
+          sla: '3-7 Days',
+          summary: 'Apply for ' + optionText + ' with IndTaxPay. Get professional CA-assisted filing and 100% online tracking.',
+          benefits: [
+            'End-to-end digital application and document submission',
+            'Verification and review by qualified Chartered Accountants',
+            'Full compliance and status updates at every stage'
+          ]
+        };
+      }
+
+      var benefitsListHtml = details.benefits.map(function(b) {
+        return '<li><span class="bullet">✓</span> ' + b + '</li>';
+      }).join('');
+
+      var docs = [];
+      var activeBtn = categoryRow.querySelector('button.active');
+      if (activeBtn) {
+        var cat = activeBtn.dataset.category;
+        docs = SERVICE_DOCUMENTS[cat] || [];
+      }
+      var docsListHtml = docs.length > 0
+        ? docs.map(function(d) {
+            return '<div class="doc-badge ' + (d.required ? 'req' : 'opt') + '">' + d.label + (d.required ? ' *' : ' (Optional)') + '</div>';
+          }).join('')
+        : '<p class="no-docs-hint">No special document upload required for this application.</p>';
+
+      infoPanel.innerHTML = `
+        <div class="info-card-content fade-in-panel">
+          <div class="info-header">
+            <span class="info-badge">Expert Review</span>
+            <h3>${details.name}</h3>
+            <p class="info-summary">${details.summary}</p>
+          </div>
+          
+          <div class="info-meta-grid">
+            <div class="meta-item">
+              <span class="meta-lbl">Estimated SLA</span>
+              <span class="meta-val sla-highlight">${details.sla}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-lbl">Execution</span>
+              <span class="meta-val">100% Online</span>
+            </div>
+          </div>
+
+          <div class="info-section">
+            <h4>Documents to Upload</h4>
+            <div class="info-docs-badges">
+              ${docsListHtml}
+            </div>
+          </div>
+
+          <div class="info-section">
+            <h4>Key Benefits</h4>
+            <ul class="info-benefits-list">
+              ${benefitsListHtml}
+            </ul>
+          </div>
+          
+          <div class="info-trust-footer">
+            <div class="trust-badge">🛡️ Secure Document Vault</div>
+            <div class="trust-badge">👔 CA-Assisted Filing</div>
+          </div>
+        </div>
+      `;
     }
 
     if (categoryRow) {
@@ -403,6 +713,13 @@
         var btn = e.target.closest('button[data-category]');
         if (!btn) return;
         renderDocumentFields(btn.dataset.category);
+        updateServiceInfoPanel();
+      });
+    }
+
+    if (serviceSelect) {
+      serviceSelect.addEventListener('change', function() {
+        updateServiceInfoPanel();
       });
     }
 
@@ -489,6 +806,13 @@
         submitStatus.style.display = 'none';
       }
     });
+
+    // Handle initial state on page load
+    var activeBtnOnLoad = categoryRow ? categoryRow.querySelector('button.active') : null;
+    if (activeBtnOnLoad) {
+      renderDocumentFields(activeBtnOnLoad.dataset.category);
+    }
+    updateServiceInfoPanel();
   })();
   </script>
 

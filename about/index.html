@@ -3,9 +3,1609 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>About — IndTaxPay</title>
-    <meta name="description" content="About IndTaxPay — India’s digital-first tax and compliance platform with expert CA support." />
+    <title>About K.Das &amp; Associates — IndTaxPay</title>
+    <meta name="description" content="About K.Das &amp; Associates — India's most trusted CA firm powering IndTaxPay. Expert tax, audit and compliance services since decades." />
     <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <style>
+      /* ─── ABOUT PAGE TOKENS ──────────────────────────── */
+      :root {
+        --flag-blue:    #0A3D91;
+        --flag-saffron: #FF9933;
+        --flag-green:   #138808;
+        --flag-white:   #FFFFFF;
+      }
+
+      /* ─── SCROLL REVEAL BASE ────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(48px);
+        transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1),
+                    transform 0.85s cubic-bezier(0.16,1,0.3,1);
+      }
+      .reveal.reveal--left  { transform: translateX(-60px); }
+      .reveal.reveal--right { transform: translateX(60px); }
+      .reveal.reveal--scale { transform: scale(0.92) translateY(32px); }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+      .reveal--d1 { transition-delay: 0.1s; }
+      .reveal--d2 { transition-delay: 0.22s; }
+      .reveal--d3 { transition-delay: 0.34s; }
+      .reveal--d4 { transition-delay: 0.46s; }
+      .reveal--d5 { transition-delay: 0.58s; }
+
+      /* ═══════════════════════════════════════════════════
+         HERO
+      ═══════════════════════════════════════════════════ */
+      .ab-hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background: linear-gradient(135deg, #051d50 0%, #0A3D91 45%, #0c5a1a 100%);
+      }
+
+      /* animated mesh overlay */
+      .ab-hero__mesh {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 900px 700px at 10% 20%,  rgba(255,153,51,0.18) 0%, transparent 70%),
+          radial-gradient(ellipse 700px 600px at 85% 70%,  rgba(19,136,8,0.20)   0%, transparent 65%),
+          radial-gradient(ellipse 600px 500px at 60% 10%,  rgba(10,61,145,0.35)  0%, transparent 60%);
+        pointer-events: none;
+      }
+
+      /* floating blobs */
+      .ab-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.45;
+        pointer-events: none;
+        animation: blobFloat 8s ease-in-out infinite alternate;
+      }
+      .ab-blob--1 { width:520px; height:520px; background:#FF9933; top:-160px; right:-120px; animation-delay:0s; }
+      .ab-blob--2 { width:380px; height:380px; background:#138808; bottom:-100px; left:-80px;  animation-delay:2.5s; }
+      .ab-blob--3 { width:260px; height:260px; background:#0A3D91; top:40%; right:8%;         animation-delay:5s;  opacity:0.3; }
+
+      @keyframes blobFloat {
+        from { transform: translate(0,0) scale(1); }
+        to   { transform: translate(20px, 30px) scale(1.06); }
+      }
+
+      /* grid lines watermark */
+      .ab-hero__grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 80px 80px;
+        pointer-events: none;
+      }
+
+      .ab-hero__inner {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 140px 40px 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .ab-hero__kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 18px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.10);
+        border: 1px solid rgba(255,255,255,0.20);
+        backdrop-filter: blur(8px);
+        color: rgba(255,255,255,0.90);
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-family: var(--font-display);
+        font-weight: 600;
+        margin-bottom: 28px;
+      }
+      .ab-hero__kicker-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--flag-saffron);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,100% { box-shadow: 0 0 0 0 rgba(255,153,51,0.6); }
+        50%      { box-shadow: 0 0 0 8px rgba(255,153,51,0); }
+      }
+
+      .ab-hero__headline {
+        font-family: var(--font-display);
+        font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+        font-weight: 800;
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        color: var(--flag-white);
+        margin: 0 0 28px;
+      }
+      .ab-hero__headline .hl-saffron { color: var(--flag-saffron); }
+      .ab-hero__headline .hl-green   { color: #4adf6a; }
+
+      .ab-hero__sub {
+        color: rgba(255,255,255,0.78);
+        font-size: 1.15rem;
+        line-height: 1.75;
+        max-width: 60ch;
+        margin-bottom: 36px;
+      }
+
+      .ab-hero__cta {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .ab-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        border-radius: 14px;
+        background: var(--flag-saffron);
+        color: #fff;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.98rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        box-shadow: 0 12px 40px rgba(255,153,51,0.40);
+        text-decoration: none;
+      }
+      .ab-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 60px rgba(255,153,51,0.55);
+      }
+
+      .ab-btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.10);
+        color: #fff;
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 0.98rem;
+        border: 1px solid rgba(255,255,255,0.25);
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        backdrop-filter: blur(8px);
+        text-decoration: none;
+      }
+      .ab-btn-ghost:hover {
+        background: rgba(255,255,255,0.18);
+        transform: translateY(-2px);
+      }
+
+      /* Hero image side */
+      .ab-hero__visual {
+        position: relative;
+      }
+      .ab-hero__img-wrap {
+        position: relative;
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 40px 120px rgba(0,0,0,0.50);
+        transform: perspective(1000px) rotateY(-6deg) rotateX(3deg);
+        transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+      }
+      .ab-hero__img-wrap:hover {
+        transform: perspective(1000px) rotateY(-2deg) rotateX(1deg);
+      }
+      .ab-hero__img-wrap img {
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        display: block;
+      }
+      .ab-hero__img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 40%, rgba(10,61,145,0.60) 100%);
+      }
+
+      /* floating stat cards */
+      .ab-hero__stat {
+        position: absolute;
+        padding: 14px 18px;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.22);
+        border-radius: 18px;
+        color: #fff;
+        font-family: var(--font-display);
+        animation: floatCard 4s ease-in-out infinite alternate;
+      }
+      .ab-hero__stat--1 { bottom: -24px; left: -40px; animation-delay: 0s; }
+      .ab-hero__stat--2 { top: -24px; right: -30px; animation-delay: 1.8s; }
+      .ab-hero__stat .stat-num {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--flag-saffron);
+        line-height: 1;
+      }
+      .ab-hero__stat .stat-lbl {
+        font-size: 0.78rem;
+        color: rgba(255,255,255,0.80);
+        margin-top: 2px;
+        letter-spacing: 0.05em;
+      }
+      @keyframes floatCard {
+        from { transform: translateY(0px); }
+        to   { transform: translateY(-10px); }
+      }
+
+      /* scroll indicator */
+      .ab-hero__scroll {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255,255,255,0.60);
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        animation: scrollBounce 2.4s ease-in-out infinite;
+      }
+      .ab-hero__scroll-line {
+        width: 1px;
+        height: 48px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.60), transparent);
+      }
+      @keyframes scrollBounce {
+        0%,100% { transform: translateX(-50%) translateY(0); }
+        50%      { transform: translateX(-50%) translateY(8px); }
+      }
+
+      /* ═══════════════════════════════════════════════════
+         TRICOLOUR DIVIDER
+      ═══════════════════════════════════════════════════ */
+      .ab-flag-stripe {
+        height: 4px;
+        background: linear-gradient(90deg,
+          var(--flag-saffron) 0 33.33%,
+          var(--flag-white)   33.33% 66.66%,
+          var(--flag-green)   66.66% 100%);
+      }
+
+      /* ═══════════════════════════════════════════════════
+         ABOUT / STORY SECTION
+      ═══════════════════════════════════════════════════ */
+      .ab-story {
+        padding: 120px 0;
+        background: var(--flag-white);
+        overflow: hidden;
+      }
+      html[data-theme="dark"] .ab-story {
+        background: #0a1628;
+      }
+
+      .ab-story__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+
+      .ab-story__visual {
+        position: relative;
+      }
+
+      .ab-story__img-main {
+        width: 100%;
+        height: 520px;
+        object-fit: cover;
+        border-radius: 28px;
+        box-shadow: 0 40px 100px rgba(10,61,145,0.20);
+        display: block;
+      }
+
+      .ab-story__img-accent {
+        position: absolute;
+        bottom: -40px;
+        right: -40px;
+        width: 55%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 20px;
+        border: 6px solid var(--flag-white);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+      }
+      html[data-theme="dark"] .ab-story__img-accent {
+        border-color: #0a1628;
+      }
+
+      .ab-story__badge {
+        position: absolute;
+        top: -24px;
+        left: -24px;
+        width: 100px;
+        height: 100px;
+        background: var(--flag-saffron);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-family: var(--font-display);
+        font-weight: 800;
+        box-shadow: 0 12px 40px rgba(255,153,51,0.50);
+        animation: rotateBadge 12s linear infinite;
+      }
+      .ab-story__badge-num { font-size: 1.8rem; line-height: 1; }
+      .ab-story__badge-txt { font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.90; }
+      @keyframes rotateBadge {
+        from { box-shadow: 0 12px 40px rgba(255,153,51,0.50); }
+        50%  { box-shadow: 0 20px 60px rgba(255,153,51,0.70); }
+        to   { box-shadow: 0 12px 40px rgba(255,153,51,0.50); }
+      }
+
+      .ab-story__content {}
+
+      .ab-story__pre {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-family: var(--font-display);
+        font-weight: 700;
+        color: var(--flag-saffron);
+        margin-bottom: 18px;
+      }
+      .ab-story__pre::before {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 2px;
+        background: var(--flag-saffron);
+      }
+
+      .ab-story__h {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3.2rem);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        color: var(--color-text-primary);
+        margin: 0 0 24px;
+      }
+      html[data-theme="dark"] .ab-story__h { color: rgba(255,255,255,0.94); }
+      .ab-story__h span { color: var(--flag-blue); }
+      html[data-theme="dark"] .ab-story__h span { color: #6fa3ef; }
+
+      .ab-story__body {
+        color: var(--color-text-secondary);
+        font-size: 1.05rem;
+        line-height: 1.78;
+        margin-bottom: 24px;
+      }
+      html[data-theme="dark"] .ab-story__body { color: rgba(255,255,255,0.72); }
+
+      /* milestone timeline */
+      .ab-milestones {
+        margin-top: 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border-left: 2px solid rgba(10,61,145,0.14);
+        padding-left: 28px;
+      }
+      html[data-theme="dark"] .ab-milestones { border-left-color: rgba(255,255,255,0.10); }
+
+      .ab-milestone {
+        position: relative;
+        padding: 0 0 28px;
+      }
+      .ab-milestone:last-child { padding-bottom: 0; }
+      .ab-milestone::before {
+        content: '';
+        position: absolute;
+        left: -35px;
+        top: 4px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--flag-saffron);
+        border: 3px solid var(--flag-white);
+        box-shadow: 0 0 0 2px var(--flag-saffron);
+        transition: transform 0.3s ease;
+      }
+      html[data-theme="dark"] .ab-milestone::before { border-color: #0a1628; }
+      .ab-milestone:hover::before { transform: scale(1.4); }
+
+      .ab-milestone__year {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--flag-saffron);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        margin-bottom: 4px;
+      }
+      .ab-milestone__title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--color-text-primary);
+        margin-bottom: 2px;
+      }
+      html[data-theme="dark"] .ab-milestone__title { color: rgba(255,255,255,0.92); }
+      .ab-milestone__desc {
+        font-size: 0.92rem;
+        color: var(--color-text-secondary);
+        line-height: 1.55;
+      }
+      html[data-theme="dark"] .ab-milestone__desc { color: rgba(255,255,255,0.60); }
+
+      /* ═══════════════════════════════════════════════════
+         VALUES / PILLARS SECTION
+      ═══════════════════════════════════════════════════ */
+      .ab-values {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #0A3D91 0%, #051d50 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      .ab-values__mesh {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 600px 400px at 0% 50%, rgba(255,153,51,0.12), transparent),
+          radial-gradient(ellipse 500px 400px at 100% 50%, rgba(19,136,8,0.12), transparent);
+        pointer-events: none;
+      }
+      .ab-values__grid-bg {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+      }
+
+      .ab-values__inner {
+        position: relative;
+        z-index: 2;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      .ab-section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-family: var(--font-display);
+        font-weight: 700;
+        color: var(--flag-saffron);
+        margin-bottom: 16px;
+      }
+      .ab-section-label-dark {
+        color: rgba(255,255,255,0.55);
+      }
+
+      .ab-values__head {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.025em;
+        margin: 0 0 60px;
+        max-width: 40ch;
+      }
+
+      .ab-values__bento {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 20px;
+      }
+
+      .ab-val-card {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 24px;
+        padding: 36px 32px;
+        backdrop-filter: blur(10px);
+        transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+        position: relative;
+        overflow: hidden;
+      }
+      .ab-val-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.08), transparent 60%);
+        pointer-events: none;
+      }
+      .ab-val-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.22); }
+      .ab-val-card:hover::after { opacity: 1; }
+
+      .ab-val-card--featured {
+        grid-row: span 2;
+        background: linear-gradient(145deg, rgba(255,153,51,0.22), rgba(255,153,51,0.06));
+        border-color: rgba(255,153,51,0.30);
+      }
+      .ab-val-card--featured:hover { border-color: rgba(255,153,51,0.55); }
+
+      .ab-val-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+      .ab-val-icon--saffron { background: rgba(255,153,51,0.20); }
+      .ab-val-icon--green   { background: rgba(19,136,8,0.20); }
+      .ab-val-icon--blue    { background: rgba(255,255,255,0.10); }
+
+      .ab-val-card__num {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 4vw, 3.6rem);
+        font-weight: 800;
+        color: var(--flag-saffron);
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+      .ab-val-card__label {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .ab-val-card__desc {
+        font-size: 0.95rem;
+        color: rgba(255,255,255,0.68);
+        line-height: 1.65;
+      }
+
+      /* ═══════════════════════════════════════════════════
+         OFFICE PHOTO GALLERY
+      ═══════════════════════════════════════════════════ */
+      .ab-office__gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 240px 220px;
+        gap: 12px;
+        border-radius: 28px;
+        overflow: hidden;
+      }
+      .ab-gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        cursor: zoom-in;
+      }
+      .ab-gallery-item--tall {
+        grid-row: span 2;
+        border-radius: 20px;
+      }
+      .ab-gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      }
+      .ab-gallery-item:hover img { transform: scale(1.07); }
+      .ab-gallery-item__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 50%, rgba(10,61,145,0.45) 100%);
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+      .ab-gallery-item:hover .ab-gallery-item__overlay { opacity: 1; }
+
+      @media (max-width: 600px) {
+        .ab-office__gallery {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+        .ab-gallery-item--tall { grid-row: auto; }
+        .ab-gallery-item { border-radius: 14px; }
+        .ab-gallery-item img { height: 200px; }
+      }
+
+      /* ═══════════════════════════════════════════════════
+         TEAM SECTION — Magazine Style
+      ═══════════════════════════════════════════════════ */
+      .ab-team {
+        padding: 120px 0;
+        background: var(--flag-white);
+        overflow: hidden;
+      }
+      html[data-theme="dark"] .ab-team { background: #0a1628; }
+
+      .ab-team__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      .ab-team__header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 60px;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .ab-team__h {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3.2rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        color: var(--color-text-primary);
+        margin: 0;
+      }
+      html[data-theme="dark"] .ab-team__h { color: rgba(255,255,255,0.94); }
+      .ab-team__h span { color: var(--flag-blue); }
+      html[data-theme="dark"] .ab-team__h span { color: #6fa3ef; }
+
+      .ab-team__sub {
+        max-width: 38ch;
+        font-size: 1.02rem;
+        color: var(--color-text-secondary);
+        line-height: 1.65;
+      }
+      html[data-theme="dark"] .ab-team__sub { color: rgba(255,255,255,0.60); }
+
+      /* Magazine composition */
+      .ab-team__magazine {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 50px;
+        align-items: start;
+      }
+
+      .ab-team__portrait {
+        position: relative;
+      }
+
+      .ab-team__frame {
+        position: relative;
+        border-radius: 32px;
+        overflow: hidden;
+      }
+      .ab-team__frame img {
+        width: 100%;
+        height: 580px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+      }
+      .ab-team__frame:hover img { transform: scale(1.04); }
+
+      .ab-team__frame-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 45%, rgba(10,61,145,0.75) 100%);
+      }
+
+      .ab-team__name-block {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 28px 32px;
+        color: #fff;
+      }
+      .ab-team__name {
+        font-family: var(--font-display);
+        font-size: 1.7rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .ab-team__designation {
+        font-size: 0.88rem;
+        color: rgba(255,255,255,0.78);
+        margin-top: 4px;
+        letter-spacing: 0.06em;
+      }
+      .ab-team__credential {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        padding: 6px 14px;
+        background: rgba(255,153,51,0.88);
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      /* floating depth element */
+      .ab-team__floating {
+        position: absolute;
+        top: -28px;
+        right: -28px;
+        width: 160px;
+        height: 160px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, var(--flag-saffron), #ff6600);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-family: var(--font-display);
+        font-weight: 800;
+        box-shadow: 0 20px 60px rgba(255,153,51,0.45);
+        z-index: 2;
+        animation: floatCard 5s ease-in-out infinite alternate;
+      }
+      .ab-team__floating-big { font-size: 2.8rem; line-height: 1; }
+      .ab-team__floating-sm  { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.90; margin-top: 4px; }
+
+      /* bio content */
+      .ab-team__bio {
+        padding-top: 16px;
+      }
+
+      .ab-team__bio-intro {
+        font-size: 1.08rem;
+        line-height: 1.78;
+        color: var(--color-text-secondary);
+        margin-bottom: 28px;
+      }
+      html[data-theme="dark"] .ab-team__bio-intro { color: rgba(255,255,255,0.68); }
+
+      .ab-team__skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 32px;
+      }
+      .ab-skill-tag {
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-size: 0.84rem;
+        font-family: var(--font-display);
+        font-weight: 600;
+        background: rgba(10,61,145,0.08);
+        color: var(--flag-blue);
+        border: 1px solid rgba(10,61,145,0.15);
+        transition: all 0.25s ease;
+        cursor: default;
+      }
+      html[data-theme="dark"] .ab-skill-tag {
+        background: rgba(111,163,239,0.10);
+        color: #6fa3ef;
+        border-color: rgba(111,163,239,0.20);
+      }
+      .ab-skill-tag:hover {
+        background: var(--flag-blue);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(10,61,145,0.25);
+      }
+
+      .ab-team__metrics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .ab-metric {
+        padding: 20px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(10,61,145,0.06), rgba(10,61,145,0.02));
+        border: 1px solid rgba(10,61,145,0.10);
+        transition: all 0.3s ease;
+      }
+      html[data-theme="dark"] .ab-metric {
+        background: rgba(255,255,255,0.04);
+        border-color: rgba(255,255,255,0.08);
+      }
+      .ab-metric:hover {
+        transform: translateY(-3px);
+        border-color: rgba(255,153,51,0.30);
+        box-shadow: 0 12px 32px rgba(255,153,51,0.12);
+      }
+      .ab-metric__num {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--flag-blue);
+        line-height: 1;
+      }
+      html[data-theme="dark"] .ab-metric__num { color: #6fa3ef; }
+      .ab-metric__lbl {
+        font-size: 0.84rem;
+        color: var(--color-text-secondary);
+        margin-top: 4px;
+      }
+      html[data-theme="dark"] .ab-metric__lbl { color: rgba(255,255,255,0.55); }
+
+      /* ═══════════════════════════════════════════════════
+         SERVICES — Bento Asymmetric
+      ═══════════════════════════════════════════════════ */
+      .ab-services {
+        padding: 100px 0;
+        background: #f7f9fc;
+        position: relative;
+        overflow: hidden;
+      }
+      html[data-theme="dark"] .ab-services {
+        background: #080f1e;
+      }
+      .ab-services::before {
+        content: '';
+        position: absolute;
+        top: -200px;
+        right: -200px;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,153,51,0.06), transparent 70%);
+        pointer-events: none;
+      }
+
+      .ab-services__inner {
+        position: relative;
+        z-index: 2;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      .ab-services__header {
+        margin-bottom: 56px;
+      }
+
+      .ab-services__h {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        color: var(--color-text-primary);
+        margin: 0;
+      }
+      html[data-theme="dark"] .ab-services__h { color: rgba(255,255,255,0.94); }
+
+      .ab-services__bento {
+        display: grid;
+        grid-template-columns: 1.8fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 20px;
+        min-height: 480px;
+      }
+
+      .ab-svc {
+        border-radius: 24px;
+        padding: 36px 32px;
+        border: 1px solid rgba(10,61,145,0.10);
+        background: var(--flag-white);
+        transition: all 0.45s cubic-bezier(0.16,1,0.3,1);
+        position: relative;
+        overflow: hidden;
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      html[data-theme="dark"] .ab-svc {
+        background: rgba(255,255,255,0.04);
+        border-color: rgba(255,255,255,0.08);
+      }
+      .ab-svc::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.45s ease;
+        border-radius: 24px;
+      }
+      .ab-svc:hover { transform: translateY(-6px); box-shadow: 0 24px 70px rgba(0,0,0,0.12); }
+      .ab-svc:hover::before { opacity: 1; }
+
+      .ab-svc--hero {
+        grid-row: span 2;
+        background: linear-gradient(145deg, #0A3D91, #051d50);
+        border-color: transparent;
+        color: #fff;
+        justify-content: space-between;
+      }
+      .ab-svc--hero::before { background: linear-gradient(145deg, rgba(255,153,51,0.15), transparent); }
+
+      .ab-svc--saffron::before { background: rgba(255,153,51,0.06); }
+      .ab-svc--green::before   { background: rgba(19,136,8,0.06); }
+      .ab-svc--blue::before    { background: rgba(10,61,145,0.06); }
+
+      .ab-svc__emoji {
+        font-size: 3rem;
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+      .ab-svc__img-wrap {
+        width: calc(100% + 64px);
+        margin: -36px -32px 20px;
+        height: 180px;
+        overflow: hidden;
+        border-radius: 24px 24px 0 0;
+        flex: 0 0 auto;
+      }
+      .ab-svc--hero .ab-svc__img-wrap {
+        height: 220px;
+      }
+      .ab-svc__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+      }
+      .ab-svc:hover .ab-svc__img { transform: scale(1.06); }
+      .ab-svc__label {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 10px;
+        opacity: 0.65;
+      }
+      .ab-svc--hero .ab-svc__label { color: rgba(255,255,255,0.65); }
+      .ab-svc__title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 800;
+        line-height: 1.25;
+        margin-bottom: 10px;
+      }
+      .ab-svc--hero .ab-svc__title { color: #fff; font-size: 1.6rem; }
+      .ab-svc__desc {
+        font-size: 0.90rem;
+        line-height: 1.6;
+        color: var(--color-text-secondary);
+      }
+      html[data-theme="dark"] .ab-svc__desc { color: rgba(255,255,255,0.55); }
+      .ab-svc--hero .ab-svc__desc { color: rgba(255,255,255,0.70); }
+
+      .ab-svc__arrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 20px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        font-family: var(--font-display);
+        color: var(--flag-saffron);
+        transition: gap 0.25s ease;
+        text-decoration: none;
+      }
+      .ab-svc__arrow:hover { gap: 14px; }
+      .ab-svc--hero .ab-svc__arrow { color: rgba(255,255,255,0.90); }
+
+      /* ═══════════════════════════════════════════════════
+         REVIEWS — Infinite Marquee
+      ═══════════════════════════════════════════════════ */
+      .ab-reviews {
+        padding: 100px 0;
+        background: var(--flag-white);
+        overflow: hidden;
+      }
+      html[data-theme="dark"] .ab-reviews { background: #0a1628; }
+
+      .ab-reviews__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        margin-bottom: 52px;
+      }
+
+      .ab-reviews__h {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        color: var(--color-text-primary);
+        margin: 0 0 12px;
+      }
+      html[data-theme="dark"] .ab-reviews__h { color: rgba(255,255,255,0.94); }
+
+      .ab-reviews__sub {
+        font-size: 1rem;
+        color: var(--color-text-secondary);
+      }
+      html[data-theme="dark"] .ab-reviews__sub { color: rgba(255,255,255,0.55); }
+
+      /* Marquee container */
+      .ab-marquee-wrap {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+      .ab-marquee-wrap::before,
+      .ab-marquee-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0;
+        width: 120px;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .ab-marquee-wrap::before {
+        left: 0;
+        background: linear-gradient(90deg, var(--flag-white), transparent);
+      }
+      .ab-marquee-wrap::after {
+        right: 0;
+        background: linear-gradient(-90deg, var(--flag-white), transparent);
+      }
+      html[data-theme="dark"] .ab-marquee-wrap::before {
+        background: linear-gradient(90deg, #0a1628, transparent);
+      }
+      html[data-theme="dark"] .ab-marquee-wrap::after {
+        background: linear-gradient(-90deg, #0a1628, transparent);
+      }
+
+      .ab-marquee-track {
+        display: flex;
+        gap: 20px;
+        width: max-content;
+        animation: marqueeScroll 40s linear infinite;
+        padding: 8px 0 16px;
+      }
+      .ab-marquee-track:hover { animation-play-state: paused; }
+      @keyframes marqueeScroll {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+
+      /* row 2 goes opposite */
+      .ab-marquee-track--rev {
+        animation-direction: reverse;
+        margin-top: 8px;
+        animation-duration: 48s;
+      }
+
+      .ab-review-card {
+        flex: 0 0 auto;
+        width: 320px;
+        padding: 28px 24px;
+        border-radius: 22px;
+        background: var(--flag-white);
+        border: 1px solid rgba(10,61,145,0.10);
+        box-shadow: 0 4px 24px rgba(10,61,145,0.07);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      html[data-theme="dark"] .ab-review-card {
+        background: rgba(255,255,255,0.04);
+        border-color: rgba(255,255,255,0.08);
+        box-shadow: none;
+      }
+      .ab-review-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(10,61,145,0.13);
+      }
+
+      .ab-review-stars {
+        color: var(--flag-saffron);
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+        letter-spacing: 2px;
+      }
+      .ab-review-text {
+        font-size: 0.94rem;
+        line-height: 1.7;
+        color: var(--color-text-secondary);
+        margin-bottom: 18px;
+        font-style: italic;
+      }
+      html[data-theme="dark"] .ab-review-text { color: rgba(255,255,255,0.62); }
+
+      .ab-review-author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ab-review-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 0.95rem;
+        color: #fff;
+        flex: 0 0 auto;
+      }
+      .av--saffron { background: linear-gradient(135deg, #FF9933, #cc7700); }
+      .av--blue    { background: linear-gradient(135deg, #0A3D91, #051d50); }
+      .av--green   { background: linear-gradient(135deg, #138808, #0a5205); }
+
+      .ab-review-name {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.90rem;
+        color: var(--color-text-primary);
+      }
+      html[data-theme="dark"] .ab-review-name { color: rgba(255,255,255,0.90); }
+      .ab-review-role {
+        font-size: 0.80rem;
+        color: var(--color-text-muted);
+        margin-top: 1px;
+      }
+
+      .ab-google-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 48px;
+        padding: 10px 20px;
+        border-radius: 999px;
+        background: rgba(10,61,145,0.06);
+        border: 1px solid rgba(10,61,145,0.12);
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        transition: all 0.25s ease;
+        margin-left: 40px;
+      }
+      html[data-theme="dark"] .ab-google-badge {
+        background: rgba(255,255,255,0.05);
+        border-color: rgba(255,255,255,0.10);
+        color: rgba(255,255,255,0.70);
+      }
+      .ab-google-badge:hover { transform: translateX(4px); }
+      .ab-google-badge .g-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+
+      /* ═══════════════════════════════════════════════════
+         OFFICE SECTION — Cinematic Split
+      ═══════════════════════════════════════════════════ */
+      .ab-office {
+        padding: 100px 0;
+        background: #f7f9fc;
+        overflow: hidden;
+      }
+      html[data-theme="dark"] .ab-office { background: #080f1e; }
+
+      .ab-office__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 70px;
+        align-items: center;
+      }
+
+      .ab-office__content {}
+
+      .ab-office__h {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        color: var(--color-text-primary);
+        margin: 0 0 20px;
+      }
+      html[data-theme="dark"] .ab-office__h { color: rgba(255,255,255,0.94); }
+      .ab-office__h span { color: var(--flag-blue); }
+      html[data-theme="dark"] .ab-office__h span { color: #6fa3ef; }
+
+      .ab-office__body {
+        font-size: 1.02rem;
+        line-height: 1.75;
+        color: var(--color-text-secondary);
+        margin-bottom: 36px;
+      }
+      html[data-theme="dark"] .ab-office__body { color: rgba(255,255,255,0.62); }
+
+      /* business hours — vertical timeline */
+      .ab-hours {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .ab-hour-row {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(10,61,145,0.08);
+        transition: all 0.25s ease;
+      }
+      html[data-theme="dark"] .ab-hour-row { border-bottom-color: rgba(255,255,255,0.06); }
+      .ab-hour-row:last-child { border-bottom: none; }
+      .ab-hour-row:hover { padding-left: 8px; }
+
+      .ab-hour-day {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 0.92rem;
+        color: var(--color-text-primary);
+        flex: 0 0 120px;
+      }
+      html[data-theme="dark"] .ab-hour-day { color: rgba(255,255,255,0.88); }
+
+      .ab-hour-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 16px;
+        flex: 0 0 auto;
+      }
+      .ab-hour-dot--open   { background: var(--flag-green); box-shadow: 0 0 0 3px rgba(19,136,8,0.18); }
+      .ab-hour-dot--closed { background: #e2e6ea; }
+
+      .ab-hour-time {
+        font-family: var(--font-mono);
+        font-size: 0.88rem;
+        color: var(--color-text-secondary);
+        flex: 1;
+      }
+      html[data-theme="dark"] .ab-hour-time { color: rgba(255,255,255,0.55); }
+
+      .ab-hour-status {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 999px;
+      }
+      .ab-hour-status--open {
+        background: rgba(19,136,8,0.10);
+        color: var(--flag-green);
+      }
+      .ab-hour-status--closed {
+        background: rgba(160,173,185,0.12);
+        color: var(--color-text-muted);
+      }
+
+      /* office image */
+      .ab-office__visual {
+        position: relative;
+      }
+      .ab-office__clip {
+        position: relative;
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 40px 120px rgba(10,61,145,0.20);
+      }
+      .ab-office__clip img {
+        width: 100%;
+        height: 520px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+      }
+      .ab-office__clip:hover img { transform: scale(1.04); }
+      .ab-office__clip-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(10,61,145,0.35), transparent 60%);
+      }
+
+      .ab-office__address-card {
+        position: absolute;
+        bottom: -30px;
+        left: -30px;
+        padding: 22px 24px;
+        background: rgba(255,255,255,0.90);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.80);
+        border-radius: 20px;
+        box-shadow: 0 16px 48px rgba(10,61,145,0.18);
+        max-width: 280px;
+      }
+      html[data-theme="dark"] .ab-office__address-card {
+        background: rgba(13,27,46,0.90);
+        border-color: rgba(255,255,255,0.10);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.40);
+      }
+      .ab-address-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: var(--flag-blue);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+      .ab-address-title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.88rem;
+        color: var(--color-text-primary);
+        margin-bottom: 4px;
+      }
+      html[data-theme="dark"] .ab-address-title { color: rgba(255,255,255,0.90); }
+      .ab-address-text {
+        font-size: 0.82rem;
+        color: var(--color-text-secondary);
+        line-height: 1.55;
+      }
+      html[data-theme="dark"] .ab-address-text { color: rgba(255,255,255,0.55); }
+
+      /* ═══════════════════════════════════════════════════
+         MAP — Glassmorphism Panel
+      ═══════════════════════════════════════════════════ */
+      .ab-map {
+        padding: 80px 0 100px;
+        background: linear-gradient(180deg, #f7f9fc, var(--flag-white));
+        overflow: hidden;
+      }
+      html[data-theme="dark"] .ab-map {
+        background: linear-gradient(180deg, #080f1e, #0a1628);
+      }
+
+      .ab-map__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      .ab-map__h {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        color: var(--color-text-primary);
+        margin: 0 0 40px;
+      }
+      html[data-theme="dark"] .ab-map__h { color: rgba(255,255,255,0.94); }
+
+      .ab-map__frame {
+        position: relative;
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 40px 120px rgba(10,61,145,0.18);
+      }
+
+      .ab-map__frame iframe {
+        width: 100%;
+        height: 460px;
+        border: 0;
+        display: block;
+        filter: saturate(0.8) contrast(1.05);
+      }
+      html[data-theme="dark"] .ab-map__frame iframe {
+        filter: invert(0.9) hue-rotate(180deg) saturate(0.6) contrast(0.95);
+      }
+
+      .ab-map__panel {
+        position: absolute;
+        top: 28px;
+        right: 28px;
+        padding: 24px 24px;
+        background: rgba(255,255,255,0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.70);
+        border-radius: 22px;
+        box-shadow: 0 16px 48px rgba(10,61,145,0.15);
+        max-width: 280px;
+        z-index: 2;
+      }
+      html[data-theme="dark"] .ab-map__panel {
+        background: rgba(10,22,40,0.92);
+        border-color: rgba(255,255,255,0.10);
+      }
+
+      .ab-map__panel-title {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 1rem;
+        color: var(--flag-blue);
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      html[data-theme="dark"] .ab-map__panel-title { color: #6fa3ef; }
+
+      .ab-contact-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(10,61,145,0.07);
+      }
+      html[data-theme="dark"] .ab-contact-row { border-bottom-color: rgba(255,255,255,0.06); }
+      .ab-contact-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+      .ab-contact-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: rgba(10,61,145,0.08);
+        color: var(--flag-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        flex: 0 0 auto;
+      }
+      html[data-theme="dark"] .ab-contact-icon {
+        background: rgba(111,163,239,0.12);
+        color: #6fa3ef;
+      }
+
+      .ab-contact-info {
+        flex: 1;
+      }
+      .ab-contact-label {
+        font-size: 0.70rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--color-text-muted);
+        margin-bottom: 2px;
+      }
+      .ab-contact-val {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        line-height: 1.4;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      html[data-theme="dark"] .ab-contact-val { color: rgba(255,255,255,0.88); }
+      a.ab-contact-val:hover { color: var(--flag-saffron); }
+
+      /* ═══════════════════════════════════════════════════
+         CTA BAND
+      ═══════════════════════════════════════════════════ */
+      .ab-cta-band {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #0A3D91 0%, #051d50 100%);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+      .ab-cta-band::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+      }
+      .ab-cta-band__inner {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+      .ab-cta-band__h {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 3.5vw, 3rem);
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.025em;
+        margin: 0 0 16px;
+        line-height: 1.1;
+      }
+      .ab-cta-band__sub {
+        color: rgba(255,255,255,0.72);
+        font-size: 1.05rem;
+        margin-bottom: 32px;
+        line-height: 1.65;
+      }
+      .ab-cta-band__btns {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ─── RESPONSIVE ────────────────────────────────── */
+      @media (max-width: 900px) {
+        .ab-hero__inner {
+          grid-template-columns: 1fr;
+          padding: 100px 24px 80px;
+          gap: 40px;
+        }
+        .ab-hero__stat--2 { top: auto; bottom: -20px; right: 10px; }
+        .ab-story__inner,
+        .ab-office__inner {
+          grid-template-columns: 1fr;
+          padding: 0 24px;
+          gap: 48px;
+        }
+        .ab-story__img-accent { display: none; }
+        .ab-story__badge { width: 80px; height: 80px; }
+        .ab-story__badge-num { font-size: 1.4rem; }
+        .ab-values__inner { padding: 0 24px; }
+        .ab-values__bento {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+        }
+        .ab-val-card--featured { grid-column: span 2; grid-row: auto; }
+        .ab-team__inner { padding: 0 24px; }
+        .ab-team__magazine { grid-template-columns: 1fr; gap: 32px; }
+        .ab-team__floating { width: 120px; height: 120px; right: 10px; top: -20px; }
+        .ab-team__floating-big { font-size: 2rem; }
+        .ab-services__inner { padding: 0 24px; }
+        .ab-services__bento {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+        }
+        .ab-svc--hero { grid-column: span 2; grid-row: auto; min-height: 280px; }
+        .ab-reviews__inner { padding: 0 24px; }
+        .ab-google-badge { margin-left: 24px; }
+        .ab-office__inner { gap: 32px; padding: 0 24px; }
+        .ab-office__address-card { bottom: -20px; left: -10px; }
+        .ab-map__inner { padding: 0 24px; }
+        .ab-map__panel { position: relative; top: auto; right: auto; max-width: 100%; margin-top: 20px; border-radius: 18px; }
+        .ab-cta-band__inner { padding: 0 24px; }
+      }
+
+      @media (max-width: 600px) {
+        .ab-hero__headline { font-size: 2.4rem; }
+        .ab-hero__img-wrap img { height: 280px; }
+        .ab-values__bento { grid-template-columns: 1fr; }
+        .ab-val-card--featured { grid-column: auto; }
+        .ab-services__bento {
+          grid-template-columns: 1fr;
+        }
+        .ab-svc--hero { grid-column: auto; }
+        .ab-team__frame img { height: 380px; }
+        .ab-team__metrics { grid-template-columns: 1fr 1fr; }
+        .ab-map__frame iframe { height: 320px; }
+        .ab-office__clip img { height: 340px; }
+      }
+    </style>
   </head>
   <body data-base="../" data-active-nav="about">
     <a class="skipLink" href="#main">Skip to content</a>
@@ -14,47 +1614,808 @@
     <div class="cursorDot" aria-hidden="true"></div>
     <div class="cursorRing" aria-hidden="true"></div>
     <div id="navbarSlot"></div>
-    <main id="main" class="pageFadeIn">
-      <section class="section section--tight" aria-label="About header">
-        <div class="container">
-          <div class="card cardPad">
-            <div class="kicker">About</div>
-            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Compliance that feels simple</h1>
-            <p style="margin-top: 10px;">
-              IndTaxPay combines expert CA support with a modern, interactive platform — so you can file, track, and grow confidently.
+
+    <main id="main">
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  HERO                                        ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="ab-hero" aria-label="About hero">
+        <div class="ab-hero__mesh" aria-hidden="true"></div>
+        <div class="ab-hero__grid-lines" aria-hidden="true"></div>
+        <div class="ab-blob ab-blob--1" aria-hidden="true"></div>
+        <div class="ab-blob ab-blob--2" aria-hidden="true"></div>
+        <div class="ab-blob ab-blob--3" aria-hidden="true"></div>
+
+        <div class="ab-hero__inner">
+          <!-- left text -->
+          <div>
+            <div class="ab-hero__kicker reveal">
+              <span class="ab-hero__kicker-dot" aria-hidden="true"></span>
+              K.Das &amp; Associates · Nagercoil, Tamil Nadu
+            </div>
+            <h1 class="ab-hero__headline reveal reveal--d1">
+              Built on<br>
+              <span class="hl-saffron">Trust.</span><br>
+              Powered by<br>
+              <span class="hl-green">Expertise.</span>
+            </h1>
+            <p class="ab-hero__sub reveal reveal--d2">
+              K.Das &amp; Associates is the chartered accountancy firm behind IndTaxPay — combining decades of CA expertise with a modern digital platform to make compliance effortless for every Indian.
             </p>
-            <div class="row wrap" style="margin-top: 12px;">
-              <button class="btn btn-primary" type="button" data-open-chat>Talk to our team →</button>
-              <a class="btn btn-outline" href="../services/index.html">Explore services</a>
+            <div class="ab-hero__cta reveal reveal--d3">
+              <button class="ab-btn-primary" type="button" data-open-chat id="hero-talk-btn">
+                Talk to our CA →
+              </button>
+              <a class="ab-btn-ghost" href="../services/index.html" id="hero-services-link">
+                Explore Services
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="ab-hero__scroll" aria-hidden="true">
+          <div class="ab-hero__scroll-line"></div>
+          Scroll
+        </div>
+      </section>
+
+      <!-- flag stripe -->
+      <div class="ab-flag-stripe" aria-hidden="true"></div>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  STORY / ABOUT                               ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="ab-story" aria-label="Our story">
+        <div class="ab-story__inner">
+          <!-- visual column -->
+          <div class="ab-story__visual">
+            <img
+              class="ab-story__img-main reveal reveal--scale"
+              src="../assets/aboutus.avif"
+              alt="K.Das &amp; Associates professionals"
+              loading="lazy"
+            />
+            <img
+              class="ab-story__img-accent reveal reveal--d2"
+              src="../assets/Building.jpg"
+              alt="IndTaxPay office building"
+              loading="lazy"
+            />
+            <div class="ab-story__badge reveal reveal--d3" aria-label="15 years experience">
+              <span class="ab-story__badge-num">15+</span>
+              <span class="ab-story__badge-txt">Yrs</span>
+            </div>
+          </div>
+
+          <!-- content column -->
+          <div class="ab-story__content">
+            <div class="ab-story__pre reveal">Our Story</div>
+            <h2 class="ab-story__h reveal reveal--d1">
+              A legacy of <span>precision</span>,<br>a future of innovation
+            </h2>
+            <p class="ab-story__body reveal reveal--d2">
+              K.Das &amp; Associates was founded with a singular mission — to bring world-class chartered accountancy services to every business and individual across India. What began as a boutique CA practice in Kolkata has grown into a trusted multi-service compliance firm, now amplified by the IndTaxPay digital platform.
+            </p>
+            <p class="ab-story__body reveal reveal--d3">
+              We believe compliance should never be a burden. Our expert CAs combine deep regulatory knowledge with a human-first approach — guiding you through ITR filing, GST, payroll, audits and company registration with clarity and confidence.
+            </p>
+
+            <div class="ab-milestones reveal reveal--d4">
+              <div class="ab-milestone">
+                <div class="ab-milestone__year">FOUNDATION</div>
+                <div class="ab-milestone__title">K.Das &amp; Associates Established</div>
+                <div class="ab-milestone__desc">Started as a specialist income tax and audit practice serving individuals and small businesses in Kolkata.</div>
+              </div>
+              <div class="ab-milestone">
+                <div class="ab-milestone__year">GROWTH</div>
+                <div class="ab-milestone__title">Expanded to GST, Payroll &amp; Audit</div>
+                <div class="ab-milestone__desc">Added statutory audit and GST registration services, growing our client base across West Bengal and beyond.</div>
+              </div>
+              <div class="ab-milestone">
+                <div class="ab-milestone__year">DIGITAL ERA</div>
+                <div class="ab-milestone__title">IndTaxPay Platform Launched</div>
+                <div class="ab-milestone__desc">Married decades of CA expertise with a modern interactive platform — making compliance accessible for all of India.</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section" aria-label="Values">
-        <div class="container">
-          <div class="grid grid-3">
-            <div class="card cardPad cardHover">
-              <div class="badge badge--navy">Trust</div>
-              <h2 style="margin-top: 10px; font-size: 1.25rem;">Secure by default</h2>
-              <p style="margin-top: 8px;">Encryption-first workflows and clear access boundaries (demo UI).</p>
+
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  TEAM — Magazine Style                       ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="ab-team" aria-label="Our team">
+        <div class="ab-team__inner">
+          <div class="ab-team__header">
+            <div>
+              <div class="ab-story__pre reveal">Leadership</div>
+              <h2 class="ab-team__h reveal reveal--d1">The <span>expert</span> behind<br>every filing</h2>
             </div>
-            <div class="card cardPad cardHover">
-              <div class="badge badge--green">Clarity</div>
-              <h2 style="margin-top: 10px; font-size: 1.25rem;">No jargon</h2>
-              <p style="margin-top: 8px;">We translate compliance into simple, actionable steps.</p>
+            <p class="ab-team__sub reveal reveal--right">
+              Led by a qualified CA with deep expertise across income tax, GST, and corporate law — bringing personal attention to every client engagement.
+            </p>
+          </div>
+
+          <div class="ab-team__magazine">
+            <!-- portrait side -->
+            <div class="ab-team__portrait">
+              <div class="ab-team__frame reveal reveal--scale">
+                <img src="../assets/aboutus.avif" alt="Principal CA — K.Das &amp; Associates" loading="lazy" />
+                <div class="ab-team__frame-overlay" aria-hidden="true"></div>
+                <div class="ab-team__name-block">
+                  <div class="ab-team__name">K. Das &amp; Associates</div>
+                  <div class="ab-team__designation">Chartered Accountants · Kolkata</div>
+                  <span class="ab-team__credential">🏛️ ICAI Registered</span>
+                </div>
+              </div>
+              <div class="ab-team__floating reveal reveal--d3" aria-label="10000+ filings completed">
+                <span class="ab-team__floating-big">10K+</span>
+                <span class="ab-team__floating-sm">Filings Done</span>
+              </div>
             </div>
-            <div class="card cardPad cardHover">
-              <div class="badge badge--saffron">Speed</div>
-              <h2 style="margin-top: 10px; font-size: 1.25rem;">Fast turnaround</h2>
-              <p style="margin-top: 8px;">Smart checklists + CA review for faster filing and fewer errors.</p>
+
+            <!-- bio side -->
+            <div class="ab-team__bio">
+              <div class="ab-story__pre reveal">Principal CA</div>
+              <h3 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 20px;" class="reveal reveal--d1">
+                Precision, integrity &amp; client-first thinking
+              </h3>
+              <p class="ab-team__bio-intro reveal reveal--d2">
+                With over 15 years of chartered accountancy practice, our principal CA brings hands-on expertise in income tax litigation, GST compliance, company formation, and statutory audit. Every client receives direct CA attention — not junior staff.
+              </p>
+
+              <div class="ab-team__skills reveal reveal--d3">
+                <span class="ab-skill-tag">Income Tax (ITR)</span>
+                <span class="ab-skill-tag">GST Filing</span>
+                <span class="ab-skill-tag">Statutory Audit</span>
+                <span class="ab-skill-tag">Company Registration</span>
+                <span class="ab-skill-tag">TDS &amp; Payroll</span>
+                <span class="ab-skill-tag">Tax Litigation</span>
+                <span class="ab-skill-tag">Bookkeeping</span>
+              </div>
+
+              <div class="ab-team__metrics reveal reveal--d4">
+                <div class="ab-metric">
+                  <div class="ab-metric__num" data-count-up="15" data-suffix="+">0+</div>
+                  <div class="ab-metric__lbl">Years of Practice</div>
+                </div>
+                <div class="ab-metric">
+                  <div class="ab-metric__num" data-count-up="500" data-suffix="+">0+</div>
+                  <div class="ab-metric__lbl">Active Clients</div>
+                </div>
+                <div class="ab-metric">
+                  <div class="ab-metric__num" data-count-up="10000" data-suffix="+">0+</div>
+                  <div class="ab-metric__lbl">Filings Completed</div>
+                </div>
+                <div class="ab-metric">
+                  <div class="ab-metric__num" data-count-up="4.9">0</div>
+                  <div class="ab-metric__lbl">Google Rating</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- flag stripe -->
+      <div class="ab-flag-stripe" aria-hidden="true"></div>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  SERVICES — Bento Asymmetric                 ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="ab-services" aria-label="Our services">
+        <div class="ab-services__inner">
+          <div class="ab-services__header">
+            <div class="ab-story__pre reveal">What We Do</div>
+            <h2 class="ab-services__h reveal reveal--d1">Comprehensive <span style="color: var(--flag-blue);">CA services</span><br>under one roof</h2>
+          </div>
+
+          <div class="ab-services__bento">
+            <!-- hero service -->
+            <div class="ab-svc ab-svc--hero reveal reveal--left reveal--d1">
+              <div>
+                <div class="ab-svc__img-wrap">
+                  <img class="ab-svc__img" src="../assets/services_assets/income.png" alt="Income Tax ITR" />
+                </div>
+                <div class="ab-svc__label">Most Popular</div>
+                <div class="ab-svc__title">Income Tax (ITR) Filing</div>
+                <div class="ab-svc__desc">Expert CA-reviewed ITR filing for salaried individuals, professionals, and businesses. From Form 16 to complex capital gains — we handle it all with accuracy and speed.</div>
+              </div>
+              <a class="ab-svc__arrow" href="../services/income-tax.html" id="svc-itr-link">
+                Explore ITR Filing →
+              </a>
+            </div>
+
+            <div class="ab-svc ab-svc--saffron reveal reveal--d2" id="svc-gst">
+              <div class="ab-svc__img-wrap"><img class="ab-svc__img" src="../assets/services_assets/gst.png" alt="GST Filing" /></div>
+              <div class="ab-svc__label" style="color: var(--flag-saffron);">Registration &amp; Returns</div>
+              <div class="ab-svc__title">GST Filing</div>
+              <div class="ab-svc__desc">GSTR-1, 3B, annual returns and reconciliations handled by experts.</div>
+              <a class="ab-svc__arrow" href="../services/gst.html" id="svc-gst-link">Learn More →</a>
+            </div>
+
+            <div class="ab-svc ab-svc--green reveal reveal--d3" id="svc-company">
+              <div class="ab-svc__img-wrap"><img class="ab-svc__img" src="../assets/services_assets/company_Registartion.png" alt="Company Registration" /></div>
+              <div class="ab-svc__label" style="color: var(--flag-green);">Pvt Ltd · LLP · OPC</div>
+              <div class="ab-svc__title">Company Registration</div>
+              <div class="ab-svc__desc">End-to-end company formation — MCA filings, PAN, TAN and more.</div>
+              <a class="ab-svc__arrow" href="../services/startup.html" id="svc-company-link">Learn More →</a>
+            </div>
+
+            <div class="ab-svc ab-svc--blue reveal reveal--d4" id="svc-audit">
+              <div class="ab-svc__img-wrap"><img class="ab-svc__img" src="../assets/services_assets/statutory.png" alt="Statutory Audit" /></div>
+              <div class="ab-svc__label" style="color: var(--flag-blue);">3CD + Audit Reports</div>
+              <div class="ab-svc__title">Statutory Audit</div>
+              <div class="ab-svc__desc">Thorough audit-ready reports that satisfy regulators and lenders.</div>
+              <a class="ab-svc__arrow" href="../services/audit-assurance.html" id="svc-audit-link">Learn More →</a>
+            </div>
+
+            <div class="ab-svc ab-svc--saffron reveal reveal--d5" id="svc-tds">
+              <div class="ab-svc__img-wrap"><img class="ab-svc__img" src="../assets/services_assets/TDS.png" alt="TDS and Payroll" /></div>
+              <div class="ab-svc__label" style="color: var(--flag-saffron);">Returns &amp; Form 16</div>
+              <div class="ab-svc__title">TDS &amp; Payroll</div>
+              <div class="ab-svc__desc">Monthly payroll processing, TDS deduction, Form 24Q and Form 16.</div>
+              <a class="ab-svc__arrow" href="../services/business-support.html" id="svc-tds-link">Learn More →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  GOOGLE REVIEWS — Infinite Marquee           ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="ab-reviews" aria-label="Client reviews">
+        <div class="ab-reviews__inner">
+          <div class="ab-story__pre reveal">Google Reviews</div>
+          <h2 class="ab-reviews__h reveal reveal--d1">What our clients <span style="color: var(--flag-saffron);">say about us</span></h2>
+          <p class="ab-reviews__sub reveal reveal--d2">Rated 4.9 ★ on Google · 100+ verified reviews</p>
+        </div>
+
+        <!-- Row 1 marquee -->
+        <div class="ab-marquee-wrap" aria-label="Client reviews scrolling display">
+          <div class="ab-marquee-track" id="marquee-row1">
+            <!-- cards duplicated for seamless loop via JS -->
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Filed my ITR in under 2 days — everything was smooth and transparent. The CA team explained every deduction clearly. Highly recommend!"</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--saffron">R</div>
+                <div>
+                  <div class="ab-review-name">Rajesh Sharma</div>
+                  <div class="ab-review-role">Salaried Professional · Delhi</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"GST registration done within 3 days. The team is very responsive and professional. IndTaxPay is a game-changer for small business owners."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--blue">P</div>
+                <div>
+                  <div class="ab-review-name">Priya Mehta</div>
+                  <div class="ab-review-role">Business Owner · Mumbai</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"K.Das &amp; Associates handled our company registration and statutory audit flawlessly. Very knowledgeable team with attention to detail."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--green">A</div>
+                <div>
+                  <div class="ab-review-name">Amit Bose</div>
+                  <div class="ab-review-role">Director · Kolkata</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Best CA service I've ever used. They helped me with capital gains tax on my property sale — saved me significant money legally."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--saffron">S</div>
+                <div>
+                  <div class="ab-review-name">Sunita Agarwal</div>
+                  <div class="ab-review-role">Real Estate Investor · Bangalore</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Our payroll and TDS have been managed perfectly for 2 years now. Zero errors, always on time. Strongly recommended for growing companies."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--blue">V</div>
+                <div>
+                  <div class="ab-review-name">Vikram Nair</div>
+                  <div class="ab-review-role">Startup Founder · Hyderabad</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Very professional. Handled my NRI ITR filing with expert care. The online process was simple and communication was excellent throughout."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--green">D</div>
+                <div>
+                  <div class="ab-review-name">Deepika Rao</div>
+                  <div class="ab-review-role">NRI Taxpayer · USA</div>
+                </div>
+              </div>
+            </div>
+            <!-- duplicates for seamless loop -->
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Filed my ITR in under 2 days — everything was smooth and transparent. The CA team explained every deduction clearly. Highly recommend!"</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--saffron">R</div>
+                <div>
+                  <div class="ab-review-name">Rajesh Sharma</div>
+                  <div class="ab-review-role">Salaried Professional · Delhi</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"GST registration done within 3 days. The team is very responsive and professional. IndTaxPay is a game-changer for small business owners."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--blue">P</div>
+                <div>
+                  <div class="ab-review-name">Priya Mehta</div>
+                  <div class="ab-review-role">Business Owner · Mumbai</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"K.Das &amp; Associates handled our company registration and statutory audit flawlessly. Very knowledgeable team with attention to detail."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--green">A</div>
+                <div>
+                  <div class="ab-review-name">Amit Bose</div>
+                  <div class="ab-review-role">Director · Kolkata</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Best CA service I've ever used. They helped me with capital gains tax on my property sale — saved me significant money legally."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--saffron">S</div>
+                <div>
+                  <div class="ab-review-name">Sunita Agarwal</div>
+                  <div class="ab-review-role">Real Estate Investor · Bangalore</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Our payroll and TDS have been managed perfectly for 2 years now. Zero errors, always on time. Strongly recommended for growing companies."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--blue">V</div>
+                <div>
+                  <div class="ab-review-name">Vikram Nair</div>
+                  <div class="ab-review-role">Startup Founder · Hyderabad</div>
+                </div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Very professional. Handled my NRI ITR filing with expert care. The online process was simple and communication was excellent throughout."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--green">D</div>
+                <div>
+                  <div class="ab-review-name">Deepika Rao</div>
+                  <div class="ab-review-role">NRI Taxpayer · USA</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2 marquee (reverse) -->
+        <div class="ab-marquee-wrap" aria-hidden="true">
+          <div class="ab-marquee-track ab-marquee-track--rev">
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Superb accounting and bookkeeping. My MIS reports are now clean and on time every month. The team really understands small business needs."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--saffron">M</div>
+                <div><div class="ab-review-name">Mohan Gupta</div><div class="ab-review-role">Retailer · Kolkata</div></div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Excellent LLP registration support. They guided us through every document and the MCA portal submission was done perfectly. Thank you!"</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--green">T</div>
+                <div><div class="ab-review-name">Tanmoy Sen</div><div class="ab-review-role">Co-founder · Kolkata</div></div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Quick, affordable, and accurate. My family has been filing ITR through K.Das &amp; Associates for 5 years. We trust them completely."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--blue">K</div>
+                <div><div class="ab-review-name">Kavya Pillai</div><div class="ab-review-role">Teacher · Chennai</div></div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Amazing GST reconciliation work. Resolved 2 years of mismatches in our GSTR-2A without any issues. Would definitely recommend to others."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--saffron">N</div>
+                <div><div class="ab-review-name">Nilesh Joshi</div><div class="ab-review-role">Manufacturer · Pune</div></div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"The audit report was delivered 3 weeks before deadline with complete documentation. Very impressed with the level of professionalism."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--green">F</div>
+                <div><div class="ab-review-name">Fatima Sheikh</div><div class="ab-review-role">NGO Director · Lucknow</div></div>
+              </div>
+            </div>
+            <!-- duplicate for seamless loop -->
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Superb accounting and bookkeeping. My MIS reports are now clean and on time every month. The team really understands small business needs."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--saffron">M</div>
+                <div><div class="ab-review-name">Mohan Gupta</div><div class="ab-review-role">Retailer · Kolkata</div></div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Excellent LLP registration support. They guided us through every document and the MCA portal submission was done perfectly. Thank you!"</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--green">T</div>
+                <div><div class="ab-review-name">Tanmoy Sen</div><div class="ab-review-role">Co-founder · Kolkata</div></div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Quick, affordable, and accurate. My family has been filing ITR through K.Das &amp; Associates for 5 years. We trust them completely."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--blue">K</div>
+                <div><div class="ab-review-name">Kavya Pillai</div><div class="ab-review-role">Teacher · Chennai</div></div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"Amazing GST reconciliation work. Resolved 2 years of mismatches in our GSTR-2A without any issues. Would definitely recommend to others."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--saffron">N</div>
+                <div><div class="ab-review-name">Nilesh Joshi</div><div class="ab-review-role">Manufacturer · Pune</div></div>
+              </div>
+            </div>
+            <div class="ab-review-card">
+              <div class="ab-review-stars">★★★★★</div>
+              <p class="ab-review-text">"The audit report was delivered 3 weeks before deadline with complete documentation. Very impressed with the level of professionalism."</p>
+              <div class="ab-review-author">
+                <div class="ab-review-avatar av--green">F</div>
+                <div><div class="ab-review-name">Fatima Sheikh</div><div class="ab-review-role">NGO Director · Lucknow</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="ab-google-badge" href="https://g.page/r/review" target="_blank" rel="noopener noreferrer" id="google-reviews-link">
+          <span style="display:flex; gap:3px;">
+            <span class="g-dot" style="background:#4285F4;"></span>
+            <span class="g-dot" style="background:#EA4335;"></span>
+            <span class="g-dot" style="background:#FBBC04;"></span>
+            <span class="g-dot" style="background:#34A853;"></span>
+          </span>
+          View all Google Reviews →
+        </a>
+      </section>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  OFFICE + HOURS                              ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="ab-office" aria-label="Our office">
+        <div class="ab-office__inner">
+          <!-- content -->
+          <div class="ab-office__content">
+            <div class="ab-story__pre reveal">Our Office</div>
+            <h2 class="ab-office__h reveal reveal--d1">Visit us at our<br><span>Nagercoil</span> office</h2>
+            <p class="ab-office__body reveal reveal--d2">
+              Our office in the heart of Kolkata is open to clients for in-person consultations, document submission and CA meetings. Drop by — we'd love to meet you.
+            </p>
+
+            <h3 style="font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin: 0 0 16px; color: var(--color-text-primary);" class="reveal reveal--d3">
+              Business Hours
+            </h3>
+
+            <div class="ab-hours reveal reveal--d4">
+              <div class="ab-hour-row">
+                <div class="ab-hour-day">Monday</div>
+                <div class="ab-hour-dot ab-hour-dot--open"></div>
+                <div class="ab-hour-time">10:00 AM – 6:00 PM</div>
+                <div class="ab-hour-status ab-hour-status--open">Open</div>
+              </div>
+              <div class="ab-hour-row">
+                <div class="ab-hour-day">Tuesday</div>
+                <div class="ab-hour-dot ab-hour-dot--open"></div>
+                <div class="ab-hour-time">10:00 AM – 6:00 PM</div>
+                <div class="ab-hour-status ab-hour-status--open">Open</div>
+              </div>
+              <div class="ab-hour-row">
+                <div class="ab-hour-day">Wednesday</div>
+                <div class="ab-hour-dot ab-hour-dot--open"></div>
+                <div class="ab-hour-time">10:00 AM – 6:00 PM</div>
+                <div class="ab-hour-status ab-hour-status--open">Open</div>
+              </div>
+              <div class="ab-hour-row">
+                <div class="ab-hour-day">Thursday</div>
+                <div class="ab-hour-dot ab-hour-dot--open"></div>
+                <div class="ab-hour-time">10:00 AM – 6:00 PM</div>
+                <div class="ab-hour-status ab-hour-status--open">Open</div>
+              </div>
+              <div class="ab-hour-row">
+                <div class="ab-hour-day">Friday</div>
+                <div class="ab-hour-dot ab-hour-dot--open"></div>
+                <div class="ab-hour-time">10:00 AM – 6:00 PM</div>
+                <div class="ab-hour-status ab-hour-status--open">Open</div>
+              </div>
+              <div class="ab-hour-row">
+                <div class="ab-hour-day">Saturday</div>
+                <div class="ab-hour-dot ab-hour-dot--open"></div>
+                <div class="ab-hour-time">10:00 AM – 2:00 PM</div>
+                <div class="ab-hour-status ab-hour-status--open">Open</div>
+              </div>
+              <div class="ab-hour-row">
+                <div class="ab-hour-day">Sunday</div>
+                <div class="ab-hour-dot ab-hour-dot--closed"></div>
+                <div class="ab-hour-time">—</div>
+                <div class="ab-hour-status ab-hour-status--closed">Closed</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- visual -->
+          <div class="ab-office__visual">
+            <!-- 4-photo premium gallery -->
+            <div class="ab-office__gallery reveal reveal--right">
+              <!-- tall left image -->
+              <div class="ab-gallery-item ab-gallery-item--tall">
+                <img src="../assets/office 1.jpg" alt="K.Das &amp; Associates office interior" loading="lazy" />
+                <div class="ab-gallery-item__overlay" aria-hidden="true"></div>
+              </div>
+              <!-- right top -->
+              <div class="ab-gallery-item reveal reveal--d2">
+                <img src="../assets/office 2.webp" alt="Office workspace" loading="lazy" />
+                <div class="ab-gallery-item__overlay" aria-hidden="true"></div>
+              </div>
+              <!-- right bottom row: two side by side -->
+              <div class="ab-gallery-item reveal reveal--d3">
+                <img src="../assets/office.jpg" alt="Office environment" loading="lazy" />
+                <div class="ab-gallery-item__overlay" aria-hidden="true"></div>
+              </div>
+              <div class="ab-gallery-item reveal reveal--d4" style="grid-column: span 1;">
+                <img src="../assets/building 1.avif" alt="Office building exterior" loading="lazy" />
+                <div class="ab-gallery-item__overlay" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div class="ab-office__address-card reveal reveal--d5">
+              <div class="ab-address-icon" aria-hidden="true">📍</div>
+              <div class="ab-address-title">K.Das &amp; Associates</div>
+              <div class="ab-address-text">2nd Floor, Jey Pee Complex,<br>Maltamal Street, WCC Rd,<br>Nagercoil, Tamil Nadu 629001</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  MAP — Glassmorphism                         ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="ab-map" aria-label="Office location map">
+        <div class="ab-map__inner">
+          <div class="ab-story__pre reveal">Find Us</div>
+          <h2 class="ab-map__h reveal reveal--d1">Find us at <span style="color: var(--flag-blue);">K.Das &amp; Associates</span></h2>
+
+          <div class="ab-map__frame reveal reveal--scale reveal--d2">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12032.984158380355!2d77.41555872719576!3d8.178058297283043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b04f11e370be845%3A0xdce04e4cdbe74719!2sK.Das%20%26%20Associates!5e1!3m2!1sen!2sin!4v1780513432186!5m2!1sen!2sin"
+              width="600"
+              height="450"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="K.Das &amp; Associates — exact office location"
+            ></iframe>
+
+            <div class="ab-map__panel">
+              <div class="ab-map__panel-title">
+                📍 K.Das &amp; Associates
+              </div>
+
+              <div class="ab-contact-row">
+                <div class="ab-contact-icon">🏛️</div>
+                <div class="ab-contact-info">
+                  <div class="ab-contact-label">Address</div>
+                  <div class="ab-contact-val">2nd Floor, Jey Pee Complex, Maltamal Street, WCC Rd, Nagercoil, Tamil Nadu 629001</div>
+                </div>
+              </div>
+
+              <div class="ab-contact-row">
+                <div class="ab-contact-icon">📞</div>
+                <div class="ab-contact-info">
+                  <div class="ab-contact-label">Phone</div>
+                  <a class="ab-contact-val" href="tel:+919876543210" id="map-phone-link">+91 98765 43210</a>
+                </div>
+              </div>
+
+              <div class="ab-contact-row">
+                <div class="ab-contact-icon">✉️</div>
+                <div class="ab-contact-info">
+                  <div class="ab-contact-label">Email</div>
+                  <a class="ab-contact-val" href="mailto:info@indTaxPay.com" id="map-email-link">info@indTaxPay.com</a>
+                </div>
+              </div>
+
+              <div class="ab-contact-row">
+                <div class="ab-contact-icon">🕐</div>
+                <div class="ab-contact-info">
+                  <div class="ab-contact-label">Hours</div>
+                  <div class="ab-contact-val">Mon–Sat · 10AM–6PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  CTA BAND                                    ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="ab-cta-band" aria-label="Call to action">
+        <div class="ab-cta-band__inner">
+          <h2 class="ab-cta-band__h reveal">
+            Ready to make compliance <span style="color: var(--flag-saffron);">effortless?</span>
+          </h2>
+          <p class="ab-cta-band__sub reveal reveal--d1">
+            Join 500+ individuals and businesses who trust K.Das &amp; Associates and IndTaxPay for their tax, audit and compliance needs.
+          </p>
+          <div class="ab-cta-band__btns reveal reveal--d2">
+            <a class="ab-btn-primary" href="../apply.html" id="cta-book-link">Book a Consultation →</a>
+            <button class="ab-btn-ghost" type="button" data-open-chat id="cta-chat-btn">Talk to a CA</button>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <div id="footerSlot"></div>
     <script defer src="../assets/js/site.js"></script>
+
+    <script>
+      /* ─── PAGE-SPECIFIC ANIMATIONS ─────────────────────
+         Scroll-triggered reveal system + interactive effects
+      ─────────────────────────────────────────────────── */
+      (function () {
+        'use strict';
+
+        /* 1. Intersection Observer for .reveal elements */
+        const io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+        document.querySelectorAll('.reveal').forEach(function (el) {
+          io.observe(el);
+        });
+
+        /* 2. Count-up for data-count-up elements */
+        const clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
+        const countIo = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              const el = e.target;
+              if (el.dataset.countUpDone) return;
+              el.dataset.countUpDone = '1';
+              countIo.unobserve(el);
+              const to      = parseFloat(el.getAttribute('data-count-up')) || 0;
+              const dec     = parseInt(el.getAttribute('data-decimals') || '0', 10);
+              const prefix  = el.getAttribute('data-prefix') || '';
+              const suffix  = el.getAttribute('data-suffix') || '';
+              const dur     = 1400;
+              const start   = performance.now();
+              (function step(now) {
+                const t   = clamp((now - start) / dur, 0, 1);
+                const eas = 1 - Math.pow(1 - t, 3);
+                const val = to * eas;
+                el.textContent = prefix + (dec ? val.toFixed(dec) : Math.round(val).toString()) + suffix;
+                if (t < 1) requestAnimationFrame(step);
+              })(start);
+            });
+          },
+          { threshold: 0.4 }
+        );
+        document.querySelectorAll('[data-count-up]').forEach(function (el) {
+          countIo.observe(el);
+        });
+
+        /* 3. Bento card mouse-move shimmer */
+        document.querySelectorAll('.ab-val-card').forEach(function (card) {
+          card.addEventListener('mousemove', function (e) {
+            const r  = card.getBoundingClientRect();
+            const mx = ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%';
+            const my = ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%';
+            card.style.setProperty('--mx', mx);
+            card.style.setProperty('--my', my);
+          });
+        });
+
+        /* 4. Hero parallax on mousemove (desktop only) */
+        const hero = document.querySelector('.ab-hero');
+        if (hero && window.matchMedia('(pointer:fine)').matches) {
+          hero.addEventListener('mousemove', function (e) {
+            const cx = (e.clientX / window.innerWidth  - 0.5) * 2;
+            const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+            const blobs = hero.querySelectorAll('.ab-blob');
+            blobs.forEach(function (b, i) {
+              const d = (i + 1) * 10;
+              b.style.transform = 'translate(' + (cx * d) + 'px,' + (cy * d) + 'px)';
+            });
+            const wrap = hero.querySelector('.ab-hero__img-wrap');
+            if (wrap) {
+              wrap.style.transform = 'perspective(1000px) rotateY(' + (-6 + cx * 4) + 'deg) rotateX(' + (3 + cy * 2) + 'deg)';
+            }
+          });
+        }
+
+        /* 5. Magnetic button effect */
+        document.querySelectorAll('.ab-btn-primary, .ab-btn-ghost').forEach(function (btn) {
+          btn.addEventListener('mousemove', function (e) {
+            const r  = btn.getBoundingClientRect();
+            const dx = (e.clientX - (r.left + r.width  / 2)) * 0.25;
+            const dy = (e.clientY - (r.top  + r.height / 2)) * 0.25;
+            btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px) translateY(-2px)';
+          });
+          btn.addEventListener('mouseleave', function () {
+            btn.style.transform = '';
+          });
+        });
+
+        /* 6. Skill tag stagger reveal */
+        const skillsIo = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              const tags = e.target.querySelectorAll('.ab-skill-tag');
+              tags.forEach(function (t, i) {
+                setTimeout(function () {
+                  t.style.opacity = '1';
+                  t.style.transform = 'translateY(0)';
+                }, i * 60);
+              });
+              skillsIo.unobserve(e.target);
+            });
+          },
+          { threshold: 0.3 }
+        );
+        const skillsWrap = document.querySelector('.ab-team__skills');
+        if (skillsWrap) {
+          skillsWrap.querySelectorAll('.ab-skill-tag').forEach(function (t) {
+            t.style.opacity = '0';
+            t.style.transform = 'translateY(12px)';
+            t.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          });
+          skillsIo.observe(skillsWrap);
+        }
+      })();
+    </script>
   </body>
 </html>

@@ -1,102 +1,682 @@
 <!doctype html>
 <html lang="en" data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Income Tax (ITR) Filing — IndTaxPay</title>
-    <meta name="description" content="Hassle-free ITR filing with expert CA review. Clear checklist, fast turnaround, secure upload." />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
-  </head>
-  <body data-base="../" data-active-nav="services">
-    <a class="skipLink" href="#main">Skip to content</a>
-    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
-    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
-    <div class="cursorDot" aria-hidden="true"></div>
-    <div class="cursorRing" aria-hidden="true"></div>
-    <div id="navbarSlot"></div>
-    <main id="main" class="pageFadeIn">
-      <section class="section section--tight" aria-label="Service header">
-        <div class="container">
-          <div class="card cardPad">
-            <div class="kicker">Service</div>
-            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Income Tax Return (ITR) Filing</h1>
-            <p style="margin-top: 10px;">CA-reviewed filing for salaried, freelancers, and HUFs — with a clean checklist and secure uploads.</p>
-            <div class="row wrap" style="margin-top: 12px;">
-              <a class="btn btn-primary" href="../calculators/income-tax.html">Estimate Tax →</a>
-              <button class="btn btn-outline" type="button" data-open-chat>Talk to CA</button>
-              <a class="btn btn-outline" href="https://wa.me/91XXXXXXXXXX?text=Hi%20IndTaxPay%2C%20I%20need%20help%20with%20ITR%20filing" target="_blank" rel="noreferrer">WhatsApp</a>
-            </div>
-            <div class="muted" style="margin-top: 10px; font-size: 0.92rem;">Note: This is an interactive UI demo. Validate your exact filing requirements with your CA.</div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Income Tax & TDS Services | IndTaxPay</title>
+  <meta name="description" content="ITR filing for individuals, businesses, companies, trusts — TAN registration, TDS returns, 15CA/15CB — K.Das & Associates CA team." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="../assets/css/services.css" />
+  <style>
+    /* Tax Journey Timeline custom styles */
+    .theme-tax .dna-left {
+      background: radial-gradient(circle at center, rgba(139, 92, 246, 0.05) 0%, rgba(3, 10, 24, 0.01) 85%),
+                  linear-gradient(rgba(139, 92, 246, 0.02) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(139, 92, 246, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
+      border-color: rgba(139, 92, 246, 0.15);
+      position: relative;
+      height: 620px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 40px;
+    }
+    html[data-theme="dark"] .theme-tax .dna-left {
+      background: radial-gradient(circle at center, rgba(139, 92, 246, 0.08) 0%, rgba(3, 10, 24, 0.2) 85%),
+                  linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 30px 30px, 30px 30px;
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+    
+    .tax-timeline-container {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      display: flex;
+      align-items: center;
+    }
+    .tax-rail {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      height: 6px;
+      background: rgba(139, 92, 246, 0.15);
+      border-radius: 3px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    html[data-theme="dark"] .tax-rail {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .tax-rail-fill {
+      position: absolute;
+      left: 8%;
+      height: 6px;
+      background: linear-gradient(90deg, #8b5cf6 0%, var(--sp-saffron) 100%);
+      border-radius: 3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0%;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+    }
+    .tax-milestone-node {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--panel, #fff);
+      border: 4px solid rgba(139, 92, 246, 0.3);
+      cursor: pointer;
+      z-index: 3;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    html[data-theme="dark"] .tax-milestone-node {
+      background: #0d1627;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .tax-milestone-node:hover {
+      transform: translate(-50%, -50%) scale(1.2);
+      border-color: #8b5cf6;
+    }
+    .tax-milestone-node.completed {
+      border-color: #8b5cf6;
+      background: #8b5cf6;
+    }
+    .tax-milestone-node.active {
+      border-color: var(--sp-saffron);
+      background: #fff;
+      width: 32px;
+      height: 32px;
+      box-shadow: 0 0 20px var(--sp-saffron), 0 0 0 6px rgba(255, 153, 51, 0.2);
+    }
+    html[data-theme="dark"] .tax-milestone-node.active {
+      background: #0d1627;
+      border-color: var(--sp-saffron);
+    }
+    .tax-milestone-label {
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.8rem;
+      font-weight: 750;
+      color: var(--color-text-secondary, #444);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    html[data-theme="dark"] .tax-milestone-label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .tax-milestone-node.active .tax-milestone-label {
+      color: var(--sp-saffron);
+      font-size: 0.88rem;
+      transform: translateX(-50%) translateY(-4px);
+    }
+    .tax-milestone-date {
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-text-muted, #888);
+      font-family: var(--font-mono, monospace);
+    }
+    html[data-theme="dark"] .tax-milestone-date {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .tax-milestone-node.active .tax-milestone-date {
+      color: var(--color-text-primary, #111);
+      font-weight: 700;
+    }
+    html[data-theme="dark"] .tax-milestone-node.active .tax-milestone-date {
+      color: #fff;
+    }
+    .tax-services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .tax-service-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid rgba(0,0,0,0.04);
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-text-primary, #333);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    html[data-theme="dark"] .tax-service-btn {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.04);
+      color: #ddd;
+    }
+    .tax-service-btn:hover, .tax-service-btn.active {
+      background: rgba(139, 92, 246, 0.05);
+      border-color: rgba(139, 92, 246, 0.12);
+      color: #8b5cf6;
+    }
+    html[data-theme="dark"] .tax-service-btn:hover, html[data-theme="dark"] .tax-service-btn.active {
+      background: rgba(139, 92, 246, 0.1);
+      border-color: rgba(139, 92, 246, 0.2);
+      color: #a78bfa;
+    }
+    .tax-service-btn.active {
+      box-shadow: inset 4px 0 0 var(--sp-saffron);
+    }
+  </style>
+</head>
+<body data-base="../" data-active-nav="services" class="theme-tax">
+  <a class="skipLink" href="#main">Skip to content</a>
+  <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+  <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+  <div class="cursorDot" aria-hidden="true"></div>
+  <div class="cursorRing" aria-hidden="true"></div>
+  <div id="navbarSlot"></div>
+  <main id="main">
+
+    <section class="sp-hero sp-hero--dark" style="background-image: url('../assets/services_assets/Gst_Hero.png');" aria-label="Income Tax hero">
+      <div class="sp-hero__bg"></div>
+      <div class="sp-hero__grid" aria-hidden="true"></div>
+      <div class="sp-hero__inner">
+        <div class="sp-hero__content">
+          <div class="sp-hero__kicker sp-reveal"><span class="sp-hero__dot"></span>Income Tax &amp; TDS · 04B</div>
+          <h1 class="sp-hero__h1 sp-reveal sp-reveal--d1">File smart.<br><span class="sp-hl-s">Maximise refunds.</span></h1>
+          <p class="sp-hero__sub sp-reveal sp-reveal--d2">CA-reviewed income tax filing for individuals, firms, LLPs, companies, and trusts. TDS returns, notice replies, and 15CA/15CB — complete tax compliance under one roof.</p>
+          <div class="sp-hero__stats sp-reveal sp-reveal--d3">
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">10</span><span class="sp-hero__stat-lbl">ITR/TDS Services</span></div>
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">1–3</span><span class="sp-hero__stat-lbl">Days Avg</span></div>
+            <div class="sp-hero__stat"><span class="sp-hero__stat-val">CA</span><span class="sp-hero__stat-lbl">Reviewed</span></div>
+          </div>
+          <div class="sp-hero__cta sp-reveal sp-reveal--d4">
+            <a class="sp-btn-primary" href="../apply.html" id="itr-apply-btn">File My ITR →</a>
+            <button class="sp-btn-ghost" type="button" data-open-chat>Talk to Expert</button>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+    <div class="sp-stripe" aria-hidden="true"></div>
 
-      <section class="section" aria-label="How it works">
-        <div class="container">
-          <h2>How ITR filing works</h2>
-          <div class="steps" style="margin-top: 18px;">
-            <div class="stepCard">
-              <div class="stepCard__title">Answer a few questions</div>
-              <p class="stepCard__desc">We collect the essentials — no jargon.</p>
-              <div class="stepCard__num">01</div>
+    <section class="sp-section" id="tax-explorer-section" aria-label="Tax Journey Timeline">
+      <div class="sp-container">
+        <div class="sp-reveal">
+          <div class="sp-label">Interactive Filing Guide</div>
+          <h2 class="sp-h2">Tax Journey <span>Timeline</span></h2>
+          <p class="sp-body">Navigate the financial year tax filing calendar. Slide or click on any milestone to see associated returns, due dates, document checklists, and CA support channels.</p>
+        </div>
+
+        <div class="dna-explorer sp-reveal sp-reveal--d2" id="taxExplorer">
+          <!-- LEFT PANEL: Horizontal Timeline Rail -->
+          <div class="dna-left theme-tax" id="taxLeft">
+            <div class="tax-timeline-container">
+              <div class="tax-rail"></div>
+              <div class="tax-rail-fill" id="taxRailFill" style="width: 0%;"></div>
+              
+              <!-- Milestones nodes -->
+              <div class="tax-milestone-node active" data-milestone="personal" style="left: 10%;">
+                <div class="tax-milestone-label">Personal Filing</div>
+                <div class="tax-milestone-date">July 31</div>
+              </div>
+              <div class="tax-milestone-node" data-milestone="business" style="left: 26%;">
+                <div class="tax-milestone-label">Business Filing</div>
+                <div class="tax-milestone-date">Oct 31</div>
+              </div>
+              <div class="tax-milestone-node" data-milestone="tds_tan" style="left: 42%;">
+                <div class="tax-milestone-label">TDS & TAN</div>
+                <div class="tax-milestone-date">Quarterly</div>
+              </div>
+              <div class="tax-milestone-node" data-milestone="international" style="left: 58%;">
+                <div class="tax-milestone-label">International</div>
+                <div class="tax-milestone-date">Prior to Transfer</div>
+              </div>
+              <div class="tax-milestone-node" data-milestone="corrections" style="left: 74%;">
+                <div class="tax-milestone-label">Corrections</div>
+                <div class="tax-milestone-date">Within 2 Years</div>
+              </div>
+              <div class="tax-milestone-node" data-milestone="notices" style="left: 90%;">
+                <div class="tax-milestone-label">Tax Notices</div>
+                <div class="tax-milestone-date">Notice Specific</div>
+              </div>
             </div>
-            <div class="stepCard">
-              <div class="stepCard__title">Upload documents</div>
-              <p class="stepCard__desc">Form 16 / AIS / bank details and proofs.</p>
-              <div class="stepCard__num">02</div>
+          </div>
+
+          <!-- Mobile categories swipe list -->
+          <div class="dna-mobile-nav">
+            <div class="dna-mobile-nav__scroll">
+              <button class="dna-mobile-btn active" data-milestone="personal">Personal Filing</button>
+              <button class="dna-mobile-btn" data-milestone="business">Business Filing</button>
+              <button class="dna-mobile-btn" data-milestone="tds_tan">TDS & TAN</button>
+              <button class="dna-mobile-btn" data-milestone="international">International</button>
+              <button class="dna-mobile-btn" data-milestone="corrections">Corrections</button>
+              <button class="dna-mobile-btn" data-milestone="notices">Tax Notices</button>
             </div>
-            <div class="stepCard">
-              <div class="stepCard__title">CA reviews</div>
-              <p class="stepCard__desc">Accuracy-first review with notes and clarifications.</p>
-              <div class="stepCard__num">03</div>
-            </div>
-            <div class="stepCard">
-              <div class="stepCard__title">E-file + ack</div>
-              <p class="stepCard__desc">Get your acknowledgment and a simple summary.</p>
-              <div class="stepCard__num">04</div>
-            </div>
+          </div>
+
+          <!-- RIGHT PANEL: Dynamic Details -->
+          <div class="dna-right" id="taxPanel">
+            <!-- Content dynamically populated via JS -->
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <div class="tricolourDivider" aria-hidden="true"></div>
+    <div class="sp-stripe" aria-hidden="true"></div>
 
-      <section class="section" aria-label="Checklist">
-        <div class="container">
-          <h2>Document checklist</h2>
-          <div class="accordion" data-accordion="single" style="margin-top: 12px;">
-            <div class="accItem">
-              <button class="accBtn" type="button" aria-expanded="false"><span class="title">Salaried</span><span>▾</span></button>
-              <div class="accPanel"><div class="accPanel__inner">
-                <ol>
-                  <li>PAN & Aadhaar</li>
-                  <li>Form 16</li>
-                  <li>Bank account details</li>
-                  <li>Investment proofs (80C/80D)</li>
-                </ol>
-              </div></div>
-            </div>
-            <div class="accItem">
-              <button class="accBtn" type="button" aria-expanded="false"><span class="title">Freelancer / Consultant</span><span>▾</span></button>
-              <div class="accPanel"><div class="accPanel__inner">
-                <ol>
-                  <li>PAN & Aadhaar</li>
-                  <li>Invoices / receipts</li>
-                  <li>Bank statements</li>
-                  <li>TDS certificates (if any)</li>
-                </ol>
-              </div></div>
-            </div>
-          </div>
-          <div class="row wrap" style="margin-top: 14px;">
-            <button class="btn btn-primary" type="button" data-open-chat>Start with CA Review →</button>
-            <a class="btn btn-outline" href="../contact/index.html">Contact</a>
-          </div>
+    <section class="sp-section sp-section--alt" aria-label="Benefits">
+      <div class="sp-container">
+        <div class="sp-reveal"><div class="sp-label">Why File with a CA?</div><h2 class="sp-h2">Why expert ITR filing<br><span>pays for itself</span></h2></div>
+        <div class="sp-benefits__grid">
+          <div class="sp-benefit sp-reveal sp-reveal--d1"><div class="sp-benefit__icon">💰</div><div class="sp-benefit__title">Maximum Refunds</div><div class="sp-benefit__desc">CA-reviewed returns identify every eligible deduction — Section 80C, 80D, HRA, LTA, NPS — leaving nothing on the table.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d2"><div class="sp-benefit__icon">🛡️</div><div class="sp-benefit__title">Avoid Scrutiny</div><div class="sp-benefit__desc">Accurate, consistent filing history significantly reduces your chances of receiving a tax notice or assessment order.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d3"><div class="sp-benefit__icon">📋</div><div class="sp-benefit__title">Loan Eligibility</div><div class="sp-benefit__desc">ITRs for 3 years are required for home loans, business loans, and most credit facilities — stay loan-ready.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d4"><div class="sp-benefit__icon">🌍</div><div class="sp-benefit__title">Visa Ready</div><div class="sp-benefit__desc">Most developed countries require 3 years of filed ITRs for visa applications — consistent filing keeps you visa-ready.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d5"><div class="sp-benefit__icon">⚡</div><div class="sp-benefit__title">Fast Refunds</div><div class="sp-benefit__desc">Electronically verified returns with correct bank details receive refunds directly to your account within days.</div></div>
+          <div class="sp-benefit sp-reveal sp-reveal--d1"><div class="sp-benefit__icon">📊</div><div class="sp-benefit__title">Tax Planning</div><div class="sp-benefit__desc">We identify advance tax requirements, carry-forward losses, and investment opportunities to minimise next year's tax liability.</div></div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <div id="footerSlot"></div>
-    <script defer src="../assets/js/site.js"></script>
-  </body>
+    <section class="sp-section" aria-label="Documents">
+      <div class="sp-container">
+        <div class="sp-reveal"><div class="sp-label">Documents Required</div><h2 class="sp-h2">What to share<br><span>with your CA</span></h2></div>
+        <div class="sp-docs__grid sp-reveal sp-reveal--d2">
+          <div class="sp-doc"><div class="sp-doc__icon">🪪</div><div><div class="sp-doc__name">PAN Card</div></div></div>
+          <div class="sp-doc"><div class="sp-doc__icon">📊</div><div><div class="sp-doc__name">Form 16 / 16A</div><div class="sp-doc__note">From employer / deductors</div></div></div>
+          <div class="sp-doc"><div class="sp-doc__icon">🏦</div><div><div class="sp-doc__name">Bank Statements</div><div class="sp-doc__note">All accounts — full year</div></div></div>
+          <div class="sp-doc"><div class="sp-doc__icon">📈</div><div><div class="sp-doc__name">Investment Proofs</div><div class="sp-doc__note">80C, 80D, NPS receipts</div></div></div>
+          <div class="sp-doc"><div class="sp-doc__icon">🏠</div><div><div class="sp-doc__name">Property Details</div><div class="sp-doc__note">If rental or capital gain income</div></div></div>
+          <div class="sp-doc"><div class="sp-doc__icon">📋</div><div><div class="sp-doc__name">26AS / AIS Statement</div><div class="sp-doc__note">We can help download these</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-section sp-section--alt" aria-label="Process">
+      <div class="sp-container">
+        <div class="sp-reveal"><div class="sp-label">The Process</div><h2 class="sp-h2">How income tax<br><span>filing works</span></h2></div>
+        <div class="sp-process__flow sp-reveal sp-reveal--d2">
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">📤</span></div><div class="sp-proc-step__label">Share Documents</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">🔍</span></div><div class="sp-proc-step__label">CA Review</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">🧮</span></div><div class="sp-proc-step__label">Tax Optimisation</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">✅</span></div><div class="sp-proc-step__label">Your Approval</div></div>
+          <div class="sp-proc-step"><div class="sp-proc-step__num"><span class="sp-proc-step__icon">🎉</span></div><div class="sp-proc-step__label">Filed &amp; Acknowledged</div></div>
+        </div>
+        <div class="sp-learn-more sp-reveal sp-reveal--d3">
+          <p>Understand the complete income tax filing journey — from document collection to e-verification.</p>
+          <a class="sp-btn-primary" href="../how-it-works/index.html" id="itr-learn-more">Learn More →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sp-cta" aria-label="Apply">
+      <div class="sp-cta__inner sp-reveal">
+        <div class="sp-cta__label">File Today</div>
+        <h2 class="sp-cta__h">Your ITR, filed right.<br><span>Refund maximised.</span></h2>
+        <p class="sp-cta__sub">Share your documents with our CA team and receive your reviewed, optimised return for approval within 1–3 working days.</p>
+        <div class="sp-cta__btns">
+          <a class="sp-btn-primary" href="../apply.html" id="itr-cta-btn">Apply Now →</a>
+          <button class="sp-btn-ghost" type="button" data-open-chat>Talk to a CA</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="footerSlot"></div>
+  <script defer src="../assets/js/site.js"></script>
+  <script>
+    (function(){
+      var io = new IntersectionObserver(function(e){
+        e.forEach(function(x){
+          if(x.isIntersecting){
+            x.target.classList.add('is-visible');
+            io.unobserve(x.target);
+          }
+        });
+      },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+      document.querySelectorAll('.sp-reveal').forEach(function(el){
+        io.observe(el);
+      });
+    })();
+  </script>
+  <script>
+    // Income Tax Timeline Data
+    const taxData = {
+      personal: {
+        name: "Personal Tax Filing",
+        desc: "Individual income tax filing for salaried employees, freelancers, capital gain earners and NRI taxpayers.",
+        services: {
+          itr_individual: {
+            name: "Income Tax E-Filing",
+            overview: "Individual income tax return filing (ITR-1, ITR-2, ITR-3) for salaried employees, freelancers, and those with capital gains. CA review ensures maximum deductions under 80C, 80D, HRA etc.",
+            who: "Salaried Employees, Freelancers, Consultants, NRIs",
+            timeline: "1–3 Days",
+            docs: ["PAN Card", "Aadhaar Card", "Form 16 from employer", "Bank statements (all accounts)", "Investment proofs (80C, 80D, etc.)"],
+            benefits: ["CA-reviewed return to avoid scrutiny", "Claim maximum refunds legally", "Formally verified ITR history for loans/visas"]
+          }
+        }
+      },
+      business: {
+        name: "Business Tax Filing",
+        desc: "Corporate and organizational tax filing for sole proprietorships, partnership firms, LLPs, companies, and non-profits.",
+        services: {
+          itr_proprietorship: {
+            name: "Business Tax Filing",
+            overview: "Proprietorship business income tax return (ITR-3 or ITR-4) with presumptive taxation options under 44AD and 44ADA for eligible businesses and professionals.",
+            who: "Proprietors, traders, retail shops, independent professionals",
+            timeline: "2–4 Days",
+            docs: ["PAN & Aadhaar", "GST return summaries (if registered)", "Bank statements", "Sales & purchase summaries"],
+            benefits: ["Presumptive taxation saves book maintenance costs", "Legally declares business income", "Enables loan eligibility upgrades"]
+          },
+          itr_firm: {
+            name: "Partnership Firm / LLP ITR Filing",
+            overview: "Income tax return (ITR-5) for partnership firms and LLPs. Includes computation of firm income, partner remuneration, interest, and share of profit allocation.",
+            who: "Registered & unregistered Partnership firms, LLPs",
+            timeline: "3–5 Days",
+            docs: ["Partnership Deed / LLP Agreement", "Audited financial statements (if threshold crossed)", "Partner PAN & Aadhaar details"],
+            benefits: ["Ensures correct partner tax computations", "Compliant allocation of remuneration", "Avoids firm-level compliance default penalties"]
+          },
+          itr_corporate: {
+            name: "Company ITR Filing",
+            overview: "Corporate income tax return (ITR-6) for private limited, public limited, and OPC companies. Includes MAT computation, deferred tax, and audit report reconciliation.",
+            who: "All registered companies (Pvt Ltd, OPC, Public Ltd)",
+            timeline: "5–10 Days",
+            docs: ["Audited Balance Sheet & P&L", "Director Sign-offs", "Tax Audit Report (Form 3CD)", "Previous year ITR copy"],
+            benefits: ["Fulfills mandatory annual MCA/IT link", "MAT (Minimum Alternate Tax) optimization", "Enables carrying forward business losses (up to 8 years)"]
+          },
+          itr_trust: {
+            name: "Trust / NGO Tax Filing",
+            overview: "Income tax return (ITR-7) for trusts, NGOs, Section 8 companies, and political parties. Ensures 12A exemptions are claimed correctly and application of income is properly disclosed.",
+            who: "NGOs, Public/Private Trusts, Section 8 Companies",
+            timeline: "5–8 Days",
+            docs: ["Trust Deed / Registration Certificate", "12A / 80G registration certificates", "FCRA report (if foreign funds received)", "Financial statements"],
+            benefits: ["Protects tax exemption status", "Ensures compliance with donor tax benefit guidelines", "Legal status report for receiving CSR grants"]
+          }
+        }
+      },
+      tds_tan: {
+        name: "TDS & TAN Compliance",
+        desc: "Quarterly TDS return filings and TAN registrations for businesses making taxable payouts.",
+        services: {
+          tan_reg: {
+            name: "TAN Registration",
+            overview: "Tax Deduction Account Number registration — mandatory for any person liable to deduct or collect tax at source (TDS/TCS). Required for salary payments, contractor payments, and rent above ₹50,000/month.",
+            who: "Employers, businesses hiring contractors/professionals",
+            timeline: "1–2 Days",
+            docs: ["Director/Owner PAN & Aadhaar", "Registered office address proof", "Incorporation certificate (for firms/companies)"],
+            benefits: ["Mandatory legal code for making tax deductions", "Avoids heavy fines for not having TAN", "Enables opening corporate tax filing credentials"]
+          },
+          tds_filing: {
+            name: "TDS Return Filing",
+            overview: "Quarterly TDS return filing (Form 24Q for salary, 26Q for non-salary) with challan reconciliation. Ensures employees and vendors receive accurate Form 16/16A.",
+            who: "All TAN holders making regular payouts",
+            timeline: "Quarterly recurring",
+            docs: ["TDS Challan receipts", "Pan details of deductees", "Payment dates & amounts"],
+            benefits: ["Prevents late fees of ₹200/day", "Deductees receive credit in Form 26AS", "Avoids disallowance of business expenses during audit"]
+          }
+        }
+      },
+      international: {
+        name: "International Transactions",
+        desc: "FEMA compliance and CA certifications for overseas remittances.",
+        services: {
+          remittance_15ca_15cb: {
+            name: "15CA & 15CB Filing",
+            overview: "CA certificate (15CB) and online declaration (15CA) mandatory for foreign remittances above specified thresholds. Ensures FEMA compliance for overseas payments.",
+            who: "Importers, SaaS buyers, firms sending dividends abroad",
+            timeline: "1–2 Days",
+            docs: ["Invoices from foreign vendor", "Bank foreign remittance agreement", "Recipient residency certificate"],
+            benefits: ["Satisfies Indian bank requirements for outward transfers", "Ensures zero-withholding tax treaty benefits (DTAA)", "Complete safety from FEMA audit notice actions"]
+          }
+        }
+      },
+      corrections: {
+        name: "Tax Corrections",
+        desc: "Updated returns to correct errors or report previously omitted income.",
+        services: {
+          itr_u_revised: {
+            name: "Revised ITR Return (ITR-U)",
+            overview: "File an updated income tax return to correct errors or report previously omitted income. Available for up to 2 years from the end of the relevant assessment year.",
+            who: "Taxpayers wishing to correct filed returns or report missed income",
+            timeline: "2–4 Days",
+            docs: ["Original ITR acknowledgment", "New income summaries / investment proofs", "Tax calculation worksheet"],
+            benefits: ["Avoids prosecution for under-reporting", "Corrects bank accounts for stuck refunds", "Maintains clean filing records with IT department"]
+          }
+        }
+      },
+      notices: {
+        name: "Tax Notice Replies",
+        desc: "Defend against scrutiny, reassessment, and adjustment intimations.",
+        services: {
+          it_notice_reply: {
+            name: "Income Tax Notice Reply",
+            overview: "Professional response to 143(1) mismatch intimations, 148 reassessment notices, 139(9) defective return notifications, and 245 demand adjustments.",
+            who: "Taxpayers receiving income tax department notice emails",
+            timeline: "3–7 Days",
+            docs: ["Income tax notice copy", "Supporting bank details / purchase logs", "Reconciliation details"],
+            benefits: ["Defends against incorrect tax additions", "Saves from arbitrary interest/penalty charges", "Qualified CA representation for peace of mind"]
+          }
+        }
+      }
+    };
+
+    const taxTimeline = {
+      activeMilestone: 'personal',
+      activeSvc: 'itr_individual',
+      
+      init() {
+        this.container = document.getElementById('taxExplorer');
+        if (!this.container) return;
+
+        this.railFill = document.getElementById('taxRailFill');
+        this.panel = document.getElementById('taxPanel');
+        this.nodes = this.container.querySelectorAll('.tax-milestone-node');
+        this.mobileBtns = this.container.querySelectorAll('.dna-mobile-btn');
+        this.mobileScroll = this.container.querySelector('.dna-mobile-nav__scroll');
+
+        // Fill width mappings for horizontal slider
+        this.widths = {
+          personal: 2,
+          business: 18,
+          tds_tan: 34,
+          international: 50,
+          corrections: 66,
+          notices: 82
+        };
+
+        // Milestone node click listeners (desktop)
+        this.nodes.forEach(node => {
+          node.addEventListener('click', () => {
+            const milestone = node.getAttribute('data-milestone');
+            this.selectMilestone(milestone);
+          });
+        });
+
+        // Mobile buttons
+        this.mobileBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const milestone = btn.getAttribute('data-milestone');
+            this.selectMilestone(milestone);
+            this.centerMobileButton(btn);
+          });
+        });
+
+        // Init
+        this.selectMilestone(this.activeMilestone, true);
+      },
+
+      selectMilestone(milestone, isInit = false) {
+        if (this.activeMilestone === milestone && !isInit) return;
+        this.activeMilestone = milestone;
+
+        // Set active classes & completed classes
+        let foundActive = false;
+        this.nodes.forEach(node => {
+          const nodeMilestone = node.getAttribute('data-milestone');
+          if (nodeMilestone === milestone) {
+            node.classList.add('active');
+            node.classList.remove('completed');
+            foundActive = true;
+          } else {
+            node.classList.remove('active');
+            if (!foundActive) {
+              node.classList.add('completed');
+            } else {
+              node.classList.remove('completed');
+            }
+          }
+        });
+
+        // Mobile buttons
+        this.mobileBtns.forEach(btn => {
+          if (btn.getAttribute('data-milestone') === milestone) {
+            btn.classList.add('active');
+            this.centerMobileButton(btn);
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        // Animate fill bar
+        const width = this.widths[milestone];
+        if (this.railFill) {
+          this.railFill.style.width = `${width}%`;
+        }
+
+        // Set first service active
+        const servicesKeys = Object.keys(taxData[milestone].services);
+        this.activeSvc = servicesKeys[0];
+
+        this.updatePanel();
+      },
+
+      centerMobileButton(btn) {
+        if (!this.mobileScroll) return;
+        const scrollRect = this.mobileScroll.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+        const offsetLeft = btnRect.left - scrollRect.left - (scrollRect.width / 2) + (btnRect.width / 2);
+        this.mobileScroll.scrollBy({ left: offsetLeft, behavior: 'smooth' });
+      },
+
+      updatePanel() {
+        if (!this.panel) return;
+
+        // Morphing animation
+        const card = this.panel.querySelector('.dna-card');
+        if (card) {
+          card.classList.add('morphing');
+          setTimeout(() => this.renderPanelHtml(), 150);
+        } else {
+          this.renderPanelHtml();
+        }
+      },
+
+      renderPanelHtml() {
+        const milestoneData = taxData[this.activeMilestone];
+        const activeSvcData = milestoneData.services[this.activeSvc];
+        
+        // Services tabs
+        const servicesKeys = Object.keys(milestoneData.services);
+        let servicesListHtml = '';
+        if (servicesKeys.length > 1) {
+          servicesListHtml = `
+            <div class="tax-card__section-title" style="margin-top: 20px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-saffron); margin-bottom: 12px;">Tax returns in this tier</div>
+            <div class="tax-services-list">
+              ${servicesKeys.map(key => {
+                const svc = milestoneData.services[key];
+                const activeClass = key === this.activeSvc ? 'active' : '';
+                return `<button class="tax-service-btn ${activeClass}" data-svc-key="${key}">
+                  <span>${svc.name}</span>
+                  <span>→</span>
+                </button>`;
+              }).join('')}
+            </div>
+          `;
+        }
+
+        const docsHtml = activeSvcData.docs.map(doc => `<div class="dna-benefit-item" style="font-size:0.84rem; line-height: 1.4;"><strong>${doc}</strong></div>`).join('');
+        const benefitsHtml = activeSvcData.benefits.map(b => `<div class="dna-benefit-item">${b}</div>`).join('');
+
+        this.panel.innerHTML = `
+          <div class="dna-card morphing">
+            <div class="dna-card__header">
+              <span style="font-size:0.68rem; font-weight:800; color:#8b5cf6; text-transform:uppercase; letter-spacing: 0.08em; display:block; margin-bottom:6px;">Milestone: ${milestoneData.name}</span>
+              <h3 class="dna-card__title">${activeSvcData.name}</h3>
+              <p class="dna-card__desc">${activeSvcData.overview}</p>
+            </div>
+            
+            <div class="dna-stats" style="margin-bottom: 20px;">
+              <div class="dna-stat">
+                <span class="dna-stat__label">Average Time</span>
+                <span class="dna-stat__val" style="color:#8b5cf6;">${activeSvcData.timeline}</span>
+              </div>
+              <div class="dna-stat">
+                <span class="dna-stat__label">Suitable For</span>
+                <span class="dna-stat__val">${activeSvcData.who.split(',')[0]}</span>
+              </div>
+              <div class="dna-stat">
+                <span class="dna-stat__label">Audit Safety</span>
+                <span class="dna-stat__val">CA Verified</span>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr; gap:20px; margin-bottom: 24px;">
+              <div>
+                <div class="dna-card__section-title" style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-saffron); margin-bottom: 8px;">Documents Checklist</div>
+                <div class="dna-benefits-list" style="gap:6px; margin:0;">
+                  ${docsHtml}
+                </div>
+              </div>
+              <div>
+                <div class="dna-card__section-title" style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sp-saffron); margin-bottom: 8px;">Why Outsource to CA?</div>
+                <div class="dna-benefits-list" style="gap:6px; margin:0;">
+                  ${benefitsHtml}
+                </div>
+              </div>
+            </div>
+
+            ${servicesListHtml}
+            
+            <div class="dna-card__cta" style="margin-top: 24px;">
+              <a class="sp-btn-primary" style="width: 100%; justify-content: center; background:#8b5cf6; box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);" href="../apply.html?service=${this.activeSvc}" id="tax-apply-${this.activeSvc}">Apply for ${activeSvcData.name} →</a>
+            </div>
+          </div>
+        `;
+
+        // Bind clicks on service buttons
+        const btns = this.panel.querySelectorAll('.tax-service-btn');
+        btns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            this.activeSvc = btn.getAttribute('data-svc-key');
+            this.updatePanel();
+          });
+        });
+
+        requestAnimationFrame(() => {
+          const card = this.panel.querySelector('.dna-card');
+          if (card) card.classList.remove('morphing');
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      taxTimeline.init();
+    });
+  </script>
+</body>
 </html>
