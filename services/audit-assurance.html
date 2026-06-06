@@ -8,21 +8,27 @@
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/services.css" />
   <style>
-    /* Audit Integrity Radar Custom Styles */
+    /* Audit integrity console styles */
     .theme-audit .dna-left {
-      background: radial-gradient(circle at center, rgba(139, 92, 246, 0.05) 0%, rgba(3, 10, 24, 0.01) 80%),
-                  radial-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px);
-      background-size: 100% 100%, 20px 20px;
+      background: radial-gradient(circle at center, rgba(124, 58, 237, 0.04) 0%, rgba(3, 10, 24, 0.01) 80%),
+                  radial-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px;
       position: relative;
       height: 480px;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      background-color: var(--panel, #ffffff);
     }
     html[data-theme="dark"] .theme-audit .dna-left {
-      background: radial-gradient(circle at center, rgba(139, 92, 246, 0.08) 0%, rgba(3, 10, 24, 0.2) 85%),
-                  radial-gradient(rgba(139, 92, 246, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 20px 20px;
+      background: radial-gradient(circle at center, rgba(124, 58, 237, 0.08) 0%, rgba(2, 6, 18, 0.8) 85%),
+                  radial-gradient(rgba(124, 58, 237, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px;
+      border-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(255, 255, 255, 0.01);
     }
 
     .radar-container {
@@ -33,83 +39,68 @@
       align-items: center;
       justify-content: center;
     }
-    .radar-circle {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px dashed rgba(139, 92, 246, 0.2);
-      transition: all 0.5s ease;
-    }
-    .radar-circle--outer {
-      width: 290px;
-      height: 290px;
-    }
-    .radar-circle--inner {
-      width: 170px;
-      height: 170px;
-    }
-    .radar-sweep {
-      position: absolute;
-      width: 145px;
-      height: 145px;
-      top: 50%;
-      left: 50%;
-      transform-origin: 0% 0%;
-      background: conic-gradient(from 0deg, rgba(139, 92, 246, 0.12) 0deg, rgba(139, 92, 246, 0) 90deg);
-      border-radius: 0 0 100% 0;
-      animation: radarSweep 5s linear infinite;
-      pointer-events: none;
-    }
-    @keyframes radarSweep {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+
+    /* CA Assurance Hub Module */
     .radar-core {
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%);
-      border: 3px solid var(--panel, #fff);
-      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+      border: 4px solid var(--panel, #fff);
+      box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       color: #fff;
-      font-size: 0.68rem;
+      font-family: var(--font-display, 'Inter', sans-serif);
+      font-size: 0.72rem;
       font-weight: 850;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       text-align: center;
       z-index: 10;
       pointer-events: none;
+      transition: all 0.3s ease;
     }
+    html[data-theme="dark"] .radar-core {
+      border-color: #1a152c;
+      box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+    }
+
     .radar-node {
       position: absolute;
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1.5px solid rgba(139, 92, 246, 0.2);
+      background: var(--panel, #ffffff);
+      border: 2px solid rgba(124, 58, 237, 0.25);
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       z-index: 9;
-      font-size: 1.15rem;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-size: 1.25rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     html[data-theme="dark"] .radar-node {
-      background: rgba(26, 21, 44, 0.85);
-      border-color: rgba(139, 92, 246, 0.3);
+      background: #1a152c;
+      border-color: rgba(124, 58, 237, 0.4);
       color: #ddd;
+      box-shadow: none;
     }
     .radar-node:hover, .radar-node.active {
       background: #7c3aed;
+      border-color: #7c3aed;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+    html[data-theme="dark"] .radar-node:hover, html[data-theme="dark"] .radar-node.active {
+      background: #7c3aed;
       border-color: #8b5cf6;
       color: #fff;
-      box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
-      transform: translate(-50%, -50%) scale(1.15);
     }
     
     .radar-node[data-index="0"] { top: 50%; left: 90%; transform: translate(-50%, -50%); }
@@ -141,6 +132,18 @@
     }
     .radar-node:hover .radar-node-label, .radar-node.active .radar-node-label {
       opacity: 1;
+    }
+
+    /* Verification Pulse Wires */
+    .audit-wire-active {
+      stroke-dasharray: 8, 8;
+      animation: auditPulse 0.8s linear infinite;
+      filter: drop-shadow(0 0 3px #7c3aed);
+    }
+    @keyframes auditPulse {
+      to {
+        stroke-dashoffset: -16;
+      }
     }
 
     .audit-spec-list {
@@ -208,16 +211,31 @@
         </div>
 
         <div class="dna-explorer sp-reveal sp-reveal--d2" id="auditExplorer">
-          <!-- LEFT PANEL: Circular glowing radar with 8 node buttons -->
+          <!-- LEFT PANEL: Spoke-and-Hub wire console with 8 nodes -->
           <div class="dna-left theme-audit" id="auditRadar">
             <div class="radar-container">
-              <div class="radar-circle radar-circle--outer"></div>
-              <div class="radar-circle radar-circle--inner"></div>
-              <div class="radar-sweep"></div>
+              <!-- Thin SVG wire connections -->
+              <svg class="audit-wires" viewBox="0 0 360 360" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;">
+                <!-- Background static wires -->
+                <line x1="180" y1="180" x2="324" y2="180" stroke="rgba(124, 58, 237, 0.15)" stroke-width="2" />
+                <line x1="180" y1="180" x2="280.8" y2="280.8" stroke="rgba(124, 58, 237, 0.15)" stroke-width="2" />
+                <line x1="180" y1="180" x2="180" y2="324" stroke="rgba(124, 58, 237, 0.15)" stroke-width="2" />
+                <line x1="180" y1="180" x2="79.2" y2="280.8" stroke="rgba(124, 58, 237, 0.15)" stroke-width="2" />
+                <line x1="180" y1="180" x2="36" y2="180" stroke="rgba(124, 58, 237, 0.15)" stroke-width="2" />
+                <line x1="180" y1="180" x2="79.2" y2="79.2" stroke="rgba(124, 58, 237, 0.15)" stroke-width="2" />
+                <line x1="180" y1="180" x2="180" y2="36" stroke="rgba(124, 58, 237, 0.15)" stroke-width="2" />
+                <line x1="180" y1="180" x2="280.8" y2="79.2" stroke="rgba(124, 58, 237, 0.15)" stroke-width="2" />
+                
+                <!-- Glowing verification pulse line -->
+                <line class="audit-wire-active" id="active-wire" x1="180" y1="180" x2="324" y2="180" stroke="#7c3aed" stroke-width="3" stroke-linecap="round" />
+              </svg>
+
+              <!-- Central CA Assurance Hub Control -->
               <div class="radar-core">
                 <span>CA<br>Assurance</span>
               </div>
               
+              <!-- Spoke Nodes -->
               <div class="radar-node active" data-index="0" data-audit-type="statutory">
                 <span>💼</span>
                 <span class="radar-node-label">Statutory Audit</span>
@@ -524,9 +542,32 @@
         this.activeType = type;
 
         // Desktop node highlight
+        let activeNodeIdx = 0;
         this.nodes.forEach(node => {
-          node.classList.toggle('active', node.getAttribute('data-audit-type') === type);
+          const isActive = node.getAttribute('data-audit-type') === type;
+          node.classList.toggle('active', isActive);
+          if (isActive) {
+            activeNodeIdx = parseInt(node.getAttribute('data-index'), 10);
+          }
         });
+
+        // Update SVG wire animation target coordinates
+        const nodeCoords = [
+          { x: 324, y: 180 },     // 0
+          { x: 280.8, y: 280.8 }, // 1
+          { x: 180, y: 324 },     // 2
+          { x: 79.2, y: 280.8 },  // 3
+          { x: 36, y: 180 },      // 4
+          { x: 79.2, y: 79.2 },   // 5
+          { x: 180, y: 36 },      // 6
+          { x: 280.8, y: 79.2 }   // 7
+        ];
+        const coord = nodeCoords[activeNodeIdx];
+        const activeWire = document.getElementById('active-wire');
+        if (activeWire && coord) {
+          activeWire.setAttribute('x2', coord.x);
+          activeWire.setAttribute('y2', coord.y);
+        }
 
         // Mobile button highlight
         this.mobileBtns.forEach(btn => {
