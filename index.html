@@ -63,7 +63,13 @@
     <div id="navbarSlot"></div>
     <main id="main" class="pageFadeIn">
       <section class="hero" aria-label="Hero">
-        <div class="hero__bg" aria-hidden="true"></div>
+        <div class="hero__bg" aria-hidden="true">
+          <div class="hero__orb hero__orb--1"></div>
+          <div class="hero__orb hero__orb--2"></div>
+          <div class="hero__orb hero__orb--3"></div>
+          <div class="hero__orb hero__orb--4"></div>
+          <div class="hero__mesh"></div>
+        </div>
 
         <div class="container hero__grid">
           <div>
@@ -128,11 +134,44 @@
             </div>
           </div>
         </div>
+
+        <div class="container">
+        <div class="leadCaptureWrap">
+          <div class="leadCaptureCard">
+            <div class="leadCaptureGrid">
+              <input class="input" type="text" placeholder="Enter Your Name" aria-label="Enter Your Name" />
+              <div class="row" style="gap: 8px;">
+                <div style="position: relative; flex-shrink: 0; width: 80px;">
+                  <select class="select" aria-label="Country Code" style="padding-right: 24px; appearance: none;">
+                    <option>+91</option>
+                  </select>
+                  <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: 0.5; font-size: 0.8rem;">▼</span>
+                </div>
+                <input class="input" type="tel" placeholder="Enter your PhoneNo." aria-label="Phone Number" style="flex-grow: 1;" />
+              </div>
+              <input class="input" type="email" placeholder="Enter your Email" aria-label="Email" />
+              <div style="position: relative;">
+                <select class="select" aria-label="Service" style="appearance: none; padding-right: 32px;">
+                  <option>Section 8 Company Registration</option>
+                  <option>Income Tax Return (ITR)</option>
+                  <option>GST Registration & Filing</option>
+                  <option>TDS & Payroll</option>
+                  <option>Statutory Audit</option>
+                </select>
+                <span style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: 0.5; font-size: 0.8rem;">▼</span>
+              </div>
+              <button class="btn btn-primary" type="button" style="width: 100%; font-weight: 700; text-transform: uppercase;">CLAIM YOUR FREE CONSULTATION</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       </section>
+
 
       <div class="tricolourDivider" aria-hidden="true"></div>
 
-      <section class="section section--tight" aria-label="Live stats panel">
+      <!-- <section class="section section--tight" aria-label="Live stats panel">
         <div class="container">
           <div class="statsPanel">
             <div class="statsPanel__inner">
@@ -161,119 +200,431 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
 
       <section class="section" id="services" aria-label="Services">
         <div class="container">
           <div class="center">
             <div class="kicker">One platform</div>
             <h2 style="margin-top: 10px;">Everything You Need. One Platform.</h2>
-            <p style="margin-top: 10px;">
+            <p style="margin-top: 10px; max-width: 60ch; margin-left: auto; margin-right: auto;">
               From filing your first ITR to managing enterprise compliance — IndTaxPay has you covered.
             </p>
           </div>
 
-          <div class="serviceGrid grid grid-3" style="margin-top: 22px;">
-            <a class="serviceCard" href="services/income-tax.html">
-              <div class="serviceCard__top">
-                <span class="serviceIcon" style="background: #FDEBD0; color: #F78A0E;">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M7 3h7l3 3v15H7V3z" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M14 3v4h4" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M9 12h6" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M9 15h6" stroke="currentColor" stroke-width="1.6" />
-                  </svg>
-                </span>
-                <span class="badge badge--saffron">Most Popular</span>
-              </div>
-              <div class="serviceCard__title">Income Tax Return (ITR)</div>
-              <div class="serviceCard__desc">Hassle-free ITR filing for individuals and freelancers with expert CA review.</div>
-              <div class="arrowLink">File ITR Now <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="serviceCard" href="services/gst.html">
-              <div class="serviceCard__top">
-                <span class="serviceIcon" style="background: #E6F5E2; color: #4B9C3A;">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M7 7h10v14H7V7z" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M9 3h6v4H9V3z" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M9 11h6" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M9 15h6" stroke="currentColor" stroke-width="1.6" />
-                  </svg>
-                </span>
-              </div>
-              <div class="serviceCard__title">GST Registration & Filing</div>
-              <div class="serviceCard__desc">Complete GST lifecycle — registration, returns, and reconciliation.</div>
-              <div class="arrowLink">Get GST Compliant <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="serviceCard" href="services/business-support.html">
-              <div class="serviceCard__top">
-                <span class="serviceIcon" style="background: #D6E6F8; color: #0D4A8A;">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M12 3v18" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M7 7h10" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M8 17c1 1 2.4 1.6 4 1.6 2.2 0 4-.9 4-2.6 0-3.2-8-1.2-8-4.6 0-1.6 1.7-2.6 4-2.6 1.6 0 3 .5 4 1.6" stroke="currentColor" stroke-width="1.6" />
-                  </svg>
-                </span>
-              </div>
-              <div class="serviceCard__title">TDS &amp; Payroll</div>
-              <div class="serviceCard__desc">Automated TDS computation, payroll processing, and returns filing.</div>
-              <div class="arrowLink">Manage TDS <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="serviceCard" href="services/startup.html">
-              <div class="serviceCard__top">
-                <span class="serviceIcon" style="background: #E6F5E2; color: #4B9C3A;">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M4 20V8l8-4 8 4v12H4z" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M9 20v-6h6v6" stroke="currentColor" stroke-width="1.6" />
-                  </svg>
-                </span>
-                <span class="badge badge--green">New</span>
-              </div>
-              <div class="serviceCard__title">Company Registration</div>
-              <div class="serviceCard__desc">Register your Pvt Ltd, LLP, or OPC — we handle MCA filings end-to-end.</div>
-              <div class="arrowLink">Register Company <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="serviceCard" href="services/audit-assurance.html">
-              <div class="serviceCard__top">
-                <span class="serviceIcon" style="background: #D6E6F8; color: #0D4A8A;">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M12 3l8 4v6c0 5-3.4 8.7-8 9-4.6-.3-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M8.5 12.5l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="1.6" />
-                  </svg>
-                </span>
-              </div>
-              <div class="serviceCard__title">Statutory Audit</div>
-              <div class="serviceCard__desc">3CD preparation, audit-ready reporting, and expert review.</div>
-              <div class="arrowLink">Request Audit <span aria-hidden="true">→</span></div>
-            </a>
-
-            <a class="serviceCard" href="services/business-support.html">
-              <div class="serviceCard__top">
-                <span class="serviceIcon" style="background: #FDEBD0; color: #F78A0E;">
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M7 4h12v16H7V4z" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M5 6h2v12H5V6z" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M10 9h6" stroke="currentColor" stroke-width="1.6" />
-                    <path d="M10 13h6" stroke="currentColor" stroke-width="1.6" />
-                  </svg>
-                </span>
-              </div>
-              <div class="serviceCard__title">Accounting &amp; Bookkeeping</div>
-              <div class="serviceCard__desc">Monthly bookkeeping, P&amp;L statements, and MIS reports.</div>
-              <div class="arrowLink">Start Bookkeeping <span aria-hidden="true">→</span></div>
-            </a>
+          <!-- Category Tabs -->
+          <div class="svcTabs" role="tablist" aria-label="Service categories" style="margin-top: 32px;">
+            <button class="svcTab is-active" role="tab" data-svc-tab="taxation" aria-selected="true" type="button">Taxation</button>
+            <button class="svcTab" role="tab" data-svc-tab="registrations" aria-selected="false" type="button">Registrations</button>
+            <button class="svcTab" role="tab" data-svc-tab="compliance" aria-selected="false" type="button">Compliance</button>
+            <button class="svcTab" role="tab" data-svc-tab="ipr" aria-selected="false" type="button">IPR</button>
+            <button class="svcTab" role="tab" data-svc-tab="startup" aria-selected="false" type="button">Startup</button>
+            <button class="svcTab" role="tab" data-svc-tab="audit" aria-selected="false" type="button">Audit</button>
           </div>
 
-          <div class="center" style="margin-top: 14px;">
+          <!-- Tab Panels -->
+          <div class="svcPanels" style="margin-top: 28px;">
+
+            <!-- Taxation -->
+            <div class="homeSvcPanel is-active" data-svc-panel="taxation" role="tabpanel">
+              <div class="svcGrid">
+                <a class="svcCard" href="services/income-tax.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Income Tax Return (ITR)</div>
+                      <span class="svcCard__icon" style="background: rgba(247,138,14,0.12); color: #F78A0E;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M7 3h7l3 3v15H7V3z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 15h6"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Hassle-free ITR filing for salaried individuals, freelancers &amp; businesses with expert CA review.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/gst.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">GST Registration &amp; Filing</div>
+                      <span class="svcCard__icon" style="background: rgba(75,156,58,0.12); color: #4B9C3A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M7 7h10v14H7V7z"/><path d="M9 3h6v4H9V3z"/><path d="M9 11h6M9 15h6"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Complete GST lifecycle — registration, GSTR returns, LUT filing, and reconciliation managed end-to-end.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/business-support.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">TDS &amp; Payroll</div>
+                      <span class="svcCard__icon" style="background: rgba(13,74,138,0.12); color: #0D4A8A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M12 3v18M7 7h10M8 17c1 1 2.4 1.6 4 1.6 2.2 0 4-.9 4-2.6 0-3.2-8-1.2-8-4.6 0-1.6 1.7-2.6 4-2.6 1.6 0 3 .5 4 1.6"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Automated TDS computation, payroll processing, and Form 24Q/26Q quarterly returns filing.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Registrations -->
+            <div class="homeSvcPanel" data-svc-panel="registrations" role="tabpanel" hidden>
+              <div class="svcGrid">
+                <a class="svcCard" href="services/startup.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Company Registration</div>
+                      <span class="svcCard__icon" style="background: rgba(75,156,58,0.12); color: #4B9C3A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M4 20V8l8-4 8 4v12H4z"/><path d="M9 20v-6h6v6"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Register Pvt Ltd, LLP, OPC, or Partnership — we handle all MCA filings end-to-end.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/registrations.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">MSME / Udyam Registration</div>
+                      <span class="svcCard__icon" style="background: rgba(13,74,138,0.12); color: #0D4A8A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Get your MSME Udyam certificate and access government benefits, schemes, and priority lending.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/registrations.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">FSSAI &amp; IEC Registration</div>
+                      <span class="svcCard__icon" style="background: rgba(247,138,14,0.12); color: #F78A0E;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Food business licenses, Import-Export Codes, and 20+ other mandatory business registrations.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Compliance -->
+            <div class="homeSvcPanel" data-svc-panel="compliance" role="tabpanel" hidden>
+              <div class="svcGrid">
+                <a class="svcCard" href="services/mca-compliance.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">MCA &amp; ROC Compliance</div>
+                      <span class="svcCard__icon" style="background: rgba(13,74,138,0.12); color: #0D4A8A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M12 3l8 4v6c0 5-3.4 8.7-8 9-4.6-.3-8-4-8-9V7l8-4z"/><path d="M8.5 12.5l2.2 2.2 4.8-4.8"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Annual returns, DIN KYC, director additions/removals, capital changes, and ROC filings.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/business-support.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Accounting &amp; Bookkeeping</div>
+                      <span class="svcCard__icon" style="background: rgba(247,138,14,0.12); color: #F78A0E;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M7 4h12v16H7V4z"/><path d="M5 6h2v12H5V6z"/><path d="M10 9h6M10 13h6"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Monthly bookkeeping, P&amp;L statements, balance sheets, and detailed MIS reports.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/global-business.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Global Expansion</div>
+                      <span class="svcCard__icon" style="background: rgba(75,156,58,0.12); color: #4B9C3A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Incorporate in USA, UK, Singapore, UAE and handle FEMA/RBI filings with expert guidance.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- IPR -->
+            <div class="homeSvcPanel" data-svc-panel="ipr" role="tabpanel" hidden>
+              <div class="svcGrid">
+                <a class="svcCard" href="services/trademark.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Trademark Registration</div>
+                      <span class="svcCard__icon" style="background: rgba(247,138,14,0.12); color: #F78A0E;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><circle cx="12" cy="12" r="9"/><path d="M8 8h8M12 8v8"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Protect your brand name and logo with trademark registration, renewals, and objection replies.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/trademark.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Copyright Registration</div>
+                      <span class="svcCard__icon" style="background: rgba(13,74,138,0.12); color: #0D4A8A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><circle cx="12" cy="12" r="9"/><path d="M15 9.5a4 4 0 1 0 0 5"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Protect your original content and ideas by filing for copyright in your name with legal backing.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/trademark.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Trademark Renewal</div>
+                      <span class="svcCard__icon" style="background: rgba(75,156,58,0.12); color: #4B9C3A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><polyline points="23 4 23 10 17 10"/><path d="M20.5 15a9 9 0 1 1-2.5-8.5L23 10"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Keep your brand protected — renew your trademark on time and avoid lapsing of rights.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Startup -->
+            <div class="homeSvcPanel" data-svc-panel="startup" role="tabpanel" hidden>
+              <div class="svcGrid">
+                <a class="svcCard" href="services/startup.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Startup India Registration</div>
+                      <span class="svcCard__icon" style="background: rgba(75,156,58,0.12); color: #4B9C3A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Get DPIIT recognition, access tax benefits, and unlock government startup schemes.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/startup.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Startup Business Planning</div>
+                      <span class="svcCard__icon" style="background: rgba(247,138,14,0.12); color: #F78A0E;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M2 20h20M6 20V10l6-6 6 6v10"/><path d="M10 20v-5h4v5"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Validate your business idea with expert CA consultation, financial projections, and pitch decks.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/global-business.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Funding &amp; Valuation</div>
+                      <span class="svcCard__icon" style="background: rgba(13,74,138,0.12); color: #0D4A8A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Get startup valuation reports, investor-ready financials, and fundraising advisory support.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Audit -->
+            <div class="homeSvcPanel" data-svc-panel="audit" role="tabpanel" hidden>
+              <div class="svcGrid">
+                <a class="svcCard" href="services/audit-assurance.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Statutory Audit</div>
+                      <span class="svcCard__icon" style="background: rgba(13,74,138,0.12); color: #0D4A8A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M12 3l8 4v6c0 5-3.4 8.7-8 9-4.6-.3-8-4-8-9V7l8-4z"/><path d="M8.5 12.5l2.2 2.2 4.8-4.8"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">3CD preparation, audit-ready reporting, and expert review for companies and partnerships.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/audit-assurance.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Tax Audit (Form 3CD)</div>
+                      <span class="svcCard__icon" style="background: rgba(247,138,14,0.12); color: #F78A0E;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M7 3h7l3 3v15H7V3z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 15h6"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Mandatory tax audit for businesses with turnover above threshold — complete end-to-end support.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+                <a class="svcCard" href="services/audit-assurance.html">
+                  <div class="svcCard__body">
+                    <div class="svcCard__titleRow">
+                      <div class="svcCard__title">Internal Audit &amp; Due Diligence</div>
+                      <span class="svcCard__icon" style="background: rgba(75,156,58,0.12); color: #4B9C3A;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      </span>
+                    </div>
+                    <p class="svcCard__desc">Internal controls review, financial due diligence, and risk assessment reports for investors.</p>
+                  </div>
+                  <div class="svcCard__footer">
+                    <span class="svcCard__link">Know More →</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+          </div><!-- /.svcPanels -->
+
+          <div class="center" style="margin-top: 28px;">
             <div class="muted">Not sure which service you need?</div>
             <button class="btn btn-ghost" type="button" data-open-chat>Talk to Our Experts →</button>
           </div>
         </div>
       </section>
+
+      <div class="tricolourDivider" aria-hidden="true"></div>
+
+      <!-- Why Choose Us -->
+      <section class="section wcuSection" id="why-choose-us" aria-label="Why choose IndTaxPay">
+        <div class="container">
+
+          <!-- Top row: heading + CTA -->
+          <div class="wcuHeader">
+            <h2 class="wcuHeader__title">Why Choose IndTaxPay?</h2>
+            <a class="btn btn-primary" href="apply.html">Get Started →</a>
+          </div>
+
+          <!-- Two-panel body -->
+          <div class="wcuBody">
+
+            <!-- Left: reason list (dark panel) -->
+            <div class="wcuList">
+              <div class="wcuList__item">
+                <span class="wcuList__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </span>
+                <span>Affordable &amp; Transparent Pricing</span>
+              </div>
+              <div class="wcuList__item">
+                <span class="wcuList__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                </span>
+                <span>100% Compliance Guaranteed</span>
+              </div>
+              <div class="wcuList__item">
+                <span class="wcuList__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                <span>500+ Qualified CA Experts</span>
+              </div>
+              <div class="wcuList__item">
+                <span class="wcuList__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </span>
+                <span>48-Hour Fast Turnaround</span>
+              </div>
+              <div class="wcuList__item">
+                <span class="wcuList__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </span>
+                <span>24/7 Dedicated CA Support</span>
+              </div>
+            </div>
+
+            <!-- Right: authority trust panel -->
+            <div class="wcuTrust">
+              <div class="wcuTrust__label">Filings accepted &amp; recognised by</div>
+              <div class="wcuTrust__logos">
+
+                <!-- Income Tax Dept -->
+                <div class="wcuTrust__badge" title="Income Tax Department of India">
+                  <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+                    <circle cx="30" cy="30" r="28" stroke="#F78A0E" stroke-width="2"/>
+                    <text x="50%" y="38%" dominant-baseline="middle" text-anchor="middle" fill="#F78A0E" font-size="7" font-weight="700" font-family="sans-serif">INCOME</text>
+                    <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" fill="#F78A0E" font-size="7" font-weight="700" font-family="sans-serif">TAX</text>
+                    <text x="50%" y="66%" dominant-baseline="middle" text-anchor="middle" fill="#F78A0E" font-size="5.5" font-family="sans-serif">INDIA</text>
+                  </svg>
+                  <span>Income Tax<br>Department</span>
+                </div>
+
+                <!-- GST Council -->
+                <div class="wcuTrust__badge" title="GST Council India">
+                  <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+                    <circle cx="30" cy="30" r="28" stroke="#138808" stroke-width="2"/>
+                    <text x="50%" y="44%" dominant-baseline="middle" text-anchor="middle" fill="#138808" font-size="10" font-weight="900" font-family="sans-serif">GST</text>
+                    <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" fill="#138808" font-size="5.5" font-family="sans-serif">COUNCIL</text>
+                  </svg>
+                  <span>GST<br>Council</span>
+                </div>
+
+                <!-- MCA -->
+                <div class="wcuTrust__badge" title="Ministry of Corporate Affairs">
+                  <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+                    <circle cx="30" cy="30" r="28" stroke="#0D4A8A" stroke-width="2"/>
+                    <text x="50%" y="44%" dominant-baseline="middle" text-anchor="middle" fill="#0D4A8A" font-size="9" font-weight="900" font-family="sans-serif">MCA</text>
+                    <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" fill="#0D4A8A" font-size="4.5" font-family="sans-serif">MINISTRY</text>
+                  </svg>
+                  <span>Ministry of<br>Corp. Affairs</span>
+                </div>
+
+                <!-- ICAI -->
+                <div class="wcuTrust__badge" title="Institute of Chartered Accountants of India">
+                  <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+                    <circle cx="30" cy="30" r="28" stroke="#8B1A1A" stroke-width="2"/>
+                    <text x="50%" y="44%" dominant-baseline="middle" text-anchor="middle" fill="#8B1A1A" font-size="9" font-weight="900" font-family="sans-serif">ICAI</text>
+                    <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" fill="#8B1A1A" font-size="5" font-family="sans-serif">CERTIFIED</text>
+                  </svg>
+                  <span>ICAI<br>Certified</span>
+                </div>
+
+              </div>
+              <div class="wcuTrust__note">All filings done under the supervision of licensed Chartered Accountants registered with ICAI.</div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
 
       <div class="tricolourDivider" aria-hidden="true"></div>
 
@@ -467,41 +818,254 @@
 
       <div class="tricolourDivider" aria-hidden="true"></div>
 
-      <section class="section" aria-label="How it works">
-        <div class="container">
-          <div class="center">
-            <div class="kicker">—— OUR PROCESS ——</div>
-            <h2 style="margin-top: 10px;">Filing Made Frictionless</h2>
+      <!-- ═══ HOW IT WORKS + BANNER + COMPARISON ═══ -->
+      <section class="howSection" id="how-it-works" aria-label="How IndTaxPay works">
+
+        <!-- Animated ambient background -->
+        <div class="howBg" aria-hidden="true">
+          <div class="howBg__grid"></div>
+          <div class="howBg__orb howBg__orb--1"></div>
+          <div class="howBg__orb howBg__orb--2"></div>
+          <div class="howBg__orb howBg__orb--3"></div>
+          <div class="howBg__shimmer"></div>
+        </div>
+
+        <div class="container" style="position:relative;z-index:1;">
+
+          <!-- ── HEADING ── -->
+          <div class="center" style="padding-top: 72px;">
+            <div class="kicker">Simple Process</div>
+            <h2 style="margin-top:10px;">Get Compliant in Just a Few Clicks</h2>
+            <p style="margin-top:10px;max-width:52ch;margin-left:auto;margin-right:auto;">
+              Fast, online, and CA-guided — share your documents, and we handle everything else.
+            </p>
           </div>
 
-          <div class="processLine">
-            <div class="processStep">
-              <div class="processIcon"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></div>
-              <div class="processTitle">1. Gather Docs</div>
-              <div class="processDesc">Securely upload your requirements to our encrypted portal.</div>
+          <!-- ── STEPS ── -->
+          <div class="howSteps" style="margin-top:56px;">
+
+            <!-- Step 1: text left, image right -->
+            <div class="howStep">
+              <div class="howStep__content">
+                <div class="howStep__num">1</div>
+                <h3 class="howStep__title">Book Your Service Online</h3>
+                <ul class="howStep__checks">
+                  <li>Quick &amp; easy — takes less than 2 minutes</li>
+                  <li>No complex info required — just the essentials</li>
+                  <li>Your data is encrypted and 100% private</li>
+                </ul>
+                <a class="howStep__btn" href="apply.html">Start Application <span>›</span></a>
+              </div>
+              <div class="howStep__visual">
+                <div class="howStep__imgPlaceholder">
+                  <div class="howStep__mockForm">
+                    <div class="howMock__title">Application Form</div>
+                    <div class="howMock__field"><div class="howMock__label">Full Name</div><div class="howMock__input">Rajesh Kumar</div></div>
+                    <div class="howMock__field"><div class="howMock__label">Mobile Number</div><div class="howMock__input">+91 98765 43210</div></div>
+                    <div class="howMock__field"><div class="howMock__label">Service Required</div><div class="howMock__input howMock__select">ITR Filing ▾</div></div>
+                    <div class="howMock__btn">Continue →</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="processStep">
-              <div class="processIcon"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg></div>
-              <div class="processTitle">2. Verification</div>
-              <div class="processDesc">Our experts review everything for 100% accuracy.</div>
+
+            <!-- Step 2: image left, text right -->
+            <div class="howStep howStep--rev">
+              <div class="howStep__content">
+                <div class="howStep__num">2</div>
+                <h3 class="howStep__title">Share Your Documents &amp; Details</h3>
+                <ul class="howStep__checks">
+                  <li>Upload PAN, Aadhaar, Form 16 &amp; bank statements</li>
+                  <li>Specify income sources and deductions</li>
+                  <li>Secure encrypted document vault — no email attachments</li>
+                </ul>
+                <a class="howStep__btn" href="apply.html">Upload Documents <span>›</span></a>
+              </div>
+              <div class="howStep__visual">
+                <div class="howStep__imgPlaceholder">
+                  <div class="howStep__mockForm">
+                    <div class="howMock__title">Document Upload</div>
+                    <div class="howMock__docRow">
+                      <span class="howMock__docIcon howMock__docIcon--done">✓</span>
+                      <span>PAN Card</span>
+                    </div>
+                    <div class="howMock__docRow">
+                      <span class="howMock__docIcon howMock__docIcon--done">✓</span>
+                      <span>Aadhaar Card</span>
+                    </div>
+                    <div class="howMock__docRow">
+                      <span class="howMock__docIcon howMock__docIcon--pending">↑</span>
+                      <span>Form 16</span>
+                    </div>
+                    <div class="howMock__docRow">
+                      <span class="howMock__docIcon howMock__docIcon--pending">↑</span>
+                      <span>Bank Statement</span>
+                    </div>
+                    <div class="howMock__btn howMock__btn--outline">Add More +</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="processStep">
-              <div class="processIcon"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></div>
-              <div class="processTitle">3. Filing</div>
-              <div class="processDesc">Immediate submission to respective government portals.</div>
+
+            <!-- Step 3: text left, image right -->
+            <div class="howStep">
+              <div class="howStep__content">
+                <div class="howStep__num">3</div>
+                <h3 class="howStep__title">Our CA Reviews &amp; Files for You</h3>
+                <ul class="howStep__checks">
+                  <li>Dedicated CA reviews your case for errors</li>
+                  <li>Filed directly on government portal (IT / GST / MCA)</li>
+                  <li>Acknowledgement number shared instantly on filing</li>
+                </ul>
+                <a class="howStep__btn" href="apply.html">Assign My CA <span>›</span></a>
+              </div>
+              <div class="howStep__visual">
+                <div class="howStep__imgPlaceholder">
+                  <div class="howStep__mockForm">
+                    <div class="howMock__title">CA Review Panel</div>
+                    <div class="howMock__statusRow">
+                      <div class="howMock__status howMock__status--done">Documents Verified ✓</div>
+                      <div class="howMock__status howMock__status--done">Tax Computed ✓</div>
+                      <div class="howMock__status howMock__status--active">Filing in Progress…</div>
+                      <div class="howMock__status howMock__status--idle">Acknowledgement</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="processStep">
-              <div class="processIcon active"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-              <div class="processTitle">4. Approval</div>
-              <div class="processDesc">Receive your official certificates and compliance proofs.</div>
+
+            <!-- Step 4: image left, text right -->
+            <div class="howStep howStep--rev">
+              <div class="howStep__content">
+                <div class="howStep__num">4</div>
+                <h3 class="howStep__title">Get Certificate &amp; Expert Assistance</h3>
+                <ul class="howStep__checks">
+                  <li>Instant email confirmation with acknowledgement</li>
+                  <li>Download your certificate from the dashboard anytime</li>
+                  <li>Ongoing CA support for notices &amp; queries</li>
+                </ul>
+                <a class="howStep__btn" href="track.html">Track My Filing <span>›</span></a>
+              </div>
+              <div class="howStep__visual">
+                <div class="howStep__imgPlaceholder howStep__imgPlaceholder--success">
+                  <div class="howStep__mockForm">
+                    <div class="howMock__successIcon">✓</div>
+                    <div class="howMock__title" style="color:#4B9C3A;margin-top:8px;">Filing Complete!</div>
+                    <div class="howMock__meta">Acknowledgement No: XXXXX2024XXX</div>
+                    <div class="howMock__meta">Filed on: 07 Jun 2025</div>
+                    <div class="howMock__btn">Download Certificate</div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+          </div><!-- /.howSteps -->
+
+          <!-- ── EXPERT BANNER ── -->
+          <div class="howExpertBanner">
+            <div class="howExpertBanner__text">
+              <h3>Have Questions? Talk to Our Experts!</h3>
+              <p>Need personalised advice on ITR, GST, company registration, or any compliance matter? Our CA team is ready — just call or chat.</p>
+            </div>
+            <a class="btn btn-primary howExpertBanner__cta" href="contact/index.html">Call Us Now →</a>
           </div>
-        </div>
-      </section>
+
+          <!-- ── COMPARISON: IndTaxPay vs Others ── -->
+          <div class="howCompare" style="padding-bottom: 72px;">
+            <div class="center" style="margin-bottom:36px;">
+              <div class="kicker">The Better Choice</div>
+              <h2 style="margin-top:10px;">Find the Best Tax Solution for You</h2>
+              <p style="margin-top:8px;">We handle the tedious compliance work so you can focus on growing your business.</p>
+            </div>
+
+            <div class="howCompareCard">
+
+              <!-- LEFT: IndTaxPay -->
+              <div class="howCompareCol howCompareCol--us">
+                <div class="howCompareCol__head">
+                  <span class="howCompareCol__logo"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></span>
+                </div>
+                <ul class="howCompareList howCompareList--us">
+                  <li>
+                    <span class="howCompareList__icon howCompareList__icon--check">✓</span>
+                    <div>
+                      <strong>All-in-one flat pricing</strong>
+                      <p>One package covers everything — zero hidden charges, ever.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="howCompareList__icon howCompareList__icon--check">✓</span>
+                    <div>
+                      <strong>Dedicated CA for your case</strong>
+                      <p>A single expert guides you from start to certificate.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="howCompareList__icon howCompareList__icon--check">✓</span>
+                    <div>
+                      <strong>End-to-end filing service</strong>
+                      <p>Document collection, review, filing, and delivery — we do it all.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="howCompareList__icon howCompareList__icon--check">✓</span>
+                    <div>
+                      <strong>Compliance deadline reminders</strong>
+                      <p>Automated alerts so you never miss an ITR, GST, or ROC due date.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="howCompareCol__divider" aria-hidden="true"></div>
+
+              <!-- RIGHT: Others -->
+              <div class="howCompareCol howCompareCol--others">
+                <div class="howCompareCol__head howCompareCol__head--others">
+                  <span class="howCompareCol__othersIcon">⊘</span>
+                  <span>Others</span>
+                </div>
+                <ul class="howCompareList howCompareList--others">
+                  <li>
+                    <span class="howCompareList__icon howCompareList__icon--cross">✕</span>
+                    <div>
+                      <strong>Pay separately for each task</strong>
+                      <p>Separate charges for every step add up quickly.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="howCompareList__icon howCompareList__icon--cross">✕</span>
+                    <div>
+                      <strong>No single point of contact</strong>
+                      <p>Dealing with different people causes delays and confusion.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="howCompareList__icon howCompareList__icon--cross">✕</span>
+                    <div>
+                      <strong>Limited service scope</strong>
+                      <p>Only basic tasks covered; advanced services cost extra or aren't available.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="howCompareList__icon howCompareList__icon--cross">✕</span>
+                    <div>
+                      <strong>No compliance alerts</strong>
+                      <p>You're responsible for tracking every deadline yourself.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+            </div><!-- /.howCompareCard -->
+          </div><!-- /.howCompare -->
+
+        </div><!-- /.container -->
+      </section><!-- /.howSection -->
 
       <div class="tricolourDivider" aria-hidden="true"></div>
 
-      <section class="section" aria-label="Persona journeys">
+      <!-- <section class="section" aria-label="Persona journeys">
         <div class="container">
           <div class="center">
             <div class="kicker">For everyone</div>
@@ -640,7 +1204,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
 
       <div class="tricolourDivider" aria-hidden="true"></div>
 
@@ -901,5 +1465,22 @@
     <div class="popover" data-popover role="dialog" aria-label="Due date details"></div>
 
     <script defer src="assets/js/site.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var tabs = document.querySelectorAll('.svcTab[data-svc-tab]');
+        var panels = document.querySelectorAll('.homeSvcPanel[data-svc-panel]');
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            var target = tab.getAttribute('data-svc-tab');
+            tabs.forEach(function (t) { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+            panels.forEach(function (p) { p.classList.remove('is-active'); p.hidden = true; });
+            tab.classList.add('is-active');
+            tab.setAttribute('aria-selected', 'true');
+            var activePanel = document.querySelector('.homeSvcPanel[data-svc-panel="' + target + '"]');
+            if (activePanel) { activePanel.classList.add('is-active'); activePanel.hidden = false; }
+          });
+        });
+      });
+    </script>
   </body>
 </html>

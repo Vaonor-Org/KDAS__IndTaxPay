@@ -472,63 +472,214 @@
     const year = new Date().getFullYear();
     return `
       <footer class="footer" aria-label="Footer">
-        <div class="container">
-          <div class="footerGrid">
-            <div class="stack" style="gap: 12px;">
-              <div class="footerTitle">IndTaxPay</div>
-              <p class="muted">India's Most Trusted Digital Tax & Compliance Platform</p>
-              <div class="row wrap">
-                <a class="pill" href="${base}contact/index.html">LinkedIn</a>
-                <a class="pill" href="${base}contact/index.html">Twitter/X</a>
-                <a class="pill" href="${base}contact/index.html">YouTube</a>
-                <a class="pill" href="${base}contact/index.html">Instagram</a>
+        <div class="footerTop">
+          <div class="container">
+            <div class="footerBrandGrid">
+              <!-- Left: logo + tagline -->
+              <div class="footerBrandLeft">
+                <div class="footerBrandLogo">
+                  <span class="brand__text" style="font-size:1.5rem;"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></span>
+                </div>
+                <p class="footerBrandDesc">India's Most Trusted Platform for ITR Filing, GST, TDS, Payroll, Audits &amp; Company Registration — handled by expert CAs.</p>
               </div>
-              <div class="stack" style="gap: 10px;">
-                <div class="kicker" style="color: rgba(255,255,255,0.86);">Get monthly compliance reminders</div>
-                <form class="row" data-newsletter>
-                  <input class="input" name="email" type="email" placeholder="you@domain.com" aria-label="Email" required style="flex:1;"/>
-                  <button class="btn btn-primary" type="submit">Subscribe</button>
-                </form>
-                <div class="muted" style="font-size:0.92rem;">No spam. Cancel anytime.</div>
-              </div>
-            </div>
-
-            <div>
-              <div class="footerTitle">Services</div>
-              <div class="footerList">
-                <a href="${base}services/income-tax.html">Income Tax (ITR)</a>
-                <a href="${base}services/gst.html">GST</a>
-                <a href="${base}services/business-support.html">TDS &amp; Payroll</a>
-                <a href="${base}services/startup.html">Company Registration</a>
-                <a href="${base}services/audit-assurance.html">Statutory Audit</a>
-              </div>
-            </div>
-
-            <div>
-              <div class="footerTitle">Resources</div>
-              <div class="footerList">
-                <a href="${base}calculators/index.html">Calculators</a>
-                <a href="${base}how-it-works/index.html">How It Works</a>
-                <a href="${base}blog/index.html">Blog</a>
-                <a href="${base}pricing/index.html">Pricing</a>
-              </div>
-            </div>
-
-            <div>
-              <div class="footerTitle">Company</div>
-              <div class="footerList">
-                <a href="${base}about/index.html">About</a>
-                <a href="${base}contact/index.html">Contact</a>
-                <a href="${base}contact/index.html#legal">Privacy Policy</a>
-                <a href="${base}contact/index.html#legal">Terms</a>
-                <a href="${base}contact/index.html#legal">Disclaimer</a>
+              <!-- Right: address, socials, nav -->
+              <div class="footerBrandRight">
+                <address class="footerAddress">
+                  IndTaxPay, India<br>
+                  <a href="mailto:support@indtaxpay.com">support@indtaxpay.com</a>
+                </address>
+                <div class="footerSocials">
+                  <a href="#" aria-label="Facebook" class="footerSocial">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  </a>
+                  <a href="#" aria-label="Instagram" class="footerSocial">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  </a>
+                  <a href="#" aria-label="LinkedIn" class="footerSocial">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                  </a>
+                  <a href="#" aria-label="YouTube" class="footerSocial">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="#0D1B2E" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+                  </a>
+                </div>
+                <div class="footerLinks" style="margin-top:16px;">
+                  <a href="${base}about/index.html">About Us</a>
+                  <a href="${base}blog/index.html">Blog</a>
+                  <a href="${base}track.html">Track Application</a>
+                  <a href="${base}contact/index.html">Contact Us</a>
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="footerBottom">
-            <div class="muted">© ${year} IndTaxPay. All rights reserved.</div>
-            <div class="muted">Made with 🧡 in India | A CA-powered compliance platform</div>
+        <div class="footerBody">
+          <div class="container">
+
+            <!-- TAXATION -->
+            <div class="footerSection">
+              <div class="footerSection__head">
+                <h3 class="footerSection__title">Taxation</h3>
+                <div class="footerSection__line"></div>
+              </div>
+              <div class="footerSection__cols">
+                <div class="footerCol">
+                  <a href="${base}services/income-tax.html">Income Tax Return (ITR)</a>
+                  <a href="${base}services/income-tax.html">Business Tax Filing</a>
+                  <a href="${base}services/income-tax.html">Partnership / LLP ITR</a>
+                  <a href="${base}services/income-tax.html">Company ITR Filing</a>
+                  <a href="${base}services/income-tax.html">Trust / NGO Tax Filing</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/income-tax.html">TDS Return Filing</a>
+                  <a href="${base}services/income-tax.html">Income Tax Notice Reply</a>
+                  <a href="${base}services/income-tax.html">Revised ITR (ITR-U)</a>
+                  <a href="${base}services/income-tax.html">15CA – 15CB Filing</a>
+                  <a href="${base}services/income-tax.html">TAN Registration</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/gst.html">GST Registration</a>
+                  <a href="${base}services/gst.html">GST Return Filing</a>
+                  <a href="${base}services/gst.html">GST LUT Form</a>
+                  <a href="${base}services/gst.html">GST Notice Reply</a>
+                  <a href="${base}services/gst.html">GSTR-9 Annual Return</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/business-support.html">TDS & Payroll</a>
+                  <a href="${base}services/business-support.html">Payroll Processing</a>
+                  <a href="${base}services/business-support.html">PF Return Filing</a>
+                  <a href="${base}services/business-support.html">ESI Return Filing</a>
+                  <a href="${base}services/business-support.html">Professional Tax Filing</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- REGISTRATIONS -->
+            <div class="footerSection">
+              <div class="footerSection__head">
+                <h3 class="footerSection__title">Registrations</h3>
+                <div class="footerSection__line"></div>
+              </div>
+              <div class="footerSection__cols">
+                <div class="footerCol">
+                  <a href="${base}services/startup.html">Private Limited Company</a>
+                  <a href="${base}services/startup.html">One Person Company (OPC)</a>
+                  <a href="${base}services/startup.html">LLP Registration</a>
+                  <a href="${base}services/startup.html">Partnership Firm</a>
+                  <a href="${base}services/startup.html">Section 8 Company</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/startup.html">Proprietorship</a>
+                  <a href="${base}services/startup.html">Trust Registration</a>
+                  <a href="${base}services/startup.html">Producer Company</a>
+                  <a href="${base}services/startup.html">Startup India Registration</a>
+                  <a href="${base}services/registrations.html">Trade License</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/registrations.html">FSSAI Registration</a>
+                  <a href="${base}services/registrations.html">FSSAI License</a>
+                  <a href="${base}services/registrations.html">Import Export Code (IEC)</a>
+                  <a href="${base}services/registrations.html">MSME / Udyam Registration</a>
+                  <a href="${base}services/registrations.html">ISO Registration</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/registrations.html">PF Registration</a>
+                  <a href="${base}services/registrations.html">ESI Registration</a>
+                  <a href="${base}services/registrations.html">Digital Signature (DSC)</a>
+                  <a href="${base}services/registrations.html">Shop Act Registration</a>
+                  <a href="${base}services/registrations.html">NGO Darpan Registration</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- IPR -->
+            <div class="footerSection">
+              <div class="footerSection__head">
+                <h3 class="footerSection__title">IPR</h3>
+                <div class="footerSection__line"></div>
+              </div>
+              <div class="footerSection__cols">
+                <div class="footerCol">
+                  <a href="${base}services/trademark.html">Trademark Registration</a>
+                  <a href="${base}services/trademark.html">Trademark Objection</a>
+                  <a href="${base}services/trademark.html">Trademark Renewal</a>
+                  <a href="${base}services/trademark.html">Trademark Opposition</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/trademark.html">Trademark Transfer</a>
+                  <a href="${base}services/trademark.html">Expedited Trademark</a>
+                  <a href="${base}services/trademark.html">Trademark Rectification</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/trademark.html">Copyright Registration</a>
+                  <a href="${base}services/trademark.html">Copyright Objection</a>
+                  <a href="${base}services/trademark.html">Design Registration</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/trademark.html">Patent Registration</a>
+                  <a href="${base}services/trademark.html">International Trademark</a>
+                  <a href="${base}services/trademark.html">Logo Designing</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- COMPLIANCE & AUDIT -->
+            <div class="footerSection footerSection--half">
+              <div class="footerSection__head">
+                <h3 class="footerSection__title">Compliance</h3>
+                <div class="footerSection__line"></div>
+              </div>
+              <div class="footerSection__cols footerSection__cols--2">
+                <div class="footerCol">
+                  <a href="${base}services/mca-compliance.html">Company Annual Compliance</a>
+                  <a href="${base}services/mca-compliance.html">LLP Annual Compliance</a>
+                  <a href="${base}services/mca-compliance.html">OPC Compliance</a>
+                  <a href="${base}services/mca-compliance.html">Director Appointment</a>
+                  <a href="${base}services/mca-compliance.html">DIN KYC Filing</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/mca-compliance.html">Share Transfer</a>
+                  <a href="${base}services/mca-compliance.html">Authorised Capital Increase</a>
+                  <a href="${base}services/mca-compliance.html">MOA / AOA Amendment</a>
+                  <a href="${base}services/mca-compliance.html">Winding Up (Company/LLP)</a>
+                  <a href="${base}services/business-support.html">Bookkeeping & Accounting</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="footerSection footerSection--half">
+              <div class="footerSection__head">
+                <h3 class="footerSection__title">Audit &amp; Assurance</h3>
+                <div class="footerSection__line"></div>
+              </div>
+              <div class="footerSection__cols footerSection__cols--2">
+                <div class="footerCol">
+                  <a href="${base}services/audit-assurance.html">Statutory Audit</a>
+                  <a href="${base}services/audit-assurance.html">Tax Audit (Form 3CD)</a>
+                  <a href="${base}services/audit-assurance.html">Internal Audit</a>
+                </div>
+                <div class="footerCol">
+                  <a href="${base}services/audit-assurance.html">Due Diligence</a>
+                  <a href="${base}services/global-business.html">Global Expansion</a>
+                  <a href="${base}services/startup.html">Startup India / DPIIT</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="footerBottom">
+          <div class="container">
+            <div class="footerBottom__inner">
+              <div class="footerBottom__copy">
+                © ${year} IndTaxPay. All rights reserved. | By continuing, you agree to our
+                <a href="${base}contact/index.html#legal">Terms &amp; Conditions</a>,
+                <a href="${base}contact/index.html#legal">Privacy Policy</a> and
+                <a href="${base}contact/index.html#legal">Refund Policy</a>.
+              </div>
+              <div class="footerBottom__brand">Made with 🧡 in India · A CA-powered compliance platform</div>
+            </div>
           </div>
         </div>
       </footer>
