@@ -397,7 +397,7 @@
                 <div class="mega__title">Resources</div>
                 ${renderMegaItem(base, "How it works", "4 steps, zero confusion.", "how-it-works/index.html", "navy")}
                 ${renderMegaItem(base, "Pricing", "Transparent plans.", "pricing/index.html", "saffron")}
-                ${renderMegaItem(base, "Dashboard (demo)", "Track filings & documents.", "dashboard/index.html", "green")}
+                ${renderMegaItem(base, "Track Application", "Track your filing status.", "track.html", "green")}
               </div>
               <div class="mega__col">
                 <div class="featuredCard">

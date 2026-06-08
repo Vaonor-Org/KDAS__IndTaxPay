@@ -8,8 +8,8 @@
 var STATUSES = ['New', 'Documents Pending', 'In Progress', 'Filed', 'Completed', 'Rejected'];
 var PRIORITIES = ['Urgent', 'High', 'Normal', 'Low'];
 var PRIORITY_COLORS = { Urgent: '#ef4444', High: '#f59e0b', Normal: '#3b82f6', Low: '#9ca3af' };
-var MAX_FIRESTORE_FILE_SIZE_BYTES = 500 * 1024;
-var MAX_FIRESTORE_BASE64_LENGTH = 900000;
+var MAX_FIRESTORE_FILE_SIZE_BYTES = 700 * 1024;  // 700 KB — safe for Firestore 1 MB doc limit
+var MAX_FIRESTORE_BASE64_LENGTH  = 980000;        // base64 ceiling: 700 KB × 1.37 ≈ 960 KB
 
 function sanitizeAlphaNumeric(value) {
   return String(value || '')
@@ -271,13 +271,21 @@ async function unarchiveTicket(ticketId, adminEmail) {
 
 /* ── Admin: Get archived tickets ── */
 async function getArchivedTickets() {
+  // No .orderBy() here — combining .where(isDeleted) + .orderBy(lastUpdated)
+  // requires a Firestore composite index. Sort client-side instead.
   var snapshot = await db.collection('tickets')
     .where('isDeleted', '==', true)
-    .orderBy('lastUpdated', 'desc')
     .get();
-  return snapshot.docs.map(function (d) {
+  var tickets = snapshot.docs.map(function (d) {
     return Object.assign({ id: d.id }, d.data());
   });
+  // Sort by lastUpdated descending (newest first)
+  tickets.sort(function (a, b) {
+    var aTs = (a.lastUpdated && a.lastUpdated.seconds) ? a.lastUpdated.seconds : 0;
+    var bTs = (b.lastUpdated && b.lastUpdated.seconds) ? b.lastUpdated.seconds : 0;
+    return bTs - aTs;
+  });
+  return tickets;
 }
 
 /* ── LEGACY: Hard delete (kept for backward compatibility) ── */
@@ -374,7 +382,7 @@ function downloadBase64File(base64Data, fileName) {
   document.body.removeChild(link);
 }
 
-/* ── Build zip from Firestore docs (client-side) ── */
+/* ── Build zip from Firestore docs (base64) ── */
 async function buildTicketZip(ticket, docs) {
   if (!window.JSZip) throw new Error('JSZip not loaded');
 
@@ -442,8 +450,9 @@ function validateFirestoreFileSize(file) {
   if (!file || !file.size) return;
   if (file.size > MAX_FIRESTORE_FILE_SIZE_BYTES) {
     throw new Error(
-      'The file "' + file.name + '" is too large for the current upload system. ' +
-      'Please keep each file under ' + formatFileSize(MAX_FIRESTORE_FILE_SIZE_BYTES) + '.'
+      'The file "' + file.name + '" is too large. ' +
+      'Please keep each file under ' + formatFileSize(MAX_FIRESTORE_FILE_SIZE_BYTES) + '.' +
+      ' (Firestore free plan limit — compress or scan at lower quality before uploading.)'
     );
   }
 }
@@ -452,8 +461,8 @@ function validateFirestoreBase64Size(file, base64Data) {
   if (!base64Data) return;
   if (base64Data.length > MAX_FIRESTORE_BASE64_LENGTH) {
     throw new Error(
-      'The file "' + file.name + '" becomes too large after secure encoding for Firestore. ' +
-      'Please upload a smaller image or PDF under ' + formatFileSize(MAX_FIRESTORE_FILE_SIZE_BYTES) + '.'
+      'The file "' + file.name + '" is still too large after encoding. ' +
+      'Please reduce the file size below ' + formatFileSize(MAX_FIRESTORE_FILE_SIZE_BYTES) + '.'
     );
   }
 }

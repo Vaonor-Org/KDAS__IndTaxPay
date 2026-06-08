@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
 
 :root {
-  --color-saffron: #F78A0E;
-  --color-saffron-light: #FDEBD0;
-  --color-saffron-dark: #C96B00;
+  --color-saffron: #F97316;       /* Modern, clean Saffron (vibrant Orange) */
+  --color-saffron-light: #FFF3E0; /* Soft peach/saffron light tint */
+  --color-saffron-dark: #D35400;  /* Professional rich dark saffron */
 
-  --color-green: #4B9C3A;
-  --color-green-light: #E6F5E2;
-  --color-green-dark: #2E6B24;
+  --color-green: #10B981;         /* Crisp minty Emerald Green */
+  --color-green-light: #E6FBF3;   /* Soft mint green light background */
+  --color-green-dark: #047857;    /* Professional emerald dark */
 
-  --color-navy: #0D4A8A;
-  --color-navy-light: #D6E6F8;
-  --color-navy-deep: #072D56;
+  --color-navy: #0A529C;          /* Vibrant, clean royal Navy Blue (Ashoka Blue) */
+  --color-navy-light: #EBF4FC;    /* Clean soft blue background tint */
+  --color-navy-deep: #052D56;     /* Deep sapphire navy for contrast backgrounds */
 
   --color-white: #FFFFFF;
   --color-off-white: #FAF8F5;
@@ -2280,15 +2280,6 @@ html[data-theme="dark"] .wcuList {
   opacity: 1;
 }
 
-.svcPanel {
-  display: none;
-}
-
-.svcPanel.is-active {
-  display: block;
-  animation: svcFadeIn 0.28s ease;
-}
-
 /* Home page service panels (avoids conflict with navbar mega-menu .svcPanel) */
 .homeSvcPanel {
   display: none;
@@ -4444,6 +4435,46 @@ html[data-theme="dark"] .login-field input {
   cursor: wait;
   transform: none;
   box-shadow: none;
+}
+
+.google-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--panel);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-base);
+  box-shadow: 0 4px 12px rgba(13, 74, 138, 0.05);
+}
+
+.google-login-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-saffron);
+  box-shadow: 0 8px 20px rgba(247, 138, 14, 0.18);
+  background: var(--panel);
+}
+
+.google-login-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border);
+}
+
+.google-login-btn .google-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .login-back {

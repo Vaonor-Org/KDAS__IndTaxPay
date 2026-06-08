@@ -1,27 +1,27 @@
 (function() {
-  var MAIL_ENDPOINT = window.INDIA_EFILING_MAIL_ENDPOINT || '/api/send-application-email';
+  // Vercel serverless function — same domain, no CORS, no separate server.
+  // Works on https://indtaxpay.com/api/send-application-email automatically.
+  var MAIL_ENDPOINT = '/api/send-application-email';
 
   window.sendApplicationAcknowledgementEmail = async function(ticketData, options) {
-    options = options || {};
-    var websiteUrl = options.websiteUrl || window.location.origin;
-    var trackUrl = websiteUrl.replace(/\/$/, '') + '/ui/track.html';
+    var trackUrl = 'https://indtaxpay.com/track';
 
     var response = await fetch(MAIL_ENDPOINT, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: ticketData.name,
-        email: ticketData.email,
-        serviceType: ticketData.serviceType,
+        name:         ticketData.name,
+        email:        ticketData.email,
+        serviceType:  ticketData.serviceType,
         ticketNumber: ticketData.ticketNumber,
-        trackUrl: trackUrl
+        trackUrl:     trackUrl
       })
     });
 
     if (!response.ok) {
-      throw new Error(await response.text());
+      var errText = '';
+      try { errText = await response.text(); } catch(_) {}
+      throw new Error('Mail API error ' + response.status + ': ' + errText);
     }
 
     return response.json();

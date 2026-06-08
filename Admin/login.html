@@ -18,21 +18,17 @@
 
       <div class="login-error" id="loginError"></div>
 
-      <form id="loginForm">
-        <div class="login-field">
-          <input id="login-email" type="email" required autofocus placeholder=" ">
-          <label for="login-email">Email</label>
-        </div>
-        <div class="login-field">
-          <input id="login-pass" type="password" required placeholder=" ">
-          <label for="login-pass">Password</label>
-        </div>
-        <div class="show-password-row">
-          <input id="show-pass" type="checkbox">
-          <label for="show-pass">Show Password</label>
-        </div>
-        <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
-      </form>
+      <div style="margin: 24px 0 32px;">
+        <button type="button" class="google-login-btn" id="googleLoginBtn">
+          <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          <span>Sign In with Google</span>
+        </button>
+      </div>
 
       <p class="login-back"><a href="../index.html">← Back to website</a></p>
     </div>
@@ -47,52 +43,109 @@
 
   <script>
   (function() {
-    var form = document.getElementById('loginForm');
-    var loginBtn = document.getElementById('loginBtn');
+    var googleLoginBtn = document.getElementById('googleLoginBtn');
     var errorDiv = document.getElementById('loginError');
-    var passwordInput = document.getElementById('login-pass');
-    var showPassCheckbox = document.getElementById('show-pass');
     var params = new URLSearchParams(window.location.search);
-
-    if (passwordInput && showPassCheckbox) {
-      showPassCheckbox.addEventListener('change', function() {
-        passwordInput.type = this.checked ? 'text' : 'password';
-      });
-    }
 
     function showLoginError(message) {
       errorDiv.textContent = message;
       errorDiv.style.display = '';
     }
 
-    if (params.get('reason') === 'session-expired' || sessionStorage.getItem('adminSessionExpired') === '1') {
+    // Handle incoming redirect/query reasons
+    var reason = params.get('reason');
+    if (reason === 'session-expired' || sessionStorage.getItem('adminSessionExpired') === '1') {
       showLoginError('Your admin session expired after 24 hours of inactivity. Please sign in again.');
       sessionStorage.removeItem('adminSessionExpired');
+    } else if (reason === 'unauthorized') {
+      showLoginError('Access Denied: Your email is not authorized to access this dashboard.');
+    } else if (reason === 'auth-check-failed') {
+      var detail = sessionStorage.getItem('adminAuthError') || '';
+      if (detail.indexOf('permission') !== -1 || detail.indexOf('Permission') !== -1 || detail.indexOf('permissions') !== -1) {
+        detail = 'Firestore permission denied. Please ensure your Firestore Security Rules allow authenticated users to read from the "allowed_admins" collection.';
+      }
+      showLoginError('Authentication verification failed: ' + (detail || 'Verification error. Please try again.'));
+      sessionStorage.removeItem('adminAuthError');
     }
 
-    // If already logged in, redirect
-    auth.onAuthStateChanged(function(user) {
-      if (user) window.location.href = 'dashboard.html';
+    // Using signInWithPopup, getRedirectResult is no longer needed on load
+
+    // Check auth state
+    auth.onAuthStateChanged(async function(user) {
+      if (user) {
+        googleLoginBtn.disabled = true;
+        googleLoginBtn.querySelector('span').textContent = 'Verifying authorization...';
+        try {
+          var email = user.email ? user.email.toLowerCase().trim() : '';
+          
+          if (!email) {
+            showLoginError('Access Denied: Google Account does not have a valid email address.');
+            await auth.signOut();
+            googleLoginBtn.disabled = false;
+            googleLoginBtn.querySelector('span').textContent = 'Sign In with Google';
+            return;
+          }
+
+          // Seeding block: If the email is indtaxpay@gmail.com, auto-add it to allowed_admins
+          if (email === 'indtaxpay@gmail.com') {
+            try {
+              await db.collection('allowed_admins').doc(email).set({
+                email: email,
+                addedAt: firebase.firestore.FieldValue.serverTimestamp()
+              }, { merge: true });
+            } catch (seedErr) {
+              console.warn('Silent seeding of allowed_admins failed (check Firestore write rules):', seedErr.message);
+            }
+            
+            // Bypass Firestore read check for the super-admin to guarantee access
+            sessionStorage.removeItem('adminSessionExpired');
+            sessionStorage.removeItem('adminLastActivityAt');
+            window.location.href = 'dashboard.html';
+            return;
+          }
+
+          var doc = await db.collection('allowed_admins').doc(email).get();
+          if (doc.exists) {
+            sessionStorage.removeItem('adminSessionExpired');
+            sessionStorage.removeItem('adminLastActivityAt');
+            window.location.href = 'dashboard.html';
+          } else {
+            // Not whitelisted
+            showLoginError('Access Denied: The email ' + email + ' is not authorized to access this dashboard.');
+            await auth.signOut();
+            googleLoginBtn.disabled = false;
+            googleLoginBtn.querySelector('span').textContent = 'Sign In with Google';
+          }
+        } catch (err) {
+          console.error('Auth verification error:', err);
+          var errMsg = err.message || 'Database error.';
+          if (errMsg.indexOf('permission') !== -1 || errMsg.indexOf('Permission') !== -1 || errMsg.indexOf('permissions') !== -1) {
+            errMsg = 'Missing or insufficient Firestore permissions. Please ensure your Firestore security rules allow authenticated users to read from the "allowed_admins" collection.';
+          }
+          showLoginError('Access verification failed: ' + errMsg);
+          await auth.signOut();
+          googleLoginBtn.disabled = false;
+          googleLoginBtn.querySelector('span').textContent = 'Sign In with Google';
+        }
+      }
     });
 
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
+    googleLoginBtn.addEventListener('click', async function() {
       errorDiv.style.display = 'none';
-      loginBtn.disabled = true;
-      loginBtn.textContent = 'Signing in...';
-
-      var email = document.getElementById('login-email').value;
-      var password = document.getElementById('login-pass').value;
+      googleLoginBtn.disabled = true;
+      var originalText = googleLoginBtn.querySelector('span').textContent;
+      googleLoginBtn.querySelector('span').textContent = 'Connecting to Google...';
 
       try {
-        sessionStorage.removeItem('adminSessionExpired');
-        sessionStorage.removeItem('adminLastActivityAt');
-        await auth.signInWithEmailAndPassword(email, password);
-        window.location.href = 'dashboard.html';
+        var provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: 'select_account' });
+        
+        var result = await auth.signInWithPopup(provider);
       } catch (err) {
-        showLoginError('Invalid email or password.');
-        loginBtn.disabled = false;
-        loginBtn.textContent = 'Sign In';
+        console.error('Google Sign-in failed:', err);
+        showLoginError('Sign-in failed: ' + (err.message || 'Verification cancelled.'));
+        googleLoginBtn.disabled = false;
+        googleLoginBtn.querySelector('span').textContent = originalText;
       }
     });
   })();

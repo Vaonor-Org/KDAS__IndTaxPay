@@ -6,7 +6,7 @@
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
       "destination": "/login",
@@ -17,7 +17,7 @@
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
       "destination": "/login",
@@ -28,10 +28,54 @@
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
       "destination": "/login",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "has": [
+        {
+          "type": "host",
+          "value": "indtaxpay.com"
+        }
+      ],
+      "destination": "/track",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "indtaxpay.com"
+        }
+      ],
+      "destination": "/track",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.indtaxpay.com"
+        }
+      ],
+      "destination": "/track",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.indtaxpay.com"
+        }
+      ],
+      "destination": "/track",
       "permanent": false
     }
   ],
@@ -41,110 +85,120 @@
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/ui/login"
+      "destination": "/Admin/login"
     },
     {
       "source": "/login.html",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/ui/login"
+      "destination": "/Admin/login"
     },
     {
       "source": "/dashboard",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/ui/dashboard"
+      "destination": "/Admin/dashboard"
     },
     {
       "source": "/dashboard.html",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/ui/dashboard"
+      "destination": "/Admin/dashboard"
     },
     {
       "source": "/ticket",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/ui/ticket"
+      "destination": "/Admin/ticket"
     },
     {
       "source": "/ticket.html",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/ui/ticket"
+      "destination": "/Admin/ticket"
     },
     {
       "source": "/style.css",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/ui/style.css"
+      "destination": "/assets/css/styles.css"
     },
     {
       "source": "/navbar.js",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/ui/navbar.js"
+      "destination": "/assets/js/site.js"
     },
     {
       "source": "/application-mail.js",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/ui/application-mail.js"
+      "destination": "/application-mail.js"
     },
     {
       "source": "/backend/(.*)",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
       "destination": "/backend/$1"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indtaxpay.com"
+        }
+      ],
+      "destination": "/assets/$1"
     },
     {
       "source": "/Assests/(.*)",
       "has": [
         {
           "type": "host",
-          "value": "admin.indiaefilings.com"
+          "value": "admin.indtaxpay.com"
         }
       ],
-      "destination": "/Assests/$1"
+      "destination": "/assets/$1"
     }
   ]
 }

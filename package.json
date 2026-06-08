@@ -1,0 +1,9 @@
+{
+  "name": "indtaxpay",
+  "version": "1.0.0",
+  "description": "IndTaxPay — Tax & Compliance Services",
+  "private": true,
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

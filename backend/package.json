@@ -1,5 +1,5 @@
 {
-  "name": "Indiaefilings-mail-server",
+  "name": "indtaxpay-mail-server",
   "private": true,
   "main": "mail-server.js",
   "dependencies": {

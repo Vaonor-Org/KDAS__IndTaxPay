@@ -1,47 +1,11 @@
-require('dotenv').config({ path: __dirname + '/.env' });
+// Vercel Serverless Function — api/send-application-email.js
+// Deploys automatically with the Vercel project (free tier supported).
+// Set GMAIL_USER and GMAIL_APP_PASSWORD in Vercel → Project → Settings → Environment Variables.
 
-const http = require('http');
 const nodemailer = require('nodemailer');
 
-const PORT = process.env.MAIL_PORT || 8787;
-const MAIL_USER = process.env.GMAIL_USER;
-const MAIL_PASS = process.env.GMAIL_APP_PASSWORD;
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGIN || '*')
-  .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean);
-
-if (!MAIL_USER || !MAIL_PASS) {
-  console.error('Missing GMAIL_USER or GMAIL_APP_PASSWORD in backend/.env');
-  process.exit(1);
-}
-
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: MAIL_USER,
-    pass: MAIL_PASS
-  }
-});
-
-function getAllowedOrigin(requestOrigin) {
-  if (ALLOWED_ORIGINS.includes('*')) return '*';
-  if (requestOrigin && ALLOWED_ORIGINS.includes(requestOrigin)) return requestOrigin;
-  return ALLOWED_ORIGINS[0] || '*';
-}
-
-function sendJson(req, res, statusCode, payload) {
-  const requestOrigin = req.headers.origin;
-  const allowedOrigin = getAllowedOrigin(requestOrigin);
-  res.writeHead(statusCode, {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': allowedOrigin,
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Vary': 'Origin'
-  });
-  res.end(JSON.stringify(payload));
-}
+const GMAIL_USER = process.env.GMAIL_USER;
+const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
 
 function buildMailContent(data) {
   const subject = 'Application Received – IndTaxPay | Ticket: ' + data.ticketNumber;
@@ -69,8 +33,7 @@ function buildMailContent(data) {
     'https://indtaxpay.com'
   ].join('\n');
 
-  const html = `
-<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -122,7 +85,7 @@ function buildMailContent(data) {
                 <tr>
                   <td style="background:#fefce8;border:1.5px solid #fde047;border-radius:10px;padding:14px 18px;">
                     <p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#a16207;">Service Requested</p>
-                    <p style="margin:0;font-size:15px;font-weight:700;color:#1e293b;">${data.serviceType || 'Tax & Compliance Service'}</p>
+                    <p style="margin:0;font-size:15px;font-weight:700;color:#1e293b;">${data.serviceType || 'Tax &amp; Compliance Service'}</p>
                   </td>
                 </tr>
               </table>
@@ -131,8 +94,7 @@ function buildMailContent(data) {
               <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 28px;">
                 <tr>
                   <td align="center">
-                    <a href="${data.trackUrl}"
-                       style="display:inline-block;padding:14px 36px;background:#f97316;border-radius:10px;color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:0.03em;">
+                    <a href="${data.trackUrl}" style="display:inline-block;padding:14px 36px;background:#f97316;border-radius:10px;color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:0.03em;">
                       📦 Track Your Application
                     </a>
                   </td>
@@ -170,72 +132,60 @@ function buildMailContent(data) {
     </tr>
   </table>
 </body>
-</html>
-  `.trim();
+</html>`;
 
   return { subject, text, html };
 }
 
-const server = http.createServer(async (req, res) => {
-  const requestOrigin = req.headers.origin || 'unknown-origin';
+module.exports = async (req, res) => {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
-    const allowedOrigin = getAllowedOrigin(requestOrigin);
-    res.writeHead(204, {
-      'Access-Control-Allow-Origin': allowedOrigin,
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Vary': 'Origin'
-    });
-    console.log('[MAIL] Preflight accepted for origin:', requestOrigin);
-    res.end();
-    return;
+    return res.status(204).end();
   }
 
-  if (req.method !== 'POST' || req.url !== '/send-application-email') {
-    console.warn('[MAIL] Invalid route:', req.method, req.url, 'from', requestOrigin);
-    sendJson(req, res, 404, { error: 'Not found' });
-    return;
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  let body = '';
-  req.on('data', (chunk) => {
-    body += chunk;
-  });
+  const { name, email, serviceType, ticketNumber, trackUrl } = req.body || {};
 
-  req.on('end', async () => {
-    try {
-      const data = JSON.parse(body || '{}');
+  if (!name || !email || !ticketNumber || !trackUrl) {
+    return res.status(400).json({ error: 'Missing required fields: name, email, ticketNumber, trackUrl' });
+  }
 
-      if (!data.name || !data.email || !data.ticketNumber || !data.trackUrl) {
-        console.error('[MAIL] Missing required fields for request from', requestOrigin, data);
-        sendJson(req, res, 400, { error: 'Missing required email fields' });
-        return;
+  if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
+    console.error('[MAIL] Missing GMAIL_USER or GMAIL_APP_PASSWORD environment variables');
+    return res.status(500).json({ error: 'Mail server not configured. Set GMAIL_USER and GMAIL_APP_PASSWORD in Vercel environment variables.' });
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: GMAIL_USER,
+        pass: GMAIL_APP_PASSWORD
       }
+    });
 
-      const mail = buildMailContent(data);
-      console.log('[MAIL] Sending acknowledgement to', data.email, 'for', data.ticketNumber);
+    const mail = buildMailContent({ name, email, serviceType, ticketNumber, trackUrl });
 
-      await transporter.sendMail({
-        from: '"IndTaxPay" <' + MAIL_USER + '>',
-        to: data.email,
-        subject: mail.subject,
-        text: mail.text,
-        html: mail.html
-      });
+    await transporter.sendMail({
+      from: '"IndTaxPay" <' + GMAIL_USER + '>',
+      to: email,
+      subject: mail.subject,
+      text: mail.text,
+      html: mail.html
+    });
 
-      console.log('[MAIL] Mail sent successfully to', data.email, 'for', data.ticketNumber);
-      sendJson(req, res, 200, { ok: true });
-    } catch (error) {
-      console.error('[MAIL] Mail send failed:', error && error.message ? error.message : error);
-      sendJson(req, res, 500, { error: error.message || 'Mail send failed' });
-    }
-  });
-});
+    console.log('[MAIL] Sent to', email, 'for ticket', ticketNumber);
+    return res.status(200).json({ ok: true });
 
-server.listen(PORT, () => {
-  console.log('IndTaxPay mail server running on http://127.0.0.1:' + PORT);
-  console.log('[MAIL] Sending FROM:', MAIL_USER);
-  console.log('[MAIL] Allowed origins:', ALLOWED_ORIGINS.join(', '));
-  console.log('[MAIL] Ready to send application acknowledgement emails');
-});
+  } catch (err) {
+    console.error('[MAIL] Send failed:', err.message);
+    return res.status(500).json({ error: err.message || 'Mail send failed' });
+  }
+};

@@ -9,6 +9,1186 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="../assets/css/styles.css">
   <link rel="icon" type="image/png" href="../assets/logo.png">
+  <style>
+  /* ==========================================================================
+     PREMIUM DASHBOARD SADO-SAFFRON, GREEN, AND WHITE THEME & ANIMATIONS
+     ========================================================================== */
+  
+  :root {
+    --color-navy: #0e5a3e; /* Deep Forest Green for text titles */
+    --color-navy-deep: #093f2b;
+    --color-navy-light: #e6faf2;
+  }
+
+  body {
+    padding-top: 0 !important;
+    background: var(--bg);
+    overflow: hidden;
+  }
+
+  .dash-page {
+    display: flex;
+    min-height: 100vh;
+    height: 100vh;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Sidebar Navigation ── */
+  .dash-sidebar {
+    width: 280px;
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    z-index: 150;
+    transition: var(--transition-base);
+    position: relative;
+  }
+
+  .sidebar-brand {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brand-link {
+    text-decoration: none;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--text);
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .brand-accent {
+    color: var(--color-saffron);
+  }
+
+  .brand-tax {
+    color: var(--color-green);
+    font-weight: 800;
+  }
+
+  .brand-pay {
+    color: var(--text);
+  }
+
+  .sidebar-brand .admin-badge {
+    background: rgba(247, 138, 14, 0.1);
+    color: var(--color-saffron);
+    padding: 3px 9px;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(247, 138, 14, 0.2);
+  }
+
+  /* User Info card */
+  .sidebar-user {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel-2);
+  }
+
+  .user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--color-green);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-family: var(--font-display);
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+    flex-shrink: 0;
+    animation: avatarPulse 3s infinite ease-in-out;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .user-email {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-role {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* Sidebar navigation items */
+  .dash-sidebar .dash-tabs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px 16px;
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  .dash-sidebar .dash-tab-btn {
+    width: 100%;
+    padding: 12px 16px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+    text-align: left;
+    bottom: 0;
+  }
+
+  .dash-sidebar .dash-tab-btn:hover {
+    background: rgba(16, 185, 129, 0.06);
+    color: var(--color-green-dark);
+    transform: translateX(4px);
+  }
+
+  .dash-sidebar .dash-tab-btn.active {
+    background: var(--color-green) !important;
+    color: #FFFFFF !important;
+    border-color: transparent !important;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+    transform: translateX(4px);
+  }
+
+  .tab-icon {
+    font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+  }
+
+  .tab-label {
+    flex: 1;
+  }
+
+  .dash-sidebar .urgent-count {
+    margin-left: auto;
+    background: var(--color-error);
+    color: var(--color-white) !important;
+    padding: 2px 8px !important;
+    font-size: 0.7rem !important;
+    border-radius: 99px !important;
+    border: none !important;
+    font-weight: 800;
+  }
+
+  .sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .dash-sidebar .dash-signout {
+    width: 100%;
+    padding: 12px 16px;
+    background: transparent;
+    color: var(--color-saffron-dark);
+    border: 1px solid rgba(249, 115, 22, 0.28);
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: var(--transition-base);
+  }
+
+  .dash-sidebar .dash-signout:hover {
+    background: rgba(249, 115, 22, 0.08);
+    transform: translateY(-1px);
+  }
+
+  /* ── Main Workspace ── */
+  .dash-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .dash-panels-viewport {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    position: relative;
+  }
+
+  /* ── Metric Cards styling overrides ── */
+  .dash-main .metrics-row {
+    padding: 24px 24px 0;
+    gap: 16px;
+  }
+
+  .dash-main .metric-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    transition: var(--transition-base);
+    animation: metricEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .dash-main .metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.12);
+    border-color: rgba(249, 115, 22, 0.3);
+  }
+
+  .dash-main .metric-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 1.3rem;
+  }
+
+  .dash-main .metric-icon.total {
+    background: rgba(249, 115, 22, 0.08);
+    color: var(--color-saffron);
+  }
+
+  .dash-main .metric-icon.progress {
+    background: rgba(16, 185, 129, 0.08);
+    color: var(--color-green);
+  }
+
+  .dash-main .metric-icon.completed {
+    background: rgba(16, 185, 129, 0.14);
+    color: var(--color-green-dark);
+  }
+
+  .dash-main .metric-icon.urgent {
+    background: rgba(249, 115, 22, 0.12);
+    color: var(--color-saffron-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dash-main .metric-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  /* ── Tab panels viewport scroll ── */
+  .dash-tab-panel {
+    display: none;
+    height: 100%;
+  }
+
+  .dash-tab-panel.active {
+    display: flex;
+    flex-direction: column;
+    animation: panelFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* ── Toolbar styling overrides ── */
+  .dash-toolbar {
+    padding: 0 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .dash-toolbar h2 {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0 0 4px;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    pointer-events: none;
+  }
+
+  .dash-search {
+    padding: 10px 16px 10px 36px !important;
+    width: 250px !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--border) !important;
+  }
+
+  .dash-search:focus {
+    border-color: var(--color-saffron) !important;
+  }
+
+  .dash-select {
+    padding: 10px 16px !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--border) !important;
+  }
+
+  .dash-select:focus {
+    border-color: var(--color-saffron) !important;
+  }
+
+  /* ── Kanban Grid ── */
+  .kanban-grid {
+    padding: 0;
+    gap: 16px;
+    height: 100%;
+    flex: 1;
+    overflow-x: auto;
+  }
+
+  .kanban-col {
+    border-radius: 16px;
+    min-height: 500px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    box-shadow: none;
+  }
+
+  .kanban-col.drag-over {
+    border-color: var(--color-saffron);
+    background: rgba(249, 115, 22, 0.04);
+  }
+
+  .kanban-col-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .kanban-col-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .kanban-col-count {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 2px 8px;
+    border-radius: 99px;
+  }
+
+  .kanban-cards {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .ticket-card {
+    border-radius: 12px;
+    padding: 16px 16px 44px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    border: 1px solid var(--border);
+    border-left-width: 4px !important;
+    background: var(--panel);
+    animation: fadeSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .ticket-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.08);
+  }
+
+  .ticket-card-id {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .priority-badge {
+    border-radius: 6px;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    font-weight: 800;
+  }
+
+  .ticket-card-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin: 8px 0 4px;
+    color: var(--text);
+  }
+
+  .ticket-card-service {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .ticket-card-date {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+
+  .ticket-card-actions {
+    bottom: 12px;
+    right: 12px;
+    gap: 6px;
+  }
+
+  .ticket-delete {
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 1px solid rgba(249, 115, 22, 0.25);
+    background: rgba(249, 115, 22, 0.06);
+    color: var(--color-saffron-dark);
+    transition: var(--transition-base);
+  }
+
+  .ticket-delete:hover {
+    background: var(--color-saffron);
+    color: #FFF;
+    border-color: var(--color-saffron);
+  }
+
+  .ticket-urgent-btn {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    border-radius: 8px;
+    transition: var(--transition-base);
+  }
+
+  .ticket-urgent-btn:hover {
+    transform: scale(1.08);
+  }
+
+  /* ── List and Table Overrides ── */
+  .panel-section-header {
+    margin-bottom: 24px;
+  }
+
+  .panel-section-header h3 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .panel-section-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .history-card, .archive-card, .urgent-card {
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--border);
+  }
+
+  .history-table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .history-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  .history-table th {
+    padding: 14px 16px;
+    font-size: 0.72rem;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .history-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+  }
+
+  .history-table tr {
+    animation: fadeSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .history-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .urgent-item, .archive-item, .callback-item {
+    border-radius: 12px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    background: var(--panel-2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .urgent-item {
+    border-left: 4px solid var(--color-saffron);
+  }
+
+  .archive-item {
+    border-left: 4px solid var(--color-green);
+  }
+
+  .archive-actions, .urgent-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .urgent-view-btn, .archive-restore-btn, .archive-delete-btn, .cb-mark-called-btn {
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    transition: var(--transition-base);
+  }
+
+  .urgent-view-btn {
+    box-shadow: none;
+    background: var(--color-green);
+    border: none;
+    color: #FFF;
+  }
+
+  .urgent-view-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+  }
+
+  .urgent-downgrade-btn, .archive-restore-btn {
+    border: 1px solid rgba(16, 185, 129, 0.28);
+    background: rgba(16, 185, 129, 0.08);
+    color: var(--color-green-dark);
+  }
+
+  .urgent-downgrade-btn:hover, .archive-restore-btn:hover {
+    background: var(--color-green);
+    color: #FFF;
+  }
+
+  .archive-delete-btn {
+    border: 1px solid rgba(249, 115, 22, 0.28);
+    background: rgba(249, 115, 22, 0.08);
+    color: var(--color-saffron-dark);
+  }
+
+  .archive-delete-btn:hover {
+    background: var(--color-saffron);
+    color: #FFF;
+  }
+
+  .cb-mark-called-btn {
+    border: 1px solid rgba(16, 185, 129, 0.28);
+    background: rgba(16, 185, 129, 0.08);
+    color: var(--color-green-dark);
+  }
+
+  .cb-mark-called-btn:hover {
+    background: var(--color-green);
+    color: #FFF;
+  }
+
+  /* ── Calendar Tab Overrides ── */
+  .calendar-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1.1fr;
+    gap: 24px;
+    margin-top: 0;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .calendar-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .calendar-card, .reminders-card {
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: none;
+    padding: 24px;
+    background: var(--panel);
+  }
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .calendar-header h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin: 0;
+  }
+
+  .cal-nav-btn {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text);
+    font-weight: bold;
+    transition: var(--transition-base);
+  }
+
+  .cal-nav-btn:hover {
+    background: var(--border);
+  }
+
+  .calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: 700;
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+
+  .calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--text);
+    transition: var(--transition-base);
+    position: relative;
+    border: 1px solid transparent;
+    background: var(--panel-2);
+    animation: fadeSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .calendar-day:hover {
+    background: rgba(247, 138, 14, 0.1);
+    border-color: rgba(247, 138, 14, 0.3);
+  }
+
+  .calendar-day.empty {
+    cursor: default;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .calendar-day.empty:hover {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .calendar-day.today {
+    font-weight: 700;
+    background: rgba(249, 115, 22, 0.06);
+    border: 1.5px solid var(--color-saffron);
+    color: var(--color-saffron-dark);
+  }
+
+  .calendar-day.selected {
+    background: var(--color-green) !important;
+    border-color: transparent !important;
+    color: var(--color-white) !important;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    animation: selectPulse 0.25s ease-out;
+  }
+
+  .calendar-day-dot-container {
+    display: flex;
+    gap: 2px;
+    position: absolute;
+    bottom: 6px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .calendar-day-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .calendar-day-dot.delivery { background: var(--color-green); }
+  .calendar-day-dot.call { background: var(--color-saffron); }
+  .calendar-day-dot.followup { background: var(--color-green-dark); }
+
+  /* Reminders List */
+  .reminders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .reminders-header h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin: 0;
+  }
+
+  .add-reminder-btn {
+    background: var(--color-saffron);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-base);
+  }
+
+  .add-reminder-btn:hover {
+    background: var(--color-saffron-dark);
+  }
+
+  .reminders-empty {
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 16px 0;
+    font-style: italic;
+  }
+
+  .reminders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .reminder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    margin-bottom: 0;
+    transition: var(--transition-base);
+    animation: fadeSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .reminder-item:hover {
+    border-color: rgba(247, 138, 14, 0.4);
+  }
+
+  .reminder-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .reminder-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+
+  .reminder-meta {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .reminder-badge {
+    font-size: 0.65rem;
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .reminder-badge.delivery { background: rgba(16, 185, 129, 0.1); color: var(--color-green); }
+  .reminder-badge.call { background: rgba(247, 138, 14, 0.1); color: var(--color-saffron); }
+  .reminder-badge.followup { background: rgba(16, 185, 129, 0.15); color: var(--color-green-dark); }
+
+  .reminder-delete-btn {
+    background: none;
+    border: none;
+    color: var(--color-error);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px 8px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .reminder-delete-btn:hover {
+    opacity: 1;
+  }
+
+  .upcoming-reminders-section {
+    margin-top: 24px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .upcoming-reminders-section h4 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0 0 12px;
+  }
+
+  /* ── Modal Design ── */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-container {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    padding: 28px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.15);
+    transform: translateY(20px);
+    transition: transform 0.2s ease;
+  }
+
+  .modal-overlay.active .modal-container {
+    transform: translateY(0);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+  }
+
+  .modal-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  .modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: var(--muted);
+    transition: var(--transition-base);
+  }
+
+  .modal-close-btn:hover {
+    color: var(--text);
+  }
+
+  .modal-form-group {
+    margin-bottom: 16px;
+  }
+
+  .modal-form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+
+  .modal-form-group input, .modal-form-group select, .modal-form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel-2);
+    color: var(--text);
+    font-size: 0.9rem;
+  }
+
+  .modal-form-group input:focus, .modal-form-group select:focus, .modal-form-group textarea:focus {
+    border-color: var(--color-saffron);
+    box-shadow: var(--focus-ring);
+    outline: none;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  .modal-cancel-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-weight: 700;
+    transition: var(--transition-base);
+  }
+
+  .modal-cancel-btn:hover {
+    background: var(--panel-2);
+    color: var(--text);
+  }
+
+  .modal-submit-btn {
+    background: var(--color-saffron);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: var(--transition-base);
+  }
+
+  .modal-submit-btn:hover {
+    background: var(--color-saffron-dark);
+  }
+
+  /* ── Toast Notifications ── */
+  .toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .toast {
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-white);
+    min-width: 260px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    animation: toastIn 0.3s ease forwards;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+  }
+
+  .toast.success {
+    background: var(--color-green);
+  }
+
+  .toast.error {
+    background: var(--color-error);
+  }
+
+  .toast.fade-out {
+    animation: toastOut 0.25s ease forwards;
+  }
+
+  /* ── Keyframe Animations ── */
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes panelFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.99) translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes metricEntrance {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes avatarPulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.45); }
+    70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  }
+
+  @keyframes selectPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+  }
+
+  /* ── Responsive rules ── */
+  @media (max-width: 1024px) {
+    .dash-page {
+      flex-direction: column;
+      overflow-y: auto;
+      height: auto;
+    }
+    
+    .dash-sidebar {
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dash-sidebar .dash-tabs {
+      flex-direction: row;
+      overflow-x: auto;
+      padding: 12px;
+      gap: 8px;
+    }
+
+    .dash-sidebar .dash-tab-btn {
+      width: auto;
+      padding: 8px 16px;
+    }
+
+    .sidebar-user {
+      display: none;
+    }
+
+    .sidebar-footer {
+      display: none;
+    }
+
+    .dash-main {
+      overflow: visible;
+    }
+
+    .dash-panels-viewport {
+      overflow-y: visible;
+      padding: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dash-main .metrics-row {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 16px 16px 0;
+    }
+
+    .dash-toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .toolbar-controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .dash-search {
+      width: 100% !important;
+    }
+  }
+
+  </style>
 </head>
 <body>
   <!-- Loading State -->
@@ -21,122 +1201,272 @@
 
   <!-- Dashboard (hidden until auth) -->
   <div class="dash-page" id="dashPage" style="display:none;">
-    <header class="dash-header">
-      <div style="display:flex; align-items:center;">
-        <a href="dashboard.html" class="dash-header-brand">IndTaxPay</a>
+    <!-- Left Sidebar -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-brand">
+        <a href="dashboard.html" class="brand-link">
+          <span class="brand-accent">Ind</span>TaxPay
+        </a>
         <span class="admin-badge">ADMIN</span>
       </div>
-      <div class="dash-header-right">
-        <span class="dash-header-email" id="userEmail"></span>
-        <button class="dash-signout" id="signOutBtn">Sign Out</button>
-      </div>
-    </header>
-
-    <div class="dash-error" id="dashError" style="display:none;">
-      <strong>Firestore Error:</strong>
-      <span id="dashErrorMsg"></span>
-      <p style="font-size:0.8rem; color:#6b7280; margin-top:8px;">Make sure Firestore is enabled in your Firebase Console and security rules are deployed.</p>
-    </div>
-
-    <!-- Metric Cards -->
-    <div class="metrics-row">
-      <div class="metric-card">
-        <div class="metric-icon total"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></div>
-        <div><div class="metric-value" id="metricTotal">0</div><div class="metric-label">Total Tickets</div></div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon progress"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 13 9 20 9"/><path d="M13 2L20 9V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></div>
-        <div><div class="metric-value" id="metricInProgress">0</div><div class="metric-label">In Progress</div></div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon completed"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-        <div><div class="metric-value" id="metricCompleted">0</div><div class="metric-label">Completed</div></div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-icon urgent">🔴</div>
-        <div><div class="metric-value" id="metricUrgent">0</div><div class="metric-label">Urgent</div></div>
-      </div>
-    </div>
-
-    <!-- Tabs: Board / Urgent / Callbacks / History / Archive -->
-    <div class="dash-tabs">
-      <button class="dash-tab-btn active" data-tab="board"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Ticket Board</button>
-      <button class="dash-tab-btn" data-tab="urgent">🔴 Urgent</button>
-      <button class="dash-tab-btn" data-tab="callbacks">📞 Callbacks <span class="urgent-count" id="callbackCountTab" style="background:#ef4444; color:#fff; padding:1px 6px; border-radius:10px; font-size:0.7rem; margin-left:4px; display:none;">0</span></button>
-      <button class="dash-tab-btn" data-tab="history"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> History</button>
-      <button class="dash-tab-btn" data-tab="archive"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg> Archive</button>
-    </div>
-
-    <!-- Tab: Board -->
-    <div class="dash-tab-panel active" id="tab-board">
-      <div class="dash-toolbar">
-        <div>
-          <h1>Ticket Board</h1>
-          <p class="count" id="ticketCount">0 tickets</p>
+      
+      <div class="sidebar-user">
+        <div class="user-avatar" id="userAvatar">IT</div>
+        <div class="user-info">
+          <span class="user-email" id="userEmail">loading...</span>
+          <span class="user-role">Operations Portal</span>
         </div>
-        <div class="toolbar-controls">
-          <input type="text" class="dash-search" id="searchInput" placeholder="Search tickets...">
-          <select class="dash-select" id="filterService">
-            <option value="">All Services</option>
-            <option value="GST">GST</option>
-            <option value="Income Tax">Income Tax</option>
-            <option value="Company">Company Registration</option>
-            <option value="PAN">PAN</option>
-            <option value="MSME">MSME</option>
-            <option value="TDS">TDS / TCS</option>
-            <option value="EPF">EPF / ESI</option>
-            <option value="Accounting">Accounting</option>
+      </div>
+
+      <nav class="dash-tabs">
+        <button class="dash-tab-btn active" data-tab="board">
+          <span class="tab-icon">📋</span>
+          <span class="tab-label">Ticket Board</span>
+        </button>
+        <button class="dash-tab-btn" data-tab="urgent">
+          <span class="tab-icon">🔴</span>
+          <span class="tab-label">Urgent Alerts</span>
+        </button>
+        <button class="dash-tab-btn" data-tab="callbacks">
+          <span class="tab-icon">📞</span>
+          <span class="tab-label">Callbacks</span>
+          <span class="urgent-count" id="callbackCountTab" style="display:none;">0</span>
+        </button>
+        <button class="dash-tab-btn" data-tab="calendar">
+          <span class="tab-icon">📅</span>
+          <span class="tab-label">Reminders</span>
+        </button>
+        <button class="dash-tab-btn" data-tab="history">
+          <span class="tab-icon">🕒</span>
+          <span class="tab-label">Activity logs</span>
+        </button>
+        <button class="dash-tab-btn" data-tab="archive">
+          <span class="tab-icon">🗄️</span>
+          <span class="tab-label">Archive</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="dash-signout" id="signOutBtn">
+          <span class="signout-icon">🚪</span> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="dash-main">
+      <div class="dash-error" id="dashError" style="display:none;">
+        <strong>Firestore Error:</strong>
+        <span id="dashErrorMsg"></span>
+        <p style="font-size:0.8rem; color:#6b7280; margin-top:8px;">Make sure Firestore is enabled in your Firebase Console and security rules are deployed.</p>
+      </div>
+
+      <!-- Metric Cards -->
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-icon total">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+          </div>
+          <div class="metric-details">
+            <div class="metric-value" id="metricTotal">0</div>
+            <div class="metric-label">Total Tickets</div>
+          </div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon progress">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 13 9 20 9"/><path d="M13 2L20 9V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7z"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+          </div>
+          <div class="metric-details">
+            <div class="metric-value" id="metricInProgress">0</div>
+            <div class="metric-label">In Progress</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon completed">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="metric-details">
+            <div class="metric-value" id="metricCompleted">0</div>
+            <div class="metric-label">Completed</div>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon urgent">
+            <span class="urgent-emoji">🚨</span>
+          </div>
+          <div class="metric-details">
+            <div class="metric-value" id="metricUrgent">0</div>
+            <div class="metric-label">Urgent Alerts</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab panels viewport -->
+      <div class="dash-panels-viewport">
+        <!-- Tab: Board -->
+        <div class="dash-tab-panel active" id="tab-board">
+          <div class="dash-toolbar">
+            <div class="toolbar-title-section">
+              <h2>Ticket Board</h2>
+              <p class="count" id="ticketCount">0 tickets</p>
+            </div>
+            <div class="toolbar-controls">
+              <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="dash-search" id="searchInput" placeholder="Search by name, ID, service...">
+              </div>
+              <select class="dash-select" id="filterService">
+                <option value="">All Services</option>
+                <option value="GST">GST</option>
+                <option value="Income Tax">Income Tax</option>
+                <option value="Company">Company Registration</option>
+                <option value="PAN">PAN</option>
+                <option value="MSME">MSME</option>
+                <option value="TDS">TDS / TCS</option>
+                <option value="EPF">EPF / ESI</option>
+                <option value="Accounting">Accounting</option>
+              </select>
+              <select class="dash-select" id="sortOrder">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="priority">Priority (Urgent → Low)</option>
+                <option value="service">Service A-Z</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="kanban-grid" id="kanbanGrid"></div>
+        </div>
+
+        <!-- Tab: History -->
+        <div class="dash-tab-panel" id="tab-history">
+          <div class="history-panel">
+            <div class="history-card">
+              <div class="panel-section-header">
+                <h3>🕒 Activity History</h3>
+                <p class="panel-section-desc">Audit logs of actions performed by administrators on client tickets.</p>
+              </div>
+              <div class="history-table-container">
+                <div id="historyContent"><p class="history-empty">Loading history...</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Urgent -->
+        <div class="dash-tab-panel" id="tab-urgent">
+          <div class="urgent-panel">
+            <div class="urgent-card">
+              <div class="panel-section-header">
+                <h3>🔴 Urgent Tickets <span class="urgent-count" id="urgentCount"></span></h3>
+                <p class="panel-section-desc">Tickets marked as high-priority that require immediate operational action.</p>
+              </div>
+              <div class="list-container" id="urgentContent"><p class="urgent-empty">Loading...</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Archive -->
+        <div class="dash-tab-panel" id="tab-archive">
+          <div class="archive-panel">
+            <div class="archive-card">
+              <div class="panel-section-header">
+                <h3>🗄️ Archived Tickets <span class="archive-count" id="archiveCount"></span></h3>
+                <p class="panel-section-desc">Historically completed or shelved tickets. Can be restored back to the board.</p>
+              </div>
+              <div class="list-container" id="archiveContent"><p class="archive-empty">Loading...</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Callbacks -->
+        <div class="dash-tab-panel" id="tab-callbacks">
+          <div class="archive-panel">
+            <div class="archive-card">
+              <div class="panel-section-header">
+                <h3>📞 Callback Requests <span class="archive-count" id="callbacksTabCount"></span></h3>
+                <p class="panel-section-desc">Leads and clients requesting phone callbacks from the website contact form.</p>
+              </div>
+              <div class="list-container" id="callbacksContent"><p class="archive-empty">Loading...</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Reminders / Calendar -->
+        <div class="dash-tab-panel" id="tab-calendar">
+          <div class="calendar-layout">
+            <!-- Calendar Grid Card -->
+            <div class="calendar-card">
+              <div class="calendar-header">
+                <button type="button" class="cal-nav-btn" id="prevMonthBtn">←</button>
+                <h2 id="calendarTitle">June 2026</h2>
+                <button type="button" class="cal-nav-btn" id="nextMonthBtn">→</button>
+              </div>
+              <div class="calendar-weekdays">
+                <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+              </div>
+              <div class="calendar-days" id="calendarDays"></div>
+            </div>
+
+            <!-- Reminders List Card -->
+            <div class="reminders-card">
+              <div class="reminders-header">
+                <h3>Reminders for <span id="selectedDateLabel">Today</span></h3>
+                <button type="button" class="add-reminder-btn" id="openReminderModalBtn">+ New Reminder</button>
+              </div>
+              <div class="reminders-list" id="remindersList">
+                <p class="reminders-empty">No reminders for this day.</p>
+              </div>
+              
+              <div class="upcoming-reminders-section">
+                <h4>Upcoming Tasks & Deadlines</h4>
+                <div id="upcomingRemindersList">
+                  <p class="reminders-empty">No upcoming reminders.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New Reminder Modal -->
+  <div class="modal-overlay" id="reminderModalOverlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Create New Reminder</h3>
+        <button type="button" class="modal-close-btn" id="closeReminderModalBtn">✕</button>
+      </div>
+      <form id="reminderForm">
+        <div class="modal-form-group">
+          <label for="reminderTitle">Description / Title</label>
+          <input type="text" id="reminderTitle" required placeholder="e.g. Call client John for document upload">
+        </div>
+        <div class="modal-form-group">
+          <label for="reminderDate">Date</label>
+          <input type="date" id="reminderDate" required>
+        </div>
+        <div class="modal-form-group">
+          <label for="reminderTime">Time</label>
+          <input type="time" id="reminderTime" required>
+        </div>
+        <div class="modal-form-group">
+          <label for="reminderType">Category</label>
+          <select id="reminderType" required>
+            <option value="delivery">Client Delivery</option>
+            <option value="call">Call Lead</option>
+            <option value="followup">Follow-up</option>
           </select>
-          <select class="dash-select" id="sortOrder">
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="priority">Priority (Urgent → Low)</option>
-            <option value="service">Service A-Z</option>
-          </select>
         </div>
-      </div>
-
-      <div class="kanban-grid" id="kanbanGrid"></div>
-    </div>
-
-    <!-- Tab: History -->
-    <div class="dash-tab-panel" id="tab-history">
-      <div class="history-panel">
-        <div class="history-card">
-          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:6px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Activity History</h3>
-          <div id="historyContent"><p class="history-empty">Loading history...</p></div>
+        <div class="modal-footer">
+          <button type="button" class="modal-cancel-btn" id="cancelReminderModalBtn">Cancel</button>
+          <button type="submit" class="modal-submit-btn">Save Reminder</button>
         </div>
-      </div>
-    </div>
-
-    <!-- Tab: Urgent -->
-    <div class="dash-tab-panel" id="tab-urgent">
-      <div class="urgent-panel">
-        <div class="urgent-card">
-          <h3>🔴 Urgent Tickets <span class="urgent-count" id="urgentCount"></span></h3>
-          <div id="urgentContent"><p class="urgent-empty">Loading...</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tab: Archive -->
-    <div class="dash-tab-panel" id="tab-archive">
-      <div class="archive-panel">
-        <div class="archive-card">
-          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px; margin-right:6px;"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>Archived Tickets <span class="archive-count" id="archiveCount"></span></h3>
-          <div id="archiveContent"><p class="archive-empty">Loading...</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tab: Callbacks -->
-    <div class="dash-tab-panel" id="tab-callbacks">
-      <div class="archive-panel">
-        <div class="archive-card">
-          <h3>📞 Callback Requests <span class="archive-count" id="callbacksTabCount"></span></h3>
-          <div id="callbacksContent"><p class="archive-empty">Loading...</p></div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 
@@ -162,19 +1492,19 @@
     ];
 
     var STATUS_COLORS = {
-      'New': '#3b82f6',
-      'Documents Pending': '#f59e0b',
-      'In Progress': '#8b5cf6',
-      'Filed': '#06b6d4',
-      'Completed': '#22c55e',
-      'Rejected': '#ef4444'
+      'New': '#F97316',               // Saffron
+      'Documents Pending': '#D35400', // Saffron Dark / Rich Amber
+      'In Progress': '#10B981',       // Emerald Green
+      'Filed': '#059669',            // Dark Green
+      'Completed': '#047857',         // Forest Green (Deep Green)
+      'Rejected': '#b91c1c'           // Dark Crimson / Saffron-Red
     };
 
     var PRIORITY_COLORS = {
-      'Urgent': '#ef4444',
-      'High': '#f59e0b',
-      'Normal': '#3b82f6',
-      'Low': '#6b7280'
+      'Urgent': '#EA580C',            // Saffron-Red / Fire Orange
+      'High': '#F97316',              // Saffron
+      'Normal': '#10B981',            // Green
+      'Low': '#6B7280'                // Gray
     };
 
     var dashLoading = document.getElementById('dashLoading');
@@ -196,7 +1526,6 @@
     var adminSessionTimer = null;
     var adminSessionInterval = null;
     var adminSessionBound = false;
-
     function clearAdminSessionTimers() {
       if (adminSessionTimer) {
         clearTimeout(adminSessionTimer);
@@ -275,22 +1604,55 @@
         if (btn.dataset.tab === 'archive') { loadArchivedTickets(); }
         if (btn.dataset.tab === 'urgent') { renderUrgentTab(); }
         if (btn.dataset.tab === 'callbacks') { renderCallbacksTab(); }
+        if (btn.dataset.tab === 'calendar') { initCalendarTab(); }
       });
     });
 
     /* ── Auth Guard ── */
-    auth.onAuthStateChanged(function(user) {
-      dashLoading.style.display = 'none';
+    // Check auth state
+    auth.onAuthStateChanged(async function(user) {
       if (!user) {
+        dashLoading.style.display = 'none';
         clearAdminSessionTimers();
         window.location.href = 'login.html';
         return;
       }
-      dashPage.style.display = '';
-      currentUserEmail = user.email;
-      document.getElementById('userEmail').textContent = user.email;
-      bindAdminSessionTracking();
-      startSubscription();
+
+      try {
+        var email = user.email ? user.email.toLowerCase().trim() : '';
+        if (!email) {
+          await auth.signOut();
+          window.location.href = 'login.html?reason=unauthorized';
+          return;
+        }
+
+        // Bypass Firestore read check for the super-admin to guarantee access
+        if (email === 'indtaxpay@gmail.com') {
+          // Bypassed
+        } else {
+          var doc = await db.collection('allowed_admins').doc(email).get();
+          if (!doc.exists) {
+            await auth.signOut();
+            window.location.href = 'login.html?reason=unauthorized';
+            return;
+          }
+        }
+
+        dashLoading.style.display = 'none';
+        dashPage.style.display = '';
+        currentUserEmail = email;
+        document.getElementById('userEmail').textContent = email;
+        var initials = email.split('@')[0].substring(0, 2).toUpperCase();
+        var avatarEl = document.getElementById('userAvatar');
+        if (avatarEl) { avatarEl.textContent = initials; }
+        bindAdminSessionTracking();
+        startSubscription();
+      } catch (err) {
+        console.error('Dashboard Auth Verification failed:', err);
+        sessionStorage.setItem('adminAuthError', err.message || String(err));
+        await auth.signOut();
+        window.location.href = 'login.html?reason=auth-check-failed';
+      }
     });
 
     document.getElementById('signOutBtn').addEventListener('click', function() {
@@ -407,8 +1769,9 @@
         if (statusTickets.length === 0) {
           html += '<div class="kanban-empty">No tickets</div>';
         } else {
+          var cardIndex = 0;
           statusTickets.forEach(function(ticket) {
-            html += '<a class="ticket-card" href="ticket.html?id=' + ticket.id + '" draggable="true" data-ticket-id="' + ticket.id + '" style="border-left-color:' + color + ';">';
+            html += '<a class="ticket-card" href="ticket.html?id=' + ticket.id + '" draggable="true" data-ticket-id="' + ticket.id + '" style="border-left-color:' + color + '; animation-delay: ' + (cardIndex * 0.05) + 's;">';
             html += '<div class="ticket-card-top"><span class="ticket-card-id">' + (ticket.ticketNumber || '') + '</span>' + priorityBadgeHtml(ticket.priority) + '</div>';
             html += '<p class="ticket-card-name">' + (ticket.name || '') + '</p>';
             html += '<p class="ticket-card-service">' + (ticket.serviceType || '') + '</p>';
@@ -418,6 +1781,7 @@
             html += '<button class="ticket-delete" type="button" data-ticket-id="' + ticket.id + '" title="Archive">Archive</button>';
             html += '</div>';
             html += '</a>';
+            cardIndex++;
           });
         }
 
@@ -544,14 +1908,16 @@
       }
 
       var html = '';
+      var itemIndex = 0;
       urgentTickets.forEach(function(ticket) {
-        html += '<div class="urgent-item">';
+        var statusColor = STATUS_COLORS[ticket.status] || '#6b7280';
+        html += '<div class="urgent-item" style="animation-delay: ' + (itemIndex * 0.05) + 's;">';
         html += '<div class="urgent-info">';
         html += '<span class="urgent-dot"></span>';
         html += '<div>';
         html += '<div style="display:flex; align-items:center; gap:8px;">';
         html += '<span class="urgent-ticket-id">' + (ticket.ticketNumber || ticket.id) + '</span>';
-        html += '<span style="font-size:0.72rem; padding:2px 6px; border-radius:4px; background:rgba(59,130,246,0.1); color:#2563eb; font-weight:700;">' + (ticket.status || '') + '</span>';
+        html += '<span style="font-size:0.72rem; padding:2px 6px; border-radius:4px; background:' + statusColor + '18; color:' + statusColor + '; font-weight:700;">' + (ticket.status || '') + '</span>';
         html += '</div>';
         html += '<p class="urgent-name">' + (ticket.name || '') + '</p>';
         html += '<p class="urgent-detail">' + (ticket.serviceType || '') + ' • ' + formatFirestoreDate(ticket.lastUpdated) + '</p>';
@@ -561,6 +1927,7 @@
         html += '<button class="urgent-downgrade-btn" data-ticket-id="' + ticket.id + '">↓ Set Normal</button>';
         html += '</div>';
         html += '</div>';
+        itemIndex++;
       });
 
       container.innerHTML = html;
@@ -636,7 +2003,7 @@
             detail = log.newValue;
           }
 
-          html += '<tr>';
+          html += '<tr style="animation-delay: ' + (i * 0.02) + 's;">';
           html += '<td style="white-space:nowrap;">' + formatFirestoreDate(log.timestamp) + '</td>';
           html += '<td><a class="history-ticket-link" href="ticket.html?id=' + log._ticketId + '">' + log._ticketNumber + '</a></td>';
           html += '<td><span class="history-type-badge ' + typeClass + '">' + formatAuditType(log.type) + '</span></td>';
@@ -676,8 +2043,9 @@
         }
 
         var html = '';
+        var archIndex = 0;
         archived.forEach(function(ticket) {
-          html += '<div class="archive-item">';
+          html += '<div class="archive-item" style="animation-delay: ' + (archIndex * 0.05) + 's;">';
           html += '<div class="archive-info">';
           html += '<span class="archive-dot"></span>';
           html += '<div>';
@@ -693,6 +2061,7 @@
           html += '<button class="archive-delete-btn" data-ticket-id="' + ticket.id + '">🗑 Delete Forever</button>';
           html += '</div>';
           html += '</div>';
+          archIndex++;
         });
 
         container.innerHTML = html;
@@ -764,8 +2133,9 @@
       }
 
       var html = '';
+      var cbIndex = 0;
       allCallbacks.forEach(function(cb) {
-        html += '<div class="archive-item">';
+        html += '<div class="archive-item" style="animation-delay: ' + (cbIndex * 0.05) + 's;">';
         html += '<div class="archive-info">';
         html += '<span class="archive-dot" style="' + (cb.status === 'Called' ? 'background:var(--color-green);' : 'background:#f59e0b;') + '"></span>';
         html += '<div>';
@@ -784,6 +2154,7 @@
         html += '<button class="cb-delete-btn archive-delete-btn" data-cb-id="' + cb.id + '"> 🗑 </button>';
         html += '</div>';
         html += '</div>';
+        cbIndex++;
       });
 
       container.innerHTML = html;
@@ -819,6 +2190,366 @@
           }
         });
       });
+    }
+
+    /* ══════════════════════════════════════
+       CALENDAR & REMINDERS SYSTEM
+       ══════════════════════════════════════ */
+    var todayInit = new Date();
+    var calendarYear = todayInit.getFullYear();
+    var calendarMonth = todayInit.getMonth(); // 0-11
+    var selectedDateStr = todayInit.getFullYear() + '-' + String(todayInit.getMonth() + 1).padStart(2, '0') + '-' + String(todayInit.getDate()).padStart(2, '0');
+    var allReminders = [];
+
+    // Init Calendar Tab
+    async function initCalendarTab() {
+      allReminders = await fetchReminders();
+      renderCalendarGrid();
+      renderDayReminders();
+      renderUpcomingReminders();
+      bindCalendarUIEvents();
+    }
+
+    // Fetch reminders from Firestore with localStorage fallback
+    async function fetchReminders() {
+      try {
+        var snapshot = await db.collection('reminders').get();
+        return snapshot.docs.map(function(d) {
+          return Object.assign({ id: d.id }, d.data());
+        });
+      } catch(err) {
+        console.warn("Firestore reminders read failed, falling back to localStorage:", err.message);
+        try {
+          return JSON.parse(localStorage.getItem('indtaxpay_reminders') || '[]');
+        } catch(e) {
+          return [];
+        }
+      }
+    }
+
+    // Save reminder to Firestore with localStorage fallback
+    async function saveReminder(reminder) {
+      try {
+        var docRef = await db.collection('reminders').add(reminder);
+        reminder.id = docRef.id;
+        return reminder;
+      } catch(err) {
+        console.warn("Firestore reminder write failed, falling back to localStorage:", err.message);
+        reminder.id = 'local_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+        var localReminders = [];
+        try {
+          localReminders = JSON.parse(localStorage.getItem('indtaxpay_reminders') || '[]');
+        } catch(e) {}
+        localReminders.push(reminder);
+        try {
+          localStorage.setItem('indtaxpay_reminders', JSON.stringify(localReminders));
+        } catch(e) {}
+        return reminder;
+      }
+    }
+
+    // Delete reminder from Firestore / localStorage
+    async function deleteReminderFromDb(reminderId) {
+      if (reminderId.indexOf('local_') === 0) {
+        var localReminders = [];
+        try {
+          localReminders = JSON.parse(localStorage.getItem('indtaxpay_reminders') || '[]');
+        } catch(e) {}
+        localReminders = localReminders.filter(function(r) { return r.id !== reminderId; });
+        try {
+          localStorage.setItem('indtaxpay_reminders', JSON.stringify(localReminders));
+        } catch(e) {}
+      } else {
+        try {
+          await db.collection('reminders').doc(reminderId).delete();
+        } catch(err) {
+          console.warn("Firestore reminder delete failed:", err.message);
+        }
+      }
+    }
+
+    // Render monthly calendar grid
+    function renderCalendarGrid() {
+      var daysContainer = document.getElementById('calendarDays');
+      var titleEl = document.getElementById('calendarTitle');
+      if (!daysContainer || !titleEl) return;
+
+      var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      titleEl.textContent = monthNames[calendarMonth] + " " + calendarYear;
+
+      daysContainer.innerHTML = '';
+
+      var firstDayIndex = new Date(calendarYear, calendarMonth, 1).getDay();
+      var totalDays = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+
+      // Pad empty cells before the 1st of the month
+      for (var i = 0; i < firstDayIndex; i++) {
+        var emptyCell = document.createElement('div');
+        emptyCell.className = 'calendar-day empty';
+        daysContainer.appendChild(emptyCell);
+      }
+
+      var today = new Date();
+      var todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+
+      // Fill in actual days
+      var calIndex = 0;
+      for (var day = 1; day <= totalDays; day++) {
+        var dayCell = document.createElement('div');
+        dayCell.className = 'calendar-day';
+        dayCell.style.animationDelay = (calIndex * 0.01) + 's';
+        dayCell.textContent = day;
+
+        var currentMonthStr = String(calendarMonth + 1).padStart(2, '0');
+        var dateStr = calendarYear + '-' + currentMonthStr + '-' + String(day).padStart(2, '0');
+
+        dayCell.dataset.date = dateStr;
+
+        // Highlight selected day
+        if (dateStr === selectedDateStr) {
+          dayCell.classList.add('selected');
+        }
+
+        // Highlight today
+        if (dateStr === todayStr) {
+          dayCell.classList.add('today');
+        }
+        calIndex++;
+
+        // Filter reminders for this day to render dots
+        var dayReminders = allReminders.filter(function(r) { return r.date === dateStr; });
+        if (dayReminders.length > 0) {
+          var dotContainer = document.createElement('div');
+          dotContainer.className = 'calendar-day-dot-container';
+
+          // Extract unique categories for dots
+          var categories = [];
+          dayReminders.forEach(function(r) {
+            if (categories.indexOf(r.type) === -1) {
+              categories.push(r.type);
+            }
+          });
+
+          categories.forEach(function(cat) {
+            var dot = document.createElement('div');
+            dot.className = 'calendar-day-dot ' + cat;
+            dotContainer.appendChild(dot);
+          });
+          dayCell.appendChild(dotContainer);
+        }
+
+        // Click selection handler
+        dayCell.addEventListener('click', function(e) {
+          var target = e.currentTarget;
+          document.querySelectorAll('.calendar-day').forEach(function(el) { el.classList.remove('selected'); });
+          target.classList.add('selected');
+          selectedDateStr = target.dataset.date;
+          renderDayReminders();
+        });
+
+        daysContainer.appendChild(dayCell);
+      }
+    }
+
+    // Render reminders for the selected day
+    function renderDayReminders() {
+      var container = document.getElementById('remindersList');
+      var labelEl = document.getElementById('selectedDateLabel');
+      if (!container || !labelEl) return;
+
+      var dateObj = new Date(selectedDateStr);
+      var displayDate = dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      labelEl.textContent = displayDate;
+
+      var dayReminders = allReminders.filter(function(r) { return r.date === selectedDateStr; });
+      
+      // Sort reminders by time
+      dayReminders.sort(function(a, b) { return (a.time || '').localeCompare(b.time || ''); });
+
+      if (dayReminders.length === 0) {
+        container.innerHTML = '<p class="reminders-empty">No reminders set for this day.</p>';
+        return;
+      }
+
+      var html = '';
+      var remIndex = 0;
+      dayReminders.forEach(function(rem) {
+        var labelMap = { delivery: 'Delivery', call: 'Lead Call', followup: 'Follow-up' };
+        var label = labelMap[rem.type] || rem.type;
+        var timeStr = format12Hour(rem.time);
+
+        html += '<div class="reminder-item" style="animation-delay: ' + (remIndex * 0.05) + 's;">';
+        html += '<div class="reminder-info">';
+        html += '<span class="reminder-title">' + rem.title + '</span>';
+        html += '<div class="reminder-meta">';
+        html += '<span class="reminder-badge ' + rem.type + '">' + label + '</span>';
+        html += '<span>🕒 ' + timeStr + '</span>';
+        html += '</div></div>';
+        html += '<button type="button" class="reminder-delete-btn" data-id="' + rem.id + '" title="Delete Reminder">🗑</button>';
+        html += '</div>';
+        remIndex++;
+      });
+
+      container.innerHTML = html;
+
+      // Bind delete buttons
+      container.querySelectorAll('.reminder-delete-btn').forEach(function(btn) {
+        btn.addEventListener('click', async function(e) {
+          e.preventDefault();
+          var id = btn.dataset.id;
+          if (confirm('Delete this reminder?')) {
+            await deleteReminderFromDb(id);
+            allReminders = allReminders.filter(function(r) { return r.id !== id; });
+            showToast('Reminder deleted');
+            renderCalendarGrid();
+            renderDayReminders();
+            renderUpcomingReminders();
+          }
+        });
+      });
+    }
+
+    // Render upcoming reminders list
+    function renderUpcomingReminders() {
+      var container = document.getElementById('upcomingRemindersList');
+      if (!container) return;
+
+      var todayStr = new Date().toISOString().split('T')[0];
+      var upcoming = allReminders.filter(function(r) { return r.date >= todayStr; });
+
+      // Sort by date then time
+      upcoming.sort(function(a, b) {
+        if (a.date !== b.date) return a.date.localeCompare(b.date);
+        return (a.time || '').localeCompare(b.time || '');
+      });
+
+      // Limit to 5 upcoming
+      upcoming = upcoming.slice(0, 5);
+
+      if (upcoming.length === 0) {
+        container.innerHTML = '<p class="reminders-empty">No upcoming reminders.</p>';
+        return;
+      }
+
+      var html = '';
+      var upIndex = 0;
+      upcoming.forEach(function(rem) {
+        var labelMap = { delivery: 'Delivery', call: 'Lead Call', followup: 'Follow-up' };
+        var label = labelMap[rem.type] || rem.type;
+        var dateObj = new Date(rem.date);
+        var dateStr = dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+        var timeStr = format12Hour(rem.time);
+
+        html += '<div class="reminder-item" style="padding: 10px; animation-delay: ' + (upIndex * 0.05) + 's;">';
+        html += '<div class="reminder-info">';
+        html += '<span class="reminder-title" style="font-size:0.85rem;">' + rem.title + '</span>';
+        html += '<div class="reminder-meta" style="font-size:0.7rem;">';
+        html += '<span class="reminder-badge ' + rem.type + '" style="font-size:0.65rem;">' + label + '</span>';
+        html += '<span>📅 ' + dateStr + '</span>';
+        html += '<span>🕒 ' + timeStr + '</span>';
+        html += '</div></div>';
+        html += '</div>';
+        upIndex++;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // Helper: format time to 12 hour
+    function format12Hour(timeStr) {
+      if (!timeStr) return '';
+      var parts = timeStr.split(':');
+      var hours = parseInt(parts[0], 10);
+      var minutes = parts[1];
+      var ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // 0 should be 12
+      return hours + ':' + minutes + ' ' + ampm;
+    }
+
+    // Bind navigation and modal events
+    function bindCalendarUIEvents() {
+      // Prev Month
+      document.getElementById('prevMonthBtn').onclick = function() {
+        calendarMonth--;
+        if (calendarMonth < 0) {
+          calendarMonth = 11;
+          calendarYear--;
+        }
+        renderCalendarGrid();
+      };
+
+      // Next Month
+      document.getElementById('nextMonthBtn').onclick = function() {
+        calendarMonth++;
+        if (calendarMonth > 11) {
+          calendarMonth = 0;
+          calendarYear++;
+        }
+        renderCalendarGrid();
+      };
+
+      // Modal Triggers
+      var modal = document.getElementById('reminderModalOverlay');
+      var openBtn = document.getElementById('openReminderModalBtn');
+      var closeBtn = document.getElementById('closeReminderModalBtn');
+      var cancelBtn = document.getElementById('cancelReminderModalBtn');
+      var form = document.getElementById('reminderForm');
+
+      if (openBtn && modal) {
+        openBtn.onclick = function() {
+          // Preset date value to currently selected day
+          document.getElementById('reminderDate').value = selectedDateStr;
+          // Preset time to current time or standard 10:00 AM
+          document.getElementById('reminderTime').value = "10:00";
+          document.getElementById('reminderTitle').value = "";
+          modal.classList.add('active');
+        };
+      }
+
+      function closeModal() {
+        if (modal) modal.classList.remove('active');
+      }
+
+      if (closeBtn) closeBtn.onclick = closeModal;
+      if (cancelBtn) cancelBtn.onclick = closeModal;
+
+      // Form Submit
+      if (form) {
+        form.onsubmit = async function(e) {
+          e.preventDefault();
+          
+          var title = document.getElementById('reminderTitle').value.trim();
+          var date = document.getElementById('reminderDate').value;
+          var time = document.getElementById('reminderTime').value;
+          var type = document.getElementById('reminderType').value;
+
+          if (!title || !date || !time) return;
+
+          var newRem = {
+            title: title,
+            date: date,
+            time: time,
+            type: type,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          };
+
+          showToast('Saving reminder...');
+          closeModal();
+
+          var saved = await saveReminder(newRem);
+          allReminders.push(saved);
+          
+          showToast('Reminder saved successfully!');
+          renderCalendarGrid();
+          
+          // If the new reminder date is the currently selected date, update the list
+          if (date === selectedDateStr) {
+            renderDayReminders();
+          }
+          renderUpcomingReminders();
+        };
+      }
     }
 
   })();
