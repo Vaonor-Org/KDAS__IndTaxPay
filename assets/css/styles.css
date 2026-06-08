@@ -44,8 +44,8 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --container: 1120px;
-  --nav-h: 64px;
-  --nav-h-mobile: 56px;
+  --nav-h: 80px;
+  --nav-h-mobile: 68px;
 
   --bg: var(--color-off-white);
   --panel: var(--color-white);
@@ -462,18 +462,23 @@ html[data-theme="dark"] .navbar__bg {
 }
 
 .brand__mark {
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  border: 2px solid rgba(26, 82, 118, 0.35);
-  display: grid;
-  place-items: center;
-  background: rgba(214, 230, 248, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-html[data-theme="dark"] .brand__mark {
-  background: rgba(214, 230, 248, 0.10);
-  border-color: rgba(214, 230, 248, 0.26);
+.brand__logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.brand__text {
+  font-size: 1.65rem;
+  font-weight: 800;
+  display: inline-block;
+  line-height: 1.2;
 }
 
 .brand__text .ind {
@@ -3903,6 +3908,14 @@ html[data-theme="dark"] .dropzone {
 @media (max-width: 720px) {
   .navbar {
     height: var(--nav-h-mobile);
+  }
+
+  .brand__logo {
+    height: 48px;
+  }
+
+  .brand__text {
+    font-size: 1.35rem;
   }
 
   .navLinks {
