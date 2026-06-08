@@ -44,7 +44,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/ui/login"
+      "destination": "/Admin/login"
     },
     {
       "source": "/login.html",
@@ -54,7 +54,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/ui/login"
+      "destination": "/Admin/login"
     },
     {
       "source": "/dashboard",
@@ -64,7 +64,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/ui/dashboard"
+      "destination": "/Admin/dashboard"
     },
     {
       "source": "/dashboard.html",
@@ -74,7 +74,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/ui/dashboard"
+      "destination": "/Admin/dashboard"
     },
     {
       "source": "/ticket",
@@ -84,7 +84,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/ui/ticket"
+      "destination": "/Admin/ticket"
     },
     {
       "source": "/ticket.html",
@@ -94,7 +94,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/ui/ticket"
+      "destination": "/Admin/ticket"
     },
     {
       "source": "/style.css",
@@ -104,7 +104,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/ui/style.css"
+      "destination": "/assets/css/styles.css"
     },
     {
       "source": "/navbar.js",
@@ -114,7 +114,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/ui/navbar.js"
+      "destination": "/assets/js/site.js"
     },
     {
       "source": "/application-mail.js",
@@ -124,7 +124,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/ui/application-mail.js"
+      "destination": "/application-mail.js"
     },
     {
       "source": "/backend/(.*)",
@@ -137,6 +137,16 @@
       "destination": "/backend/$1"
     },
     {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "admin.indiaefilings.com"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
       "source": "/Assests/(.*)",
       "has": [
         {
@@ -144,7 +154,7 @@
           "value": "admin.indiaefilings.com"
         }
       ],
-      "destination": "/Assests/$1"
+      "destination": "/assets/$1"
     }
   ]
 }
