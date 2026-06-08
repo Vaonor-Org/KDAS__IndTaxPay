@@ -186,7 +186,7 @@
             <!-- Document Uploads -->
             <div class="form-group" id="documentsSection" style="display:none;">
               <p class="form-section-title">Required Documents</p>
-              <p class="form-hint" style="margin-bottom:14px;">Upload the documents listed below. Maximum <strong>10 MB</strong> per file (PDF, JPG, PNG, XLSX accepted).</p>
+              <p class="form-hint" style="margin-bottom:14px;">Upload the documents listed below. Maximum <strong>700 KB</strong> per file. If a file is too large, compress it or scan at lower quality before uploading.</p>
               <div id="documentFields"></div>
             </div>
 
@@ -270,7 +270,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
   <script src="backend/firebase-init.js"></script>
   <script src="backend/firestore-helpers.js"></script>
   <script src="backend/script.js"></script>
@@ -530,7 +529,7 @@
         html += '    <div class="upload-zone-content" id="upload_content_' + idx + '">';
         html += '      <span class="upload-icon">📤</span>';
         html += '      <p class="upload-text">Drag &amp; drop or <span class="upload-link">browse</span></p>';
-        html += '      <p class="upload-hint">Accepted: ' + docItem.accept.toUpperCase().replace(/\./g, ' ') + ' (Max 10 MB)</p>';
+        html += '      <p class="upload-hint">Accepted: ' + docItem.accept.toUpperCase().replace(/\./g, ' ') + ' (Max 700 KB)</p>';
         html += '    </div>';
         html += '    <input type="file" id="doc_' + idx + '" name="doc_' + idx + '" accept="' + docItem.accept + '" data-doc-label="' + docItem.label + '" class="form-input-file"';
         if (docItem.required) html += ' required';

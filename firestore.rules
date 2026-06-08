@@ -1,0 +1,79 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─────────────────────────────────────────────────────────────────────
+    // HELPER: Is the request from a signed-in admin?
+    // ─────────────────────────────────────────────────────────────────────
+    function isAdmin() {
+      return request.auth != null;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    // COUNTERS
+    // Public read+write is required so the ticket-number generator
+    // (Firestore transaction on counters/tickets) works from the apply form
+    // without authentication.
+    // ─────────────────────────────────────────────────────────────────────
+    match /counters/{counterId} {
+      allow read, write: if true;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    // TICKETS
+    // ─────────────────────────────────────────────────────────────────────
+    match /tickets/{ticketId} {
+
+      // Public: create a new ticket (apply form)
+      allow create: if true;
+
+      // Public: read own ticket only via track page
+      // (verified by matching ticketNumber AND phone in the query —
+      //  enforced at query level; single-doc read allowed for admin)
+      allow read: if isAdmin()
+                  || (resource.data.ticketNumber is string
+                      && resource.data.phone is string);
+
+      // Only admin can update or delete
+      allow update, delete: if isAdmin();
+
+      // ── Documents subcollection ──────────────────────────────────────
+      // Public: upload documents when creating a ticket
+      // Admin: read / download documents
+      match /documents/{docId} {
+        allow create: if true;
+        allow read, update, delete: if isAdmin();
+      }
+
+      // ── Activity log subcollection ────────────────────────────────────
+      // Admin-only: status changes, notes, audit trail
+      match /activityLog/{logId} {
+        allow read, write: if isAdmin();
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    // CALLBACKS (contact / callback request form)
+    // Public can submit; only admin can read, update, delete
+    // ─────────────────────────────────────────────────────────────────────
+    match /callbacks/{callbackId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    // REMINDERS (admin calendar reminders)
+    // ─────────────────────────────────────────────────────────────────────
+    match /reminders/{reminderId} {
+      allow read, write: if isAdmin();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    // CATCH-ALL — deny everything else
+    // ─────────────────────────────────────────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

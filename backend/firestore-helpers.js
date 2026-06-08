@@ -8,7 +8,8 @@
 var STATUSES = ['New', 'Documents Pending', 'In Progress', 'Filed', 'Completed', 'Rejected'];
 var PRIORITIES = ['Urgent', 'High', 'Normal', 'Low'];
 var PRIORITY_COLORS = { Urgent: '#ef4444', High: '#f59e0b', Normal: '#3b82f6', Low: '#9ca3af' };
-var MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10 MB per file (Firebase Storage limit)
+var MAX_FIRESTORE_FILE_SIZE_BYTES = 700 * 1024;  // 700 KB — safe for Firestore 1 MB doc limit
+var MAX_FIRESTORE_BASE64_LENGTH  = 980000;        // base64 ceiling: 700 KB × 1.37 ≈ 960 KB
 
 function sanitizeAlphaNumeric(value) {
   return String(value || '')
@@ -99,49 +100,34 @@ async function createTicket(data) {
   return { ticketId: docRef.id, ticketNumber: ticketNumber };
 }
 
-/* ── Validate file before upload ── */
-function validateFileSize(file) {
-  if (!file || !file.size) return;
-  if (file.size > MAX_FILE_SIZE_BYTES) {
-    throw new Error(
-      'The file "' + file.name + '" is too large. ' +
-      'Maximum allowed size is 10 MB per file.'
-    );
-  }
+/* ── Convert File to base64 ── */
+function fileToBase64(file) {
+  return new Promise(function (resolve, reject) {
+    var reader = new FileReader();
+    reader.onload = function () { resolve(reader.result); };
+    reader.onerror = function () { reject(reader.error); };
+    reader.readAsDataURL(file);
+  });
 }
 
-/* ── Upload Documents to Firebase Storage; store only URL + metadata in Firestore ── */
+/* ── Upload Documents as base64 into Firestore subcollection ── */
 async function uploadDocuments(ticketId, files) {
   for (var i = 0; i < files.length; i++) {
     var item = files[i];
     var file = item.file;
     var type = item.type || 'Other';
-
-    validateFileSize(file);
-
-    // Build a unique path: tickets/<ticketId>/<timestamp>_<safeName>
+    validateFirestoreFileSize(file);
     var safeName = file.name.replace(/[\\/:*?"<>|]/g, '_');
-    var storagePath = 'tickets/' + ticketId + '/' + Date.now() + '_' + safeName;
-    var fileRef = storage.ref(storagePath);
+    var base64Data = await fileToBase64(file);
+    validateFirestoreBase64Size(file, base64Data);
 
-    // Upload to Firebase Storage
-    var snapshot = await fileRef.put(file, {
-      contentType: file.type || 'application/octet-stream',
-      customMetadata: { docType: type, originalName: file.name }
-    });
-
-    // Get permanent download URL
-    var downloadUrl = await snapshot.ref.getDownloadURL();
-
-    // Store ONLY metadata + URL in Firestore (no base64)
     await db.collection('tickets').doc(ticketId).collection('documents').add({
-      type:        type,
-      fileName:    safeName,
-      mimeType:    file.type || 'application/octet-stream',
-      size:        file.size,
-      storagePath: storagePath,
-      downloadUrl: downloadUrl,
-      uploadedAt:  firebase.firestore.FieldValue.serverTimestamp()
+      type: type,
+      fileName: safeName,
+      mimeType: file.type || 'application/octet-stream',
+      size: file.size,
+      base64: base64Data,
+      uploadedAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
 }
@@ -378,19 +364,17 @@ async function trackFileDownload(ticketId, fileName, adminEmail) {
   });
 }
 
-/* ── Open or download a Storage document by URL ── */
-function openStorageFile(downloadUrl, fileName) {
+/* ── Download a base64 document as a file ── */
+function downloadBase64File(base64Data, fileName) {
   var link = document.createElement('a');
-  link.href = downloadUrl;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
+  link.href = base64Data;
   link.download = fileName;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
 }
 
-/* ── Build zip from Storage docs — fetches each file by its download URL ── */
+/* ── Build zip from Firestore docs (base64) ── */
 async function buildTicketZip(ticket, docs) {
   if (!window.JSZip) throw new Error('JSZip not loaded');
 
@@ -418,19 +402,12 @@ async function buildTicketZip(ticket, docs) {
 
   zip.file('data.txt', lines.join('\n'));
 
-  // Fetch each file from its Storage download URL and add to zip
-  for (var i = 0; i < docs.length; i++) {
-    var d = docs[i];
-    if (d.downloadUrl) {
-      try {
-        var response = await fetch(d.downloadUrl);
-        var blob = await response.blob();
-        zip.file('files/' + d.fileName, blob);
-      } catch (fetchErr) {
-        console.warn('Could not fetch file for zip:', d.fileName, fetchErr.message);
-      }
+  docs.forEach(function (d) {
+    if (d.base64) {
+      var base64Content = d.base64.split(',')[1] || d.base64;
+      zip.file('files/' + d.fileName, base64Content, { base64: true });
     }
-  }
+  });
 
   return zip.generateAsync({ type: 'blob' });
 }
@@ -461,7 +438,26 @@ function formatFileSize(bytes) {
   return (bytes / 1048576).toFixed(1) + ' MB';
 }
 
-/* validateFileSize is defined above near uploadDocuments */
+function validateFirestoreFileSize(file) {
+  if (!file || !file.size) return;
+  if (file.size > MAX_FIRESTORE_FILE_SIZE_BYTES) {
+    throw new Error(
+      'The file "' + file.name + '" is too large. ' +
+      'Please keep each file under ' + formatFileSize(MAX_FIRESTORE_FILE_SIZE_BYTES) + '.' +
+      ' (Firestore free plan limit — compress or scan at lower quality before uploading.)'
+    );
+  }
+}
+
+function validateFirestoreBase64Size(file, base64Data) {
+  if (!base64Data) return;
+  if (base64Data.length > MAX_FIRESTORE_BASE64_LENGTH) {
+    throw new Error(
+      'The file "' + file.name + '" is still too large after encoding. ' +
+      'Please reduce the file size below ' + formatFileSize(MAX_FIRESTORE_FILE_SIZE_BYTES) + '.'
+    );
+  }
+}
 
 function prioritySortValue(p) {
   var map = { 'Urgent': 0, 'High': 1, 'Normal': 2, 'Low': 3 };
