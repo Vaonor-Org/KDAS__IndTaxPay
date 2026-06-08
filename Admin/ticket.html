@@ -6,8 +6,8 @@
   <title>Ticket Detail | IndTaxPay Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
 </head>
 <body>
   <!-- Loading -->
@@ -20,7 +20,7 @@
   <div class="ticket-page" id="ticketPage" style="display:none;">
     <header class="ticket-header">
       <div style="display:flex; align-items:center;">
-        <a href="Admin/dashboard.html">IndTaxPay</a>
+        <a href="dashboard.html">IndTaxPay</a>
         <span class="ticket-admin-badge">ADMIN</span>
       </div>
       <div class="ticket-header-right">
@@ -38,8 +38,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
-  <script src="backend/firebase-init.js"></script>
-  <script src="backend/firestore-helpers.js"></script>
+  <script src="../backend/firebase-init.js"></script>
+  <script src="../backend/firestore-helpers.js"></script>
 
   <script>
   (function() {
@@ -51,13 +51,38 @@
     var ticketId = params.get('id');
 
     /* ── Auth Guard ── */
-    auth.onAuthStateChanged(function(user) {
+    auth.onAuthStateChanged(async function(user) {
       if (!user) {
         window.location.href = 'login.html';
         return;
       }
-      document.getElementById('userEmail').textContent = user.email;
-      loadTicket();
+
+      try {
+        var email = user.email ? user.email.toLowerCase().trim() : '';
+        if (!email) {
+          await auth.signOut();
+          window.location.href = 'login.html?reason=unauthorized';
+          return;
+        }
+
+        // Bypass Firestore read check for the super-admin to guarantee access
+        if (email !== 'indtaxpay@gmail.com') {
+          var doc = await db.collection('allowed_admins').doc(email).get();
+          if (!doc.exists) {
+            await auth.signOut();
+            window.location.href = 'login.html?reason=unauthorized';
+            return;
+          }
+        }
+
+        document.getElementById('userEmail').textContent = email;
+        loadTicket();
+      } catch (err) {
+        console.error('Ticket Auth Verification failed:', err);
+        sessionStorage.setItem('adminAuthError', err.message || String(err));
+        await auth.signOut();
+        window.location.href = 'login.html?reason=auth-check-failed';
+      }
     });
 
     document.getElementById('signOutBtn').addEventListener('click', function() {
@@ -95,7 +120,7 @@
     function showNotFound() {
       ticketLoading.style.display = 'none';
       ticketPage.style.display = '';
-      ticketContent.innerHTML = '<div style="padding:48px; text-align:center;"><h2 style="color:#E53E3E;">Ticket Not Found</h2><a href="Admin/dashboard.html" style="color:#F78A0E; margin-top:16px; display:inline-block;">← Back to Board</a></div>';
+      ticketContent.innerHTML = '<div style="padding:48px; text-align:center;"><h2 style="color:#E53E3E;">Ticket Not Found</h2><a href="dashboard.html" style="color:#F78A0E; margin-top:16px; display:inline-block;">← Back to Board</a></div>';
     }
 
     function renderTicket(ticket, docs) {
@@ -151,7 +176,7 @@
         : '';
 
       ticketContent.innerHTML = ''
-        + '<div class="breadcrumb"><a href="Admin/dashboard.html">← Board</a><span class="sep">/</span><span class="current">' + ticket.ticketNumber + '</span></div>'
+        + '<div class="breadcrumb"><a href="dashboard.html">← Board</a><span class="sep">/</span><span class="current">' + ticket.ticketNumber + '</span></div>'
 
         // Header
         + '<div class="ticket-section header-section">'
