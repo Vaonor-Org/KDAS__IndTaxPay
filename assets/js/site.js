@@ -441,8 +441,8 @@
               <!-- Left: logo + tagline -->
               <div class="footerBrandLeft">
                 <div class="footerBrandLogo">
-                  <img src="${base}assets/logo.png" alt="IndTaxPay" style="height:72px;width:auto;object-fit:contain;display:block;margin-bottom:8px;">
-                  <span class="brand__text" style="font-size:1.80rem;"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></span>
+                  <img src="${base}assets/logo.png" alt="IndTaxPay" style="height:56px;width:auto;object-fit:contain;display:block;margin-bottom:8px;">
+                  <span class="brand__text" style="font-size:1.55rem;"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></span>
                 </div>
                 <p class="footerBrandDesc">India's Most Trusted Platform for ITR Filing, GST, TDS, Payroll, Audits &amp; Company Registration — handled by expert CAs.</p>
               </div>

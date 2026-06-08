@@ -314,6 +314,13 @@
   .dash-main .metrics-row {
     padding: 24px 24px 0;
     gap: 16px;
+    transition: padding-left 0.3s ease;
+  }
+
+  @media (min-width: 1025px) {
+    .dash-sidebar.collapsed + .dash-main .metrics-row {
+      padding-left: 68px;
+    }
   }
 
   .dash-main .metric-card {
@@ -1273,7 +1280,6 @@
     <aside class="dash-sidebar" id="dashSidebar">
       <div class="sidebar-brand">
         <a href="dashboard.html" class="brand-link">
-          <img src="../assets/logo.png" alt="IndTaxPay" class="sidebar-logo">
           <span class="brand-accent">Ind</span>TaxPay
         </a>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -1736,6 +1742,7 @@
         if (avatarEl) { avatarEl.textContent = initials; }
         bindAdminSessionTracking();
         startSubscription();
+        startReminderSystem();
       } catch (err) {
         console.error('Dashboard Auth Verification failed:', err);
         sessionStorage.setItem('adminAuthError', err.message || String(err));
@@ -2638,6 +2645,149 @@
           }
           renderUpcomingReminders();
         };
+      }
+    }
+
+    // ── Background Reminder Notification System ──
+    var notifiedReminderIds = {};
+
+    async function startReminderSystem() {
+      try {
+        allReminders = await fetchReminders();
+      } catch (err) {
+        console.warn("Failed to load initial reminders for notification checks:", err);
+      }
+      // Check reminders every 15 seconds
+      setInterval(checkRemindersNow, 15000);
+      checkRemindersNow();
+    }
+
+    function checkRemindersNow() {
+      if (!allReminders || allReminders.length === 0) return;
+
+      var now = new Date();
+      var currentYear = now.getFullYear();
+      var currentMonth = String(now.getMonth() + 1).padStart(2, '0');
+      var currentDate = String(now.getDate()).padStart(2, '0');
+      var currentDateStr = currentYear + '-' + currentMonth + '-' + currentDate;
+
+      var currentHours = String(now.getHours()).padStart(2, '0');
+      var currentMinutes = String(now.getMinutes()).padStart(2, '0');
+      var currentTimeStr = currentHours + ':' + currentMinutes;
+
+      allReminders.forEach(function(rem) {
+        if (rem.date === currentDateStr) {
+          if (rem.time <= currentTimeStr && !notifiedReminderIds[rem.id]) {
+            notifiedReminderIds[rem.id] = true;
+            showReminderToast(rem);
+          }
+        }
+      });
+    }
+
+    function showReminderToast(rem) {
+      var labelMap = { delivery: 'Delivery', call: 'Lead Call', followup: 'Follow-up' };
+      var label = labelMap[rem.type] || rem.type;
+
+      var container = document.getElementById('toastContainer');
+      if (!container) return;
+
+      var toast = document.createElement('div');
+      toast.className = 'toast success';
+      toast.style.background = 'var(--color-green-dark, #2e6b24)';
+      toast.style.color = '#fff';
+      toast.style.boxShadow = '0 10px 30px rgba(75, 156, 58, 0.4)';
+      toast.style.display = 'flex';
+      toast.style.flexDirection = 'column';
+      toast.style.alignItems = 'flex-start';
+      toast.style.gap = '6px';
+      toast.style.padding = '16px';
+      toast.style.borderRadius = '14px';
+      toast.style.minWidth = '280px';
+      toast.style.border = '1px solid rgba(255,255,255,0.15)';
+
+      var header = document.createElement('div');
+      header.style.display = 'flex';
+      header.style.alignItems = 'center';
+      header.style.justifyContent = 'space-between';
+      header.style.width = '100%';
+      header.style.fontWeight = '800';
+      header.style.fontSize = '0.9rem';
+      header.innerHTML = '<span>🔔 REMINDER (' + label + ')</span>';
+
+      var closeBtn = document.createElement('button');
+      closeBtn.textContent = '✕';
+      closeBtn.style.background = 'none';
+      closeBtn.style.border = 'none';
+      closeBtn.style.color = '#fff';
+      closeBtn.style.cursor = 'pointer';
+      closeBtn.style.fontWeight = 'bold';
+      closeBtn.style.fontSize = '1rem';
+      closeBtn.onclick = function() {
+        toast.classList.add('fade-out');
+        setTimeout(function() { toast.remove(); }, 250);
+      };
+      header.appendChild(closeBtn);
+      toast.appendChild(header);
+
+      var body = document.createElement('div');
+      body.style.fontSize = '0.85rem';
+      body.style.lineHeight = '1.4';
+      body.textContent = rem.title;
+      toast.appendChild(body);
+
+      var footer = document.createElement('div');
+      footer.style.fontSize = '0.72rem';
+      footer.style.opacity = '0.85';
+      footer.textContent = 'Scheduled for ' + format12Hour(rem.time);
+      toast.appendChild(footer);
+
+      container.appendChild(toast);
+
+      playNotificationSound();
+
+      // Auto-dismiss after 20 seconds
+      setTimeout(function() {
+        if (toast.parentNode) {
+          toast.classList.add('fade-out');
+          setTimeout(function() { toast.remove(); }, 250);
+        }
+      }, 20000);
+    }
+
+    function playNotificationSound() {
+      try {
+        var AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        var ctx = new AudioContext();
+
+        // Chime 1
+        var osc1 = ctx.createOscillator();
+        var gain1 = ctx.createGain();
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+        gain1.gain.setValueAtTime(0, ctx.currentTime);
+        gain1.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.05);
+        gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+        osc1.start(ctx.currentTime);
+        osc1.stop(ctx.currentTime + 0.4);
+
+        // Chime 2
+        var osc2 = ctx.createOscillator();
+        var gain2 = ctx.createGain();
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(880.00, ctx.currentTime + 0.12); // A5
+        gain2.gain.setValueAtTime(0, ctx.currentTime + 0.12);
+        gain2.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.17);
+        gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.52);
+        osc2.start(ctx.currentTime + 0.12);
+        osc2.stop(ctx.currentTime + 0.6);
+      } catch (err) {
+        console.warn("Audio chime play failed:", err);
       }
     }
 

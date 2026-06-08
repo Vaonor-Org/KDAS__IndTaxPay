@@ -44,8 +44,8 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --container: 1120px;
-  --nav-h: 80px;
-  --nav-h-mobile: 68px;
+  --nav-h: 72px;
+  --nav-h-mobile: 60px;
 
   --bg: var(--color-off-white);
   --panel: var(--color-white);
@@ -468,14 +468,14 @@ html[data-theme="dark"] .navbar__bg {
 }
 
 .brand__logo {
-  height: 60px;
+  height: 50px;
   width: auto;
   object-fit: contain;
   display: block;
 }
 
 .brand__text {
-  font-size: 1.65rem;
+  font-size: 1.45rem;
   font-weight: 800;
   display: inline-block;
   line-height: 1.2;
@@ -2399,14 +2399,7 @@ html[data-theme="dark"] .wcuList {
   opacity: 1;
 }
 
-.svcPanel {
-  display: none;
-}
 
-.svcPanel.is-active {
-  display: block;
-  animation: svcFadeIn 0.28s ease;
-}
 
 /* Home page service panels (avoids conflict with navbar mega-menu .svcPanel) */
 .homeSvcPanel {
@@ -4034,11 +4027,11 @@ html[data-theme="dark"] .dropzone {
   }
 
   .brand__logo {
-    height: 48px;
+    height: 40px;
   }
 
   .brand__text {
-    font-size: 1.35rem;
+    font-size: 1.20rem;
   }
 
   .navLinks {
