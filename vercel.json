@@ -33,6 +33,50 @@
       ],
       "destination": "/login",
       "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "has": [
+        {
+          "type": "host",
+          "value": "indtaxpay.com"
+        }
+      ],
+      "destination": "/track",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "indtaxpay.com"
+        }
+      ],
+      "destination": "/track",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.indtaxpay.com"
+        }
+      ],
+      "destination": "/track",
+      "permanent": false
+    },
+    {
+      "source": "/dashboard.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.indtaxpay.com"
+        }
+      ],
+      "destination": "/track",
+      "permanent": false
     }
   ],
   "rewrites": [
