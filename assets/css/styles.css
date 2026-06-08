@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
 
 :root {
-  --color-saffron: #F97316;       /* Modern, clean Saffron (vibrant Orange) */
-  --color-saffron-light: #FFF3E0; /* Soft peach/saffron light tint */
-  --color-saffron-dark: #D35400;  /* Professional rich dark saffron */
+  --color-saffron: #F78A0E;
+  --color-saffron-light: #FDEBD0;
+  --color-saffron-dark: #C96B00;
 
-  --color-green: #10B981;         /* Crisp minty Emerald Green */
-  --color-green-light: #E6FBF3;   /* Soft mint green light background */
-  --color-green-dark: #047857;    /* Professional emerald dark */
+  --color-green: #4B9C3A;
+  --color-green-light: #E6F5E2;
+  --color-green-dark: #2E6B24;
 
-  --color-navy: #0A529C;          /* Vibrant, clean royal Navy Blue (Ashoka Blue) */
-  --color-navy-light: #EBF4FC;    /* Clean soft blue background tint */
-  --color-navy-deep: #052D56;     /* Deep sapphire navy for contrast backgrounds */
+  --color-navy: #0D4A8A;
+  --color-navy-light: #D6E6F8;
+  --color-navy-deep: #072D56;
 
   --color-white: #FFFFFF;
   --color-off-white: #FAF8F5;
@@ -1528,26 +1528,33 @@ html[data-theme="dark"] .howSection {
 .howBg__grid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(13,74,138,0.10) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(13, 74, 138, 0.10) 1px, transparent 1px);
   background-size: 32px 32px;
   animation: howGridDrift 40s linear infinite;
 }
 
 html[data-theme="dark"] .howBg__grid {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
 }
 
 @keyframes howGridDrift {
-  from { background-position: 0 0; }
-  to   { background-position: 32px 32px; }
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 32px 32px;
+  }
 }
 
 /* Orb 1 — Morphing saffron blob (top-left) */
 .howBg__orb--1 {
   position: absolute;
-  width: 500px; height: 500px;
-  top: -160px; left: -120px;
-  background: radial-gradient(ellipse at 40% 40%, rgba(247,138,14,0.16) 0%, rgba(247,138,14,0.05) 55%, transparent 80%);
+  width: 500px;
+  height: 500px;
+  top: -160px;
+  left: -120px;
+  background: radial-gradient(ellipse at 40% 40%, rgba(247, 138, 14, 0.16) 0%, rgba(247, 138, 14, 0.05) 55%, transparent 80%);
   filter: blur(40px);
   border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
   animation: howMorph1 14s ease-in-out infinite alternate, howDrift1 20s ease-in-out infinite alternate;
@@ -1555,94 +1562,135 @@ html[data-theme="dark"] .howBg__grid {
 }
 
 @keyframes howMorph1 {
-  0%   { border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%; }
-  33%  { border-radius: 40% 60% 35% 65% / 65% 35% 65% 35%; }
-  66%  { border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%; }
-  100% { border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%; }
+  0% {
+    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  }
+
+  33% {
+    border-radius: 40% 60% 35% 65% / 65% 35% 65% 35%;
+  }
+
+  66% {
+    border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%;
+  }
+
+  100% {
+    border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
+  }
 }
 
 @keyframes howDrift1 {
-  from { transform: translate(0, 0) scale(1);    }
-  to   { transform: translate(70px, 90px) scale(1.1); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(70px, 90px) scale(1.1);
+  }
 }
 
 /* Orb 2 — Slow-rotating navy ring (bottom-right) */
 .howBg__orb--2 {
   position: absolute;
-  width: 460px; height: 460px;
-  bottom: -120px; right: -100px;
+  width: 460px;
+  height: 460px;
+  bottom: -120px;
+  right: -100px;
   border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    rgba(13,74,138,0.0) 0%,
-    rgba(13,74,138,0.18) 20%,
-    rgba(75,156,58,0.10) 40%,
-    rgba(247,138,14,0.10) 60%,
-    rgba(13,74,138,0.12) 80%,
-    rgba(13,74,138,0.0) 100%
-  );
+  background: conic-gradient(from 0deg,
+      rgba(13, 74, 138, 0.0) 0%,
+      rgba(13, 74, 138, 0.18) 20%,
+      rgba(75, 156, 58, 0.10) 40%,
+      rgba(247, 138, 14, 0.10) 60%,
+      rgba(13, 74, 138, 0.12) 80%,
+      rgba(13, 74, 138, 0.0) 100%);
   filter: blur(52px);
   animation: howRotate2 30s linear infinite;
 }
 
 @keyframes howRotate2 {
-  from { transform: rotate(0deg) scale(1);    }
-  to   { transform: rotate(360deg) scale(1.08); }
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+
+  to {
+    transform: rotate(360deg) scale(1.08);
+  }
 }
 
 /* Orb 3 — Pulsing green spotlight (mid-page) */
 .howBg__orb--3 {
   position: absolute;
-  width: 320px; height: 320px;
-  top: 38%; left: 42%;
+  width: 320px;
+  height: 320px;
+  top: 38%;
+  left: 42%;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(75,156,58,0.13) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(75, 156, 58, 0.13) 0%, transparent 70%);
   filter: blur(36px);
   animation: howPulse3 8s ease-in-out infinite;
 }
 
 @keyframes howPulse3 {
-  0%, 100% { transform: scale(1);    opacity: 0.6; }
-  50%       { transform: scale(1.25); opacity: 1;   }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
 }
 
 /* Shimmer stripes — diagonal sweep */
 .howBg__shimmer {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    -55deg,
-    transparent 0px,
-    transparent 60px,
-    rgba(247,138,14,0.025) 60px,
-    rgba(247,138,14,0.025) 62px,
-    transparent 62px,
-    transparent 120px
-  );
+  background: repeating-linear-gradient(-55deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(247, 138, 14, 0.025) 60px,
+      rgba(247, 138, 14, 0.025) 62px,
+      transparent 62px,
+      transparent 120px);
   animation: howShimmerMove 18s linear infinite;
 }
 
 html[data-theme="dark"] .howBg__shimmer {
-  background: repeating-linear-gradient(
-    -55deg,
-    transparent 0px,
-    transparent 60px,
-    rgba(247,138,14,0.04) 60px,
-    rgba(247,138,14,0.04) 62px,
-    transparent 62px,
-    transparent 120px
-  );
+  background: repeating-linear-gradient(-55deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(247, 138, 14, 0.04) 60px,
+      rgba(247, 138, 14, 0.04) 62px,
+      transparent 62px,
+      transparent 120px);
 }
 
 @keyframes howShimmerMove {
-  from { background-position: 0 0; }
-  to   { background-position: 120px 0; }
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 120px 0;
+  }
 }
 
 /* Dark mode opacity adjustments */
-html[data-theme="dark"] .howBg__orb--1 { opacity: 0.6; }
-html[data-theme="dark"] .howBg__orb--2 { opacity: 0.35; }
-html[data-theme="dark"] .howBg__orb--3 { opacity: 0.4; }
+html[data-theme="dark"] .howBg__orb--1 {
+  opacity: 0.6;
+}
+
+html[data-theme="dark"] .howBg__orb--2 {
+  opacity: 0.35;
+}
+
+html[data-theme="dark"] .howBg__orb--3 {
+  opacity: 0.4;
+}
 
 
 /* — Steps — */
@@ -1662,7 +1710,8 @@ html[data-theme="dark"] .howBg__orb--3 { opacity: 0.4; }
 .howStep--rev {
   direction: rtl;
 }
-.howStep--rev > * {
+
+.howStep--rev>* {
   direction: ltr;
 }
 
@@ -1670,7 +1719,8 @@ html[data-theme="dark"] .howBg__orb--3 { opacity: 0.4; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px; height: 48px;
+  width: 48px;
+  height: 48px;
   border-radius: 14px;
   background: rgba(247, 138, 14, 0.15);
   color: #F78A0E;
@@ -1710,7 +1760,8 @@ html[data-theme="dark"] .howBg__orb--3 { opacity: 0.4; }
 .howStep__checks li::before {
   content: "✓";
   flex-shrink: 0;
-  width: 20px; height: 20px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: rgba(75, 156, 58, 0.12);
   color: #4B9C3A;
@@ -1767,8 +1818,8 @@ html[data-theme="dark"] .howBg__orb--3 { opacity: 0.4; }
 }
 
 html[data-theme="dark"] .howStep__imgPlaceholder {
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
 }
 
 .howStep__imgPlaceholder:hover {
@@ -1781,7 +1832,11 @@ html[data-theme="dark"] .howStep__imgPlaceholder {
 }
 
 /* Mock form elements */
-.howStep__mockForm { display: flex; flex-direction: column; gap: 12px; }
+.howStep__mockForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .howMock__title {
   font-family: var(--font-display);
@@ -1791,9 +1846,15 @@ html[data-theme="dark"] .howStep__imgPlaceholder {
   margin-bottom: 4px;
 }
 
-html[data-theme="dark"] .howMock__title { color: rgba(255,255,255,0.9); }
+html[data-theme="dark"] .howMock__title {
+  color: rgba(255, 255, 255, 0.9);
+}
 
-.howMock__field { display: flex; flex-direction: column; gap: 4px; }
+.howMock__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
 .howMock__label {
   font-size: 0.72rem;
@@ -1813,12 +1874,14 @@ html[data-theme="dark"] .howMock__title { color: rgba(255,255,255,0.9); }
 }
 
 html[data-theme="dark"] .howMock__input {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.howMock__select { cursor: pointer; }
+.howMock__select {
+  cursor: pointer;
+}
 
 .howMock__btn {
   background: #F78A0E;
@@ -1850,12 +1913,13 @@ html[data-theme="dark"] .howMock__input {
 }
 
 html[data-theme="dark"] .howMock__docRow {
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.75);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .howMock__docIcon {
-  width: 22px; height: 22px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   font-size: 0.7rem;
   display: grid;
@@ -1864,10 +1928,21 @@ html[data-theme="dark"] .howMock__docRow {
   flex-shrink: 0;
 }
 
-.howMock__docIcon--done { background: rgba(75,156,58,0.15); color: #4B9C3A; }
-.howMock__docIcon--pending { background: rgba(247,138,14,0.15); color: #F78A0E; }
+.howMock__docIcon--done {
+  background: rgba(75, 156, 58, 0.15);
+  color: #4B9C3A;
+}
 
-.howMock__statusRow { display: flex; flex-direction: column; gap: 8px; }
+.howMock__docIcon--pending {
+  background: rgba(247, 138, 14, 0.15);
+  color: #F78A0E;
+}
+
+.howMock__statusRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
 .howMock__status {
   padding: 9px 14px;
@@ -1876,28 +1951,44 @@ html[data-theme="dark"] .howMock__docRow {
   font-weight: 600;
 }
 
-.howMock__status--done { background: rgba(75,156,58,0.12); color: #4B9C3A; }
+.howMock__status--done {
+  background: rgba(75, 156, 58, 0.12);
+  color: #4B9C3A;
+}
+
 .howMock__status--active {
-  background: rgba(247,138,14,0.12);
+  background: rgba(247, 138, 14, 0.12);
   color: #F78A0E;
   animation: howPulse 1.5s ease-in-out infinite;
 }
-.howMock__status--idle { background: #F3F4F6; color: #9CA3AF; }
+
+.howMock__status--idle {
+  background: #F3F4F6;
+  color: #9CA3AF;
+}
 
 html[data-theme="dark"] .howMock__status--idle {
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.35);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 @keyframes howPulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.6; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
 }
 
 .howMock__successIcon {
-  width: 52px; height: 52px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: rgba(75,156,58,0.15);
+  background: rgba(75, 156, 58, 0.15);
   color: #4B9C3A;
   font-size: 1.4rem;
   display: grid;
@@ -1930,7 +2021,7 @@ html[data-theme="dark"] .howMock__status--idle {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 90% at 90% 50%, rgba(247,138,14,0.18) 0%, transparent 65%);
+  background: radial-gradient(ellipse 60% 90% at 90% 50%, rgba(247, 138, 14, 0.18) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -1950,7 +2041,7 @@ html[data-theme="dark"] .howMock__status--idle {
 
 .howExpertBanner__text p {
   font-size: 0.92rem;
-  color: rgba(255,255,255,0.68);
+  color: rgba(255, 255, 255, 0.68);
   max-width: 52ch;
   line-height: 1.6;
 }
@@ -1962,7 +2053,9 @@ html[data-theme="dark"] .howMock__status--idle {
 }
 
 /* — Comparison Card — */
-.howCompare { margin-top: 0; }
+.howCompare {
+  margin-top: 0;
+}
 
 .howCompareCard {
   display: grid;
@@ -1971,12 +2064,12 @@ html[data-theme="dark"] .howMock__status--idle {
   border: 1px solid #E5E7EB;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
 }
 
 html[data-theme="dark"] .howCompareCard {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .howCompareCol {
@@ -2014,7 +2107,7 @@ html[data-theme="dark"] .howCompareCard {
 }
 
 html[data-theme="dark"] .howCompareCol__divider {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .howCompareList {
@@ -2053,7 +2146,8 @@ html[data-theme="dark"] .howCompareCol__divider {
 
 .howCompareList__icon {
   flex-shrink: 0;
-  width: 24px; height: 24px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   font-size: 0.7rem;
   font-weight: 900;
@@ -2063,12 +2157,12 @@ html[data-theme="dark"] .howCompareCol__divider {
 }
 
 .howCompareList__icon--check {
-  background: rgba(75,156,58,0.12);
+  background: rgba(75, 156, 58, 0.12);
   color: #4B9C3A;
 }
 
 .howCompareList__icon--cross {
-  background: rgba(220,38,38,0.1);
+  background: rgba(220, 38, 38, 0.1);
   color: #DC2626;
 }
 
@@ -2078,11 +2172,30 @@ html[data-theme="dark"] .howCompareCol__divider {
     grid-template-columns: 1fr;
     gap: 28px;
   }
-  .howStep--rev { direction: ltr; }
-  .howStep__imgPlaceholder { max-width: 100%; }
-  .howCompareCard { grid-template-columns: 1fr; }
-  .howCompareCol__divider { width: 100%; height: 1px; margin: 0; }
-  .howExpertBanner { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+
+  .howStep--rev {
+    direction: ltr;
+  }
+
+  .howStep__imgPlaceholder {
+    max-width: 100%;
+  }
+
+  .howCompareCard {
+    grid-template-columns: 1fr;
+  }
+
+  .howCompareCol__divider {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+  }
+
+  .howExpertBanner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px;
+  }
 }
 
 /* ── Why Choose Us ── */
@@ -2214,8 +2327,8 @@ html[data-theme="dark"] .howCompareCol__divider {
 }
 
 html[data-theme="dark"] .wcuList {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Responsive */
@@ -2230,6 +2343,7 @@ html[data-theme="dark"] .wcuList {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .wcuTrust__logos {
     gap: 16px;
   }
@@ -2283,6 +2397,15 @@ html[data-theme="dark"] .wcuList {
 
 .svcTab.is-active::after {
   opacity: 1;
+}
+
+.svcPanel {
+  display: none;
+}
+
+.svcPanel.is-active {
+  display: block;
+  animation: svcFadeIn 0.28s ease;
 }
 
 /* Home page service panels (avoids conflict with navbar mega-menu .svcPanel) */
@@ -4448,46 +4571,6 @@ html[data-theme="dark"] .login-field input {
   cursor: wait;
   transform: none;
   box-shadow: none;
-}
-
-.google-login-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: 100%;
-  padding: 14px 20px;
-  background: var(--panel);
-  border: 1.5px solid var(--border);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 1.05rem;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: var(--transition-base);
-  box-shadow: 0 4px 12px rgba(13, 74, 138, 0.05);
-}
-
-.google-login-btn:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-saffron);
-  box-shadow: 0 8px 20px rgba(247, 138, 14, 0.18);
-  background: var(--panel);
-}
-
-.google-login-btn:disabled {
-  opacity: 0.6;
-  cursor: wait;
-  transform: none;
-  box-shadow: none;
-  border-color: var(--border);
-}
-
-.google-login-btn .google-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
 }
 
 .login-back {
