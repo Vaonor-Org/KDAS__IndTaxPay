@@ -186,7 +186,7 @@
             <!-- Document Uploads -->
             <div class="form-group" id="documentsSection" style="display:none;">
               <p class="form-section-title">Required Documents</p>
-              <p class="form-hint" style="margin-bottom:14px;">Upload the documents listed below. Maximum 500 KB per file.</p>
+              <p class="form-hint" style="margin-bottom:14px;">Upload the documents listed below. Maximum <strong>10 MB</strong> per file (PDF, JPG, PNG, XLSX accepted).</p>
               <div id="documentFields"></div>
             </div>
 
@@ -270,6 +270,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
   <script src="backend/firebase-init.js"></script>
   <script src="backend/firestore-helpers.js"></script>
   <script src="backend/script.js"></script>
@@ -529,7 +530,7 @@
         html += '    <div class="upload-zone-content" id="upload_content_' + idx + '">';
         html += '      <span class="upload-icon">📤</span>';
         html += '      <p class="upload-text">Drag &amp; drop or <span class="upload-link">browse</span></p>';
-        html += '      <p class="upload-hint">Accepted: ' + docItem.accept.toUpperCase().replace(/\./g, ' ') + ' (Max 500 KB)</p>';
+        html += '      <p class="upload-hint">Accepted: ' + docItem.accept.toUpperCase().replace(/\./g, ' ') + ' (Max 10 MB)</p>';
         html += '    </div>';
         html += '    <input type="file" id="doc_' + idx + '" name="doc_' + idx + '" accept="' + docItem.accept + '" data-doc-label="' + docItem.label + '" class="form-input-file"';
         if (docItem.required) html += ' required';
@@ -739,6 +740,45 @@
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       formError.style.display = 'none';
+
+      /* ── Client-side validation ── */
+      var nameVal  = (document.getElementById('fullName') || {}).value || '';
+      var emailVal = (document.getElementById('email') || {}).value || '';
+      var phoneVal = (phoneField || {}).value || '';
+      var phoneDigits = phoneVal.replace(/\D/g, '');
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      if (nameVal.trim().length < 2) {
+        formError.textContent = '⚠️ Please enter your full name (at least 2 characters).';
+        formError.style.display = '';
+        return;
+      }
+      if (!emailRegex.test(emailVal.trim())) {
+        formError.textContent = '⚠️ Please enter a valid email address (e.g. you@example.com).';
+        formError.style.display = '';
+        return;
+      }
+      if (phoneDigits.length !== 10) {
+        formError.textContent = '⚠️ Please enter a valid 10-digit Indian mobile number.';
+        formError.style.display = '';
+        return;
+      }
+
+      /* ── Required document gate ── */
+      var requiredInputs = documentFields.querySelectorAll('input[type="file"][required]');
+      var missingDocs = [];
+      requiredInputs.forEach(function(input) {
+        if (!input.files || input.files.length === 0) {
+          missingDocs.push(input.dataset.docLabel || 'Required document');
+        }
+      });
+      if (missingDocs.length > 0) {
+        formError.textContent = '⚠️ Please upload the following required documents: ' + missingDocs.join(', ') + '.';
+        formError.style.display = '';
+        formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
       submitBtn.disabled = true;
       submitStatus.style.display = 'block';
       submitStatus.textContent = 'Creating your ticket...';
@@ -755,9 +795,9 @@
         dataFields.serviceName = serviceLabel;
 
         var result = await createTicket({
-          name:        document.getElementById('fullName').value.trim(),
-          phone:       document.getElementById('phone').value.trim(),
-          email:       document.getElementById('email').value.trim(),
+          name:        nameVal.trim(),
+          phone:       phoneVal.trim(),
+          email:       emailVal.trim(),
           serviceType: fullServiceType,
           dataFields:  dataFields
         });
@@ -770,37 +810,39 @@
           }
         });
         if (files.length > 0) {
-          submitStatus.textContent = 'Uploading documents (' + files.length + ' files)...';
+          submitStatus.textContent = 'Uploading documents (' + files.length + ' file' + (files.length > 1 ? 's' : '') + ')...';
           await uploadDocuments(result.ticketId, files);
         }
 
         /* Acknowledgement email */
-        submitStatus.textContent = 'Sending acknowledgement email...';
+        submitStatus.textContent = 'Sending confirmation email...';
         var emailSent = false;
         try {
           await sendApplicationAcknowledgementEmail({
-            name:         document.getElementById('fullName').value.trim(),
-            email:        document.getElementById('email').value.trim(),
+            name:         nameVal.trim(),
+            email:        emailVal.trim(),
             serviceType:  fullServiceType,
             ticketNumber: result.ticketNumber
-          }, { websiteUrl: window.location.origin });
+          }, { websiteUrl: 'https://indtaxpay.com' });
           emailSent = true;
         } catch (emailErr) {
-          console.warn('Email send failed:', emailErr);
+          console.warn('Email send failed (non-blocking):', emailErr.message || emailErr);
         }
 
         document.getElementById('successTicketId').textContent = result.ticketNumber;
         successEmailStatus.textContent = emailSent
-          ? 'A confirmation email has been sent. Keep this ID safe and use it on the tracking page.'
-          : 'Keep this ID safe and use it on the tracking page. Email is not configured yet.';
+          ? '✅ A confirmation email has been sent to ' + emailVal.trim() + '. Keep your Ticket ID safe!'
+          : '📋 Keep your Ticket ID safe and use it at https://indtaxpay.com/track to check your status.';
 
         form.style.display = 'none';
         successScreen.style.display = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
       } catch (err) {
         console.error('Submit error:', err);
-        formError.textContent = 'Something went wrong: ' + (err.message || err);
+        formError.textContent = '⚠️ Something went wrong: ' + (err.message || 'Please try again.');
         formError.style.display = '';
+        formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
         submitBtn.disabled = false;
       } finally {
         submitStatus.style.display = 'none';

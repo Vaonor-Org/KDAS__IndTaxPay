@@ -1,10 +1,13 @@
 (function() {
-  var MAIL_ENDPOINT = window.INDIA_EFILING_MAIL_ENDPOINT || '/api/send-application-email';
+  // Point to the running mail server. On production this should be your
+  // deployed mail server URL. Locally it runs on port 8787.
+  var MAIL_ENDPOINT = window.INDTAXPAY_MAIL_ENDPOINT
+    || 'http://127.0.0.1:8787/send-application-email';
 
   window.sendApplicationAcknowledgementEmail = async function(ticketData, options) {
     options = options || {};
-    var websiteUrl = options.websiteUrl || window.location.origin;
-    var trackUrl = websiteUrl.replace(/\/$/, '') + '/ui/track.html';
+    // Always use the canonical track URL
+    var trackUrl = 'https://indtaxpay.com/track';
 
     var response = await fetch(MAIL_ENDPOINT, {
       method: 'POST',
@@ -12,16 +15,18 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: ticketData.name,
-        email: ticketData.email,
-        serviceType: ticketData.serviceType,
+        name:         ticketData.name,
+        email:        ticketData.email,
+        serviceType:  ticketData.serviceType,
         ticketNumber: ticketData.ticketNumber,
-        trackUrl: trackUrl
+        trackUrl:     trackUrl
       })
     });
 
     if (!response.ok) {
-      throw new Error(await response.text());
+      var errText = '';
+      try { errText = await response.text(); } catch(_) {}
+      throw new Error('Mail server error: ' + (errText || response.status));
     }
 
     return response.json();
