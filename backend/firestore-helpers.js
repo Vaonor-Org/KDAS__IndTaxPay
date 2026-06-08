@@ -271,13 +271,21 @@ async function unarchiveTicket(ticketId, adminEmail) {
 
 /* ── Admin: Get archived tickets ── */
 async function getArchivedTickets() {
+  // No .orderBy() here — combining .where(isDeleted) + .orderBy(lastUpdated)
+  // requires a Firestore composite index. Sort client-side instead.
   var snapshot = await db.collection('tickets')
     .where('isDeleted', '==', true)
-    .orderBy('lastUpdated', 'desc')
     .get();
-  return snapshot.docs.map(function (d) {
+  var tickets = snapshot.docs.map(function (d) {
     return Object.assign({ id: d.id }, d.data());
   });
+  // Sort by lastUpdated descending (newest first)
+  tickets.sort(function (a, b) {
+    var aTs = (a.lastUpdated && a.lastUpdated.seconds) ? a.lastUpdated.seconds : 0;
+    var bTs = (b.lastUpdated && b.lastUpdated.seconds) ? b.lastUpdated.seconds : 0;
+    return bTs - aTs;
+  });
+  return tickets;
 }
 
 /* ── LEGACY: Hard delete (kept for backward compatibility) ── */
