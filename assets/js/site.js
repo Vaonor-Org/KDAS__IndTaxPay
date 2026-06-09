@@ -53,20 +53,7 @@
         <div class="container navbar__inner">
           <a class="brand" href="${base}index.html" aria-label="IndTaxPay home">
             <span class="brand__mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-                <circle cx="12" cy="12" r="9" stroke="currentColor" opacity="0.35"/>
-                <circle cx="12" cy="12" r="2.2" stroke="currentColor"/>
-                ${Array.from({ length: 12 })
-        .map((_, i) => {
-          const a = (i * Math.PI) / 6;
-          const x1 = 12 + Math.cos(a) * 3.4;
-          const y1 = 12 + Math.sin(a) * 3.4;
-          const x2 = 12 + Math.cos(a) * 8.9;
-          const y2 = 12 + Math.sin(a) * 8.9;
-          return `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" stroke="currentColor" opacity="0.45"/>`;
-        })
-        .join("")}
-              </svg>
+              <img src="${base}assets/logo.png" alt="IndTaxPay Logo" class="brand__logo">
             </span>
             <span class="brand__text" aria-label="IndTaxPay">
               <span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span>
@@ -391,9 +378,14 @@
       <div class="mobileMenu" data-mobile-menu aria-hidden="true">
         <div class="mobileMenu__panel">
           <div class="row" style="justify-content: space-between;">
-            <div class="brand" aria-label="IndTaxPay">
-              <span class="brand__text"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></span>
-            </div>
+            <a class="brand" href="${base}index.html" aria-label="IndTaxPay home">
+              <span class="brand__mark" aria-hidden="true">
+                <img src="${base}assets/logo.png" alt="IndTaxPay Logo" class="brand__logo">
+              </span>
+              <span class="brand__text" aria-label="IndTaxPay">
+                <span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span>
+              </span>
+            </a>
             <button class="iconBtn" type="button" data-mobile-close aria-label="Close menu">✕</button>
           </div>
           <div class="mobileMenu__links" aria-label="Mobile navigation">
@@ -449,7 +441,8 @@
               <!-- Left: logo + tagline -->
               <div class="footerBrandLeft">
                 <div class="footerBrandLogo">
-                  <span class="brand__text" style="font-size:1.5rem;"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></span>
+                  <img src="${base}assets/logo.png" alt="IndTaxPay" style="height:56px;width:auto;object-fit:contain;display:block;margin-bottom:8px;">
+                  <span class="brand__text" style="font-size:1.55rem;"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></span>
                 </div>
                 <p class="footerBrandDesc">India's Most Trusted Platform for ITR Filing, GST, TDS, Payroll, Audits &amp; Company Registration — handled by expert CAs.</p>
               </div>
@@ -675,7 +668,7 @@
           <button class="chipBtn" type="button" data-quick="itr">How do I file ITR?</button>
           <button class="chipBtn" type="button" data-quick="gst">What's my GST due date?</button>
           <button class="chipBtn" type="button" data-quick="company">I need to register a company</button>
-          <a class="chipBtn" href="https://wa.me/91XXXXXXXXXX?text=Hi%20IndTaxPay%2C%20I%20need%20help%20with%20tax%20filing" target="_blank" rel="noreferrer">WhatsApp us</a>
+          <a class="chipBtn" href="https://wa.me/919487740944?text=Hi%20IndTaxPay%2C%20I%20need%20help%20with%20tax%20filing" target="_blank" rel="noreferrer">WhatsApp us</a>
         </div>
       </div>
 

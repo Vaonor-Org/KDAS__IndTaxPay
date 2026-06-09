@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Contact — IndTaxPay</title>
-    <meta name="description" content="Contact IndTaxPay. Ask questions, request a callback, or get help choosing a service." />
+    <title>Contact Us | IndTaxPay — Talk to a CA Expert</title>
+    <meta name="description" content="Contact IndTaxPay. Request a callback, ask questions, or get expert guidance on tax filing, GST, company registration and more." />
+    <meta name="theme-color" content="#10B981" />
+    <link rel="icon" type="image/png" href="../assets/logo.png" />
     <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="contact.css" />
   </head>
   <body data-base="../" data-active-nav="contact">
     <a class="skipLink" href="#main">Skip to content</a>
@@ -14,100 +17,350 @@
     <div class="cursorDot" aria-hidden="true"></div>
     <div class="cursorRing" aria-hidden="true"></div>
     <div id="navbarSlot"></div>
+
     <main id="main" class="pageFadeIn">
-      <section class="section section--tight" aria-label="Contact header">
-        <div class="container">
-          <div class="card cardPad">
-            <div class="kicker">Contact</div>
-            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 10px;">Talk to a CA Expert</h1>
-            <p style="margin-top: 10px;">Tell us what you need — we’ll guide you to the right service.</p>
-            <div class="row wrap" style="margin-top: 12px;">
-              <button class="btn btn-primary" type="button" data-open-chat>Chat now →</button>
-              <a class="btn btn-outline" href="https://wa.me/91XXXXXXXXXX?text=Hi%20IndTaxPay%2C%20I%20need%20help%20with%20tax%20and%20compliance" target="_blank" rel="noreferrer">WhatsApp</a>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section class="section" aria-label="Contact form">
+      <!-- ── HERO ── -->
+      <section class="contact-hero" aria-label="Contact header">
+        <div class="contact-hero__bg-orb contact-hero__bg-orb--1" aria-hidden="true"></div>
+        <div class="contact-hero__bg-orb contact-hero__bg-orb--2" aria-hidden="true"></div>
         <div class="container">
-          <div class="grid grid-2" style="align-items: start;">
-            <div class="card cardPad">
-              <h2 style="margin:0;">Send a message</h2>
-              <form data-contact style="margin-top: 12px;" class="stack">
-                <div class="field">
-                  <div class="label">Name</div>
-                  <input class="input" name="name" autocomplete="name" placeholder="Your name" required />
-                </div>
-                <div class="field">
-                  <div class="label">Email</div>
-                  <input class="input" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
-                </div>
-                <div class="field">
-                  <div class="label">Message</div>
-                  <textarea class="input" name="message" rows="5" placeholder="Tell us what you need..." required></textarea>
-                </div>
-                <div class="row wrap">
-                  <button class="btn btn-primary" type="submit">Send →</button>
-                  <button class="btn btn-outline" type="button" data-open-lead>Get deadline alerts</button>
-                </div>
-              </form>
-              <div class="muted" style="margin-top: 10px; font-size: 0.92rem;">Demo UX — messages aren’t sent.</div>
+          <div class="contact-hero__inner">
+            <div class="contact-hero__badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Swift callback support
             </div>
-
-            <div class="card cardPad">
-              <h2 style="margin:0;">Help shortcuts</h2>
-              <div class="stack" style="margin-top: 12px;">
-                <a class="btn btn-outline" href="../services/income-tax.html">ITR filing</a>
-                <a class="btn btn-outline" href="../services/gst.html">GST</a>
-                <a class="btn btn-outline" href="../services/startup.html">Company registration</a>
-                <a class="btn btn-outline" href="../services/business-support.html">TDS &amp; payroll</a>
+            <h1 class="contact-hero__title">Talk to a <span>CA Expert</span></h1>
+            <p class="contact-hero__sub">
+              Tell us what you need — leave your details and our team will call you back.
+              No waiting, no bots, just real experts.
+            </p>
+            <div class="contact-stats">
+              <div class="contact-stat">
+                <div class="contact-stat__num">100<span>+</span></div>
+                <div class="contact-stat__lbl">Projects Done</div>
               </div>
-              <div class="tricolourDivider" aria-hidden="true" style="margin: 18px 0;"></div>
-              <div class="kicker">Email</div>
-              <div class="mono" style="font-weight: 800;">support@indtaxpay.in</div>
-              <div class="kicker" style="margin-top: 12px;">Hours</div>
-              <div class="muted">Mon–Sat • 10:00 AM – 7:00 PM (IST)</div>
+              <div class="contact-stat">
+                <div class="contact-stat__num">Swift</div>
+                <div class="contact-stat__lbl">Response Time</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <div class="tricolourDivider" aria-hidden="true"></div>
-
-      <section class="section" id="legal" aria-label="Legal">
+      <!-- ── MAIN CONTENT ── -->
+      <section aria-label="Contact form and information">
         <div class="container">
-          <div class="center">
-            <div class="kicker">Legal</div>
-            <h2 style="margin-top: 10px;">Privacy • Terms • Disclaimer</h2>
-            <p style="margin-top: 10px;">Demo UX — replace this text with your final legal documents.</p>
-          </div>
+          <div class="contact-layout">
 
-          <div class="accordion" data-accordion="single" style="margin-top: 14px;">
-            <div class="accItem">
-              <button class="accBtn" type="button" aria-expanded="false"><span class="title">Privacy Policy (demo)</span><span>▾</span></button>
-              <div class="accPanel"><div class="accPanel__inner">
-                This demo website stores small UI preferences in your browser (e.g., theme and demo reminders). No messages from the contact form are actually sent.
-              </div></div>
+            <!-- ── CONTACT FORM ── -->
+            <div class="contact-form-card">
+              <!-- Success screen -->
+              <div class="cf-success" id="cfSuccess" role="status" aria-live="polite">
+                <div class="cf-success__icon" aria-hidden="true">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h2 class="cf-success__title">We'll call you back!</h2>
+                <p class="cf-success__msg">
+                  Your request has been received. One of our CA experts will reach out to you
+                  at your preferred time. You can also submit an application directly.
+                </p>
+                <a href="../apply.html" class="cf-success__cta">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+                  Apply for a Service
+                </a>
+              </div>
+
+              <!-- Form -->
+              <div id="cfFormWrapper">
+                <div class="contact-form-header">
+                  <div class="contact-form-header__icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  </div>
+                  <div>
+                    <p class="contact-form-header__title">Request a Callback</p>
+                    <p class="contact-form-header__sub">Fill in your details — we'll reach out shortly.</p>
+                  </div>
+                </div>
+
+                <div class="contact-form-body">
+                  <div class="cf-error-msg" id="cfError" role="alert"></div>
+
+                  <form id="contactForm" novalidate>
+                    <div class="cf-row">
+                      <div class="cf-field">
+                        <label class="cf-label" for="cf-name">Full Name <span class="req" aria-hidden="true">*</span></label>
+                        <input class="cf-input" type="text" id="cf-name" name="name" placeholder="Your full name" autocomplete="name" required aria-required="true" />
+                      </div>
+                      <div class="cf-field">
+                        <label class="cf-label" for="cf-phone">Phone Number <span class="req" aria-hidden="true">*</span></label>
+                        <input class="cf-input" type="tel" id="cf-phone" name="phone" placeholder="10-digit mobile" inputmode="numeric" autocomplete="tel" required aria-required="true" />
+                      </div>
+                    </div>
+
+                    <div class="cf-field">
+                      <label class="cf-label" for="cf-email">Email Address</label>
+                      <input class="cf-input" type="email" id="cf-email" name="email" placeholder="you@example.com" autocomplete="email" />
+                      <p class="cf-hint">Optional — we'll use this to send a confirmation.</p>
+                    </div>
+
+                    <div class="cf-field">
+                      <label class="cf-label" for="cf-service">Service You Need <span class="req" aria-hidden="true">*</span></label>
+                      <select class="cf-select" id="cf-service" name="service" required aria-required="true">
+                        <option value="">— Select a service —</option>
+                        <optgroup label="Start Business">
+                          <option value="Proprietorship Registration">Proprietorship Registration</option>
+                          <option value="Private Limited Company">Private Limited Company</option>
+                          <option value="LLP Registration">LLP Registration</option>
+                          <option value="OPC Registration">OPC Registration</option>
+                          <option value="Partnership Firm">Partnership Firm</option>
+                        </optgroup>
+                        <optgroup label="Tax & GST">
+                          <option value="Income Tax Return Filing">Income Tax Return Filing</option>
+                          <option value="GST Registration">GST Registration</option>
+                          <option value="GST Return Filing">GST Return Filing</option>
+                          <option value="TDS Return Filing">TDS Return Filing</option>
+                          <option value="Tax Notice Handling">Tax Notice Handling</option>
+                        </optgroup>
+                        <optgroup label="Registrations">
+                          <option value="Udyam / MSME Registration">Udyam / MSME Registration</option>
+                          <option value="Trademark Registration">Trademark Registration</option>
+                          <option value="FSSAI Registration">FSSAI Registration</option>
+                          <option value="PF / ESI Registration">PF / ESI Registration</option>
+                          <option value="Digital Signature (DSC)">Digital Signature (DSC)</option>
+                        </optgroup>
+                        <optgroup label="Compliance & Audit">
+                          <option value="Company Annual Compliance">Company Annual Compliance</option>
+                          <option value="LLP Compliance">LLP Compliance</option>
+                          <option value="Audit & Assurance">Audit &amp; Assurance</option>
+                          <option value="Bookkeeping & Accounting">Bookkeeping &amp; Accounting</option>
+                        </optgroup>
+                        <option value="Other / Not Listed">Other / Not Listed</option>
+                      </select>
+                    </div>
+
+                    <div class="cf-field">
+                      <label class="cf-label" for="cf-message">Message / Details</label>
+                      <textarea class="cf-textarea" id="cf-message" name="message" rows="4" placeholder="Tell us more about your requirements, preferred call time, or any specific questions..."></textarea>
+                    </div>
+
+                    <button type="submit" class="cf-submit-btn" id="cfSubmitBtn">
+                      <span class="btn-spinner" aria-hidden="true"></span>
+                      <span class="btn-text">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Request Callback
+                      </span>
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div class="accItem">
-              <button class="accBtn" type="button" aria-expanded="false"><span class="title">Terms (demo)</span><span>▾</span></button>
-              <div class="accPanel"><div class="accPanel__inner">
-                Calculator outputs and timelines shown here are illustrative for UX only. Final filings should be validated by a qualified CA.
-              </div></div>
-            </div>
-            <div class="accItem">
-              <button class="accBtn" type="button" aria-expanded="false"><span class="title">Disclaimer (demo)</span><span>▾</span></button>
-              <div class="accPanel"><div class="accPanel__inner">
-                IndTaxPay demo UI does not constitute legal or tax advice. Always confirm current rules and due dates from official sources or your advisor.
-              </div></div>
+
+            <!-- ── SIDEBAR ── -->
+            <div class="contact-sidebar">
+
+              <!-- Contact channels -->
+              <div class="contact-info-card">
+                <h2 class="contact-info-card__title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  Reach Us Directly
+                </h2>
+
+                <div class="contact-channel">
+                  <div class="contact-channel__icon contact-channel__icon--green" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  </div>
+                  <div>
+                    <div class="contact-channel__label">Email</div>
+                    <div class="contact-channel__value">
+                      <a href="mailto:support@indtaxpay.com">support@indtaxpay.com</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="contact-channel">
+                  <div class="contact-channel__icon contact-channel__icon--saffron" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  </div>
+                  <div>
+                    <div class="contact-channel__label">WhatsApp</div>
+                    <div class="contact-channel__value">
+                      <a href="https://wa.me/919487740944?text=Hi%20IndTaxPay%2C%20I%20need%20help" target="_blank" rel="noreferrer">+91 94877 40944</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="contact-channel">
+                  <div class="contact-channel__icon contact-channel__icon--navy" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div>
+                    <div class="contact-channel__label">Office Hours</div>
+                    <div class="contact-channel__value">
+                      <span class="hours-open-dot" aria-hidden="true"></span>Mon – Sat, 10 AM – 7 PM IST
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick links -->
+              <div class="contact-info-card">
+                <h2 class="contact-info-card__title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  Quick Actions
+                </h2>
+
+                <a class="quick-link" href="../apply.html">
+                  <div class="quick-link__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+                  </div>
+                  <div>
+                    <div class="quick-link__name">Apply for a Service</div>
+                    <div class="quick-link__desc">Submit documents &amp; get started</div>
+                  </div>
+                  <span class="quick-link__arr" aria-hidden="true">→</span>
+                </a>
+
+                <a class="quick-link" href="../track.html">
+                  <div class="quick-link__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </div>
+                  <div>
+                    <div class="quick-link__name">Track Application</div>
+                    <div class="quick-link__desc">Check your application status</div>
+                  </div>
+                  <span class="quick-link__arr" aria-hidden="true">→</span>
+                </a>
+
+                <a class="quick-link" href="../services/income-tax.html">
+                  <div class="quick-link__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                  </div>
+                  <div>
+                    <div class="quick-link__name">ITR Filing</div>
+                    <div class="quick-link__desc">Income tax return services</div>
+                  </div>
+                  <span class="quick-link__arr" aria-hidden="true">→</span>
+                </a>
+
+                <a class="quick-link" href="../services/gst.html">
+                  <div class="quick-link__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                  </div>
+                  <div>
+                    <div class="quick-link__name">GST Services</div>
+                    <div class="quick-link__desc">Registration &amp; return filing</div>
+                  </div>
+                  <span class="quick-link__arr" aria-hidden="true">→</span>
+                </a>
+
+                <a class="quick-link" href="../services/startup.html">
+                  <div class="quick-link__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                  </div>
+                  <div>
+                    <div class="quick-link__name">Company Registration</div>
+                    <div class="quick-link__desc">Pvt Ltd, LLP, OPC &amp; more</div>
+                  </div>
+                  <span class="quick-link__arr" aria-hidden="true">→</span>
+                </a>
+              </div>
+
+
+
             </div>
           </div>
         </div>
       </section>
+
     </main>
 
     <div id="footerSlot"></div>
+
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+    <script src="../backend/firebase-init.js"></script>
+    <script src="../backend/firestore-helpers.js"></script>
+
+    <script>
+    (function() {
+      var form        = document.getElementById('contactForm');
+      var submitBtn   = document.getElementById('cfSubmitBtn');
+      var errorBox    = document.getElementById('cfError');
+      var successEl   = document.getElementById('cfSuccess');
+      var formWrapper = document.getElementById('cfFormWrapper');
+      var phoneInput  = document.getElementById('cf-phone');
+
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+          this.value = this.value.replace(/[^0-9+\s\-()\. ]/g, '');
+        });
+      }
+
+      function showError(msg) {
+        errorBox.textContent = msg;
+        errorBox.style.display = 'block';
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      function hideError() {
+        errorBox.style.display = 'none';
+      }
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        hideError();
+
+        var name    = document.getElementById('cf-name').value.trim();
+        var phone   = phoneInput.value.trim();
+        var email   = document.getElementById('cf-email').value.trim();
+        var service = document.getElementById('cf-service').value;
+        var message = document.getElementById('cf-message').value.trim();
+
+        if (name.length < 2) {
+          showError('Please enter your full name (at least 2 characters).');
+          return;
+        }
+
+        var phoneDigits = phone.replace(/\D/g, '');
+        if (phoneDigits.length !== 10) {
+          showError('Please enter a valid 10-digit mobile number.');
+          return;
+        }
+
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+          showError('Please enter a valid email address.');
+          return;
+        }
+
+        if (!service) {
+          showError('Please select the service you need.');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+
+        try {
+          await addCallback({ name, phone, email, service, message });
+
+          formWrapper.style.display = 'none';
+          successEl.style.display   = 'block';
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        } catch (err) {
+          console.error('Contact form error:', err);
+          showError('Something went wrong: ' + (err.message || 'Please try again.'));
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+        }
+      });
+    })();
+    </script>
+
     <script defer src="../assets/js/site.js"></script>
   </body>
 </html>

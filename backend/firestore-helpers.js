@@ -100,6 +100,29 @@ async function createTicket(data) {
   return { ticketId: docRef.id, ticketNumber: ticketNumber };
 }
 
+/* ── Save callback / contact request to Firestore ── */
+async function addCallback(data) {
+  var name    = String(data.name    || '').trim();
+  var phone   = String(data.phone   || '').trim();
+  var email   = String(data.email   || '').trim();
+  var service = String(data.service || '').trim();
+  var message = String(data.message || '').trim();
+
+  if (!name || !phone) {
+    throw new Error('Name and phone are required for a callback request.');
+  }
+
+  await db.collection('callbacks').add({
+    name:      name,
+    phone:     phone,
+    email:     email,
+    service:   service,
+    message:   message,
+    status:    'New',
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
 /* ── Convert File to base64 ── */
 function fileToBase64(file) {
   return new Promise(function (resolve, reject) {
