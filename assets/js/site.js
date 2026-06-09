@@ -74,7 +74,7 @@
             <button class="iconBtn" type="button" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
               <span aria-hidden="true">◐</span>
             </button>
-            <a class="btn btn-sm btn-primary" href="${base}apply.html">Book Now <span aria-hidden="true">→</span></a>
+            <a class="btn btn-sm btn-primary" href="${base}apply.html">Apply Now <span aria-hidden="true">→</span></a>
             <button class="iconBtn hamburger" type="button" data-mobile-open aria-label="Open menu">
               <span aria-hidden="true">☰</span>
             </button>
@@ -397,7 +397,7 @@
             <a class="navLink" href="${base}track.html" data-nav="track">Track Application</a>
           </div>
           <div class="mobileMenu__cta">
-            <a class="btn btn-primary" href="${base}apply.html">Book Now →</a>
+            <a class="btn btn-primary" href="${base}apply.html">Apply Now →</a>
           </div>
         </div>
       </div>
