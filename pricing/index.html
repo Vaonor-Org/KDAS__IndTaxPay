@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pricing &amp; Plans — IndTaxPay (K.Das &amp; Associates)</title>
+    <meta name="description" content="Transparent, upfront pricing for ITR filing, GST compliance, company registration, and audit services. Powered by K.Das &amp; Associates, Nagercoil." />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/png" href="../assets/logo.png" />
+
+    <style>
+      /* ─── PRICING PAGE STYLES ──────────────────────────── */
+      .pr-hero {
+        position: relative;
+        padding: 80px 0 60px;
+        background: linear-gradient(135deg, rgba(10,61,145,0.04) 0%, rgba(255,153,51,0.04) 100%);
+        text-align: center;
+        overflow: hidden;
+      }
+      html[data-theme="dark"] .pr-hero {
+        background: linear-gradient(135deg, rgba(10,61,145,0.20) 0%, rgba(255,153,51,0.08) 100%);
+      }
+
+      .pr-hero__kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: rgba(255,153,51,0.12);
+        color: var(--color-saffron-dark);
+        font-size: 0.80rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      html[data-theme="dark"] .pr-hero__kicker {
+        color: var(--flag-saffron);
+        background: rgba(255,153,51,0.20);
+      }
+
+      .pr-hero__h {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        margin-bottom: 16px;
+        color: var(--color-text-primary);
+      }
+      html[data-theme="dark"] .pr-hero__h { color: rgba(255,255,255,0.95); }
+
+      .pr-hero__sub {
+        max-width: 640px;
+        margin: 0 auto 36px;
+        font-size: 1.1rem;
+        line-height: 1.65;
+        color: var(--color-text-secondary);
+      }
+      html[data-theme="dark"] .pr-hero__sub { color: rgba(255,255,255,0.70); }
+
+      /* Toggle Switch */
+      .pr-toggle-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 6px;
+        border-radius: 999px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-card);
+        margin-bottom: 40px;
+      }
+      .pr-toggle-btn {
+        padding: 10px 22px;
+        border-radius: 999px;
+        border: none;
+        background: transparent;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.90rem;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+      html[data-theme="dark"] .pr-toggle-btn { color: rgba(255,255,255,0.70); }
+      .pr-toggle-btn.is-active {
+        background: var(--color-navy);
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(10,61,145,0.30);
+      }
+      .pr-toggle-save {
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: var(--flag-green);
+        background: rgba(19,136,8,0.12);
+        padding: 3px 8px;
+        border-radius: 999px;
+        margin-left: 4px;
+      }
+
+      /* Pricing Grid */
+      .pr-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 28px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .pr-card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 36px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+      .pr-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+      }
+      .pr-card--popular {
+        border-color: var(--flag-saffron);
+        box-shadow: 0 12px 40px rgba(255,153,51,0.18);
+        background: linear-gradient(180deg, rgba(255,153,51,0.04) 0%, var(--panel) 30%);
+      }
+      .pr-card__pop-badge {
+        position: absolute;
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--flag-saffron);
+        color: #fff;
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 4px 16px;
+        border-radius: 999px;
+        box-shadow: 0 4px 12px rgba(255,153,51,0.40);
+      }
+
+      .pr-card__title {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        color: var(--color-text-primary);
+      }
+      html[data-theme="dark"] .pr-card__title { color: rgba(255,255,255,0.95); }
+
+      .pr-card__desc {
+        font-size: 0.90rem;
+        color: var(--color-text-secondary);
+        margin-bottom: 24px;
+        min-height: 44px;
+      }
+
+      .pr-card__price-wrap {
+        margin-bottom: 28px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .pr-card__price {
+        font-family: var(--font-display);
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: var(--color-text-primary);
+        line-height: 1;
+      }
+      html[data-theme="dark"] .pr-card__price { color: #fff; }
+      .pr-card__price span {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+      }
+
+      .pr-card__features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .pr-card__feat {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.92rem;
+        color: var(--color-text-secondary);
+      }
+      html[data-theme="dark"] .pr-card__feat { color: rgba(255,255,255,0.80); }
+      .pr-card__feat-icon {
+        color: var(--flag-green);
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+
+      /* Trust Band */
+      .pr-trust {
+        padding: 60px 0;
+        background: var(--panel-2);
+        margin-top: 80px;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+      .pr-trust__inner {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+        text-align: center;
+      }
+      .pr-trust__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .pr-trust__icon {
+        width: 48px; height: 48px;
+        border-radius: 14px;
+        background: rgba(10,61,145,0.10);
+        color: var(--color-navy);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+      }
+      .pr-trust__title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1rem;
+      }
+      .pr-trust__sub {
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+      }
+
+      /* Comparison Table */
+      .pr-table-sec {
+        padding: 80px 0;
+      }
+      .pr-table-wrap {
+        overflow-x: auto;
+        margin-top: 40px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        background: var(--panel);
+      }
+      .pr-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        min-width: 700px;
+      }
+      .pr-table th, .pr-table td {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border);
+      }
+      .pr-table th {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.95rem;
+        background: var(--panel-2);
+      }
+      .pr-table tr:last-child td { border-bottom: none; }
+      .chk-yes { color: var(--flag-green); font-weight: bold; }
+      .chk-no { color: var(--color-text-muted); }
+
+      /* FAQ Accordion */
+      .pr-faq {
+        padding: 80px 0;
+        background: var(--panel-2);
+      }
+      .pr-faq__inner {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .pr-faq-item {
+        border-bottom: 1px solid var(--border);
+        padding: 20px 0;
+      }
+      .pr-faq-item:last-child { border-bottom: none; }
+      .pr-faq-q {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      html[data-theme="dark"] .pr-faq-q { color: rgba(255,255,255,0.92); }
+      .pr-faq-a {
+        margin-top: 12px;
+        font-size: 0.94rem;
+        line-height: 1.65;
+        color: var(--color-text-secondary);
+        display: none;
+      }
+      .pr-faq-item.is-open .pr-faq-a { display: block; }
+      .pr-faq-item.is-open .pr-faq-arr { transform: rotate(180deg); }
+      .pr-faq-arr { transition: transform 0.25s ease; }
+    </style>
+  </head>
+  <body data-base="../" data-active-nav="pricing">
+    <a class="skipLink" href="#main">Skip to content</a>
+    <div class="scrollProgress" aria-hidden="true"><div class="scrollProgress__bar"></div></div>
+    <div class="loader" id="loader" aria-hidden="true"><div class="chakra" aria-hidden="true"></div></div>
+    <div class="cursorDot" aria-hidden="true"></div>
+    <div class="cursorRing" aria-hidden="true"></div>
+
+    <div id="navbarSlot"></div>
+
+    <main id="main" class="pageFadeIn">
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  PRICING HERO                                ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="pr-hero" aria-label="Pricing hero">
+        <div class="container">
+          <div class="pr-hero__kicker">Transparent Pricing · Zero Hidden Fees</div>
+          <h1 class="pr-hero__h">Simple, Affordable Tax &amp; Compliance Plans</h1>
+          <p class="pr-hero__sub">
+            Directly backed by <strong>K.Das &amp; Associates, Nagercoil</strong> — combining Dedicated Tax Advocate &amp; Semi-Qualified CA expertise for seamless filing and advisory.
+          </p>
+
+          <div class="pr-toggle-wrap" role="radiogroup" aria-label="Pricing plans toggle">
+            <button class="pr-toggle-btn is-active" id="tab-individual" type="button" role="radio" aria-checked="true">
+              Individual &amp; Salaried
+            </button>
+            <button class="pr-toggle-btn" id="tab-business" type="button" role="radio" aria-checked="false">
+              Business &amp; Startup <span class="pr-toggle-save">Save 20%</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  PRICING CARDS GRID                          ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="section" aria-label="Pricing cards">
+        <div class="pr-grid" id="pricingGrid">
+
+          <!-- Card 1: Salaried ITR -->
+          <div class="pr-card" data-cat="individual">
+            <div>
+              <div class="pr-card__title">Salaried ITR Filing</div>
+              <div class="pr-card__desc">Ideal for employees with Form-16, single or multiple employers, and bank interest income.</div>
+              <div class="pr-card__price-wrap">
+                <div class="pr-card__price">₹499 <span>/ filing</span></div>
+              </div>
+              <ul class="pr-card__features">
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Form 16 import &amp; validation</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Maximum tax deduction optimizations</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Dedicated Tax Advocate review</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> E-verification support included</li>
+              </ul>
+            </div>
+            <a class="btn btn-outline" href="../apply.html" id="plan-salaried-btn">Get Started →</a>
+          </div>
+
+          <!-- Card 2: Popular Capital Gains & NRI -->
+          <div class="pr-card pr-card--popular" data-cat="individual">
+            <div class="pr-card__pop-badge">Most Popular</div>
+            <div>
+              <div class="pr-card__title">Capital Gains &amp; NRI ITR</div>
+              <div class="pr-card__desc">For stock trading, property sale, crypto, foreign income, and NRI tax declarations.</div>
+              <div class="pr-card__price-wrap">
+                <div class="pr-card__price">₹1,499 <span>/ filing</span></div>
+              </div>
+              <ul class="pr-card__features">
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> All Salaried ITR features included</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Stock &amp; Mutual Fund P&amp;L computation</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Real Estate Capital Gain tax advisory</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> DTAA &amp; Foreign Asset schedule (FSI)</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Dedicated Tax Advocate consultation</li>
+              </ul>
+            </div>
+            <a class="btn btn-primary" href="../apply.html" id="plan-capital-btn">Choose Popular →</a>
+          </div>
+
+          <!-- Card 3: Business & Professional ITR -->
+          <div class="pr-card" data-cat="individual">
+            <div>
+              <div class="pr-card__title">Business &amp; Presumptive ITR</div>
+              <div class="pr-card__desc">For freelancers, doctors, lawyers, consultants (44ADA) and small shop owners (44AD).</div>
+              <div class="pr-card__price-wrap">
+                <div class="pr-card__price">₹2,499 <span>/ filing</span></div>
+              </div>
+              <ul class="pr-card__features">
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Presumptive taxation scheme filing</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Balance sheet &amp; P&amp;L preparation</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Tax saving strategies &amp; expense audit</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Advance tax calculation assistance</li>
+              </ul>
+            </div>
+            <a class="btn btn-outline" href="../apply.html" id="plan-business-btn">Get Started →</a>
+          </div>
+
+          <!-- Card 4: Business GST Registration & Filing -->
+          <div class="pr-card" data-cat="business" style="display:none;">
+            <div>
+              <div class="pr-card__title">GST Registration &amp; Filing</div>
+              <div class="pr-card__desc">End-to-end GST compliance: New GST registration, monthly GSTR-1 &amp; GSTR-3B filings.</div>
+              <div class="pr-card__price-wrap">
+                <div class="pr-card__price">₹1,199 <span>/ month</span></div>
+              </div>
+              <ul class="pr-card__features">
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> New GSTIN Registration included</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Monthly GSTR-1 &amp; GSTR-3B filing</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> GSTR-2B Input Tax Credit reconciliation</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> E-Way bill generation support</li>
+              </ul>
+            </div>
+            <a class="btn btn-outline" href="../apply.html" id="plan-gst-btn">Select GST Plan →</a>
+          </div>
+
+          <!-- Card 5: Pvt Ltd & Company Formation -->
+          <div class="pr-card pr-card--popular" data-cat="business" style="display:none;">
+            <div class="pr-card__pop-badge">Recommended</div>
+            <div>
+              <div class="pr-card__title">Company Incorporation</div>
+              <div class="pr-card__desc">Complete registration for Pvt Ltd, OPC, or LLP with MCA name approval, PAN, TAN, &amp; DSC.</div>
+              <div class="pr-card__price-wrap">
+                <div class="pr-card__price">₹4,999 <span>+ Govt Fees</span></div>
+              </div>
+              <ul class="pr-card__features">
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> 2 Digital Signature Certificates (DSC)</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> RUN Name Approval &amp; SPICe+ filing</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> MOA &amp; AOA drafting by Legal Team</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Company PAN, TAN &amp; Bank Account setup</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Free MSME Udyam Registration</li>
+              </ul>
+            </div>
+            <a class="btn btn-primary" href="../apply.html" id="plan-incorporation-btn">Incorporate Now →</a>
+          </div>
+
+          <!-- Card 6: Audit & Enterprise -->
+          <div class="pr-card" data-cat="business" style="display:none;">
+            <div>
+              <div class="pr-card__title">Statutory Audit &amp; 3CD</div>
+              <div class="pr-card__desc">Comprehensive Tax Audit (Form 3CD), Statutory Audit, and Annual MCA Compliance.</div>
+              <div class="pr-card__price-wrap">
+                <div class="pr-card__price">Custom <span>quote</span></div>
+              </div>
+              <ul class="pr-card__features">
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Audit-ready financial statement prep</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Form 3CD Tax Audit report certification</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> AOC-4 &amp; MGT-7 MCA annual returns</li>
+                <li class="pr-card__feat"><span class="pr-card__feat-icon">✓</span> Dedicated Tax Advocate &amp; CA Team</li>
+              </ul>
+            </div>
+            <a class="btn btn-outline" href="../apply.html" id="plan-audit-btn">Request Quote →</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  TRUST BADGES                                ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="pr-trust" aria-label="Trust guarantees">
+        <div class="pr-trust__inner">
+          <div class="pr-trust__item">
+            <div class="pr-trust__icon" aria-hidden="true">🛡️</div>
+            <div class="pr-trust__title">100% Legal Accuracy</div>
+            <div class="pr-trust__sub">Every filing reviewed by qualified Tax Advocates &amp; CAs</div>
+          </div>
+          <div class="pr-trust__item">
+            <div class="pr-trust__icon" aria-hidden="true">⏱️</div>
+            <div class="pr-trust__title">On-Time Guarantee</div>
+            <div class="pr-trust__sub">Processed within committed SLA deadlines</div>
+          </div>
+          <div class="pr-trust__item">
+            <div class="pr-trust__icon" aria-hidden="true">🔒</div>
+            <div class="pr-trust__title">Bank-Grade Security</div>
+            <div class="pr-trust__sub">Encrypted document vault &amp; data privacy</div>
+          </div>
+          <div class="pr-trust__item">
+            <div class="pr-trust__icon" aria-hidden="true">📍</div>
+            <div class="pr-trust__title">Nagercoil HQ Support</div>
+            <div class="pr-trust__sub">Mon–Fri 10AM–5:30PM in-person or online</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  FEATURE COMPARISON TABLE                    ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="pr-table-sec" aria-label="Plans comparison">
+        <div class="container">
+          <div style="text-align:center;">
+            <div class="kicker">Compare Details</div>
+            <h2 style="margin-top:8px;">Plan Feature Comparison</h2>
+          </div>
+
+          <div class="pr-table-wrap">
+            <table class="pr-table" aria-label="Feature comparison table">
+              <thead>
+                <tr>
+                  <th>Feature / Service</th>
+                  <th>Salaried ITR</th>
+                  <th>Capital Gains &amp; NRI</th>
+                  <th>Business &amp; GST</th>
+                  <th>Company Setup</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CA &amp; Tax Advocate Review</td>
+                  <td><span class="chk-yes">✓ Included</span></td>
+                  <td><span class="chk-yes">✓ Included</span></td>
+                  <td><span class="chk-yes">✓ Included</span></td>
+                  <td><span class="chk-yes">✓ Included</span></td>
+                </tr>
+                <tr>
+                  <td>Form 16 &amp; 26AS Reconciliation</td>
+                  <td><span class="chk-yes">✓</span></td>
+                  <td><span class="chk-yes">✓</span></td>
+                  <td><span class="chk-yes">✓</span></td>
+                  <td><span class="chk-yes">✓</span></td>
+                </tr>
+                <tr>
+                  <td>Capital Gains (Stock/Property)</td>
+                  <td><span class="chk-no">—</span></td>
+                  <td><span class="chk-yes">✓ Included</span></td>
+                  <td><span class="chk-yes">✓ Optional</span></td>
+                  <td><span class="chk-yes">✓ Optional</span></td>
+                </tr>
+                <tr>
+                  <td>GST Return &amp; Input Credit</td>
+                  <td><span class="chk-no">—</span></td>
+                  <td><span class="chk-no">—</span></td>
+                  <td><span class="chk-yes">✓ Included</span></td>
+                  <td><span class="chk-yes">✓ Add-on</span></td>
+                </tr>
+                <tr>
+                  <td>Digital Signature (DSC)</td>
+                  <td><span class="chk-no">—</span></td>
+                  <td><span class="chk-no">—</span></td>
+                  <td><span class="chk-no">—</span></td>
+                  <td><span class="chk-yes">✓ 2 DSCs</span></td>
+                </tr>
+                <tr>
+                  <td>Notice Reply Support</td>
+                  <td><span class="chk-yes">✓ Basic</span></td>
+                  <td><span class="chk-yes">✓ Priority</span></td>
+                  <td><span class="chk-yes">✓ Dedicated</span></td>
+                  <td><span class="chk-yes">✓ Dedicated</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  FAQ SECTION                                 ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="pr-faq" aria-label="Frequently asked questions">
+        <div class="pr-faq__inner">
+          <div style="text-align:center; margin-bottom:40px;">
+            <div class="kicker">Got Questions?</div>
+            <h2 style="margin-top:8px;">Pricing FAQs</h2>
+          </div>
+
+          <div class="pr-faq-item">
+            <div class="pr-faq-q">Are there any hidden charges over the displayed price? <span class="pr-faq-arr">▼</span></div>
+            <div class="pr-faq-a">No! All pricing shown is transparent. For company incorporation or legal registrations, government stamp duty and MCA fees are charged at actuals with zero markup.</div>
+          </div>
+          <div class="pr-faq-item">
+            <div class="pr-faq-q">Who handles my tax filing and documents? <span class="pr-faq-arr">▼</span></div>
+            <div class="pr-faq-a">Your case is assigned directly to our Dedicated Tax Advocate &amp; Semi-Qualified CA team at K.Das &amp; Associates, Nagercoil. Every filing undergoes multi-tier quality checks.</div>
+          </div>
+          <div class="pr-faq-item">
+            <div class="pr-faq-q">What documents do I need to get started? <span class="pr-faq-arr">▼</span></div>
+            <div class="pr-faq-a">For ITR filing, you only need your PAN, Aadhaar, and Form-16 or bank statements. For company registration, identity proof and address proof are required. Our system guides you with a simple checklist.</div>
+          </div>
+          <div class="pr-faq-item">
+            <div class="pr-faq-q">What are your office hours for consultation? <span class="pr-faq-arr">▼</span></div>
+            <div class="pr-faq-a">Our Nagercoil office and online assistance operate Monday to Friday from 10:00 AM to 5:30 PM, and Saturdays from 10:00 AM to 2:00 PM.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ╔══════════════════════════════════════════════╗
+           ║  CTA BAND                                    ║
+           ╚══════════════════════════════════════════════╝ -->
+      <section class="section" style="background: linear-gradient(135deg, #0A3D91 0%, #051d50 100%); color: #fff; text-align: center; padding: 70px 0;" aria-label="Call to action">
+        <div class="container" style="max-width: 680px;">
+          <h2 style="color:#fff; font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 16px;">Need a Custom Tax or Audit Quote?</h2>
+          <p style="color: rgba(255,255,255,0.78); font-size: 1.05rem; margin-bottom: 32px;">
+            Talk to our Tax Advocate team for customized corporate compliance, GST audits, or international taxation solutions.
+          </p>
+          <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="../apply.html" id="pricing-cta-apply">Book a Consultation →</a>
+            <button class="btn btn-outline" style="color:#fff; border-color:rgba(255,255,255,0.30);" type="button" data-open-chat id="pricing-cta-chat">Talk to a Tax Advocate</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <div id="footerSlot"></div>
+    <script defer src="../assets/js/site.js"></script>
+
+    <script>
+      (function() {
+        'use strict';
+        /* Toggle Individual vs Business Cards */
+        const btnInd = document.getElementById('tab-individual');
+        const btnBiz = document.getElementById('tab-business');
+        const cards = document.querySelectorAll('#pricingGrid .pr-card');
+
+        if (btnInd && btnBiz) {
+          btnInd.addEventListener('click', function() {
+            btnInd.classList.add('is-active');
+            btnInd.setAttribute('aria-checked', 'true');
+            btnBiz.classList.remove('is-active');
+            btnBiz.setAttribute('aria-checked', 'false');
+            cards.forEach(function(c) {
+              if (c.dataset.cat === 'individual') c.style.display = 'flex';
+              else c.style.display = 'none';
+            });
+          });
+
+          btnBiz.addEventListener('click', function() {
+            btnBiz.classList.add('is-active');
+            btnBiz.setAttribute('aria-checked', 'true');
+            btnInd.classList.remove('is-active');
+            btnInd.setAttribute('aria-checked', 'false');
+            cards.forEach(function(c) {
+              if (c.dataset.cat === 'business') c.style.display = 'flex';
+              else c.style.display = 'none';
+            });
+          });
+        }
+
+        /* FAQ Accordion Toggle */
+        document.querySelectorAll('.pr-faq-item').forEach(function(item) {
+          const q = item.querySelector('.pr-faq-q');
+          if (q) {
+            q.addEventListener('click', function() {
+              const isOpen = item.classList.contains('is-open');
+              document.querySelectorAll('.pr-faq-item').forEach(function(i) { i.classList.remove('is-open'); });
+              if (!isOpen) item.classList.add('is-open');
+            });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -444,12 +444,12 @@
                   <img src="${base}assets/logo.png" alt="IndTaxPay" style="height:56px;width:auto;object-fit:contain;display:block;margin-bottom:8px;">
                   <span class="brand__text" style="font-size:1.55rem;"><span class="ind">Ind</span><span class="tax">Tax</span><span class="pay">Pay</span></span>
                 </div>
-                <p class="footerBrandDesc">India's Most Trusted Platform for ITR Filing, GST, TDS, Payroll, Audits &amp; Company Registration — handled by expert CAs.</p>
+                <p class="footerBrandDesc">India's Most Trusted Platform for ITR Filing, GST, TDS, Payroll, Audits &amp; Company Registration — handled by expert Tax Advocates &amp; CAs.</p>
               </div>
               <!-- Right: address, socials, nav -->
               <div class="footerBrandRight">
                 <address class="footerAddress">
-                  IndTaxPay, India<br>
+                  IndTaxPay (An e-unit of K.Das &amp; Associates, Nagercoil, Tamil Nadu.)<br>
                   <a href="mailto:support@indtaxpay.com">support@indtaxpay.com</a>
                 </address>
                 <div class="footerSocials">
@@ -526,17 +526,17 @@
               </div>
               <div class="footerSection__cols">
                 <div class="footerCol">
-                  <a href="${base}services/startup.html">Private Limited Company</a>
-                  <a href="${base}services/startup.html">One Person Company (OPC)</a>
-                  <a href="${base}services/startup.html">LLP Registration</a>
-                  <a href="${base}services/startup.html">Partnership Firm</a>
-                  <a href="${base}services/startup.html">Section 8 Company</a>
+                  <a href="${base}services/company-registration.html">Private Limited Company</a>
+                  <a href="${base}services/company-registration.html">One Person Company (OPC)</a>
+                  <a href="${base}services/company-registration.html">LLP Registration</a>
+                  <a href="${base}services/company-registration.html">Partnership Firm</a>
+                  <a href="${base}services/company-registration.html">Section 8 Company</a>
                 </div>
                 <div class="footerCol">
-                  <a href="${base}services/startup.html">Proprietorship</a>
-                  <a href="${base}services/startup.html">Trust Registration</a>
-                  <a href="${base}services/startup.html">Producer Company</a>
-                  <a href="${base}services/startup.html">Startup India Registration</a>
+                  <a href="${base}services/company-registration.html">Proprietorship</a>
+                  <a href="${base}services/company-registration.html">Trust Registration</a>
+                  <a href="${base}services/company-registration.html">Producer Company</a>
+                  <a href="${base}services/company-registration.html">Startup India Registration</a>
                   <a href="${base}services/registrations.html">Trade License</a>
                 </div>
                 <div class="footerCol">
@@ -625,7 +625,7 @@
                 <div class="footerCol">
                   <a href="${base}services/audit-assurance.html">Due Diligence</a>
                   <a href="${base}services/global-business.html">Global Expansion</a>
-                  <a href="${base}services/startup.html">Startup India / DPIIT</a>
+                  <a href="${base}services/company-registration.html">Startup India / DPIIT</a>
                 </div>
               </div>
             </div>
@@ -1052,7 +1052,7 @@
 
   function initSvcPanel() {
     const serviceRoutes = {
-      startup: "services/startup.html",
+      startup: "services/company-registration.html",
       registrations: "services/registrations.html",
       trademark: "services/trademark.html",
       gst: "services/gst.html",
