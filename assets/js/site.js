@@ -648,27 +648,38 @@
         </div>
       </footer>
 
-      <button class="chatBubble" type="button" data-chat-bubble aria-label="Open chat">
+      <button class="chatBubble" type="button" data-chat-bubble aria-label="Open chat" style="background:none; border:none; padding:0; width:58px; height:58px; border-radius:50%; position:fixed; bottom:24px; right:24px; z-index:999; cursor:pointer; filter:drop-shadow(0 6px 16px rgba(0,0,0,0.22)); transition:transform 0.2s ease;">
+        <img src="${base}assets/taxbot.png" alt="TaxBot" style="width:100%; height:100%; object-fit:contain; border-radius:50%;" />
         <span class="srOnly">Open chat</span>
       </button>
       <div class="chatPanel" data-chat-panel aria-label="Chat panel" role="dialog" aria-modal="false">
-        <div class="chatTop">
-          <div class="row" style="justify-content: space-between;">
-            <div>
-              <div style="font-family: var(--font-display); font-weight: 800;">TaxBot</div>
-              <div class="muted" style="font-size:0.92rem;">CA help • quick answers</div>
+        <div class="chatTop" style="padding:14px 18px; background:linear-gradient(135deg, #FF9933 0%, #E65100 100%); color:#fff;">
+          <div class="row" style="justify-content: space-between; width: 100%; align-items: center;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <img src="${base}assets/taxbot.png" alt="TaxBot Avatar" style="width:36px; height:36px; border-radius:50%; object-fit:cover; background:#fff; padding:2px;" />
+              <div>
+                <div style="font-family: var(--font-display); font-weight: 800; color: #fff; font-size:1.05rem;">TaxBot</div>
+                <div style="font-size:0.75rem; color: rgba(255,255,255,0.92);">Tax Advocate &amp; Compliance Assistant • Online</div>
+              </div>
             </div>
-            <button class="iconBtn" type="button" data-chat-close aria-label="Close chat">✕</button>
+            <button class="iconBtn" type="button" data-chat-close aria-label="Close chat" style="color:#fff; background:rgba(255,255,255,0.22); border:none; width:32px; height:32px;">✕</button>
           </div>
         </div>
-        <div class="chatMsgs" data-chat-msgs>
-          <div class="msg bot">Hi! I'm TaxBot 🙏 How can I help you today?</div>
+        <div class="chatMsgs" data-chat-msgs style="flex:1; padding:14px; overflow-y:auto; display:flex; flex-direction:column; gap:10px;">
+          <div class="msg bot">Welcome to IndTaxPay. I am TaxBot, your compliance assistant. How can I help you today? Type a message or select a topic below:</div>
         </div>
-        <div class="quickChips" data-chat-chips>
+        <div class="quickChips" data-chat-chips style="padding:8px 12px; display:flex; flex-wrap:wrap; gap:6px; background:var(--panel,#fff); border-top:1px solid var(--border,rgba(0,0,0,0.08));">
           <button class="chipBtn" type="button" data-quick="itr">How do I file ITR?</button>
-          <button class="chipBtn" type="button" data-quick="gst">What's my GST due date?</button>
-          <button class="chipBtn" type="button" data-quick="company">I need to register a company</button>
+          <button class="chipBtn" type="button" data-quick="gst">GST Registration &amp; Returns</button>
+          <button class="chipBtn" type="button" data-quick="company">Register a Company</button>
+          <button class="chipBtn" type="button" data-quick="pricing">View Pricing &amp; Plans</button>
+          <button class="chipBtn" type="button" data-quick="track">Track Application Status</button>
+          <button class="chipBtn" type="button" data-quick="office">Office Location &amp; Hours</button>
           <a class="chipBtn" href="https://wa.me/919487740944?text=Hi%20IndTaxPay%2C%20I%20need%20help%20with%20tax%20filing" target="_blank" rel="noreferrer">WhatsApp us</a>
+        </div>
+        <div class="chatInputWrap" style="padding:10px 12px; display:flex; gap:8px; background:var(--panel,#fff); border-top:1px solid var(--border,rgba(0,0,0,0.08));">
+          <input type="text" class="chatInput" placeholder="Ask TaxBot a question (e.g. Hi, ITR, GST)..." data-chat-input style="flex:1; padding:8px 12px; border-radius:10px; border:1px solid var(--border, #ccc); font-size:0.85rem; outline:none; background:var(--bg,#fff); color:var(--text,#111);" />
+          <button class="btn btn-sm btn-primary" type="button" data-chat-send style="padding:8px 14px; border-radius:10px; font-weight:700; background:var(--color-saffron,#FF9933); color:#fff; border:none; cursor:pointer;">Send</button>
         </div>
       </div>
 
@@ -1380,13 +1391,51 @@
     if (!bubble || !panel) return;
     const closeBtn = $('[data-chat-close]', panel);
     const msgs = $('[data-chat-msgs]', panel);
-    const addMsg = (text, who) => {
+    const input = $('[data-chat-input]', panel);
+    const sendBtn = $('[data-chat-send]', panel);
+    const chipsWrap = $('[data-chat-chips]', panel);
+
+    let taxbotKB = null;
+
+    // Load structured TaxBot Responses database (assets/data/taxbot-responses.json)
+    fetch(getBase() + 'assets/data/taxbot-responses.json')
+      .then((res) => res.json())
+      .then((data) => { taxbotKB = data; })
+      .catch(() => { /* fallback to embedded KB */ });
+
+    const addMsg = (text, who, isHtml = false) => {
       if (!msgs) return;
       const div = document.createElement('div');
       div.className = `msg ${who}`;
-      div.textContent = text;
+      if (isHtml) {
+        div.innerHTML = text;
+      } else {
+        div.textContent = text;
+      }
       msgs.appendChild(div);
       msgs.scrollTop = msgs.scrollHeight;
+    };
+
+    const hideChips = () => {
+      if (chipsWrap) {
+        chipsWrap.style.display = 'none';
+      }
+    };
+
+    const showTyping = () => {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'msg bot typing-indicator';
+      typingDiv.id = 'taxbotTyping';
+      typingDiv.style.fontStyle = 'italic';
+      typingDiv.style.opacity = '0.7';
+      typingDiv.textContent = 'TaxBot is typing...';
+      msgs.appendChild(typingDiv);
+      msgs.scrollTop = msgs.scrollHeight;
+    };
+
+    const removeTyping = () => {
+      const el = document.getElementById('taxbotTyping');
+      if (el) el.remove();
     };
 
     const open = () => panel.classList.add('is-open');
@@ -1400,15 +1449,119 @@
       if (t.closest('[data-open-chat]')) open();
     });
 
+    const getBotResponse = (rawMsg) => {
+      const msg = rawMsg.toLowerCase().trim();
+
+      // If loaded from taxbot-responses.json / taxbot-responses.yaml
+      if (taxbotKB) {
+        for (const cat in taxbotKB) {
+          if (cat === 'fallback') continue;
+          const item = taxbotKB[cat];
+          if (item.keywords && item.keywords.some((kw) => msg.includes(kw))) {
+            return item.response;
+          }
+        }
+        if (taxbotKB.fallback && taxbotKB.fallback.responses) {
+          const list = taxbotKB.fallback.responses;
+          return list[Math.floor(Math.random() * list.length)];
+        }
+      }
+
+      // Greetings
+      if (/^(hi|hello|hey|namaste|halo|hie|good morning|good afternoon|good evening|greetings)\b/.test(msg) || msg === 'hi' || msg === 'hello') {
+        return "Hello! Welcome to IndTaxPay. I am TaxBot, your compliance assistant. How can I help you today?<br><br>You can ask me about:<br>• Available Services &amp; Packages<br>• Income Tax Filing (ITR) &amp; Form 16<br>• GST Registration &amp; Monthly Returns<br>• Company Incorporation (Pvt Ltd / LLP / OPC)<br>• Pricing &amp; Fee Structure<br>• Track Application Status<br>• Office Hours &amp; Location";
+      }
+
+      // Available Services
+      if (msg.includes('service') || msg.includes('services') || msg.includes('offer') || msg.includes('available') || msg.includes('package')) {
+        return "<strong>IndTaxPay Services Available</strong>:<br>1. <strong>Income Tax Filing (ITR)</strong> — Salaried, Business, Capital Gains, NRI.<br>2. <strong>GST Services</strong> — GSTIN Registration, GSTR-1, GSTR-3B, LUT Filing.<br>3. <strong>Company Registration</strong> — Pvt Ltd, OPC, LLP, Partnership, Section 8 NGO.<br>4. <strong>Audit &amp; Assurance</strong> — Statutory Audit, Tax Audit (Form 3CD).<br>5. <strong>MCA &amp; Corporate Compliance</strong> — Annual ROC Filings, Director KYC.<br>6. <strong>Trademark &amp; IPR</strong> — Brand Name &amp; Logo Registration.<br><br><a href='services/index.html' style='color:#FF9933; font-weight:700;'>Explore All Services -></a>";
+      }
+
+      // Track Application Status
+      if (msg.includes('track') || msg.includes('status') || msg.includes('application status') || msg.includes('check status')) {
+        return "<strong>Track Application Status</strong>:<br>To track your application status, please visit our Track page or click Track Application in the navigation menu. You can enter your Application ID or registered Phone Number.<br><br><a href='apply.html' style='color:#FF9933; font-weight:700;'>Track Application Status -></a>";
+      }
+
+      // ITR / Income Tax
+      if (msg.includes('itr') || msg.includes('income tax') || msg.includes('form 16') || msg.includes('tax return') || msg.includes('capital gain')) {
+        return "<strong>Income Tax Filing (ITR)</strong>:<br>We handle ITR-1 to ITR-7 for salaried individuals, business owners, capital gains, and NRIs. All filings are prepared by our Tax Advocates &amp; Semi-Qualified CAs.<br><br><a href='services/income-tax.html' style='color:#FF9933; font-weight:700;'>View ITR Service -></a> or <a href='apply.html' style='color:#FF9933; font-weight:700;'>Start Application -></a>";
+      }
+
+      // GST
+      if (msg.includes('gst') || msg.includes('gstr') || msg.includes('lut') || msg.includes('2b')) {
+        return "<strong>GST Registration &amp; Returns</strong>:<br>Get your GSTIN within 3 to 5 business days or let us manage your monthly GSTR-1 &amp; GSTR-3B filings with 2B reconciliation.<br><br><a href='services/gst.html' style='color:#FF9933; font-weight:700;'>View GST Services -></a>";
+      }
+
+      // Company / Registration
+      if (msg.includes('company') || msg.includes('pvt ltd') || msg.includes('llp') || msg.includes('opc') || msg.includes('register') || msg.includes('startup')) {
+        return "<strong>Company Registration</strong>:<br>We incorporate Private Limited, OPC, LLP, Partnership firms, and Section 8 NGOs. Includes MCA name approval, PAN, TAN &amp; Digital Signatures (DSC).<br><br><a href='services/company-registration.html' style='color:#FF9933; font-weight:700;'>Explore Company Registration -></a>";
+      }
+
+      // Audit
+      if (msg.includes('audit') || msg.includes('3cd')) {
+        return "<strong>Audit &amp; Assurance Services</strong>:<br>We provide Tax Audits under Section 44AB (Form 3CD), Statutory Company Audits, and Internal Financial Control reviews.<br><br><a href='services/statutory-audit.html' style='color:#FF9933; font-weight:700;'>Explore Audit Services -></a>";
+      }
+
+      // Pricing / Costs
+      if (msg.includes('pricing') || msg.includes('cost') || msg.includes('price') || msg.includes('fee') || msg.includes('charge') || msg.includes('plans')) {
+        return "<strong>Pricing &amp; Fee Structure</strong>:<br>• Salaried ITR: Rs.499<br>• Capital Gains / NRI ITR: Rs.1,499<br>• GST Monthly Filing: Rs.1,199/month<br>• Company Registration: Rs.4,999 + Govt Fees<br><br><a href='pricing/index.html' style='color:#FF9933; font-weight:700;'>View All Pricing Plans -></a>";
+      }
+
+      // Office / Hours / Address
+      if (msg.includes('office') || msg.includes('location') || msg.includes('address') || msg.includes('nagercoil') || msg.includes('hours') || msg.includes('time')) {
+        return "<strong>Office Location &amp; Hours</strong>:<br>K.Das &amp; Associates (IndTaxPay e-unit)<br>2nd Floor, Jey Pee Complex, WCC Rd, Nagercoil, Tamil Nadu.<br><br><strong>Office Hours</strong>: Monday to Friday 10:00 AM to 5:30 PM | Saturday 10:00 AM to 2:00 PM.";
+      }
+
+      // Contact / Phone
+      if (msg.includes('contact') || msg.includes('phone') || msg.includes('call') || msg.includes('number') || msg.includes('email') || msg.includes('whatsapp')) {
+        return "<strong>Contact Our Tax Advocate Team</strong>:<br>• Phone: +91 94877 40944<br>• Email: support@indtaxpay.com<br>• WhatsApp: <a href='https://wa.me/919487740944' target='_blank' style='color:#FF9933; font-weight:700;'>Chat on WhatsApp -></a>";
+      }
+
+      // Off-Topic Fallback
+      return "I don't have exact information for that specific query.<br><br>I am TaxBot and can assist you with available services, ITR filing, GST returns, company registration, pricing, tracking applications, and office hours.<br><br>Would you like to speak directly with our Tax Advocates? Click <a href='contact/index.html' style='color:#FF9933; font-weight:700;'>Contact Us</a> or message us on <a href='https://wa.me/919487740944' target='_blank' style='color:#FF9933; font-weight:700;'>WhatsApp</a>.";
+    };
+
+    const handleUserSend = (text) => {
+      if (!text || !text.trim()) return;
+      const userText = text.trim();
+      hideChips();
+      addMsg(userText, 'user');
+      if (input) input.value = '';
+
+      showTyping();
+      setTimeout(() => {
+        removeTyping();
+        const reply = getBotResponse(userText);
+        addMsg(reply, 'bot', true);
+      }, 400);
+    };
+
+    sendBtn?.addEventListener('click', () => {
+      if (input) handleUserSend(input.value);
+    });
+
+    input?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleUserSend(input.value);
+      }
+    });
+
     panel.addEventListener('click', (e) => {
       const t = e.target;
       if (!(t instanceof Element)) return;
       const quick = t.getAttribute('data-quick');
       if (!quick) return;
-      addMsg(t.textContent || 'Question', 'user');
-      if (quick === 'itr') addMsg('Start with the tax calculator, then upload documents. A CA reviews before e-filing.', 'bot');
-      if (quick === 'gst') addMsg('Due dates depend on filing type. Use the calendar widget for reminders.', 'bot');
-      if (quick === 'company') addMsg('Tell us your entity type (Pvt Ltd/LLP/OPC). We’ll share a document checklist.', 'bot');
+
+      let qText = t.textContent || 'Question';
+      if (quick === 'itr') qText = 'How do I file ITR?';
+      if (quick === 'gst') qText = 'GST Registration & Monthly Filing';
+      if (quick === 'company') qText = 'How to register a company?';
+      if (quick === 'pricing') qText = 'What are your pricing plans?';
+      if (quick === 'track') qText = 'How to track application?';
+      if (quick === 'office') qText = 'What is your office location and hours?';
+
+      handleUserSend(qText);
     });
   }
 

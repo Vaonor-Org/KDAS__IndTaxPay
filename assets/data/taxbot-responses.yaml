@@ -1,0 +1,187 @@
+# TaxBot Knowledge Base & Response Database (Authoritative Version)
+
+greetings:
+  keywords:
+    - hi
+    - hello
+    - hey
+    - namaste
+    - halo
+    - hie
+    - good morning
+    - good afternoon
+    - good evening
+    - greetings
+  response: "Hello! Welcome to IndTaxPay. I am TaxBot, your compliance assistant. How can I help you today?<br><br>You can ask me about:<br>• Available Services &amp; Packages<br>• Income Tax Filing (ITR) &amp; Documents Needed<br>• GST Registration &amp; Monthly Returns<br>• Company Incorporation (Pvt Ltd / LLP / OPC)<br>• Tax Calculators &amp; Deadlines<br>• Pricing &amp; Fee Structure<br>• Track Application Status<br>• Office Hours &amp; Location"
+
+services:
+  keywords:
+    - service
+    - services
+    - offer
+    - offered
+    - available
+    - what do you do
+    - list services
+    - all services
+    - packages
+  response: "<strong>IndTaxPay Services Available</strong>:<br>1. <strong>Income Tax Filing (ITR)</strong> — Salaried, Business, Capital Gains, NRI.<br>2. <strong>GST Services</strong> — GSTIN Registration, GSTR-1, GSTR-3B, LUT Filing.<br>3. <strong>Company Registration</strong> — Pvt Ltd, OPC, LLP, Partnership, Section 8 NGO.<br>4. <strong>Audit &amp; Assurance</strong> — Statutory Audit, Tax Audit (Form 3CD).<br>5. <strong>MCA &amp; Corporate Compliance</strong> — Annual ROC Filings, Director KYC.<br>6. <strong>Trademark &amp; IPR</strong> — Brand Name &amp; Logo Registration.<br>7. <strong>Bookkeeping &amp; Payroll</strong> — Monthly accounting, PF, ESI, TDS filing.<br><br><a href='services/index.html' style='color:#FF9933; font-weight:700;'>Explore All Services -></a>"
+
+itr:
+  keywords:
+    - itr
+    - income tax
+    - form 16
+    - tax return
+    - capital gain
+    - salaried tax
+    - nri tax
+  response: "<strong>Income Tax Filing (ITR)</strong>:<br>We handle ITR-1 to ITR-7 for salaried individuals, business owners, capital gains, and NRIs. All filings are prepared by our Tax Advocates &amp; Semi-Qualified CAs.<br><br><strong>Key Features</strong>:<br>• Form 16 &amp; AIS/TIS reconciliation<br>• Maximize tax savings under Old vs New Tax Regime<br>• Capital gains tax calculation for stocks, mutual funds &amp; real estate<br><br><a href='services/income-tax.html' style='color:#FF9933; font-weight:700;'>View ITR Service -></a> or <a href='apply.html' style='color:#FF9933; font-weight:700;'>Start Application -></a>"
+
+gst:
+  keywords:
+    - gst
+    - gstr
+    - lut
+    - 2b
+    - gstin
+    - gst return
+    - gst registration
+  response: "<strong>GST Registration &amp; Returns</strong>:<br>Get your GSTIN within 3 to 5 business days or let us manage your monthly GSTR-1 &amp; GSTR-3B filings with 2B reconciliation.<br><br><strong>GST Solutions</strong>:<br>• New GST Registration (Proprietorship / Firm / Company)<br>• Monthly GSTR-1 &amp; GSTR-3B Return Filing<br>• Annual GSTR-9 Return &amp; Reconciliations<br>• LUT filing for Exporters<br><br><a href='services/gst.html' style='color:#FF9933; font-weight:700;'>View GST Services -></a>"
+
+company:
+  keywords:
+    - company
+    - pvt ltd
+    - llp
+    - opc
+    - register
+    - startup
+    - incorporation
+    - firm
+    - proprietorship
+  response: "<strong>Company Registration</strong>:<br>We incorporate Private Limited, OPC, LLP, Partnership firms, and Section 8 NGOs. Includes MCA name approval, PAN, TAN &amp; Digital Signatures (DSC).<br><br><strong>Package Includes</strong>:<br>• Name Approval &amp; SPICe+ MCA Application<br>• Digital Signature Certificates (DSC) for 2 Directors<br>• Drafting MOA, AOA &amp; Certificate of Incorporation<br>• PAN, TAN &amp; Bank Account Opening Assistance<br><br><a href='services/company-registration.html' style='color:#FF9933; font-weight:700;'>Explore Company Registration -></a>"
+
+documents:
+  keywords:
+    - document
+    - documents
+    - checklist
+    - proof
+    - pan
+    - aadhaar
+    - docs needed
+    - what documents
+  response: "<strong>Document Checklists</strong>:<br>• <strong>ITR Filing</strong>: PAN, Aadhaar, Form 16 / Salary slips, Bank statement, Investment proofs (80C / 80D), Capital Gain statements.<br>• <strong>GST Registration</strong>: Business PAN, Electricity bill / Rent agreement, Cancelled cheque, Aadhaar of proprietor / partners.<br>• <strong>Company Incorporation</strong>: PAN &amp; Aadhaar of Directors, Passport photo, Bank statement (latest 2 months), Electricity bill of registered office.<br><br><a href='services/index.html' style='color:#FF9933; font-weight:700;'>View Complete Document Guide -></a>"
+
+deadlines:
+  keywords:
+    - deadline
+    - deadlines
+    - due date
+    - due dates
+    - last date
+    - penalty
+    - late fee
+  response: "<strong>Important Compliance Deadlines</strong>:<br>• <strong>Individual ITR (Non-Audit)</strong>: July 31st<br>• <strong>GSTR-1 Monthly Return</strong>: 11th of every month<br>• <strong>GSTR-3B Monthly Return</strong>: 20th of every month<br>• <strong>Tax Audit (Form 3CD)</strong>: September 30th<br>• <strong>TDS Quarterly Return</strong>: 31st of month following quarter end<br><br><a href='services/index.html' style='color:#FF9933; font-weight:700;'>Check Compliance Calendar -></a>"
+
+audit:
+  keywords:
+    - audit
+    - tax audit
+    - statutory audit
+    - 3cd
+    - form 3cd
+    - auditor
+  response: "<strong>Audit &amp; Assurance Services</strong>:<br>We provide Tax Audits under Section 44AB (Form 3CD), Statutory Company Audits, and Internal Financial Control reviews by experienced professionals.<br><br><a href='services/statutory-audit.html' style='color:#FF9933; font-weight:700;'>Explore Audit Services -></a>"
+
+mca:
+  keywords:
+    - mca
+    - roc
+    - dir 3
+    - dir-3
+    - annual return
+    - compliance
+    - mca filing
+  response: "<strong>MCA &amp; ROC Compliance</strong>:<br>We manage company annual returns (AOC-4, MGT-7), Director DIR-3 KYC, board resolutions, and statutory register maintenance.<br><br><a href='services/mca-compliance.html' style='color:#FF9933; font-weight:700;'>View MCA Compliance -></a>"
+
+trademark:
+  keywords:
+    - trademark
+    - brand
+    - logo
+    - ipr
+    - copyright
+    - patent
+  response: "<strong>Trademark &amp; Brand Registration</strong>:<br>Protect your brand name, logo, and intellectual property with official TM registration and objection reply support.<br><br><a href='services/trademark.html' style='color:#FF9933; font-weight:700;'>View Trademark Services -></a>"
+
+calculators:
+  keywords:
+    - calculator
+    - calculate
+    - tax calculator
+    - gst calculator
+    - tds calculator
+    - regime
+  response: "<strong>Free Tax Calculators</strong>:<br>Try our free interactive calculators directly on the site:<br>• Income Tax Calculator (Old vs New Regime)<br>• GST Calculator (Add or Remove GST)<br>• TDS Calculator<br><br><a href='index.html#services' style='color:#FF9933; font-weight:700;'>Use Free Calculators -></a>"
+
+about:
+  keywords:
+    - about
+    - firm
+    - kdas
+    - k.das
+    - experience
+    - advocate
+    - advocates
+    - tax advocate
+  response: "<strong>About K.Das &amp; Associates (IndTaxPay)</strong>:<br>Founded as a boutique Tax Advocate practice in Nagercoil, Tamil Nadu, K.Das &amp; Associates brings 15+ years of trusted experience in tax advocacy, audit, and legal compliance. IndTaxPay is our digital e-unit making tax services accessible across India.<br><br><a href='about/index.html' style='color:#FF9933; font-weight:700;'>Read Our Full Story -></a>"
+
+pricing:
+  keywords:
+    - pricing
+    - cost
+    - price
+    - fee
+    - charge
+    - plans
+    - rate
+  response: "<strong>Pricing &amp; Fee Structure</strong>:<br>• Salaried ITR: Rs.499<br>• Capital Gains / NRI ITR: Rs.1,499<br>• GST Monthly Filing: Rs.1,199/month<br>• Company Registration: Rs.4,999 + Govt Fees<br><br><a href='pricing/index.html' style='color:#FF9933; font-weight:700;'>View All Pricing Plans -></a>"
+
+track:
+  keywords:
+    - track
+    - status
+    - application status
+    - check status
+    - my application
+  response: "<strong>Track Application Status</strong>:<br>To track your application status, please visit our Track page or click Track Application in the navigation menu. You can enter your Application ID or registered Phone Number.<br><br><a href='apply.html' style='color:#FF9933; font-weight:700;'>Track Application Status -></a>"
+
+office:
+  keywords:
+    - office
+    - location
+    - address
+    - nagercoil
+    - hours
+    - time
+    - where are you
+  response: "<strong>Office Location &amp; Hours</strong>:<br>K.Das &amp; Associates (IndTaxPay e-unit)<br>2nd Floor, Jey Pee Complex, WCC Rd, Nagercoil, Tamil Nadu.<br><br><strong>Office Hours</strong>: Monday to Friday 10:00 AM to 5:30 PM | Saturday 10:00 AM to 2:00 PM."
+
+contact:
+  keywords:
+    - contact
+    - phone
+    - call
+    - number
+    - email
+    - whatsapp
+    - talk
+    - speak
+  response: "<strong>Contact Our Tax Advocate Team</strong>:<br>• Phone: +91 94877 40944<br>• Email: support@indtaxpay.com<br>• WhatsApp: <a href='https://wa.me/919487740944' target='_blank' style='color:#FF9933; font-weight:700;'>Chat on WhatsApp -></a>"
+
+fallback:
+  responses:
+    - "I don't have exact information for that specific query.<br><br>I am TaxBot and can assist you with available services, ITR filing, GST returns, company registration, document checklists, compliance deadlines, pricing, tracking applications, and office hours.<br><br>Would you like to speak directly with our Tax Advocates? Please visit our <a href='contact/index.html' style='color:#FF9933; font-weight:700;'>Contact Page</a> or reach out on <a href='https://wa.me/919487740944' target='_blank' style='color:#FF9933; font-weight:700;'>WhatsApp</a>."
+    - "Sorry, I couldn't find a direct match for your question.<br><br>As TaxBot, I can guide you through our tax &amp; compliance services, required documents, deadlines, pricing, tracking applications, and office details.<br><br>Feel free to type your service interest or contact our team directly at <a href='contact/index.html' style='color:#FF9933; font-weight:700;'>Contact Us</a>."
