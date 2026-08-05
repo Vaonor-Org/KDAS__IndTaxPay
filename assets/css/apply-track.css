@@ -963,7 +963,11 @@ html[data-theme="dark"] .process-step:hover .process-dot {
    ═══════════════════════════════════════════ */
 
 .track-page { min-height: 100vh; background: var(--color-off-white); padding-top: 90px; }
-.track-main { max-width: 620px; margin: 0 auto; padding: 48px 24px 80px; }
+.track-main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+.track-layout-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items: start; margin-top: 24px; }
+@media (max-width: 900px) {
+  .track-layout-grid { grid-template-columns: 1fr; gap: 24px; }
+}
 
 .track-title { text-align: center; margin-bottom: 36px; }
 .track-title h1 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 800; color: var(--color-text-primary); margin: 10px 0 10px; line-height: 1.2; }

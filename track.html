@@ -24,48 +24,56 @@
         <p>Enter your ticket ID and registered phone number to view the latest progress from IndTaxPay.</p>
       </div>
 
-      <form class="track-form" id="trackForm" novalidate>
-        <div class="track-field-group">
-          <div class="track-field">
-            <label for="tid">Ticket ID</label>
-            <input id="tid" type="text" required placeholder="e.g. ITP-20240521-001" autocomplete="off">
+      <div class="track-layout-grid">
+        <!-- Left Column: Form -->
+        <form class="track-form" id="trackForm" novalidate>
+          <div class="track-field-group">
+            <div class="track-field">
+              <label for="tid">Ticket ID</label>
+              <input id="tid" type="text" required placeholder="e.g. ITP-20240521-001" autocomplete="off">
+            </div>
+            <div class="track-field">
+              <label for="tphone">Registered Phone Number</label>
+              <input id="tphone" type="tel" required placeholder="e.g. 9876543210" autocomplete="tel" inputmode="numeric">
+            </div>
           </div>
-          <div class="track-field">
-            <label for="tphone">Registered Phone Number</label>
-            <input id="tphone" type="tel" required placeholder="e.g. 9876543210" autocomplete="tel" inputmode="numeric">
+          <button type="submit" class="track-btn" id="trackBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Track Application
+          </button>
+        </form>
+
+        <!-- Right Column: Results/Placeholder -->
+        <div class="track-result-container">
+          <!-- Placeholder State -->
+          <div id="trackPlaceholder" class="track-result placeholder-state" style="text-align:center; padding:60px 20px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px dashed var(--color-border-grey); background:#fff; border-radius:20px; box-shadow:0 8px 40px rgba(13,74,138,0.04); margin-top:0; height:100%; box-sizing:border-box;">
+            <div style="background:rgba(13,74,138,0.05); color:var(--color-navy); width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:16px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3 style="font-size:1.1rem; font-weight:700; color:var(--color-text-primary); margin:0; line-height:1.4; max-width:280px;">Enter your details to check status</h3>
+          </div>
+
+          <!-- Not Found -->
+          <div id="notFound" class="track-result not-found" style="display:none; margin-top:0;" role="alert">
+            <div class="kicker" style="margin-bottom:10px;">Search Result</div>
+            <h3>No matching ticket found</h3>
+            <p>Please check your ticket ID and registered phone number. Both fields must exactly match our records.</p>
+          </div>
+
+          <!-- Found -->
+          <div id="ticketResult" class="track-result found" style="display:none; margin-top:0;" role="region" aria-label="Ticket status">
+            <div class="result-header">
+              <div>
+                <p class="result-ticket-label">Ticket</p>
+                <p class="result-ticket-number" id="resTicketNumber"></p>
+              </div>
+              <span class="result-status-badge" id="resStatusBadge"></span>
+            </div>
+
+            <!-- Details -->
+            <div id="resDetails" style="margin-top:10px;"></div>
           </div>
         </div>
-        <button type="submit" class="track-btn" id="trackBtn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Track Application
-        </button>
-      </form>
-
-      <!-- Not Found -->
-      <div id="notFound" class="track-result not-found" style="display:none;" role="alert">
-        <div class="kicker" style="margin-bottom:10px;">Search Result</div>
-        <h3>No matching ticket found</h3>
-        <p>Please check your ticket ID and registered phone number. Both fields must exactly match our records.</p>
-      </div>
-
-      <!-- Found -->
-      <div id="ticketResult" class="track-result found" style="display:none;" role="region" aria-label="Ticket status">
-        <div class="result-header">
-          <div>
-            <p class="result-ticket-label">Ticket</p>
-            <p class="result-ticket-number" id="resTicketNumber"></p>
-          </div>
-          <span class="result-status-badge" id="resStatusBadge"></span>
-        </div>
-
-        <!-- Progress Bar -->
-        <div class="track-status-progress">
-          <div class="track-status-progress-fill" id="resProgressFill"></div>
-        </div>
-        <div class="track-status-labels" id="resStatusLabels"></div>
-
-        <!-- Details -->
-        <div id="resDetails"></div>
       </div>
     </main>
   </div>
@@ -112,6 +120,9 @@
       e.preventDefault();
       notFound.style.display = 'none';
       ticketResult.style.display = 'none';
+      var placeholder = document.getElementById('trackPlaceholder');
+      if (placeholder) placeholder.style.display = 'none';
+      
       trackBtn.disabled = true;
       trackBtn.innerHTML = '<span style="opacity:.7">Searching...</span>';
 
@@ -135,11 +146,6 @@
       }
     });
 
-    function statusPercent(status) {
-      var map = { 'New': 5, 'Documents Pending': 25, 'In Progress': 55, 'Filed': 80, 'Completed': 100, 'Rejected': 100 };
-      return map[status] || 0;
-    }
-
     function renderResult(ticket) {
       document.getElementById('resTicketNumber').textContent = ticket.ticketNumber;
 
@@ -152,20 +158,6 @@
       } else {
         badge.style.cssText = 'background:rgba(247,138,14,0.12); color:var(--color-saffron-dark);';
       }
-
-      var fill = document.getElementById('resProgressFill');
-      fill.style.width = statusPercent(ticket.status) + '%';
-      fill.style.background = ticket.status === 'Rejected'
-        ? 'linear-gradient(90deg,#E53E3E,#C96B00)'
-        : 'linear-gradient(90deg,var(--color-navy),var(--color-saffron))';
-
-      var labelsDiv = document.getElementById('resStatusLabels');
-      var html = '';
-      STATUSES.forEach(function(s) {
-        var cls = s === ticket.status ? ' active-label' : '';
-        html += '<span class="' + cls + '">' + s + '</span>';
-      });
-      labelsDiv.innerHTML = html;
 
       var details = [
         ['Service',      ticket.serviceType],

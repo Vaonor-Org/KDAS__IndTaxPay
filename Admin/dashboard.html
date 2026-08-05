@@ -1294,7 +1294,6 @@
         <div class="user-avatar" id="userAvatar">IT</div>
         <div class="user-info">
           <span class="user-email" id="userEmail">loading...</span>
-          <span class="user-role">Operations Portal</span>
         </div>
       </div>
 
@@ -1342,14 +1341,13 @@
           </span>
           <span class="tab-label">Archive</span>
         </button>
-      </nav>
-
-      <div class="sidebar-footer">
-        <button class="dash-signout" id="signOutBtn">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          Sign Out
+        <button class="dash-tab-btn" data-tab="settings">
+          <span class="tab-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span class="tab-label">Settings</span>
         </button>
-      </div>
+      </nav>
     </aside>
 
     <!-- Main Workspace -->
@@ -1537,18 +1535,14 @@
           <div class="archive-panel">
             <div class="archive-card" style="margin-bottom: 20px;">
               <div class="panel-section-header">
-                <h3>📂 Document Section — Local Storage Configuration</h3>
-                <p class="panel-section-desc">Specify your local client folder destination (e.g. <code>D:\Clients Folder</code>). Organise completed projects locally and delete them safely from Firestore.</p>
+                <h3>Choose a Path to store Locally</h3>
               </div>
               <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:14px; background:var(--panel-2); padding:16px; border-radius:12px; border:1px solid var(--border);">
-                <div style="flex:1; min-width:260px;">
-                  <label for="docLocalStoragePathInput" style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:4px;">Local Clients Base Directory Path:</label>
-                  <input type="text" id="docLocalStoragePathInput" class="dash-search" style="width:100% !important;" value="D:\Clients Folder" placeholder="e.g. D:\Clients Folder" />
+                <div style="flex:1; min-width:260px; display:flex; gap:8px; align-items:center;">
+                  <input type="text" id="docLocalStoragePathInput" class="dash-search" style="flex:1; margin:0;" value="D:\Clients Folder" placeholder="Choose a folder..." />
+                  <button type="button" id="browseDirBtn" style="padding:0 16px; height:42px; border-radius:8px; border:1px solid var(--border); background:var(--panel); cursor:pointer; font-weight:600; color:var(--text); font-size:0.85rem;">Browse...</button>
                 </div>
-                <button type="button" class="add-reminder-btn" id="saveLocalStoragePathBtn" style="height:42px; margin-top:18px;">💾 Save Path Setting</button>
-              </div>
-              <div id="pathStatusBadge" style="margin-top:10px; font-size:0.82rem; color:var(--color-green-dark); font-weight:700;">
-                ✓ Active Destination: <span id="activePathDisplay">D:\Clients Folder</span>
+                <button type="button" class="add-reminder-btn" id="saveLocalStoragePathBtn" style="height:42px; margin:0;">Save</button>
               </div>
             </div>
 
@@ -1556,11 +1550,44 @@
               <div class="panel-section-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                 <div>
                   <h3>Completed Projects &amp; Client Documents <span class="archive-count" id="docProjectsCount">(0)</span></h3>
-                  <p class="panel-section-desc">Completed client applications ready for local download/organization and Firestore removal.</p>
+                  <p class="panel-section-desc">Completed client applications ready for local download/organization and Database removal.</p>
                 </div>
-                <button type="button" class="add-reminder-btn" id="exportAllCompletedDocsBtn" style="background:var(--color-navy); color:#fff;">📁 Store All Completed Locally</button>
+                <button type="button" class="add-reminder-btn" id="exportAllCompletedDocsBtn" style="background:var(--color-navy); color:#fff;">Store All Completed Locally</button>
               </div>
               <div class="list-container" id="documentsListContent"><p class="archive-empty">Loading completed projects...</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Settings -->
+        <div class="dash-tab-panel" id="tab-settings">
+          <div class="archive-panel">
+            <div class="archive-card" style="margin-bottom: 20px;">
+              <div class="panel-section-header">
+                <h3>Settings &amp; Configuration</h3>
+                <p class="panel-section-desc">Manage your admin profile, database connections, and session logout.</p>
+              </div>
+              
+              <!-- Setting 1: Admin User Name -->
+              <div style="margin-top:20px; background:var(--panel-2); padding:20px; border-radius:12px; border:1px solid var(--border);">
+                <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:8px; color:var(--text);">Admin Profile Settings</h4>
+                <div style="max-width:400px; margin-bottom:12px;">
+                  <label for="settingsAdminNameInput" style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:6px;">Your Name / Display Name:</label>
+                  <input type="text" id="settingsAdminNameInput" class="dash-search" style="width:100% !important;" placeholder="e.g. Gopal Krishnan" />
+                </div>
+                <button type="button" class="add-reminder-btn" id="saveAdminNameBtn" style="height:42px;">Save Profile Name</button>
+              </div>
+
+               <!-- Setting 3: Log Out Button (Only here!) -->
+              <div style="margin-top:20px; background:rgba(239, 68, 68, 0.05); padding:20px; border-radius:12px; border:1px solid rgba(239, 68, 68, 0.15);">
+                <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:8px; color:#dc2626;">Session Management</h4>
+                <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:16px;">Sign out of the operations portal. Your local preferences will remain saved.</p>
+                <button type="button" class="dash-signout" id="settingsSignOutBtn" style="background:#dc2626; color:#fff; border:none; padding:10px 24px; border-radius:10px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:8px; max-width:200px; justify-content:center; transition:var(--transition-base);">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                  Sign Out Portal
+                </button>
+              </div>
+
             </div>
           </div>
         </div>
@@ -1611,6 +1638,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <script src="../backend/firebase-init.js"></script>
   <script src="../backend/firestore-helpers.js"></script>
 
@@ -1654,6 +1682,7 @@
     var allTickets = [];
     var allCallbacks = [];
     var draggedId = null;
+    var chosenDirHandle = null;
     var dragOverCol = null;
     var currentUserEmail = '';
     var ADMIN_TIMEOUT_MS = 24 * 60 * 60 * 1000;
@@ -1740,6 +1769,7 @@
         if (btn.dataset.tab === 'callbacks') { renderCallbacksTab(); }
         if (btn.dataset.tab === 'calendar') { initCalendarTab(); }
         if (btn.dataset.tab === 'documents') { renderDocumentSectionTab(); }
+        if (btn.dataset.tab === 'settings') { initSettingsTab(); }
       });
     });
 
@@ -1776,10 +1806,23 @@
         dashLoading.style.display = 'none';
         dashPage.style.display = '';
         currentUserEmail = email;
-        document.getElementById('userEmail').textContent = email;
-        var initials = email.split('@')[0].substring(0, 2).toUpperCase();
+        
+        var displayName = user.displayName || localStorage.getItem('itp_admin_name_' + email) || '';
+        var nameDisplayEl = document.getElementById('userEmail');
         var avatarEl = document.getElementById('userAvatar');
-        if (avatarEl) { avatarEl.textContent = initials; }
+        
+        if (displayName) {
+          if (nameDisplayEl) {
+            nameDisplayEl.innerHTML = '<strong style="display:block; color:var(--text); font-weight:700;">' + displayName + '</strong>' + email;
+          }
+          var initials = displayName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0, 2);
+          if (avatarEl && initials) avatarEl.textContent = initials;
+        } else {
+          if (nameDisplayEl) nameDisplayEl.textContent = email;
+          var initials = email.split('@')[0].substring(0, 2).toUpperCase();
+          if (avatarEl) { avatarEl.textContent = initials; }
+        }
+
         bindAdminSessionTracking();
         startSubscription();
         startReminderSystem();
@@ -1791,14 +1834,108 @@
       }
     });
 
-    document.getElementById('signOutBtn').addEventListener('click', function() {
-      clearAdminSessionTimers();
-      sessionStorage.removeItem('adminSessionExpired');
-      sessionStorage.removeItem('adminLastActivityAt');
-      auth.signOut().then(function() {
-        window.location.href = 'login.html';
+    /* ── Settings Tab Functionality ── */
+    function initSettingsTab() {
+      var nameInput = document.getElementById('settingsAdminNameInput');
+      if (nameInput) {
+        var currentName = localStorage.getItem('itp_admin_name_' + currentUserEmail) || (auth.currentUser ? auth.currentUser.displayName : '') || '';
+        nameInput.value = currentName;
+      }
+      updateFirestoreSpaceEstimate();
+    }
+
+    var saveAdminNameBtn = document.getElementById('saveAdminNameBtn');
+    if (saveAdminNameBtn) {
+      saveAdminNameBtn.onclick = async function() {
+        var nameInput = document.getElementById('settingsAdminNameInput');
+        var newName = nameInput ? nameInput.value.trim() : '';
+        if (!newName) {
+          showToast('Please enter a display name', 'error');
+          return;
+        }
+        saveAdminNameBtn.disabled = true;
+        saveAdminNameBtn.textContent = 'Saving...';
+        try {
+          localStorage.setItem('itp_admin_name_' + currentUserEmail, newName);
+          var user = auth.currentUser;
+          if (user) {
+            try {
+              await user.updateProfile({ displayName: newName });
+            } catch(e) {
+              console.warn("Auth updateProfile display name warning:", e);
+            }
+          }
+          showToast('Display name saved successfully!');
+          // Update sidebar immediately
+          var nameDisplayEl = document.getElementById('userEmail');
+          var avatarEl = document.getElementById('userAvatar');
+          if (nameDisplayEl) {
+            nameDisplayEl.innerHTML = '<strong style="display:block; color:var(--text); font-weight:700;">' + newName + '</strong>' + currentUserEmail;
+          }
+          var initials = newName.split(' ').map(function(n){return n[0];}).join('').toUpperCase().slice(0, 2);
+          if (avatarEl && initials) { avatarEl.textContent = initials; }
+        } catch(err) {
+          console.error(err);
+          showToast('Failed to save settings', 'error');
+        } finally {
+          saveAdminNameBtn.disabled = false;
+          saveAdminNameBtn.textContent = 'Save Profile Name';
+        }
+      };
+    }
+
+    async function updateFirestoreSpaceEstimate() {
+      var tCount = allTickets.length;
+      var cCount = allCallbacks.length;
+      var rCount = allReminders.length;
+      var auditLogsCount = tCount * 2; // assume 2 log entries per ticket average
+      
+      var ticketBytes = tCount * 1200;
+      var callbackBytes = cCount * 300;
+      var reminderBytes = rCount * 250;
+      var auditLogBytes = auditLogsCount * 350;
+      
+      var totalFileBytes = 0;
+      allTickets.forEach(function(t) {
+        if (t.files && t.files.length > 0) {
+          t.files.forEach(function(f) {
+            totalFileBytes += (f.size || 0);
+          });
+        }
       });
-    });
+      
+      var totalUsedBytes = ticketBytes + callbackBytes + reminderBytes + auditLogBytes + totalFileBytes;
+      var totalLimitBytes = 1024 * 1024 * 1024; // 1 GB free ceiling
+      
+      var percentUsed = (totalUsedBytes / totalLimitBytes) * 100;
+      if (percentUsed < 0.001) percentUsed = 0.001; // visual minimum
+      var percentLeft = 100 - percentUsed;
+      
+      var usedMB = (totalUsedBytes / (1024 * 1024)).toFixed(3);
+      var leftMB = ((totalLimitBytes - totalUsedBytes) / (1024 * 1024)).toFixed(1);
+      
+      var progressFill = document.getElementById('firestoreSpaceProgress');
+      var spacePercentText = document.getElementById('firestoreSpaceTextPercent');
+      var spaceUsedText = document.getElementById('firestoreSpaceUsedText');
+      var spaceLeftText = document.getElementById('firestoreSpaceLeftText');
+      
+      if (progressFill) progressFill.style.width = percentUsed.toFixed(3) + '%';
+      if (spacePercentText) spacePercentText.textContent = percentLeft.toFixed(3) + '% Left';
+      if (spaceUsedText) spaceUsedText.textContent = 'Used: ' + usedMB + ' MB';
+      if (spaceLeftText) spaceLeftText.textContent = 'Available Space: ' + leftMB + ' MB / 1024 MB';
+    }
+
+    var settingsSignOutBtn = document.getElementById('settingsSignOutBtn');
+    if (settingsSignOutBtn) {
+      settingsSignOutBtn.addEventListener('click', function() {
+        clearAdminSessionTimers();
+        sessionStorage.removeItem('adminSessionExpired');
+        sessionStorage.removeItem('adminLastActivityAt');
+        auth.signOut().then(function() {
+          window.location.href = 'login.html';
+        });
+      });
+    }
 
     /* ── Realtime subscription ── */
     function startSubscription() {
@@ -2193,8 +2330,8 @@
           html += '<p class="archive-detail">' + (ticket.serviceType || '') + ' • Archived ' + formatFirestoreDate(ticket.lastUpdated) + '</p>';
           html += '</div></div>';
           html += '<div class="archive-actions">';
-          html += '<button class="archive-restore-btn" data-ticket-id="' + ticket.id + '">↩ Restore</button>';
-          html += '<button class="archive-delete-btn" data-ticket-id="' + ticket.id + '">🗑 Delete Forever</button>';
+          html += '<button class="archive-restore-btn" data-ticket-id="' + ticket.id + '">Restore</button>';
+          html += '<button class="archive-delete-btn" data-ticket-id="' + ticket.id + '">Delete Forever</button>';
           html += '</div>';
           html += '</div>';
           archIndex++;
@@ -2213,7 +2350,7 @@
             } catch (e) {
               console.error('Restore failed:', e);
               showToast('Restore failed', 'error');
-              btn.disabled = false; btn.textContent = '↩ Restore';
+              btn.disabled = false; btn.textContent = 'Restore';
             }
           });
         });
@@ -2231,7 +2368,7 @@
             } catch (e) {
               console.error('Delete failed:', e);
               showToast('Delete failed', 'error');
-              btn.disabled = false; btn.textContent = '🗑 Delete Forever';
+              btn.disabled = false; btn.textContent = 'Delete Forever';
             }
           });
         });
@@ -2279,15 +2416,15 @@
         html += '<span class="archive-ticket-id">' + (cb.name || 'Unknown') + '</span>';
         html += '<span style="font-size:0.72rem; color:' + (cb.status === 'Called' ? 'var(--color-green-dark)' : '#d97706') + '; font-weight:700;">(' + (cb.status || 'New') + ')</span>';
         html += '</div>';
-        html += '<p class="archive-name">📞 ' + (cb.phone || '') + '  | 📧 ' + (cb.email || '') + '</p>';
+        html += '<p class="archive-name"><svg class="inline-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.86-.86a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>' + (cb.phone || '') + '  | <svg class="inline-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>' + (cb.email || '') + '</p>';
         html += '<p class="archive-detail">' + (cb.service || '') + ' • ' + formatFirestoreDate(cb.createdAt) + '</p>';
         if (cb.message) html += '<p style="font-size:0.8rem; margin-top:4px; max-width:600px; color:var(--text-secondary);">&quot;' + cb.message + '&quot;</p>';
         html += '</div></div>';
         html += '<div class="archive-actions">';
         if (cb.status !== 'Called') {
-          html += '<button class="cb-mark-called-btn" data-cb-id="' + cb.id + '">✓ Mark Called</button>';
+          html += '<button class="cb-mark-called-btn" data-cb-id="' + cb.id + '">Mark Called</button>';
         }
-        html += '<button class="cb-delete-btn archive-delete-btn" data-cb-id="' + cb.id + '"> 🗑 </button>';
+        html += '<button class="cb-delete-btn archive-delete-btn" data-cb-id="' + cb.id + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>';
         html += '</div>';
         html += '</div>';
         cbIndex++;
@@ -2305,7 +2442,7 @@
           } catch (e) {
             console.error(e);
             showToast('Failed to update', 'error');
-            btn.disabled = false; btn.textContent = '✓ Mark Called';
+            btn.disabled = false; btn.textContent = 'Mark Called';
           }
         });
       });
@@ -2322,7 +2459,7 @@
           } catch (e) {
             console.error(e);
             showToast('Delete failed', 'error');
-            btn.disabled = false; btn.textContent = '🗑 Delete';
+            btn.disabled = false; btn.textContent = 'Delete';
           }
         });
       });
@@ -2335,29 +2472,133 @@
       return localStorage.getItem('itp_admin_local_path') || 'D:\\Clients Folder';
     }
 
+    function openSettingsDB() {
+      return new Promise(function(resolve, reject) {
+        var request = indexedDB.open('kdas_settings', 1);
+        request.onupgradeneeded = function(e) {
+          var db = e.target.result;
+          if (!db.objectStoreNames.contains('handles')) {
+            db.createObjectStore('handles');
+          }
+        };
+        request.onsuccess = function(e) {
+          resolve(e.target.result);
+        };
+        request.onerror = function(e) {
+          reject(request.error);
+        };
+      });
+    }
+
+    async function savePersistedDirHandle(handle) {
+      try {
+        var db = await openSettingsDB();
+        var tx = db.transaction('handles', 'readwrite');
+        tx.objectStore('handles').put(handle, 'chosenDir');
+        return new Promise(function(resolve) {
+          tx.oncomplete = function() { resolve(true); };
+          tx.onerror = function() { resolve(false); };
+        });
+      } catch(e) {
+        console.warn("IndexedDB save failed:", e);
+      }
+    }
+
+    async function loadPersistedDirHandle() {
+      try {
+        var db = await openSettingsDB();
+        var tx = db.transaction('handles', 'readonly');
+        var request = tx.objectStore('handles').get('chosenDir');
+        return new Promise(function(resolve) {
+          request.onsuccess = function(e) {
+            resolve(e.target.result || null);
+          };
+          request.onerror = function() {
+            resolve(null);
+          };
+        });
+      } catch(e) {
+        return null;
+      }
+    }
+
+    async function verifyPermission(fileHandle, readWrite) {
+      const options = {};
+      if (readWrite) {
+        options.mode = 'readwrite';
+      }
+      try {
+        if ((await fileHandle.queryPermission(options)) === 'granted') {
+          return true;
+        }
+        if ((await fileHandle.requestPermission(options)) === 'granted') {
+          return true;
+        }
+      } catch (e) {
+        console.warn("Permission verification failed:", e);
+      }
+      return false;
+    }
+
+    var isDirHandleLoaded = false;
     function initDocumentSectionSettings() {
       var input = document.getElementById('docLocalStoragePathInput');
       var saveBtn = document.getElementById('saveLocalStoragePathBtn');
       var display = document.getElementById('activePathDisplay');
+      var browseBtn = document.getElementById('browseDirBtn');
       
-      if (input && display) {
+      if (input) {
         var current = getStoredLocalPath();
         input.value = current;
-        display.textContent = current;
+      }
+      if (display) {
+        display.textContent = getStoredLocalPath();
       }
 
-      if (saveBtn && input && display) {
+      if (!isDirHandleLoaded) {
+        isDirHandleLoaded = true;
+        loadPersistedDirHandle().then(async function(handle) {
+          if (handle) {
+            var ok = await verifyPermission(handle, true);
+            if (ok) {
+              chosenDirHandle = handle;
+              if (input) {
+                input.value = handle.name || 'Selected Folder';
+              }
+              if (display) {
+                display.textContent = handle.name || 'Selected Folder';
+              }
+            }
+          }
+        });
+      }
+
+      if (browseBtn && input) {
+        browseBtn.onclick = async function() {
+          try {
+            chosenDirHandle = await window.showDirectoryPicker();
+            input.value = chosenDirHandle.name || 'Selected Folder';
+            await savePersistedDirHandle(chosenDirHandle);
+          } catch(e) {
+            console.warn("Folder picker cancelled:", e);
+          }
+        };
+      }
+
+      if (saveBtn && input) {
         saveBtn.onclick = function() {
           var val = input.value.trim() || 'D:\\Clients Folder';
           localStorage.setItem('itp_admin_local_path', val);
-          display.textContent = val;
+          if (display) {
+            display.textContent = val;
+          }
           showToast('Local storage target path updated to ' + val);
         };
       }
 
       var exportAllBtn = document.getElementById('exportAllCompletedDocsBtn');
       if (exportAllBtn) {
-        exportAllBtn.onclick = function() {
+        exportAllBtn.onclick = async function() {
           var completed = allTickets.filter(function(t) {
             return t.status === 'Completed' || t.status === 'Approved' || t.isCompleted === true;
           });
@@ -2365,11 +2606,46 @@
             showToast('No completed projects to store', 'error');
             return;
           }
-          var targetPath = getStoredLocalPath();
-          completed.forEach(function(t) {
-            downloadClientOrganizedPackage(t, targetPath);
-          });
-          showToast('Triggered local export for ' + completed.length + ' completed projects! Target path: ' + targetPath);
+
+          if (!chosenDirHandle) {
+            try {
+              chosenDirHandle = await window.showDirectoryPicker();
+              var input = document.getElementById('docLocalStoragePathInput');
+              if (input) {
+                input.value = chosenDirHandle.name || 'Selected Folder';
+              }
+            } catch(e) {
+              showToast('Directory selection is required to export all files', 'error');
+              return;
+            }
+          }
+
+          exportAllBtn.disabled = true;
+          exportAllBtn.textContent = 'Storing...';
+          
+          var successCount = 0;
+          for (var i = 0; i < completed.length; i++) {
+            var t = completed[i];
+            try {
+              var docs = await getTicketDocuments(t.id);
+              var zipBlob = await buildTicketZip(t, docs);
+              var clientName = t.name || 'Client';
+              var folderName = clientName.replace(/[^a-zA-Z0-9_-]/g, '_') + '_' + (t.ticketNumber || t.id);
+              var zipName = folderName + '.zip';
+              
+              const fileHandle = await chosenDirHandle.getFileHandle(zipName, { create: true });
+              const writable = await fileHandle.createWritable();
+              await writable.write(zipBlob);
+              await writable.close();
+              successCount++;
+            } catch(err) {
+              console.error('Failed to export ticket ' + t.id, err);
+            }
+          }
+
+          exportAllBtn.disabled = false;
+          exportAllBtn.textContent = 'Store All Completed Locally';
+          showToast('Successfully stored ' + successCount + ' / ' + completed.length + ' projects inside chosen folder!');
         };
       }
     }
@@ -2378,6 +2654,7 @@
       initDocumentSectionSettings();
       var container = document.getElementById('documentsListContent');
       var countEl = document.getElementById('docProjectsCount');
+      var targetPath = getStoredLocalPath();
       
       var completedTickets = allTickets.filter(function(t) {
         return t.status === 'Completed' || t.status === 'Approved' || t.isCompleted === true;
@@ -2390,25 +2667,19 @@
         return;
       }
 
-      var targetPath = getStoredLocalPath();
       var html = '<table class="history-table" style="width:100%; margin-top:10px;">';
-      html += '<thead><tr><th>Ticket / Client</th><th>Service</th><th>Status</th><th>Local Target Folder</th><th>Organize &amp; Delete Actions</th></tr></thead>';
+      html += '<thead><tr><th>Client ID</th><th>Action</th></tr></thead>';
       html += '<tbody>';
 
       completedTickets.forEach(function(ticket, index) {
         var clientName = ticket.name || 'Client';
-        var folderName = clientName.replace(/[^a-zA-Z0-9_-]/g, '_') + '_' + (ticket.ticketNumber || ticket.id);
-        var fullFolder = targetPath + '\\' + folderName;
 
         html += '<tr style="animation-delay: ' + (index * 0.03) + 's;">';
-        html += '<td><strong>' + (ticket.ticketNumber || ticket.id) + '</strong><br><span style="font-size:0.85rem; color:var(--text); font-weight:600;">' + clientName + '</span><br><span style="font-size:0.75rem; color:var(--muted);">' + (ticket.email || ticket.phone || '') + '</span></td>';
-        html += '<td><span class="badge badge--green" style="font-size:0.75rem;">' + (ticket.serviceType || 'Service') + '</span></td>';
-        html += '<td><span style="font-size:0.78rem; font-weight:700; color:var(--color-green);">' + (ticket.status || 'Completed') + '</span></td>';
-        html += '<td style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-secondary); max-width:220px; overflow:hidden; text-overflow:ellipsis;" title="' + fullFolder + '">📁 ' + fullFolder + '</td>';
+        html += '<td><strong>' + (ticket.ticketNumber || ticket.id) + '</strong><br><span style="font-size:0.8rem; color:var(--text-secondary); font-weight:600;">' + clientName + '</span></td>';
         html += '<td>';
         html += '<div style="display:flex; gap:8px; align-items:center;">';
-        html += '<button type="button" class="btn-store-local" data-ticket-id="' + ticket.id + '" style="padding:6px 12px; font-size:0.78rem; border-radius:8px; background:var(--color-saffron); color:#fff; border:none; font-weight:700; cursor:pointer;">📁 Store Locally</button>';
-        html += '<button type="button" class="btn-del-firestore" data-ticket-id="' + ticket.id + '" style="padding:6px 12px; font-size:0.78rem; border-radius:8px; background:rgba(239,68,68,0.1); color:#dc2626; border:1px solid rgba(239,68,68,0.3); font-weight:700; cursor:pointer;">🗑 Delete from Firestore</button>';
+        html += '<button type="button" class="btn-store-local" data-ticket-id="' + ticket.id + '" style="padding:6px 12px; font-size:0.78rem; border-radius:8px; background:var(--color-saffron); color:#fff; border:none; font-weight:700; cursor:pointer;">Store Locally</button>';
+        html += '<button type="button" class="btn-del-firestore" data-ticket-id="' + ticket.id + '" style="padding:6px 12px; font-size:0.78rem; border-radius:8px; background:rgba(239,68,68,0.1); color:#dc2626; border:1px solid rgba(239,68,68,0.3); font-weight:700; cursor:pointer;">Delete from Database</button>';
         html += '</div>';
         html += '</td>';
         html += '</tr>';
@@ -2434,83 +2705,104 @@
           var t = allTickets.find(function(item) { return item.id === tid; });
           var num = t ? (t.ticketNumber || t.id) : tid;
           
-          var ok = confirm('Confirm Deletion from Firestore:\nHave you downloaded and saved the client documents to your local folder at:\n' + targetPath + '?\n\nClick OK to permanently delete ticket #' + num + ' from Firestore.');
+          var ok = confirm('Confirm Deletion from Database:\nHave you downloaded and saved the client documents to your local folder at:\n' + targetPath + '?\n\nClick OK to permanently delete ticket #' + num + ' from Database.');
           if (!ok) return;
 
           btn.disabled = true;
           btn.textContent = 'Deleting...';
           try {
             await deleteTicketAndFiles(tid);
-            showToast('Ticket #' + num + ' deleted from Firestore and archived locally!');
+            showToast('Ticket #' + num + ' deleted from Database and archived locally!');
             renderDocumentSectionTab();
           } catch(err) {
-            console.error('Delete from Firestore failed:', err);
-            showToast('Failed to delete from Firestore: ' + err.message, 'error');
+            console.error('Delete from Database failed:', err);
+            showToast('Failed to delete from Database: ' + err.message, 'error');
             btn.disabled = false;
-            btn.textContent = '🗑 Delete from Firestore';
+            btn.textContent = 'Delete from Database';
           }
         };
       });
     }
 
-    function downloadClientOrganizedPackage(ticket, basePath) {
-      var clientName = ticket.name || 'Client';
-      var folderName = clientName.replace(/[^a-zA-Z0-9_-]/g, '_') + '_' + (ticket.ticketNumber || ticket.id);
-      var folderPath = basePath + '\\' + folderName;
-
-      var summaryText = "====================================================\n";
-      summaryText += "INDTAXPAY CLIENT COMPLETED PROJECT ARCHIVE MANIFEST\n";
-      summaryText += "====================================================\n\n";
-      summaryText += "Target Local Directory : " + folderPath + "\n";
-      summaryText += "Ticket ID              : " + ticket.id + "\n";
-      summaryText += "Ticket Number          : " + (ticket.ticketNumber || ticket.id) + "\n";
-      summaryText += "Client Name            : " + (ticket.name || 'N/A') + "\n";
-      summaryText += "Email Address          : " + (ticket.email || 'N/A') + "\n";
-      summaryText += "Phone Number           : " + (ticket.phone || 'N/A') + "\n";
-      summaryText += "Service Category       : " + (ticket.serviceType || 'N/A') + "\n";
-      summaryText += "Final Status           : " + (ticket.status || 'Completed') + "\n";
-      summaryText += "Created At             : " + formatFirestoreDate(ticket.createdAt) + "\n";
-      summaryText += "Stored Locally On      : " + new Date().toLocaleString() + "\n";
-      summaryText += "Archived By Admin      : " + currentUserEmail + "\n\n";
-      summaryText += "----------------------------------------------------\n";
-      summaryText += "CLIENT DOCUMENTS & MANIFEST FILES:\n";
-      summaryText += "----------------------------------------------------\n";
-
-      if (ticket.files && ticket.files.length > 0) {
-        ticket.files.forEach(function(f, i) {
-          summaryText += (i + 1) + ". " + (f.name || 'document') + " (" + (f.size || 'N/A') + ") -> " + (f.url || f.downloadURL || 'N/A') + "\n";
-        });
-      } else {
-        summaryText += "No attached files registered for this client.\n";
+    async function saveBlobWithPicker(blob, defaultName) {
+      try {
+        if (window.showSaveFilePicker) {
+          const options = {
+            suggestedName: defaultName,
+            startIn: chosenDirHandle || 'downloads',
+            types: [{
+              description: 'ZIP Archive',
+              accept: {
+                'application/zip': ['.zip'],
+              },
+            }],
+          };
+          const handle = await window.showSaveFilePicker(options);
+          const writable = await handle.createWritable();
+          await writable.write(blob);
+          await writable.close();
+          return true;
+        }
+      } catch (err) {
+        if (err.name === 'AbortError') {
+          console.log('User cancelled save picker');
+          return false;
+        }
+        console.error('File System Access API failed:', err);
       }
 
-      summaryText += "\n====================================================\n";
-
-      // Download text manifest
-      var blob = new Blob([summaryText], { type: 'text/plain;charset=utf-8' });
+      // Fallback to standard download anchor
+      var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = folderName + '_ARCHIVE_MANIFEST.txt';
+      a.href = url;
+      a.download = defaultName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      return true;
+    }
 
-      // Download attached files
-      if (ticket.files && ticket.files.length > 0) {
-        ticket.files.forEach(function(f) {
-          if (f.url || f.downloadURL) {
-            var fileLink = document.createElement('a');
-            fileLink.href = f.url || f.downloadURL;
-            fileLink.target = '_blank';
-            fileLink.download = f.name || 'client_document';
-            document.body.appendChild(fileLink);
-            fileLink.click();
-            document.body.removeChild(fileLink);
+    async function downloadClientOrganizedPackage(ticket, basePath) {
+      var clientName = ticket.name || 'Client';
+      var folderName = clientName.replace(/[^a-zA-Z0-9_-]/g, '_') + '_' + (ticket.ticketNumber || ticket.id);
+
+      // Ensure directory handle is authorized
+      if (!chosenDirHandle) {
+        try {
+          chosenDirHandle = await window.showDirectoryPicker();
+          var input = document.getElementById('docLocalStoragePathInput');
+          if (input) {
+            input.value = chosenDirHandle.name || 'Selected Folder';
           }
-        });
+          await savePersistedDirHandle(chosenDirHandle);
+        } catch(e) {
+          showToast('Directory selection is required to store files locally.', 'error');
+          return;
+        }
       }
 
-      showToast('Organized & stored archive manifest for ' + folderName + '! Destination: ' + basePath);
+      showToast('Generating zip package for ' + (ticket.ticketNumber || ticket.id) + '...');
+
+      try {
+        // Fetch files for this ticket
+        var docs = await getTicketDocuments(ticket.id);
+        
+        // Build the ticket zip blob
+        var zipBlob = await buildTicketZip(ticket, docs);
+        
+        // Save via picker
+        var zipName = folderName + '.zip';
+        var success = await saveBlobWithPicker(zipBlob, zipName);
+        if (success) {
+          showToast('Stored zip package for ' + (ticket.ticketNumber || ticket.id) + ' successfully!');
+        } else {
+          showToast('Save cancelled', 'error');
+        }
+      } catch (err) {
+        console.error('Failed to store locally:', err);
+        showToast('Failed to store locally: ' + err.message, 'error');
+      }
     }
 
     /* ══════════════════════════════════════
@@ -2704,9 +2996,9 @@
         html += '<span class="reminder-title">' + rem.title + '</span>';
         html += '<div class="reminder-meta">';
         html += '<span class="reminder-badge ' + rem.type + '">' + label + '</span>';
-        html += '<span>🕒 ' + timeStr + '</span>';
+        html += '<span><svg class="inline-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + timeStr + '</span>';
         html += '</div></div>';
-        html += '<button type="button" class="reminder-delete-btn" data-id="' + rem.id + '" title="Delete Reminder">🗑</button>';
+        html += '<button type="button" class="reminder-delete-btn" data-id="' + rem.id + '" title="Delete Reminder"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>';
         html += '</div>';
         remIndex++;
       });
@@ -2766,8 +3058,8 @@
         html += '<span class="reminder-title" style="font-size:0.85rem;">' + rem.title + '</span>';
         html += '<div class="reminder-meta" style="font-size:0.7rem;">';
         html += '<span class="reminder-badge ' + rem.type + '" style="font-size:0.65rem;">' + label + '</span>';
-        html += '<span>📅 ' + dateStr + '</span>';
-        html += '<span>🕒 ' + timeStr + '</span>';
+        html += '<span><svg class="inline-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> ' + dateStr + '</span>';
+        html += '<span><svg class="inline-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + timeStr + '</span>';
         html += '</div></div>';
         html += '</div>';
         upIndex++;
