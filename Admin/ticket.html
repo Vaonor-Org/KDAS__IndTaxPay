@@ -18,18 +18,7 @@
 
   <!-- Ticket Page -->
   <div class="ticket-page" id="ticketPage" style="display:none;">
-    <header class="ticket-header">
-      <div style="display:flex; align-items:center;">
-        <a href="dashboard.html">IndTaxPay</a>
-        <span class="ticket-admin-badge">ADMIN</span>
-      </div>
-      <div class="ticket-header-right">
-        <span class="ticket-header-email" id="userEmail"></span>
-        <button class="ticket-signout" id="signOutBtn">Sign Out</button>
-      </div>
-    </header>
-
-    <div class="ticket-content" id="ticketContent"></div>
+    <div class="ticket-content" id="ticketContent" style="padding-top: 40px;"></div>
   </div>
 
   <!-- Firebase CDN -->
@@ -46,6 +35,7 @@
     var ticketLoading = document.getElementById('ticketLoading');
     var ticketPage = document.getElementById('ticketPage');
     var ticketContent = document.getElementById('ticketContent');
+    var currentUserEmail = '';
 
     var params = new URLSearchParams(window.location.search);
     var ticketId = params.get('id');
@@ -75,7 +65,11 @@
           }
         }
 
-        document.getElementById('userEmail').textContent = email;
+        var emailEl = document.getElementById('userEmail');
+        if (emailEl) {
+          emailEl.textContent = email;
+        }
+        currentUserEmail = email;
         loadTicket();
       } catch (err) {
         console.error('Ticket Auth Verification failed:', err);
@@ -83,10 +77,6 @@
         await auth.signOut();
         window.location.href = 'login.html?reason=auth-check-failed';
       }
-    });
-
-    document.getElementById('signOutBtn').addEventListener('click', function() {
-      auth.signOut().then(function() { window.location.href = 'login.html'; });
     });
 
     /* ── Load Ticket Data ── */
@@ -123,6 +113,44 @@
       ticketContent.innerHTML = '<div style="padding:48px; text-align:center;"><h2 style="color:#E53E3E;">Ticket Not Found</h2><a href="dashboard.html" style="color:#F78A0E; margin-top:16px; display:inline-block;">← Back to Board</a></div>';
     }
 
+    async function saveBlobWithPicker(blob, defaultName) {
+      try {
+        if (window.showSaveFilePicker) {
+          const options = {
+            suggestedName: defaultName,
+            types: [{
+              description: 'ZIP Archive',
+              accept: {
+                'application/zip': ['.zip'],
+              },
+            }],
+          };
+          const handle = await window.showSaveFilePicker(options);
+          const writable = await handle.createWritable();
+          await writable.write(blob);
+          await writable.close();
+          return true;
+        }
+      } catch (err) {
+        if (err.name === 'AbortError') {
+          console.log('User cancelled save picker');
+          return false;
+        }
+        console.error('File System Access API failed:', err);
+      }
+
+      // Fallback to standard download anchor
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = defaultName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      return true;
+    }
+
     function renderTicket(ticket, docs) {
       var badgeColor, badgeBg;
       if (ticket.status === 'Completed') {
@@ -133,12 +161,12 @@
         badgeColor = '#E53E3E';
       } else {
         badgeBg = 'rgba(247, 138, 14, 0.12)';
-        badgeColor = '#C96B00';
+        badgeColor = '#F78A0E';
       }
 
       var progressBg = ticket.status === 'Rejected'
-        ? 'linear-gradient(90deg, #E53E3E, #C96B00)'
-        : 'linear-gradient(90deg, #0D4A8A, #F78A0E)';
+        ? 'linear-gradient(90deg, #E53E3E, #F78A0E)'
+        : 'linear-gradient(90deg, #4B9C3A, #F78A0E, #4B9C3A)';
 
       var statusLabelsHtml = '';
       STATUSES.forEach(function(s) {
@@ -154,47 +182,40 @@
         statusOptions += '<option value="' + s + '"' + sel + '>' + s + '</option>';
       });
 
-      // Documents HTML
+      // Documents HTML inside a single unified list container
       var docsHtml = '';
       if (docs.length === 0) {
-        docsHtml = '<p class="doc-empty">No documents uploaded yet.</p>';
+        docsHtml = '<p class="doc-empty" style="padding:20px; text-align:center; color:var(--text-secondary); margin:0;">No documents uploaded yet.</p>';
       } else {
-        docs.forEach(function(d) {
-          docsHtml += '<div class="doc-item">';
-          docsHtml += '<div style="display:flex; align-items:center;">';
-          docsHtml += '<span class="doc-icon">📄</span>';
-          docsHtml += '<div><p class="doc-name">' + d.fileName + '</p>';
-          docsHtml += '<p class="doc-meta">' + (d.type || 'Other') + ' • ' + formatFileSize(d.size) + ' • ' + formatFirestoreDate(d.uploadedAt) + '</p></div>';
-          docsHtml += '</div>';
-          docsHtml += '<button class="doc-download" data-doc-id="' + d.id + '">Download</button>';
+        docs.forEach(function(d, idx) {
+          var borderStyle = idx === docs.length - 1 ? '' : ' border-bottom: 1px solid var(--border);';
+          docsHtml += '<div style="display:flex; align-items:center; padding:16px;' + borderStyle + '">';
+          docsHtml += '<span class="doc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-saffron);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>';
+          docsHtml += '<div style="margin-left:12px;"><p class="doc-name" style="margin:0; font-weight:600; font-size:0.9rem;">' + d.fileName + '</p>';
+          docsHtml += '<p class="doc-meta" style="margin:2px 0 0 0; font-size:0.75rem; color:var(--text-secondary);">' + (d.type || 'Other') + ' • ' + formatFileSize(d.size) + ' • ' + formatFirestoreDate(d.uploadedAt) + '</p></div>';
           docsHtml += '</div>';
         });
       }
 
-      var zipBtnHtml = docs.length > 0
-        ? '<div class="doc-item"><div style="display:flex; align-items:center;"><span class="doc-icon">🗂️</span><div><p class="doc-name">' + ticket.ticketNumber + '.zip</p><p class="doc-meta">All documents + data.txt</p></div></div><button class="doc-download" id="downloadZipBtn">Download Zip</button></div>'
-        : '';
-
       ticketContent.innerHTML = ''
-        + '<div class="breadcrumb"><a href="dashboard.html">← Board</a><span class="sep">/</span><span class="current">' + ticket.ticketNumber + '</span></div>'
-
-        // Header
-        + '<div class="ticket-section header-section">'
-        + '<div><h1>' + ticket.ticketNumber + '</h1><p class="service-label">' + ticket.serviceType + '</p></div>'
-        + '<span class="header-badge" style="background:' + badgeBg + '; color:' + badgeColor + ';">' + ticket.status + '</span>'
+        // Premium Back Button
+        + '<div style="margin-bottom: 24px; display: flex; align-items: center;">'
+        + '<a href="dashboard.html" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-secondary); background: var(--panel-2); padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size:0.85rem; border: 1px solid var(--border); transition: var(--transition-base);">'
+        + '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>'
+        + 'Back to Board'
+        + '</a>'
         + '</div>'
 
-        // Progress
-        + '<div class="ticket-section">'
-        + '<div class="status-progress"><div class="status-progress-fill" style="width:' + statusPercent(ticket.status) + '%; background:' + progressBg + ';"></div></div>'
-        + '<div class="status-labels">' + statusLabelsHtml + '</div>'
-        + '</div>'
+        // Unified Single Card layout containing Client Info + Documents side-by-side
+        + '<div class="ticket-section" style="max-width: 1100px; margin: 0 auto; padding: 32px;">'
+        + '<div class="two-col" style="margin-top:0;">'
 
-        // Two column: Client Info + Admin Controls
-        + '<div class="two-col">'
-
-        // Client Info
-        + '<div class="ticket-section"><h3>Client Information</h3>'
+        // Left Column (Client Information)
+        + '<div>'
+        + '<h3 style="margin-top:0; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:10px;">Client Information</h3>'
+        + '<div class="info-row"><p class="info-label">Client ID</p><p class="info-value" style="font-weight:700;">' + ticket.ticketNumber + '</p></div>'
+        + '<div class="info-row"><p class="info-label">Service Type</p><p class="info-value" style="font-weight:600;">' + ticket.serviceType + '</p></div>'
+        + '<div class="info-row"><p class="info-label">Status</p><p class="info-value"><span class="badge" style="background:' + badgeBg + '; color:' + badgeColor + '; font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:6px; display:inline-block;">' + ticket.status + '</span></p></div>'
         + '<div class="info-row"><p class="info-label">Name</p><p class="info-value">' + ticket.name + '</p></div>'
         + '<div class="info-row"><p class="info-label">Phone</p><p class="info-value">' + ticket.phone + '</p></div>'
         + '<div class="info-row"><p class="info-label">Email</p><p class="info-value">' + ticket.email + '</p></div>'
@@ -202,89 +223,16 @@
         + '<div class="info-row"><p class="info-label">Last Updated</p><p class="info-value">' + formatFirestoreDate(ticket.lastUpdated) + '</p></div>'
         + '</div>'
 
-        // Admin Controls
-        + '<div class="ticket-section"><h3>Update Ticket</h3>'
-        + '<div class="edit-field"><label>Status</label><select id="editStatus">' + statusOptions + '</select></div>'
-        + '<div class="edit-field"><label>Internal Notes</label><textarea id="editNotes" rows="4" placeholder="Add internal notes here">' + (ticket.notes || '') + '</textarea></div>'
-        + '<div style="display:flex; align-items:center;"><button class="save-btn" id="saveBtn">Save Changes</button><span class="save-msg" id="saveMsg"></span></div>'
+        // Right Column (Files & Documents)
+        + '<div>'
+        + '<h3 style="margin-top:0; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:10px;">Files &amp; Documents</h3>'
+        + '<div class="docs-list-container" style="background:var(--panel-2); border:1px solid var(--border); border-radius:12px; overflow:hidden;">'
+        + docsHtml
+        + '</div>'
         + '</div>'
 
-        + '</div>'
-
-        // Files
-        + '<div class="ticket-section"><h3>Files</h3>' + (zipBtnHtml || '<p class="doc-empty">No documents to download.</p>') + '</div>'
-
-        // Documents
-        + '<div class="ticket-section"><h3>Uploaded Documents (' + docs.length + ')</h3>' + docsHtml + '</div>';
-
-      // Bind save button
-      document.getElementById('saveBtn').addEventListener('click', async function() {
-        var btn = document.getElementById('saveBtn');
-        var msg = document.getElementById('saveMsg');
-        btn.disabled = true;
-        btn.textContent = 'Saving...';
-        msg.textContent = '';
-
-        try {
-          await updateTicketFields(ticketId, {
-            status: document.getElementById('editStatus').value,
-            notes: document.getElementById('editNotes').value
-          });
-          msg.textContent = 'Saved successfully';
-          msg.className = 'save-msg success';
-          // Reload to refresh
-          var t = await getTicket(ticketId);
-          var d = await getTicketDocuments(ticketId);
-          renderTicket(t, d);
-          setTimeout(function() { msg.textContent = ''; }, 3000);
-        } catch (err) {
-          console.error(err);
-          msg.textContent = 'Save failed';
-          msg.className = 'save-msg error';
-        } finally {
-          btn.disabled = false;
-          btn.textContent = 'Save Changes';
-        }
-      });
-
-      // Bind download buttons
-      ticketContent.querySelectorAll('.doc-download[data-doc-id]').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var docId = btn.dataset.docId;
-          var doc = docs.find(function(d) { return d.id === docId; });
-          if (doc && doc.base64) {
-            downloadBase64File(doc.base64, doc.fileName);
-          } else {
-            alert('File data not available.');
-          }
-        });
-      });
-
-      // Bind zip download
-      var zipBtn = document.getElementById('downloadZipBtn');
-      if (zipBtn) {
-        zipBtn.addEventListener('click', async function() {
-          zipBtn.textContent = 'Generating...';
-          zipBtn.disabled = true;
-          try {
-            var zipBlob = await buildTicketZip(ticket, docs);
-            var url = URL.createObjectURL(zipBlob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = ticket.ticketNumber + '.zip';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-          } catch (err) {
-            console.error('Zip error:', err);
-            alert('Failed to generate zip.');
-          } finally {
-            zipBtn.textContent = 'Download Zip';
-            zipBtn.disabled = false;
-          }
-        });
-      }
+        + '</div>' // End of two-col
+        + '</div>'; // End of unified layout
     }
   })();
   </script>

@@ -5012,7 +5012,7 @@ html[data-theme="dark"] .ticket-header {
 
 .ticket-signout {
   padding: 8px 16px;
-  background: linear-gradient(135deg, var(--color-navy), var(--color-saffron));
+  background: linear-gradient(135deg, var(--color-green), var(--color-saffron));
   color: var(--color-white);
   border: none;
   border-radius: var(--radius-md);
@@ -5213,7 +5213,7 @@ html[data-theme="dark"] .ticket-header {
 
 .save-btn {
   padding: 10px 24px;
-  background: linear-gradient(135deg, var(--color-navy), var(--color-saffron));
+  background: linear-gradient(135deg, var(--color-green), var(--color-saffron));
   color: var(--color-white);
   border: none;
   border-radius: var(--radius-md);
